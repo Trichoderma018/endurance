@@ -42,33 +42,7 @@ function FormRegister() {
 
     return (
         <div className="form-container">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-                </div>
-                {error && <p className="error">{error}</p>}
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <button type="submit">Register</button>
-                )}
-                <button type="button" onClick={() => navigate('/login')}>Login</button>
-                <button type="button" onClick={() => navigate('/')}>Home</button>
-            </form>
+
 
             <div>
 
@@ -78,41 +52,30 @@ function FormRegister() {
     <div className="heading">SignIn to your account</div>
     <form className="form" action="">
       <div className="input-field">
-        <input
-          required=""
-          autoComplete="off"
-          type="text"
-          name="text"
-          id="username"
-        />
+      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
         <label htmlFor="username">Full Name</label>
       </div>
       <div className="input-field">
-        <input
-          required=""
-          autoComplete="off"
-          type="email"
-          name="email"
-          id="email"
-        />
+      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
         <label htmlFor="email">Email</label>
       </div>
       <div className="input-field">
-        <input
-          required=""
-          autoComplete="off"
-          type="password"
-          name="text"
-          id="password"
-        />
+        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
         <label htmlFor="username">Password</label>
+      </div>
+      <div className="input-field">
+        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+        <label htmlFor="username">confirm Password</label>
       </div>
       <div className="btn-container">
         <button className="btn">Submit</button>
         <div className="acc-text">
           New here ?
-          <span style={{ color: "#0000ff", cursor: "pointer" }}>
+          <span onClick={() => navigate('/login')} style={{ color: "#0000ff", cursor: "pointer" }}>
             Create Account
+            <div>
+              
+            </div>
           </span>
         </div>
       </div>
