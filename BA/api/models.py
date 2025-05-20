@@ -1,14 +1,35 @@
 from django.db import models
 
-class User(models.Model):
-    nombreCompleto = models.CharField(max_length=150, unique=True)
-    apellido = models.CharField(max_length=30, blank=True)
+class Admin(models.Model):
+    nombreCompleto = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
 
     def __str__(self):
         return self.nombreCompleto
     
+class Staff(models.Model):
+    nombreCompleto = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    rol = models.CharField(max_length=30)
+    activo = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to='staff/', blank=True, null=True)
+
+    def __str__(self):
+        return self.nombreCompleto
+    
+class Atletas(models.Model):
+    nombreCompleto = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    rol = models.CharField(max_length=30)
+    activo = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to='atletas/', blank=True, null=True)
+
+    def __str__(self):
+        return self.nombreCompleto
+
 class Expedientes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     nombreCompleto = models.CharField(max_length=150)
@@ -81,6 +102,6 @@ class visitas(models.Model):
     celular = models.CharField(max_length=400)
     viaticos = models.CharField(max_length=400)
     salud = models.CharField(max_length=400)
-    deudas
+    deudas = models.CharField(max_length=400)
 
 
