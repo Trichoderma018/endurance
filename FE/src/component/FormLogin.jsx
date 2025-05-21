@@ -13,6 +13,8 @@ function FormLogin() {
   };
 
   return (
+
+  
     <div>
       <form className="login-form" onSubmit={handleSubmit}> {/* Attach onSubmit here */}
         <div className="form-heading">Login</div>
@@ -36,10 +38,12 @@ function FormLogin() {
         </div>
         <div className="forgot-password"></div>
         <button className="submit" type="submit">Log In</button>
-        <div className="signup-link" onClick={() => navigate('/register')}> {/* Ensure useNavigate is used here */}
+        <div className="signup-link" onClick={() => navigate('/register')}>
           Don't have an account? <a href="#">Sign up</a>
         </div>
       </form>
+      <div className="image-container">
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 *{
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     color: black;
 }
 
@@ -18,6 +18,8 @@
 }
 
 .login-form {
+    position: relative;
+    left: 152%;
   max-width: 420px;
   width: 100%;
   padding: 40px;
@@ -29,6 +31,7 @@
 
 .form-heading {
   text-align: center;
+  background-color: #ffffff;
   color: #333;
   font-size: 2rem;
   font-weight: 600;
@@ -47,7 +50,7 @@
   top: -16px;
   left: 12px;
   font-size: 12px;
-  color: #58bc82;
+  color: #0197A6;
   font-weight: 600;
   transition: all 0.3s ease;
   opacity: 0.7;
@@ -66,38 +69,41 @@
 }
 
 .input-group input:focus {
-  border-color: #58bc82;
+  border-color: #18417B;
   box-shadow: 0 0 10px rgba(88, 188, 130, 0.4);
 }
 
 .input-group input:focus + .label {
   top: -20px;
   font-size: 11px;
-  color: #58bc82;
+  color: #0197A6;
   opacity: 1;
 }
 
 .forgot-password {
   text-align: right;
   margin-bottom: 20px;
+  background-color: #ffffff;
+  
 }
 
 .forgot-password a {
+    
   font-size: 14px;
-  color: #58bc82;
+  color: #0197A6;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .forgot-password a:hover {
-  color: #45a56b;
+  color: #0197A6;
 }
 
 .submit {
   width: 100%;
   padding: 15px;
-  background-color: #58bc82;
-  color: #fff;
+  background-color: #0197A6;
+  color: #ffffff;
   border: none;
   border-radius: 30px;
   font-size: 1.1rem;
@@ -107,7 +113,7 @@
 }
 
 .submit:hover {
-  background-color: #45a56b;
+  background-color: #0197A6;
   transform: translateY(-2px);
   box-shadow: 0 5px 20px rgba(88, 188, 130, 0.3);
 }
@@ -119,7 +125,7 @@
 }
 
 .signup-link a {
-  color: #58bc82;
+  color: #0197A6;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
@@ -132,7 +138,7 @@
 }
 
 .signup-link a:hover {
-  color: #45a56b;
+  color: #0197A6;
 }
 
 @keyframes fadeIn {

@@ -11,8 +11,8 @@ function Routing() {
     <div>
       <Router>
         <Routes>
-            <Route path='/login' element={<Login/>}/>
             <Route path="/register" element={<Register />} />
+            <Route path='/login' element={<Login/>}/>
             {/* <Route path="/pagina" element={<Pagina />} /> */}
             {/* <Route path="/pagina2" element={<Pagina2 />} /> */}
             {/* <Route path="/pagina3" element={<Pagina3 />} /> */}
