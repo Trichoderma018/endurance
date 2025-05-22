@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User 
 
 class Admin(models.Model):
     nombreCompleto = models.CharField(max_length=150)
@@ -14,7 +15,7 @@ class Staff(models.Model):
     password = models.CharField(max_length=128)
     rol = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
-    imagen = models.ImageField(upload_to='staff/', blank=True, null=True)
+    imagen = models.CharField(max_length=150, blank=True, null=True)
 
     def __str__(self):
         return self.nombreCompleto
@@ -25,7 +26,7 @@ class Atletas(models.Model):
     password = models.CharField(max_length=128)
     rol = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
-    imagen = models.ImageField(upload_to='atletas/', blank=True, null=True)
+    imagen = models.CharField(max_length=150, blank=True, null=True)
 
     def __str__(self):
         return self.nombreCompleto
@@ -35,7 +36,7 @@ class Expedientes(models.Model):
     nombreCompleto = models.CharField(max_length=150)
     rol = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
-    imagen = models.ImageField(upload_to='expedientes/', blank=True, null=True)
+    imagen = models.CharField(max_length=150, blank=True, null=True)
     sede = models.CharField(max_length=150)
     cometario1 = models.TextField(blank=True, null=True)
     cometario2 = models.TextField(blank=True, null=True)
