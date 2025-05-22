@@ -1,15 +1,11 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework.permissions import BasePermission, IsAuthenticated, AllowAny
-
-
+from .models import CustomUser, Admin, Staff, Expedientes, visitas
+from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Permisos
-class IsAdminUserGroup(BasePermission):
-    def has_permission(self, request, view):
-        return request.user and request.user.groups.filter(name='admin').exists()
 
 #Vistas de los modelos creados por Django
 
@@ -17,10 +13,50 @@ class IsAdminUserGroup(BasePermission):
 # Modelo usuario
 class UserListCreateView(ListCreateAPIView):
     permission_classes = [AllowAny]
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAdminUserGroup, IsAuthenticated]
-    queryset = User.objects.all()
+    permission_classes = [ IsAuthenticated]
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
+
+class AdminListCreateView(ListCreateAPIView):
+    queryset = Admin.objects.all()
+    serializer_class = AdminSerializer
+
+class AdminDetailView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = Admin.objects.all()
+    serializer_class = AdminSerializer
+
+class StaffListCreateView(ListCreateAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = Staff.objects.all()
+    serializer_class = StaffSerializer
+
+class StaffDetailView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = Staff.objects.all()
+    serializer_class = StaffSerializer
+
+
+class ExpedientesListCreateView(ListCreateAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = Expedientes.objects.all()
+    serializer_class = ExpedientesSerializer
+
+class ExpedientesDetailView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = Expedientes.objects.all()
+    serializer_class = ExpedientesSerializer
+
+class VisitasListCreateView(ListCreateAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = visitas.objects.all()
+    serializer_class = VisitasSerializer
+
+class VisitasDetailView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [ IsAuthenticated]
+    queryset = visitas.objects.all()
+    serializer_class = VisitasSerializer

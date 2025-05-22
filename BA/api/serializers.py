@@ -1,16 +1,14 @@
 from django.contrib.auth.models import User, Group
+from .models import Admin, Staff, Expedientes, visitas, CustomUser
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
-        extra_kwargs = {
-            'password': {'write_only': True},
-            'email': {'required': True}
-        }
+        model = CustomUser
+        fields = '__all__'
+        
 
     def validate_username(self, value):
         if len(value.strip()) < 3:
@@ -58,3 +56,23 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         
         return user
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Admin
+        fields = '__all__'
+
+class StaffSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Staff
+        fields = '__all__'
+
+class ExpedientesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expedientes
+        fields = '__all__'
+
+class VisitasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = visitas
+        fields = '__all__'

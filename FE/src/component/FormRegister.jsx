@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Register.css';
+import Llamados from '../services/Llamados';
 
 
 // Componente de registro de usuario
@@ -67,7 +68,8 @@ function FormRegister() {
   else if (passwordStrength === 4) strengthLabel = "Strong";
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log('Form submitted:', formData);
+    
     // Por seguridad, verificamos nuevamente que coincidan ambas contraseñas.
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match.');
@@ -82,6 +84,7 @@ function FormRegister() {
     setTimeout(() => {
       console.log('User registered:', formData);
       setIsLoading(false);
+      Llamados.postUsers(formData, 'users')
       navigate('/login'); // Redirigir a la página de inicio de sesión después del registro exitoso
       // Aquí podrías hacer una llamada a la API para registrar al usuario
       // y manejar la respuesta (éxito/error) según sea necesario.
