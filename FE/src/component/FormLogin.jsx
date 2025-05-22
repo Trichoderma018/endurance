@@ -37,7 +37,7 @@ function FormLogin() {
           />
         </div>
         <div className="forgot-password"></div>
-        <button className="submit" type="submit">Log In</button>
+        <button className="submit" type="submit" onClick={() => navigate('/principal')}>Log In</button>
         <div className="signup-link" onClick={() => navigate('/register')}>
           Don't have an account? <a href="#">Sign up</a>
         </div>

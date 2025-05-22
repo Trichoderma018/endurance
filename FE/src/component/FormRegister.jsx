@@ -101,7 +101,8 @@ function FormRegister() {
   return (
     // Renderizamos el formulario de registro
     // El formulario tiene campos para nombre, email, contraseña y confirmación de contraseña 
-    
+    // También muestra la fortaleza de la contraseña y un mensaje de error si es necesario
+    // El formulario tiene un botón de envío y un enlace para crear una cuental
     <div className="form-container">
       <div>
         <div className="container">
@@ -187,12 +188,13 @@ function FormRegister() {
 
                   Create Account
                 </span>
-                
+
               </div>
             </div>
           </form>
         </div>
       </div>
+      
     </div>
   );
 }
