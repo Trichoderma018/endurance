@@ -1,4 +1,4 @@
-async function getUsers(endpoint) {
+async function getData(endpoint) {
     try {
         const response = await fetch(`http://localhost:3000/${endpoint}`, {
             method: 'GET',
@@ -17,7 +17,7 @@ async function getUsers(endpoint) {
     }
 }
 //////////LLAMADO POST//////////
-async function postUsers(obj,endpoint) {
+async function postData(obj,endpoint) {
     try {
         const response = await fetch(`http://localhost:3000/${endpoint}`, {
             method: 'POST',
@@ -53,7 +53,7 @@ async function patchData(valor,endpoint,id)
 }
 
 //////////////LLAMADO DELETE/////////////
-async function deleteUser(endpoint,id) {
+async function deleteGata(endpoint,id) {
     try {
         const response = await fetch(`http://localhost:3000/${endpoint}/${id}`, {
             method: 'DELETE',
@@ -70,4 +70,4 @@ async function deleteUser(endpoint,id) {
         throw error;
     }
 }
-export default { postUsers,deleteUser,getUsers,patchData };
+export default { getData, postData, patchData, deleteGata };

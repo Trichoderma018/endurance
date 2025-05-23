@@ -1,17 +1,19 @@
 from django.contrib.auth.models import User, Group
+from .models import Admin, Staff, Expedientes, visitas, CustomUser
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    email = serializers.CharField(required=True)
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
+        model = CustomUser
+        fields = ('password', 'password_confirm', 'username', 'email')
         extra_kwargs = {
-            'password': {'write_only': True},
-            'email': {'required': True}
-        }
 
+            'email': {'required': True},
+        }
+        
     def validate_username(self, value):
         if len(value.strip()) < 3:
             raise serializers.ValidationError("El nombre de usuario debe tener al menos 3 caracteres.")
@@ -45,16 +47,34 @@ class UserSerializer(serializers.ModelSerializer):
         
         # Guardar la contraseña para usarla después
         password = validated_data.pop('password')
+
         
         # Crear el usuario sin la contraseña
-        user = User.objects.create(**validated_data)
+        user = CustomUser.objects.create(**validated_data)
         
         # Establecer la contraseña con el método seguro que aplica el hashing
         user.set_password(password)
 
-        cliente_group, created = Group.objects.get_or_create(name='doctor')
-        user.groups.add(cliente_group)
-
         user.save()
         
         return user
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Admin
+        fields = '__all__'
+
+class StaffSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Staff
+        fields = '__all__'
+
+class ExpedientesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expedientes
+        fields = '__all__'
+
+class VisitasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = visitas
+        fields = '__all__'

@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'BA',
     'api',
+    'ba',
     'corsheaders',
 ]
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'BA.urls'
+ROOT_URLCONF = 'ba.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'BA.wsgi.application'
+WSGI_APPLICATION = 'ba.wsgi.application'
 
 
 # Database
@@ -146,10 +146,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
 
-Rest_FRAMEWORK = {
+REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'JWTAuthentication',
     ),
 }
 
@@ -158,3 +157,4 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+AUTH_USER_MODEL = 'api.CustomUser'
