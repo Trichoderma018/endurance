@@ -5,11 +5,15 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    email = serializers.CharField(required=True)
     class Meta:
         model = CustomUser
-        fields = '__all__'
-        
+        fields = ('password', 'password_confirm', 'username', 'email')
+        extra_kwargs = {
 
+            'email': {'required': True},
+        }
+        
     def validate_username(self, value):
         if len(value.strip()) < 3:
             raise serializers.ValidationError("El nombre de usuario debe tener al menos 3 caracteres.")
@@ -43,15 +47,13 @@ class UserSerializer(serializers.ModelSerializer):
         
         # Guardar la contraseña para usarla después
         password = validated_data.pop('password')
+
         
         # Crear el usuario sin la contraseña
-        user = User.objects.create(**validated_data)
+        user = CustomUser.objects.create(**validated_data)
         
         # Establecer la contraseña con el método seguro que aplica el hashing
         user.set_password(password)
-
-        cliente_group, created = Group.objects.get_or_create(name='doctor')
-        user.groups.add(cliente_group)
 
         user.save()
         
