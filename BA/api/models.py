@@ -26,7 +26,6 @@ class Staff(models.Model):
 
 class Expedientes(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    nombreCompleto = models.CharField(max_length=150)
     rol = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
     imagen = models.CharField(max_length=150, blank=True, null=True)

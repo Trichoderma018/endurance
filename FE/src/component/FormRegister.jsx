@@ -145,7 +145,7 @@ function FormRegister() {
             {isLoading && <span className="loading">Loading...</span>}
             <div className="acc-text">
               New here?{' '}
-              <span onClick={() => navigate('/register')} style={{ color: "#0197A6", cursor: "pointer" }}>
+              <span onClick={() => navigate('/')} style={{ color: "#0197A6", cursor: "pointer" }}>
                 Create Account
               </span>
             </div>

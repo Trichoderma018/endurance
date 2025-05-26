@@ -12,9 +12,9 @@ function Routing() {
     <div>
       <Router>
         <Routes>
-            <Route path="/register" element={<Register />} />
             <Route path='/' element={<Login/>}/>
-            <Route path='/EXPE' element={<Expediente/>}/>
+            <Route path="/register" element={<Register />} />
+            <Route path='/Expesiente' element={<Expediente/>}/>
 
         </Routes>
       </Router>

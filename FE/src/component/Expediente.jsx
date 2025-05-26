@@ -111,6 +111,8 @@ function Expediente() {
                 </form>
                 {error && <p className="error">{error}</p>}
                 {isLoading ? <p>Cargando...</p> : expediente.imc && <p>IMC calculado: {expediente.imc}</p>}
+
+                
             </div>
         </div>
     );

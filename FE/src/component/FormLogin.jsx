@@ -24,7 +24,7 @@ const FormLogin = () => {
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
 
-    navigate('/EXPE');
+    navigate('/Expesiente'); // Redirect to the expediente page
   };
 
   return (
