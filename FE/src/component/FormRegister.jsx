@@ -66,37 +66,57 @@ function FormRegister() {
   else if (passwordStrength === 2) strengthLabel = "Moderate";
   else if (passwordStrength === 3) strengthLabel = "Good";
   else if (passwordStrength === 4) strengthLabel = "Strong";
-  const handleSubmit = (event) => {
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Form submitted:', formData);
-    
+  
     // Por seguridad, verificamos nuevamente que coincidan ambas contraseñas.
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
 
-    // Aquí podrías hacer una llamada a la API para registrar al usuario
-    // y manejar la respuesta (éxito/error) según sea necesario.
-    setIsLoading(true);
+    // Verificamos que todos los campos estén completos
+    if (!formData.name || !formData.email || !formData.password) {
+      setError('Please fill in all fields.');
+      return;
+    }
 
-    // Simulación de llamada API
-    setTimeout(() => {
-      console.log('User registered:', formData);
+    setIsLoading(true);
+    setError(null); // Limpiar errores previos
+
+    try {
+      // Preparar los datos para enviar (sin incluir confirmPassword)
+      const dataToSend = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      };
+
+      // Llamada real a la API
+      const response = await Llamados.postData(dataToSend, 'api/users');
+      
+      console.log('User registered successfully:', response);
+      
+      // Si la respuesta es exitosa, redirigir al login
+      navigate('/login');
+      
+    } catch (error) {
+      console.error('Registration error:', error);
+      
+      // Manejar diferentes tipos de errores
+      if (error.message) {
+        setError(error.message);
+      } else if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('Registration failed. Please try again.');
+      }
+    } finally {
       setIsLoading(false);
-      Llamados.postUsers(formData, 'users')
-      navigate('/login'); // Redirigir a la página de inicio de sesión después del registro exitoso
-      // Aquí podrías hacer una llamada a la API para registrar al usuario
-      // y manejar la respuesta (éxito/error) según sea necesario.
-      // Por ejemplo:
-      // fetch('/api/register', {
-      //   method: 'POST',
-    }, 2000);
+    }
   };
-  // Simulación de llamada API
-  // setTimeout(() => {
-  //   console.log('User registered:', formData);
-  //   setIsLoading(false);
 
   return (
     // Renderizamos el formulario de registro
