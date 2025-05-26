@@ -65,7 +65,7 @@ function FormRegister() {
         password_confirm: formData.confirmPassword,
         username: formData.username,
         email: formData.email
-      }, 'users/');
+      }, 'api/users/');
 
       console.log('User registered successfully:', response);
       navigate('/');
