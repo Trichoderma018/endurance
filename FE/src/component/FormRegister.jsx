@@ -4,9 +4,19 @@ import '../style/Register.css';
 import Llamados from '../services/Llamados';
 
 
+
 // Componente de registro de usuario
 // Este componente maneja el registro de un nuevo usuario
 function FormRegister() {
+  const obj ={
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }
+ 
+
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -119,6 +129,9 @@ function FormRegister() {
   };
 
   return (
+    // input onChange={(e)=> setNombre(e.target.value)}
+    // input onChange={(e)=> setEmail(e.target.value)}
+    // input onChange={(e)=> setPassword(e.target.value)}
     // Renderizamos el formulario de registro
     // El formulario tiene campos para nombre, email, contraseña y confirmación de contraseña 
     // También muestra la fortaleza de la contraseña y un mensaje de error si es necesario
