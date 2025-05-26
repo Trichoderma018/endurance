@@ -4,11 +4,11 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-    password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    password_confirm = serializers.CharField(write_only=True, style={'input_type': 'password'})
     email = serializers.CharField(required=True)
     class Meta:
         model = CustomUser
-        fields = ('password', 'password_confirm', 'username', 'email')
+        fields = ['password', 'password_confirm', 'username', 'email']
         extra_kwargs = {
 
             'email': {'required': True},
@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         if len(value.strip()) < 3:
             raise serializers.ValidationError("El nombre de usuario debe tener al menos 3 caracteres.")
 
-        if User.objects.filter(username=value).exists():
+        if CustomUser.objects.filter(username=value).exists():
             raise serializers.ValidationError("Este nombre de usuario ya está en uso.")
         return value
     
@@ -26,15 +26,10 @@ class UserSerializer(serializers.ModelSerializer):
         if not '@' in value:
             raise serializers.ValidationError("El correo electrónico no es válido.")
 
-        if User.objects.filter(email=value).exists():
+        if CustomUser.objects.filter(email=value).exists():
             raise serializers.ValidationError("Este correo electrónico ya está en uso.")
         return value
 
-    def validate(self, data):
-        # Verificar que las contraseñas coincidan
-        if data.get('password') != data.get('password_confirm'):
-            raise serializers.ValidationError({"password_confirm": "Las contraseñas no coinciden."})
-        return data
 
     def validate_password(self, value):
         if len(value) < 8:

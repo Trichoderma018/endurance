@@ -1,6 +1,8 @@
+const API_URL = 'http://localhost:8000';
+
 async function getData(endpoint) {
     try {
-        const response = await fetch(`http://localhost:3000/${endpoint}`, {
+        const response = await fetch(`${API_URL}/${endpoint}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,7 +21,7 @@ async function getData(endpoint) {
 //////////LLAMADO POST//////////
 async function postData(obj,endpoint) { 
     try {
-        const response = await fetch(`http://localhost:5173/${endpoint}`, { 
+        const response = await fetch(`${API_URL}/${endpoint}`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +40,7 @@ async function patchData(valor,endpoint,id)
 {
 
     try {
-        const response = await fetch(`http://localhost:3000/${endpoint}/`+id, {
+        const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,9 +55,9 @@ async function patchData(valor,endpoint,id)
 }
 
 //////////////LLAMADO DELETE/////////////
-async function deleteGata(endpoint,id) {
+async function deleteData(endpoint,id) {
     try {
-        const response = await fetch(`http://localhost:3000/${endpoint}/${id}`, {
+        const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,4 +72,4 @@ async function deleteGata(endpoint,id) {
         throw error;
     }
 }
-export default { getData, postData, patchData, deleteGata };
+export default { getData, postData, patchData, deleteData };

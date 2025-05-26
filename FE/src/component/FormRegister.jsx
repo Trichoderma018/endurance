@@ -8,17 +8,8 @@ import Llamados from '../services/Llamados';
 // Componente de registro de usuario
 // Este componente maneja el registro de un nuevo usuario
 function FormRegister() {
-  const obj ={
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  }
- 
-
-
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -80,15 +71,9 @@ function FormRegister() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Form submitted:', formData);
-  
-    // Por seguridad, verificamos nuevamente que coincidan ambas contraseñas.
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
 
     // Verificamos que todos los campos estén completos
-    if (!formData.name || !formData.email || !formData.password) {
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
@@ -97,20 +82,20 @@ function FormRegister() {
     setError(null); // Limpiar errores previos
 
     try {
-      // Preparar los datos para enviar (sin incluir confirmPassword)
       const dataToSend = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
+        password: formData.password,
+        password_confirm: formData.confirmPassword,
+        username: formData.name,
+        email: formData.email
       };
 
       // Llamada real a la API
-      const response = await Llamados.postData(dataToSend, 'api/users');
+      const response = await Llamados.postData(dataToSend, 'users/');
       
       console.log('User registered successfully:', response);
       
       // Si la respuesta es exitosa, redirigir al login
-      navigate('/login');
+      navigate('/');
       
     } catch (error) {
       console.error('Registration error:', error);
@@ -126,8 +111,7 @@ function FormRegister() {
     } finally {
       setIsLoading(false);
     }
-  };
-
+  }
   return (
     // input onChange={(e)=> setNombre(e.target.value)}
     // input onChange={(e)=> setEmail(e.target.value)}
@@ -215,7 +199,7 @@ function FormRegister() {
 
                 New here?{' '}
                 <span
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/')}
                   style={{ color: "#0197A6", cursor: "pointer" }}
                 >
 
