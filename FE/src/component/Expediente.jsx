@@ -15,16 +15,13 @@ function Expediente() {
     });
 
     const [expedientes, setExpedientes] = useState([]);
-    const [expedientesOriginales, setExpedientesOriginales] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        setTimeout(() => setIsLoading(false), 2000);
     }, []);
 
     const handleChange = (event) => {
@@ -45,8 +42,8 @@ function Expediente() {
             setError('Edad, peso y altura deben ser números.');
             return false;
         }
-        if (edad <= 0 || peso <= 0 || altura <= 0) {
-            setError('Edad, peso y altura deben ser mayores a cero.');
+        if (edad < 1 || edad > 120 || peso < 30 || peso > 200 || altura < 100 || altura > 250) {
+            setError('Valores fuera de los rangos permitidos.');
             return false;
         }
         setError(null);
@@ -55,7 +52,11 @@ function Expediente() {
 
     const calculateIMC = (peso, altura) => {
         if (peso && altura) {
-            return (peso / ((altura / 100) ** 2)).toFixed(2);
+            const imc = (peso / ((altura / 100) ** 2)).toFixed(2);
+            if (imc < 18.5) return `${imc} - Bajo peso`;
+            if (imc < 24.9) return `${imc} - Normal`;
+            if (imc < 29.9) return `${imc} - Sobrepeso`;
+            return `${imc} - Obesidad`;
         }
         return '';
     };
@@ -75,44 +76,47 @@ function Expediente() {
         };
 
         setExpedientes(prev => [...prev, newExpediente]);
-        setExpedientesOriginales(prev => [...prev, newExpediente]);
-
         setExpediente({
-            nombre: '',
-            apellido: '',
-            edad: '',
-            sexo: '',
-            fecha: '',
-            peso: '',
-            altura: '',
-            imc: ''
+            nombre: '', apellido: '', edad: '', sexo: '',
+            fecha: '', peso: '', altura: '', imc: ''
         });
 
         setIsLoading(false);
+        navigate('/');
     };
 
     return (
-        <div className="">
-            <div className="container">
-                <div className="heading">Registro de atletas</div>
+        <div> 
+            <header>ENDURANCE</header>
+            <nav>
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/expediente">Expediente</a></li>
+                    <li><a href="/atletas">Atletas</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <div className="registro-container">
+                <h2>Registro de atletas</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Nombre" required />
-                    <input type="text" name="apellido" value={expediente.apellido} onChange={handleChange} placeholder="Apellido" required />
-                    <input type="number" name="edad" value={expediente.edad} onChange={handleChange} placeholder="Edad" required />
-                    <select name="sexo" value={expediente.sexo} onChange={handleChange} required>
-                        <option value="">Seleccione Sexo</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
+                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Nombre" required />
+                    <input className='input' type="text" name="apellido" value={expediente.apellido} onChange={handleChange} placeholder="Apellido" required />
+                    <input className='input' type="number" name="edad" value={expediente.edad} onChange={handleChange} placeholder="Edad" required />
+                    <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
+                        <option className='input' value="">Seleccione Sexo</option>
+                        <option className='input' value="masculino">Masculino</option>
+                        <option className='input' value="femenino">Femenino</option>
+                        <option className='input' value="otro">Otro</option>
                     </select>
-                    <input type="date" name="fecha" value={expediente.fecha} onChange={handleChange} placeholder="Fecha de visita" required />
-                    <input type="number" name="peso" value={expediente.peso} onChange={handleChange} placeholder="Peso (kg)" required />
-                    <input type="number" name="altura" value={expediente.altura} onChange={handleChange} placeholder="Altura (cm)" required />
-                    <button type="submit">Realizar visita</button>
+                    
+                    <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
+                    <input className='input' type="number" name="peso" value={expediente.peso} onChange={handleChange} placeholder="Peso (kg)" required />
+                    <input className='input' type="number" name="altura" value={expediente.altura} onChange={handleChange} placeholder="Altura (cm)" required />
+                    <button className='input' type="submit">Realizar visita</button>
                 </form>
                 {error && <p className="error">{error}</p>}
                 {isLoading ? <p>Cargando...</p> : expediente.imc && <p>IMC calculado: {expediente.imc}</p>}
-
-                
             </div>
         </div>
     );
