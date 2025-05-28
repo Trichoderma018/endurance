@@ -36,23 +36,27 @@ const FormLogin = () => {
       
 
         <div className="input-group">
-          <label htmlFor="email">Email</label>
+          <div className='rtflx'>
+          <label className='rtflx' htmlFor="email">Email</label>
           <input 
+            className='rtflx'
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
             required 
-          />
+          /></div>
         </div>
 
         <div className="input-group">
-          <label htmlFor="password">Password</label>
+          <div className='rtflx'>
+          <label className='rtflx' htmlFor="password">Password</label>
           <input 
+            className='rtflx'
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
             required 
-          />
+          /></div>
         </div>
 
         <button className="submit" type="submit">Log In</button>
