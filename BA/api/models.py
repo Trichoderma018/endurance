@@ -29,6 +29,7 @@ class Expedientes(models.Model):
     rol = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
     imagen = models.CharField(max_length=150, blank=True, null=True)
+    genero = models.CharField(max_length=10)
     sede = models.CharField(max_length=150)
     cometario1 = models.TextField(blank=True, null=True)
     cometario2 = models.TextField(blank=True, null=True)
