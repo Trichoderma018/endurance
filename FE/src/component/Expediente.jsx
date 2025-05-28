@@ -75,13 +75,13 @@ function Expediente() {
             const response = await Llamados.postData({
                 user: expediente.nombre,
                 rol: expediente.apellido,
-                activo: expediente.edad,
                 imagen: expediente.sexo,
                 sede: expediente.fecha,
                 comentario1: expediente.peso,
                 comentario2: expediente.altura,
                 comentario3: expediente.altura,
                 fechaExpediente: expediente.fecha,
+                activo: expediente.edad,
             }, 'api/expedientes/');
         } catch (error) {
             
@@ -109,18 +109,30 @@ function Expediente() {
             <div className="registro-container">
                 <h2>Registro de atletas</h2>
                 <form onSubmit={handleSubmit}>
-                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Nombre" required />
-                    <input className='input' type="text" name="apellido" value={expediente.apellido} onChange={handleChange} placeholder="Apellido" required />
-                    <input className='input' type="number" name="edad" value={expediente.edad} onChange={handleChange} placeholder="Edad" required />
-                    <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
-                        <option className='input' value="">Seleccione Sexo</option>
+                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="full name" required />
+
+                    <img src="" alt="" />
+
+                    <select className='input' type="text" name="rol" value={expediente.apellido} onChange={handleChange} placeholder="ROL" required >
+                        <option className='input' value="">Seleccione Rol</option>
+                        <option className='input' value="atleta">Atleta</option>
+                        <option className='input' value="entrenador">Entrenador</option>
+                        <option className='input' value="staff">STAFF</option>
+                    </select>
+
+                    <select className='input' value={expediente.sexo} onChange={handleChange} required>
+                        <option className='input' value="">Seleccione genero</option>
                         <option className='input' value="masculino">Masculino</option>
                         <option className='input' value="femenino">Femenino</option>
                         <option className='input' value="otro">Otro</option>
                     </select>
-                    <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
-                    <input className='input' type="number" name="peso" value={expediente.peso} onChange={handleChange} placeholder="Peso (kg)" required />
-                    <input className='input' type="number" name="altura" value={expediente.altura} onChange={handleChange} placeholder="Altura (cm)" required />
+
+                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °1" required />
+                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °2" required />
+                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °3" required />
+                    
+                    <input className='input' type="date" value={expediente.fecha} onChange={handleChange} required />
+
                     <button className='input' type="submit">Realizar visita</button>
                 </form>
                 {error && <p className="error">{error}</p>}

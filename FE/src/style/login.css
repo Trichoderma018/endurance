@@ -1,5 +1,5 @@
 *{
-    background-color: rgb(255, 255, 255);
+    background-color: #F8F3F7;
     color: black;
 }
 
@@ -23,7 +23,7 @@
   max-width: 420px;
   width: 100%;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.9);
+  background: #F8F3F7;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1.5s ease-out;
@@ -31,7 +31,7 @@
 
 .form-heading {
   text-align: center;
-  background-color: #ffffff;
+  background-color: #F8F3F7;
   color: #333;
   font-size: 2rem;
   font-weight: 600;
@@ -61,8 +61,8 @@
   padding: 15px 20px;
   font-size: 1rem;
   color: #333;
-  background-color: #ffffff;
-  border: 2px solid #ddd;
+  background-color: #F8F3F7;
+  border: 2px solid #828282;
   border-radius: 10px;
   outline: none;
   transition: all 0.3s ease;
@@ -83,7 +83,7 @@
 .forgot-password {
   text-align: right;
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-color: #F8F3F7;
   
 }
 
@@ -103,7 +103,7 @@
   width: 100%;
   padding: 15px;
   background-color: #0197A6;
-  color: #ffffff;
+  color: #F8F3F7;
   border: none;
   border-radius: 30px;
   font-size: 1.1rem;
@@ -132,7 +132,7 @@
 }
 
 .logi {
- background-color: #ffffff;
+ background-color: #F8F3F7;
  color: #333;
 
 }

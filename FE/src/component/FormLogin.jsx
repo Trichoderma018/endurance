@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../style/login.css";
+import "../assets/img/Logo.jpeg";
 
 const FormLogin = () => {
   const [email, setEmail] = useState('');
@@ -28,9 +29,11 @@ const FormLogin = () => {
   };
 
   return (
-    <div className="login-container">
+
+   <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2 className="form-heading">Login</h2>
+        <img className='' src="..\src\assets\img\Logo.jpeg" alt="logo" />
+      
 
         <div className="input-group">
           <label htmlFor="email">Email</label>
