@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
+import Llamados from '../services/Llamados';
 
 function Expediente() {
     const [expediente, setExpediente] = useState({
@@ -61,7 +62,7 @@ function Expediente() {
         return '';
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
 
@@ -69,17 +70,25 @@ function Expediente() {
             setIsLoading(false);
             return;
         }
+        
+        try {
+            const response = await Llamados.postData({
+                user: expediente.nombre,
+                rol: expediente.apellido,
+                activo: expediente.edad,
+                imagen: expediente.sexo,
+                sede: expediente.fecha,
+                comentario1: expediente.peso,
+                comentario2: expediente.altura,
+                comentario3: expediente.altura,
+                fechaExpediente: expediente.fecha,
+            }, 'api/expedientes/');
+        } catch (error) {
+            
+        }
 
-        const newExpediente = {
-            ...expediente,
-            imc: calculateIMC(expediente.peso, expediente.altura)
-        };
-
-        setExpedientes(prev => [...prev, newExpediente]);
-        setExpediente({
-            nombre: '', apellido: '', edad: '', sexo: '',
-            fecha: '', peso: '', altura: '', imc: ''
-        });
+        
+        
 
         setIsLoading(false);
         navigate('/');
@@ -109,7 +118,6 @@ function Expediente() {
                         <option className='input' value="femenino">Femenino</option>
                         <option className='input' value="otro">Otro</option>
                     </select>
-                    
                     <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
                     <input className='input' type="number" name="peso" value={expediente.peso} onChange={handleChange} placeholder="Peso (kg)" required />
                     <input className='input' type="number" name="altura" value={expediente.altura} onChange={handleChange} placeholder="Altura (cm)" required />
