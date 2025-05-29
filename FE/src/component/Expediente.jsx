@@ -8,11 +8,11 @@ function Expediente() {
         nombre: '',
         edad: '',
         genero: '',
-        fecha: '',
         activo: '',
         comentario1: '',
         comentario2: '',
-        comentario3: ''
+        comentario3: '',
+        fecha: '',
     } );
 
     const [error, setError] = useState(null);
@@ -99,15 +99,16 @@ function Expediente() {
 
     return (
         <div>
+
             <header>ENDURANCE</header>
+
             <nav>
                 <ul>
     
-                {/* lista de expedientes */}
+                {/*lista del navegador*/}
 
                 </ul>
             </nav>
-
             <div className="registro-container">
                 <h2>Registro de atletas</h2>
                 <form onSubmit={handleSubmit}>
@@ -118,11 +119,13 @@ function Expediente() {
                         <option value="entrenador">Entrenador</option>
                         <option value="staff">STAFF</option>
                     </select>
-                    <select className='input' name="" id="">
+
+                    <select className='input' name="Estado" id="" value={expediente.activo} onChange={handleChange} required>
+                        <option className='input' value="">Estado</option>
+                        <option className='input' value="">inactivo</option>
                         <option className='input' value="Activo">Activo</option>
-                        <option className='input' value="si">Si</option>
-                        <option className='input' value="no">No</option>
                     </select>
+
                     <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
                         <option value="">Seleccione género</option>
                         <option value="masculino">Masculino</option>
@@ -130,9 +133,9 @@ function Expediente() {
                         <option value="otro">Otro</option>
                     </select>
 
-                    <input className='input' type="text" name="comentario1" value={expediente.comentario1} onChange={handleChange} placeholder="Comentario °1" required />
-                    <input className='input' type="text" name="comentario2" value={expediente.comentario2} onChange={handleChange} placeholder="Comentario °2" required />
-                    <input className='input' type="text" name="comentario3" value={expediente.comentario3} onChange={handleChange} placeholder="Comentario °3" required />
+                    <input className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
+                    <input className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
+                    <input className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
                     
                     <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
                     <button className='input' type="submit">Realizar visita</button>

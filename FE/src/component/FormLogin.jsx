@@ -2,30 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../style/login.css";
 import "../assets/img/Logo.jpeg";
+import Llamados from '../services/Llamados';
 
 const FormLogin = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const savedEmail = localStorage.getItem('email');
-    const savedPassword = localStorage.getItem('password');
-
-    if (savedEmail && savedPassword) {
-      setEmail(savedEmail);
-      setPassword(savedPassword);
-    }
-  }, []);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login Details:', { email, password });
 
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+    try {
+      const response = await Llamados.postData({
+        username: username,
+        password: password
+      }, 'api/token');
 
-    navigate('/Expesiente'); // Redirect to the expediente page
+      console.log('Response Data', response);
+      if (!response.token) {
+        navigate('/Expesiente'); // Redirige a Expediente
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -37,12 +36,12 @@ const FormLogin = () => {
 
         <div className="input-group">
           <div className='rtflx'>
-          <label className='rtflx' htmlFor="email">Email</label>
+          <label className='rtflx' htmlFor="email">Username</label>
           <input 
             className='rtflx'
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            type="text" 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
             required 
           /></div>
         </div>
