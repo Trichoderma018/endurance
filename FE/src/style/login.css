@@ -1,11 +1,22 @@
 *{
-    background-color: #ffffff;
+    background-color: #F8F3F7;
     color: black;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F8F3F7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .rtflx {
  background-color: #F8F3F7;
- color: #333;
+ color: #000000;
 }
 
 /* From Uiverse.io by rajesh_4474 */ 
@@ -24,7 +35,6 @@
 
 .login-form {
     position: relative;
-    left: 119%;
   max-width: 420px;
   width: 100%;
   padding: 40px;
@@ -47,7 +57,8 @@
 
 .input-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  background-color: transparent;
 }
 
 .input-group .label {
@@ -62,7 +73,7 @@
 }
 
 .input-group input {
-  width: 100%;
+  width: 105%;
   padding: 15px 20px;
   font-size: 1rem;
   color: #333;
@@ -97,7 +108,7 @@
   font-size: 14px;
   color: #0197A6;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.4s ease;
 }
 
 .forgot-password a:hover {

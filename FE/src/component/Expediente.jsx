@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/Expediente.css';
 import Llamados from '../services/Llamados';
+import '../style/Expediente.css';
 
 function Expediente() {
     const [expediente, setExpediente] = useState({
         nombre: '',
-        apellido: '',
         edad: '',
-        sexo: '',
+        genero: '',
         fecha: '',
-        peso: '',
-        altura: '',
-        imc: ''
-    });
+        activo: '',
+        comentario1: '',
+        comentario2: '',
+        comentario3: ''
+    } );
 
-    const [expedientes, setExpedientes] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -24,6 +23,13 @@ function Expediente() {
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 2000);
     }, []);
+
+    useEffect(() => {
+        setExpediente(prev => ({
+            ...prev,
+            imc: calculateIMC(prev.peso, prev.altura)
+        }));
+    }, [expediente.peso, expediente.altura]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -34,12 +40,12 @@ function Expediente() {
     };
 
     const validateFields = () => {
-        const { nombre, apellido, edad, sexo, fecha, peso, altura } = expediente;
-        if (!nombre || !apellido || !edad || !sexo || !fecha || !peso || !altura) {
+        const { nombre, edad, genero, fecha, peso, altura } = expediente;
+        if (!nombre || !edad || !genero || !fecha || !peso || !altura) {
             setError('Todos los campos son obligatorios.');
             return false;
         }
-        if (isNaN(edad) || isNaN(peso) || isNaN(altura)) {
+        if (isNaN(edad) || isNaN(genero) || isNaN(altura)) {
             setError('Edad, peso y altura deben ser números.');
             return false;
         }
@@ -70,71 +76,68 @@ function Expediente() {
             setIsLoading(false);
             return;
         }
-        
+
         try {
             const response = await Llamados.postData({
                 user: expediente.nombre,
                 rol: expediente.apellido,
                 imagen: expediente.sexo,
                 sede: expediente.fecha,
-                comentario1: expediente.peso,
-                comentario2: expediente.altura,
-                comentario3: expediente.altura,
-                fechaExpediente: expediente.fecha,
-                activo: expediente.edad,
+                activo: expediente.activo,
+                genero: expediente.genero,
+                comentario1: expediente.comentario1,
+                comentario2: expediente.comentario2,
+                comentario3: expediente.comentario3,
             }, 'api/expedientes/');
         } catch (error) {
-            
+            setError('Hubo un error al enviar el expediente.');
         }
 
-        
-        
-
         setIsLoading(false);
-        navigate('/');
+       
     };
 
     return (
-        <div> 
+        <div>
             <header>ENDURANCE</header>
             <nav>
                 <ul>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/expediente">Expediente</a></li>
-                    <li><a href="/atletas">Atletas</a></li>
-                    <li><a href="/contacto">Contacto</a></li>
+    
+                {/* lista de expedientes */}
+
                 </ul>
             </nav>
 
             <div className="registro-container">
                 <h2>Registro de atletas</h2>
                 <form onSubmit={handleSubmit}>
-                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="full name" required />
-
-                    <img src="" alt="" />
-
-                    <select className='input' type="text" name="rol" value={expediente.apellido} onChange={handleChange} placeholder="ROL" required >
-                        <option className='input' value="">Seleccione Rol</option>
-                        <option className='input' value="atleta">Atleta</option>
-                        <option className='input' value="entrenador">Entrenador</option>
-                        <option className='input' value="staff">STAFF</option>
+                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Full name" required />
+                    <select className='input' name="apellido" value={expediente.apellido} onChange={handleChange} required>
+                        <option value="">Seleccione Rol</option>
+                        <option value="atleta">Atleta</option>
+                        <option value="entrenador">Entrenador</option>
+                        <option value="staff">STAFF</option>
+                    </select>
+                    <select className='input' name="" id="">
+                        <option className='input' value="Activo">Activo</option>
+                        <option className='input' value="si">Si</option>
+                        <option className='input' value="no">No</option>
+                    </select>
+                    <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
+                        <option value="">Seleccione género</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
                     </select>
 
-                    <select className='input' value={expediente.sexo} onChange={handleChange} required>
-                        <option className='input' value="">Seleccione genero</option>
-                        <option className='input' value="masculino">Masculino</option>
-                        <option className='input' value="femenino">Femenino</option>
-                        <option className='input' value="otro">Otro</option>
-                    </select>
-
-                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °1" required />
-                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °2" required />
-                    <input className='input' type="text" value={expediente.nombre} onChange={handleChange} placeholder="Comentario °3" required />
+                    <input className='input' type="text" name="comentario1" value={expediente.comentario1} onChange={handleChange} placeholder="Comentario °1" required />
+                    <input className='input' type="text" name="comentario2" value={expediente.comentario2} onChange={handleChange} placeholder="Comentario °2" required />
+                    <input className='input' type="text" name="comentario3" value={expediente.comentario3} onChange={handleChange} placeholder="Comentario °3" required />
                     
-                    <input className='input' type="date" value={expediente.fecha} onChange={handleChange} required />
-
+                    <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
                     <button className='input' type="submit">Realizar visita</button>
                 </form>
+
                 {error && <p className="error">{error}</p>}
                 {isLoading ? <p>Cargando...</p> : expediente.imc && <p>IMC calculado: {expediente.imc}</p>}
             </div>
