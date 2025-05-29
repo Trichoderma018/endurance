@@ -60,7 +60,7 @@ const FormLogin = () => {
 
         <button className="submit" type="submit">Log In</button>
 
-        <div className="signup-link" onClick={() => navigate('/register')}>
+        <div className="signup-link" onClick={() => navigate('/expesiente')}>
           Don't have an account? <a href="#">Sign up</a>
         </div>
       </form>
