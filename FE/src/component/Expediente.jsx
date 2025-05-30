@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Llamados from '../services/Llamados';
 import '../style/Expediente.css';
+import "../style/ExpeNav.css";
+import Navbar from './navbar';
 
 function Expediente() {
     const [expediente, setExpediente] = useState({
@@ -13,7 +15,7 @@ function Expediente() {
         comentario2: '',
         comentario3: '',
         fecha: '',
-    } );
+    });
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -32,16 +34,18 @@ function Expediente() {
     }, [expediente.peso, expediente.altura]);
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setExpediente(prev => ({
-            ...prev,
-            [name]: value
+        const { value } = event.target;
+        console.log("Nuevo valor:", value); // Verifica en la consola
+        setExpediente(prevState => ({
+            ...prevState,
+            activo: value
         }));
     };
 
+    const Estado = expediente.activo === 'Activo' ? 'Activo' : 'Inactivo';
     const validateFields = () => {
         const { nombre, edad, genero, fecha, peso, altura } = expediente;
-        if (!nombre || !edad || !genero || !fecha || !peso || !altura) {
+        if (!nombre || !edad || !Estado || !genero || !fecha || !peso || !altura) {
             setError('Todos los campos son obligatorios.');
             return false;
         }
@@ -94,23 +98,17 @@ function Expediente() {
         }
 
         setIsLoading(false);
-       
+
     };
 
     return (
         <div>
+            <Navbar/>
 
             <header>ENDURANCE</header>
 
-            <nav>
-                <ul>
-    
-                {/*lista del navegador*/}
-
-                </ul>
-            </nav>
             <div className="registro-container">
-                <h2>Registro de atletas</h2>
+                <h2>EXPEDIENTES</h2>
                 <form onSubmit={handleSubmit}>
                     <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Full name" required />
                     <select className='input' name="apellido" value={expediente.apellido} onChange={handleChange} required>
@@ -120,10 +118,10 @@ function Expediente() {
                         <option value="staff">STAFF</option>
                     </select>
 
-                    <select className='input' name="Estado" id="" value={expediente.activo} onChange={handleChange} required>
+                    <select className='input' value={expediente.activo} onChange={handleChange} required>
                         <option className='input' value="">Estado</option>
-                        <option className='input' value="">inactivo</option>
-                        <option className='input' value="Activo">Activo</option>
+                        <option className='input' value="inactivo">Inactivo</option>
+                        <option className='input' value="activo">Activo</option>
                     </select>
 
                     <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
@@ -136,11 +134,10 @@ function Expediente() {
                     <input className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
                     <input className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
                     <input className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
-                    
+
                     <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
                     <button className='input' type="submit">Realizar visita</button>
                 </form>
-
                 {error && <p className="error">{error}</p>}
                 {isLoading ? <p>Cargando...</p> : expediente.imc && <p>IMC calculado: {expediente.imc}</p>}
             </div>
