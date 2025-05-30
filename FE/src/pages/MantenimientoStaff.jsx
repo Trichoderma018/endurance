@@ -3,7 +3,7 @@ import MantStaff from '../component/MantStaff'
 function MantenimientoStaff() {
   return (
     <div>
-        <MantStaff />
+      <MantStaff />
     </div>
   )
 }

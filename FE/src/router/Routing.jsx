@@ -19,6 +19,8 @@ function Routing() {
             <Route path='/Expesiente' element={<Expediente/>}/>
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
+            <Route path='/mantUser' element={<MantenimientoUser/>}/>
+
         </Routes>
       </Router>
     </div>
