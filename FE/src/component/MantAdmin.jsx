@@ -60,7 +60,7 @@ function MantAdmin() {
         password: password
       }
         
-      await Llamados.putData(administradorActualizado, `api/admin/${currentAdminId}/`)
+      await Llamados.patchData(administradorActualizado, "api/admin/",currentAdminId)
       limpiarFormulario()
       setEditMode(false)
       setCurrentAdminId(null)

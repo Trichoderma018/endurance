@@ -47,7 +47,7 @@ function MantUser() {
 
     async function obtenerUsuarios() {
         try {
-            const response = await Llamados.getData('api/usuarios/')
+            const response = await Llamados.getData('api/users/')
             console.log("Usuarios obtenidos:", response)
             setUsuarios(response.data || response) // Adaptar según la estructura de respuesta
         } catch (error) {
@@ -70,7 +70,7 @@ function MantUser() {
                 sede: sede
             }
             
-            const response = await Llamados.postData(obj, 'api/usuarios/')
+            const response = await Llamados.postData(obj, 'api/users/')
             console.log('Response Data', response)
             limpiarFormulario()
             obtenerUsuarios() // Refresh the list
@@ -94,7 +94,7 @@ function MantUser() {
                 sede: sede
             }
             
-            await Llamados.putData(usuarioActualizado, `api/usuarios/${currentUsuarioId}/`)
+            await Llamados.patchData(usuarioActualizado, `api/users/${currentUsuarioId}/`)
             limpiarFormulario()
             setEditMode(false)
             setCurrentUsuarioId(null)
@@ -107,7 +107,7 @@ function MantUser() {
     async function eliminarUsuario(id) {
         if (window.confirm("¿Está seguro que desea eliminar este usuario?")) {
             try {
-                await Llamados.deleteData("api/usuarios/",id)
+                await Llamados.deleteData("api/users/",id)
                 obtenerUsuarios() // Refresh the list
             } catch (error) {
                 console.error("Error al eliminar usuario:", error)

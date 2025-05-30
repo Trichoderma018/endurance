@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import Expediente from '../component/Expediente';
 import MantenimientoAdmin from '../pages/MantenimientoAdmin';
 import MantenimientoStaff from '../pages/MantenimientoStaff';
+import MantenimientoUser from '../pages/MantenimientoUser';
 
 
 

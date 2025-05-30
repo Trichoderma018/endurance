@@ -2,7 +2,7 @@ const API_URL = 'http://127.0.0.1:8000/';
 
 async function getData(endpoint) {
     try {
-        const response = await fetch(`${API_URL}/${endpoint}`, {
+        const response = await fetch(`${API_URL}${endpoint}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ async function patchData(valor,endpoint,id)
 {
 
     try {
-        const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
+        const response = await fetch(`${API_URL}${endpoint}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
