@@ -57,7 +57,7 @@ async function patchData(valor,endpoint,id)
 //////////////LLAMADO DELETE/////////////
 async function deleteData(endpoint,id) {
     try {
-        const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
+        const response = await fetch(`${API_URL}${endpoint}/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

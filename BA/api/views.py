@@ -25,7 +25,7 @@ class AdminListCreateView(ListCreateAPIView):
     serializer_class = AdminSerializer
 
 class AdminDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [ IsAuthenticated]
+    
     queryset = Admin.objects.all()
     serializer_class = AdminSerializer
 

@@ -3,6 +3,7 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Expediente from '../component/Expediente';
 import MantenimientoAdmin from '../pages/MantenimientoAdmin';
+import MantenimientoStaff from '../pages/MantenimientoStaff';
 
 
 
@@ -17,7 +18,7 @@ function Routing() {
             <Route path="/register" element={<Register />} />
             <Route path='/Expesiente' element={<Expediente/>}/>
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
-
+            <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
         </Routes>
       </Router>
     </div>

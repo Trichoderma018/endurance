@@ -19,6 +19,8 @@ class Staff(models.Model):
     cargo = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
     departamento = models.CharField(max_length=30)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
 
     def __str__(self):
         return self.nombreCompleto
