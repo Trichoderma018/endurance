@@ -50,24 +50,18 @@ function Expediente() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
-
-        if (!validateFields()) {
+        setError(null);
+        if (!nombreExpediente || !edadExpediente || !generoExpediente || !activoExpediente || !comentario1Expediente || !comentario2Expediente || !comentario3Expediente || !fechaExpediente) {
+            setError('Por favor, complete todos los campos.');
             setIsLoading(false);
             return;
         }
-        const expediente = {
-            nombre: nombreExpediente,
-            edad: edadExpediente,
-            genero: generoExpediente,
-            activo: activoExpediente,
-            comentario1: comentario1Expediente,
-            comentario2: comentario2Expediente,
-            comentario3: comentario3Expediente,
-            fecha: fechaExpediente,
-        };
+
+        // Aquí podrías calcular el IMC si tuvieras los campos de peso y altura
+        // const imc = calculateIMC(pesoExpediente, alturaExpediente);
 
         try {
-            const response = await Llamados.postData({
+            const obj = {
                 user: nombreExpediente,
                 edad: edadExpediente,
                 genero: generoExpediente,
@@ -76,7 +70,9 @@ function Expediente() {
                 comentario2: comentario2Expediente,
                 comentario3: comentario3Expediente,
                 fecha: fechaExpediente,
-            }, 'api/expedientes/');
+            }
+            const response = await Llamados.postData(obj, 'api/expedientes/');
+            console.log('Response Data', response);
         } catch (error) {
             setError('Hubo un error al enviar el expediente.');
         }
@@ -123,7 +119,7 @@ function Expediente() {
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
 
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
-                    <button className='input' type="submit">Create Expedient</button>
+                    <button className='input' type="submit" onClick={handleSubmit}>Create Expedient</button>
                     <button className='input'>Realizar view</button>
                 </form>
                 {error && <p className="error">{error}</p>}

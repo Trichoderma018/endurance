@@ -11,12 +11,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Modelo usuario
 class UserListCreateView(ListCreateAPIView):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
@@ -30,32 +30,32 @@ class AdminDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = AdminSerializer
 
 class StaffListCreateView(ListCreateAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
 
 class StaffDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [ IsAuthenticated]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
 
 
 class ExpedientesListCreateView(ListCreateAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Expedientes.objects.all()
     serializer_class = ExpedientesSerializer
 
 class ExpedientesDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [ IsAuthenticated]
     queryset = Expedientes.objects.all()
     serializer_class = ExpedientesSerializer
 
 class VisitasListCreateView(ListCreateAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [ IsAuthenticated]
     queryset = visitas.objects.all()
     serializer_class = VisitasSerializer
 
 class VisitasDetailView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [ IsAuthenticated]
     queryset = visitas.objects.all()
     serializer_class = VisitasSerializer
