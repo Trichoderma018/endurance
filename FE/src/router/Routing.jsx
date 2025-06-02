@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import Expediente from '../component/Expediente';
 import MantenimientoAdmin from '../pages/MantenimientoAdmin';
 import MantenimientoStaff from '../pages/MantenimientoStaff';
+import MantenimientoUser from '../pages/MantenimientoUser';
 
 
 
@@ -19,6 +20,8 @@ function Routing() {
             <Route path='/Expesiente' element={<Expediente/>}/>
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
+            <Route path='/mantUser' element={<MantenimientoUser/>}/>
+
         </Routes>
       </Router>
     </div>

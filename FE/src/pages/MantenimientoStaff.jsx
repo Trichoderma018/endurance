@@ -5,7 +5,7 @@ function MantenimientoStaff() {
 
   return (
     <div>
-        <MantStaff />
+      <MantStaff />
     </div>
   )
 }
