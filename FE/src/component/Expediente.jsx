@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Llamados from '../services/Llamados';
 import '../style/Expediente.css';
 import "../style/ExpeNav.css";
 import Navbar from './navbar';
 
 function Expediente() {
+    const [nombreExpediente,setNombreExpediente] = useState("")
+    const [edadExpediente,setEdadExpediente] = useState("")
+    const [generoExpediente, setGeneroExpediente] = useState("");
+    const [activoExpediente, setActivoExpediente] = useState("");
+    const [comentario1Expediente, setComentario1Expediente] = useState("");
+    const [comentario2Expediente, setComentario2Expediente] = useState("");
+    const [comentario3Expediente, setComentario3Expediente] = useState("");
+    const [fechaExpediente, setFechaExpediente] = useState("");
+    
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     const [expediente, setExpediente] = useState({
         nombre: '',
         edad: '',
@@ -15,51 +26,14 @@ function Expediente() {
         comentario2: '',
         comentario3: '',
         fecha: '',
+        imc: ''
     });
-
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 2000);
     }, []);
 
-    useEffect(() => {
-        setExpediente(prev => ({
-            ...prev,
-            imc: calculateIMC(prev.peso, prev.altura)
-        }));
-    }, [expediente.peso, expediente.altura]);
-
-    const handleChange = (event) => {
-        const { value } = event.target;
-        console.log("Nuevo valor:", value); // Verifica en la consola
-        setExpediente(prevState => ({
-            ...prevState,
-            activo: value
-        }));
-    };
-
-    const Estado = expediente.activo === 'Activo' ? 'Activo' : 'Inactivo';
-    const validateFields = () => {
-        const { nombre, edad, genero, fecha, peso, altura } = expediente;
-        if (!nombre || !edad || !Estado || !genero || !fecha || !peso || !altura) {
-            setError('Todos los campos son obligatorios.');
-            return false;
-        }
-        if (isNaN(edad) || isNaN(genero) || isNaN(altura)) {
-            setError('Edad, peso y altura deben ser números.');
-            return false;
-        }
-        if (edad < 1 || edad > 120 || peso < 30 || peso > 200 || altura < 100 || altura > 250) {
-            setError('Valores fuera de los rangos permitidos.');
-            return false;
-        }
-        setError(null);
-        return true;
-    };
 
     const calculateIMC = (peso, altura) => {
         if (peso && altura) {
@@ -72,6 +46,7 @@ function Expediente() {
         return '';
     };
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setIsLoading(true);
@@ -80,18 +55,27 @@ function Expediente() {
             setIsLoading(false);
             return;
         }
+        const expediente = {
+            nombre: nombreExpediente,
+            edad: edadExpediente,
+            genero: generoExpediente,
+            activo: activoExpediente,
+            comentario1: comentario1Expediente,
+            comentario2: comentario2Expediente,
+            comentario3: comentario3Expediente,
+            fecha: fechaExpediente,
+        };
 
         try {
             const response = await Llamados.postData({
-                user: expediente.nombre,
-                rol: expediente.apellido,
-                imagen: expediente.sexo,
-                sede: expediente.fecha,
-                activo: expediente.activo,
-                genero: expediente.genero,
-                comentario1: expediente.comentario1,
-                comentario2: expediente.comentario2,
-                comentario3: expediente.comentario3,
+                user: nombreExpediente,
+                edad: edadExpediente,
+                genero: generoExpediente,
+                activo: activoExpediente,
+                comentario1: comentario1Expediente,
+                comentario2: comentario2Expediente,
+                comentario3: comentario3Expediente,
+                fecha: fechaExpediente,
             }, 'api/expedientes/');
         } catch (error) {
             setError('Hubo un error al enviar el expediente.');
@@ -109,34 +93,38 @@ function Expediente() {
 
             <div className="registro-container">
                 <h2>EXPEDIENTES</h2>
-                <form onSubmit={handleSubmit}>
-                    <input className='input' type="text" name="nombre" value={expediente.nombre} onChange={handleChange} placeholder="Full name" required />
-                    <select className='input' name="apellido" value={expediente.apellido} onChange={handleChange} required>
-                        <option value="">Seleccione Rol</option>
+                <form >
+                    <input className='input' type="text" name="nombre"  onChange={(e)=>setNombreExpediente(e.target.value)} placeholder="Full name" required />
+
+                    <select className='input' name="Estado"  onChange={(e)=>setActivoExpediente(e.target.value)} required>
+                        <option value="" >Seleccione Rol</option>
                         <option value="atleta">Atleta</option>
                         <option value="entrenador">Entrenador</option>
                         <option value="staff">STAFF</option>
                     </select>
 
-                    <select className='input' value={expediente.activo} onChange={handleChange} required>
-                        <option className='input' value="">Estado</option>
-                        <option className='input' value="inactivo">Inactivo</option>
-                        <option className='input' value="activo">Activo</option>
+                    <input className='input' type="number" placeholder='Edad' onChange={(e)=>setEdadExpediente(e.target.value)}/>
+
+                    <select className='input' onChange={(e)=>setActivoExpediente(e.target.value)} >
+                        <option value="Estado" >estado</option>
+                        <option value="inactivo">Inactivo</option>
+                        <option value="activo">Activo</option>
                     </select>
 
-                    <select className='input' name="sexo" value={expediente.sexo} onChange={handleChange} required>
-                        <option value="">Seleccione género</option>
+                    <select className='input' name="Genero" onChange={(e)=>setGeneroExpediente(e.target.value)} required>
+                        <option value="" >Seleccione género</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
 
-                    <input className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
-                    <input className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
-                    <input className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
+                    <input onChange={(e)=>setComentario1Expediente(e.target.value)} className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
+                    <input onChange={(e)=>setComentario2Expediente(e.target.value)} className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
+                    <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
 
-                    <input className='input' type="date" name="fecha" value={expediente.fecha} onChange={handleChange} required />
-                    <button className='input' type="submit">Realizar visita</button>
+                    <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
+                    <button className='input' type="submit">Create Expedient</button>
+                    <button className='input'>Realizar view</button>
                 </form>
                 {error && <p className="error">{error}</p>}
                 {isLoading ? <p>Cargando...</p> : expediente.imc && <p>IMC calculado: {expediente.imc}</p>}
