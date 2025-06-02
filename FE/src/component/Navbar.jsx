@@ -1,6 +1,4 @@
 import React from 'react'
-import "../component/MantAdmin.jsx";
-import "../component/MantStaff.jsx";
 import { Link } from 'react-router-dom'
 
 function Navbar() {
@@ -11,7 +9,6 @@ function Navbar() {
             
             <div className="radio-input">
             <label>
-                <Link ></Link>
                 <input
                 defaultValue="value-1"
                 name="value-radio"
@@ -21,13 +18,13 @@ function Navbar() {
                 />
                 <span>Usuarios</span>
             </label>
-            <label>
+            <label><Link to={"/Expesiente"}>
                 <input
                 defaultValue="value-2"
                 name="value-radio"
                 id="value-2"
                 type="radio"
-                />
+                /></Link>
                 <span>Expedientes</span>
             </label>
             <label>
