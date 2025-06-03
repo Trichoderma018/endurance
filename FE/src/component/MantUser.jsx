@@ -73,7 +73,7 @@ function MantUser() {
             const response = await Llamados.postData(obj, 'api/users/')
             console.log('Response Data', response)
             limpiarFormulario()
-            obtenerUsuarios() // Refresh the list
+            obtenerUsuarios() // Refrescar la lista
         } catch (error) {
             console.error("Error al crear usuario:", error)
         }
@@ -82,6 +82,11 @@ function MantUser() {
     async function actualizarUsuario() {
         if (password !== passwordConfirm) {
             setPasswordError('Las contraseñas no coinciden')
+            return
+        }
+        console.log("Id usuario:", currentUsuarioId) //debugging
+        if (!currentUsuarioId) {
+            console.error("No se puede actualizar: ID de usuario no válido")
             return
         }
 
@@ -94,20 +99,25 @@ function MantUser() {
                 sede: sede
             }
             
-            await Llamados.patchData(usuarioActualizado, `api/users/${currentUsuarioId}/`)
+            await Llamados.patchData(usuarioActualizado, "api/users",currentUsuarioId)
             limpiarFormulario()
             setEditMode(false)
             setCurrentUsuarioId(null)
-            obtenerUsuarios() // Refresh the list
+            obtenerUsuarios() // Refrescar la lista
         } catch (error) {
             console.error("Error al actualizar usuario:", error)
         }
     }
 
-    async function eliminarUsuario(id) {
+    async function eliminarUsuario(currentUsuarioId) {
+        if (!currentUsuarioId) {
+            console.error("No se puede eliminar: ID de usuario no válido")
+            return
+        }
+        
         if (window.confirm("¿Está seguro que desea eliminar este usuario?")) {
             try {
-                await Llamados.deleteData("api/users/",id)
+                await Llamados.deleteData("api/users/", id)
                 obtenerUsuarios() // Refresh the list
             } catch (error) {
                 console.error("Error al eliminar usuario:", error)
@@ -116,11 +126,12 @@ function MantUser() {
     }
 
     function editarUsuario(usuario) {
-        setUsername(usuario.username)
-        setEmail(usuario.email)
-        setSede(usuario.sede)
-        setPassword('') // Por seguridad, empezar con contraseña vacía al editar
-        setPasswordConfirm('')
+        console.log("Editando usuario:", ) //debugging
+        setUsername(usuario.username || '')
+        setEmail(usuario.email || '')
+        setSede(usuario.sede || '')
+        setPassword(usuario.password || '') // Mostrar la contraseña actual
+        setPasswordConfirm(usuario.password || '') // Mostrar la contraseña actual
         setPasswordError('')
         setCurrentUsuarioId(usuario.id)
         setEditMode(true)
@@ -279,11 +290,11 @@ function MantUser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {usuarios.map(usuario => (
-                        <tr key={usuario.id}>
-                            <td>{usuario.username}</td>
-                            <td>{usuario.email}</td>
-                            <td>{usuario.sede}</td>
+                    {usuarios.map((usuario, index) => (
+                        <tr key={usuario.id || `usuario-${index}`}>
+                            <td>{usuario.username  || ''}</td>
+                            <td>{usuario.email  || ''}</td>
+                            <td>{usuario.sede || ''}</td>
                             <td>
                                 <span style={{ fontFamily: 'monospace' }}>
                                     {'•'.repeat(usuario.password?.length || 8)}

@@ -47,7 +47,7 @@ function MantAdmin() {
       const response = await Llamados.postData(obj, 'api/admin/')
       console.log('Response Data', response)
       limpiarFormulario()
-      obtenerAdministradores() // Refresh the list
+      obtenerAdministradores() // Refrescar la lista
     } catch (error) {
       console.error("Error al crear administrador:", error)
     }
@@ -65,7 +65,7 @@ function MantAdmin() {
       limpiarFormulario()
       setEditMode(false)
       setCurrentAdminId(null)
-      obtenerAdministradores() // Refresh the list
+      obtenerAdministradores() // Refrescar la lista
     } catch (error) {
       console.error("Error al actualizar administrador:", error)
     }

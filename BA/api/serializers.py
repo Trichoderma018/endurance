@@ -3,15 +3,18 @@ from .models import Admin, Staff, Expedientes, visitas, CustomUser
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True, allow_blank=False)
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     password_confirm = serializers.CharField(write_only=True, style={'input_type': 'password'})
-    email = serializers.CharField(required=True)
+    email = serializers.CharField(required=False, allow_blank=True)
+    sede = serializers.CharField(required=False, allow_blank=True)
     class Meta:
         model = CustomUser
-        fields = ['password', 'password_confirm', 'username', 'email']
+        fields = ['password', 'password_confirm', 'username', 'email', 'sede']
         extra_kwargs = {
 
             'email': {'required': True},
+            'sede': {'required': False},
         }
         
     def validate_username(self, value):
