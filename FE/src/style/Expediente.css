@@ -1,4 +1,10 @@
 /* From Uiverse.io by SARAN2004 */ 
+
+.fondo {
+  background-attachment: fixed;
+  background-image: url('https://i.postimg.cc/3x1b7X5H/fondo.jpg');
+  background-size: cover;
+}
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 .input {
   display: grid;

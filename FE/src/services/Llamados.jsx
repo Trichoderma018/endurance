@@ -21,14 +21,16 @@ async function getData(endpoint) {
 //////////LLAMADO POST//////////
 async function postData(obj,endpoint) { 
     try {
-        const response = await fetch(`${API_URL}/${endpoint}`, { 
+        const response = await fetch(`${API_URL}/${endpoint}/`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(obj)
         });
-        return await response.json();
+        const respuesta = await response.json()
+        console.log(respuesta);
+        return respuesta
     } catch (error) {
         console.error('Error posting user:', error);
         throw error;

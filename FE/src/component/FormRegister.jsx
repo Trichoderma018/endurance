@@ -6,10 +6,10 @@ import Llamados from '../services/Llamados';
 function FormRegister() {
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    email: ''
   });
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,8 +51,9 @@ function FormRegister() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+    if (!formData.username || !formData.email) {
       setError('Please fill in all fields.');
+      
       return;
     }
 
@@ -60,13 +61,21 @@ function FormRegister() {
     setError(null);
 
     try {
-      const response = await Llamados.postData({
-        password: formData.password,
-        password_confirm: formData.confirmPassword,
+      const objUsuario = {
+        password: password,
+        password_confirm: confirmPassword,
         username: formData.username,
         email: formData.email
-      }, 'api/users/');
+      }
+      console.log(objUsuario);
 
+      const response = await fetch(`http://127.0.0.1:8000/api/users/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objUsuario)
+      });
       console.log('User registered successfully:', response);
       navigate('/');
 
@@ -110,8 +119,7 @@ function FormRegister() {
               type="password"
               id="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
             <label htmlFor="password">Password</label>
@@ -121,8 +129,7 @@ function FormRegister() {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
             <label htmlFor="confirmPassword">Confirm Password</label>
@@ -139,7 +146,7 @@ function FormRegister() {
           {error && <div className="error">{error}</div>}
 
           <div className="btn-container">
-            <button className="btn" type="submit" disabled={isLoading || !!error}>
+            <button className="btn" type="button" disabled={isLoading || !!error} onClick={handleSubmit}>
               Submit
             </button>
             {isLoading && <span className="loading">Loading...</span>}
