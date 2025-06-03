@@ -119,11 +119,9 @@ function Expediente() {
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
 
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
-<<<<<<< HEAD
+
                     <button className='input' type="submit" >Create Expedient</button>
-=======
-                    <button className='input' type="submit" onClick={handleSubmit}>Create Expedient</button>
->>>>>>> 40d0790547b8020cd1c6043666b48cacee1cbb17
+
                     <button className='input'>Realizar view</button>
                 </form>
                 {error && <p className="error">{error}</p>}
