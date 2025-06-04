@@ -67,8 +67,9 @@ function Expediente() {
 
     return (
         <div className='fondo'>
-            <Navbar/>
 
+            <Navbar/>
+            
             <header>ENDURANCE</header>
 
             <div className="registro-container">
@@ -109,8 +110,8 @@ function Expediente() {
                     <input onChange={(e)=>setComentario1Expediente(e.target.value)} className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
                     <input onChange={(e)=>setComentario2Expediente(e.target.value)} className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
-
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
+                    
                     <button className='input' type="submit" onClick={(e)=>handleSubmit(e.target.value)}>Create Expedient</button>
                     <button className='input'>Realizar view</button>
                     {isLoading && <p>Cargando...</p>}
