@@ -19,7 +19,8 @@ function MantAdmin() {
     setEmail(e.target.value)
   }
   function handleUser(e) {
-    setUser(e.target.value)
+    // Convertir a número o mantener como string vacío si no hay selección
+    setUser(e.target.value === '' ? '' : parseInt(e.target.value))
   }
 
   useEffect(() => {
@@ -52,9 +53,10 @@ function MantAdmin() {
       const obj = {
         nombreCompleto: nombreCompleto,
         email: email,
-        user: user
+        user: parseInt(user) // Asegurar que se envíe como número
       }
         
+      console.log('Objeto a enviar:', obj) // Para debug
       const response = await Llamados.postData(obj, 'api/admin/')
       console.log('Response Data', response)
       limpiarFormulario()
@@ -69,9 +71,10 @@ function MantAdmin() {
       const administradorActualizado = {
         nombreCompleto: nombreCompleto,
         email: email,
-        user: user
+        user: parseInt(user) // Asegurar que se envíe como número
       }
         
+      console.log('Objeto a actualizar:', administradorActualizado) // Para debug
       await Llamados.patchData(administradorActualizado, "api/admin/", currentAdminId)
       limpiarFormulario()
       setEditMode(false)
@@ -96,7 +99,7 @@ function MantAdmin() {
   function editarAdministrador(administrador) {
     setNombreCompleto(administrador.nombreCompleto)
     setEmail(administrador.email)
-    setUser(administrador.user) // Usar el ID del usuario
+    setUser(administrador.user) // Ya viene como número del backend
     setCurrentAdminId(administrador.id)
     setEditMode(true)
   }
@@ -157,9 +160,9 @@ function MantAdmin() {
                   value={user}
                   onChange={handleUser}
               >
-                  <option value="">Seleccione un usuario</option>
-                  {usuarios.map(usuario => (
-                      <option key={usuario.id} value={usuario.id}>
+                  <option key="empty-option" value="">Seleccione un usuario</option>
+                  {usuarios && usuarios.length > 0 && usuarios.map((usuario, index) => (
+                      <option key={`user-${usuario.id}-${index}`} value={usuario.id}>
                           {usuario.username}
                       </option>
                   ))}
@@ -196,8 +199,8 @@ function MantAdmin() {
               </tr>
           </thead>
         <tbody>
-          {administradores.map(administrador => (
-            <tr key={administrador.id}>
+          {administradores && administradores.length > 0 && administradores.map((administrador, index) => (
+            <tr key={`admin-${administrador.id}-${index}`}>
                 <td>{administrador.nombreCompleto}</td>
                 <td>{administrador.email}</td>
                 <td>{getUsernameById(administrador.user)}</td>
