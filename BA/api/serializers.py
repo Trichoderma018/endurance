@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Admin, Staff, Expedientes, visitas, CustomUser
+from .models import Admin, Staff, Expedientes, Visitas, CustomUser
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,5 +74,5 @@ class ExpedientesSerializer(serializers.ModelSerializer):
 
 class VisitasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = visitas
+        model = Visitas
         fields = '__all__'
