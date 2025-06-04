@@ -5,12 +5,12 @@ import Navbar from './navbar'
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')
   const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [user, setUser] = React.useState('') // Cambiado de password a user
 
   const [administradores, setAdministradores] = React.useState([])
+  const [usuarios, setUsuarios] = React.useState([]) // Para cargar los usuarios disponibles
   const [editMode, setEditMode] = React.useState(false)
   const [currentAdminId, setCurrentAdminId] = React.useState(null)
-  const [showPassword, setShowPassword] = React.useState(false)
 
   function handleNombreCompleto(e) {
     setNombreCompleto(e.target.value)
@@ -18,21 +18,32 @@ function MantAdmin() {
   function handleEmail(e) {
     setEmail(e.target.value)
   }
-  function handlePassword(e) {
-    setPassword(e.target.value)
+  function handleUser(e) {
+    setUser(e.target.value)
   }
 
   useEffect(() => {
     obtenerAdministradores()
+    obtenerUsuarios() // Cargar usuarios para el select
   }, [])
 
   async function obtenerAdministradores() {
     try {
         const response = await Llamados.getData('api/admin/')
         console.log("Administradores obtenidos:", response)
-        setAdministradores(response.data || response) // Adaptar según la estructura de respuesta
+        setAdministradores(response.data || response)
     } catch (error) {
         console.error("Error obteniendo administradores:", error)
+    }
+  }
+
+  async function obtenerUsuarios() {
+    try {
+        const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
+        console.log("Usuarios obtenidos:", response)
+        setUsuarios(response.data || response)
+    } catch (error) {
+        console.error("Error obteniendo usuarios:", error)
     }
   }
 
@@ -41,13 +52,13 @@ function MantAdmin() {
       const obj = {
         nombreCompleto: nombreCompleto,
         email: email,
-        password: password
+        user: user
       }
         
       const response = await Llamados.postData(obj, 'api/admin/')
       console.log('Response Data', response)
       limpiarFormulario()
-      obtenerAdministradores() // Refrescar la lista
+      obtenerAdministradores()
     } catch (error) {
       console.error("Error al crear administrador:", error)
     }
@@ -58,14 +69,14 @@ function MantAdmin() {
       const administradorActualizado = {
         nombreCompleto: nombreCompleto,
         email: email,
-        password: password
+        user: user
       }
         
-      await Llamados.patchData(administradorActualizado, "api/admin/",currentAdminId)
+      await Llamados.patchData(administradorActualizado, "api/admin/", currentAdminId)
       limpiarFormulario()
       setEditMode(false)
       setCurrentAdminId(null)
-      obtenerAdministradores() // Refrescar la lista
+      obtenerAdministradores()
     } catch (error) {
       console.error("Error al actualizar administrador:", error)
     }
@@ -74,8 +85,8 @@ function MantAdmin() {
   async function eliminarAdministrador(id) {
     if (window.confirm("¿Está seguro que desea eliminar este administrador?")) {
       try {
-        await Llamados.deleteData("api/admin",id)
-        obtenerAdministradores() // Refresh the list
+        await Llamados.deleteData("api/admin", id)
+        obtenerAdministradores()
       } catch (error) {
         console.error("Error al eliminar administrador:", error)
       }
@@ -85,28 +96,31 @@ function MantAdmin() {
   function editarAdministrador(administrador) {
     setNombreCompleto(administrador.nombreCompleto)
     setEmail(administrador.email)
-    setPassword(administrador.password || '') // Mostrar la contraseña actual
+    setUser(administrador.user) // Usar el ID del usuario
     setCurrentAdminId(administrador.id)
     setEditMode(true)
   }
     
-    // Reset form fields
   function limpiarFormulario() {
     setNombreCompleto('')
     setEmail('')
-    setPassword('')
+    setUser('')
     setEditMode(false)
     setCurrentAdminId(null)
-    setShowPassword(false)
   }
     
-    // Handle form submission based on mode
   function handleSubmit() {
     if (editMode) {
         actualizarAdministrador()
     } else {
         cargarDatos()
     }
+  }
+
+  // Función para obtener el username del usuario
+  function getUsernameById(userId) {
+    const usuario = usuarios.find(u => u.id === userId)
+    return usuario ? usuario.username : 'Usuario no encontrado'
   }
 
   return (
@@ -137,31 +151,19 @@ function MantAdmin() {
           </div>
           
           <div className="campo">
-              <label htmlFor="password">Contraseña</label>
-              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                  <input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={handlePassword}
-                      placeholder="Contraseña"
-                      style={{ paddingRight: '40px', flex: 1 }}
-                  />
-                  <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      style={{
-                          position: 'absolute',
-                          right: '10px',
-                          border: 'none',
-                          background: 'transparent',
-                          cursor: 'pointer',
-                          fontSize: '14px'
-                      }}
-                  >
-                      {showPassword ? '👁️' : '👁️‍🗨️'}
-                  </button>
-              </div>
+              <label htmlFor="user">Usuario</label>
+              <select
+                  id="user"
+                  value={user}
+                  onChange={handleUser}
+              >
+                  <option value="">Seleccione un usuario</option>
+                  {usuarios.map(usuario => (
+                      <option key={usuario.id} value={usuario.id}>
+                          {usuario.username}
+                      </option>
+                  ))}
+              </select>
           </div>
           
           <div className="botones">
@@ -189,7 +191,7 @@ function MantAdmin() {
               <tr>
                   <th>Nombre Completo</th>
                   <th>Email</th>
-                  <th>Contraseña</th>
+                  <th>Usuario</th>
                   <th>Acciones</th>
               </tr>
           </thead>
@@ -198,6 +200,7 @@ function MantAdmin() {
             <tr key={administrador.id}>
                 <td>{administrador.nombreCompleto}</td>
                 <td>{administrador.email}</td>
+                <td>{getUsernameById(administrador.user)}</td>
               <td>
                 <button 
                   onClick={() => editarAdministrador(administrador)}
