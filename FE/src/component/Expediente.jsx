@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import '../style/Expediente.css';
 import "../style/ExpeNav.css";
-import Navbar from './navbar';
+import "../style/pared.css"
+import Navbar from './navbar'
 
 function Expediente() {
     
@@ -67,11 +68,11 @@ function Expediente() {
 
     return (
         <div className='fondo'>
-
             <Navbar/>
+            <div className='barra'>
             
-            <header>ENDURANCE</header>
-
+            <header className='Endurance'>ENDURANCE</header>
+            </div>
             <div className="registro-container">
                 <h2>EXPEDIENTES</h2>
                 <form >
@@ -111,14 +112,21 @@ function Expediente() {
                     <input onChange={(e)=>setComentario2Expediente(e.target.value)} className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
-                    
+
                     <button className='input' type="submit" onClick={(e)=>handleSubmit(e.target.value)}>Create Expedient</button>
                     <button className='input'>Realizar view</button>
-                    {isLoading && <p>Cargando...</p>}
+                    {isLoading && (
+                    <div className="spinner">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    )}
                     {error && <p className="error">{error}</p>}
-                    
-                </form>
-                
+                </form> 
             </div>
         </div>
     );

@@ -18,7 +18,7 @@ function Navbar() {
                 />
                 <span>Usuarios</span>
             </label>
-            <label><Link to={"/Expesiente"}>
+            <label><Link to={"/Expediente"}>
                 <input
                 defaultValue="value-2"
                 name="value-radio"
