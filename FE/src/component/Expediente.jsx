@@ -5,6 +5,7 @@ import "../style/ExpeNav.css";
 import "../style/pared.css"
 import Navbar from './navbar'
 import Cards from './Cards';
+import Search from './Search';
 
 function Expediente() {
     
@@ -69,53 +70,17 @@ function Expediente() {
 
     return (
         <div className='fondo'>
-            <Navbar/>
-            <div className='barra'>
-            
             <header className='Endurance'>ENDURANCE</header>
+            <Navbar/>
+            <Search/>
+            <button onClick={() => navigate('/agregar')}>Agregar +</button>
+            <div className='barra'>
+
+            
             </div>
             <div className="registro-container">
                 <h2>EXPEDIENTES</h2>
-                <form >
-                    <input className='input' type="text" name="nombre"  onChange={(e)=>setUserExpediente(e.target.value)} placeholder="Full name" required />
 
-                    <select className='input' name="Estado"  onChange={(e)=>setRolExpediente(e.target.value)} required>
-                        <option value="" >Seleccione Rol</option>
-                        <option value="atleta">Atleta</option>
-                        <option value="entrenador">Entrenador</option>
-                        <option value="staff">STAFF</option>
-                    </select>
-
-                    <select className='input' value={activoExpediente} onChange={(e)=>setActivoExpediente(e.target.value)} >
-                        <option value="Estado" >estado</option>
-                        <option value="inactivo">Inactivo</option>
-                        <option value="activo">Activo</option>
-                    </select>
-
-                    <select className='input' name="Genero" onChange={(e)=>setGeneroExpediente(e.target.value)} required>
-                        <option value="" >Seleccione género</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                    <select className='input' name="Sede" onChange={(e)=>setSedeExpediente(e.target.value)} required>
-                        <option value="">Seleccione Sede</option>
-                        <option value="sede1">San Jose</option>
-                        <option value="sede2">Limon</option>
-                        <option value="sede3">Cartago</option>
-                        <option value="sede4">Heredia</option>
-                        <option value="sede5">Alajuela</option>
-                        <option value="sede6">Guanacaste</option>
-                        <option value="sede7">Puntarenas</option>
-                    </select>
-
-                    <input onChange={(e)=>setComentario1Expediente(e.target.value)} className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
-                    <input onChange={(e)=>setComentario2Expediente(e.target.value)} className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
-                    <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
-                    <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
-
-                    <button className='input' type="submit" onClick={(e)=>handleSubmit(e.target.value)}>Create Expedient</button>
-                  
                     {isLoading && (
                     <div className="spinner">
                         <span></span>
@@ -130,7 +95,6 @@ function Expediente() {
                     {error && <p className="error">{error}</p>}
 
                     <Cards/>
-                </form> 
             </div>
         </div>
     );

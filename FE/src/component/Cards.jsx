@@ -7,8 +7,8 @@ function Cards() {
         <div className="card">
   <div className="image" />
   <div className="card-info">
-    <span>josepht monge</span>
-    <p>Sport</p>
+    <p className="card-info">josepht monge</p>
+    <p className="card-info">Sport</p>
   </div>
   <a href="#" className="button">
     view
