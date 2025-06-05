@@ -4,6 +4,7 @@ import '../style/Expediente.css';
 import "../style/ExpeNav.css";
 import "../style/pared.css"
 import Navbar from './navbar'
+import Cards from './Cards';
 
 function Expediente() {
     
@@ -114,7 +115,7 @@ function Expediente() {
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
 
                     <button className='input' type="submit" onClick={(e)=>handleSubmit(e.target.value)}>Create Expedient</button>
-                    <button className='input'>Realizar view</button>
+                  
                     {isLoading && (
                     <div className="spinner">
                         <span></span>
@@ -125,7 +126,10 @@ function Expediente() {
                         <span></span>
                     </div>
                     )}
+
                     {error && <p className="error">{error}</p>}
+
+                    <Cards/>
                 </form> 
             </div>
         </div>

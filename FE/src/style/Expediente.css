@@ -1,7 +1,7 @@
 /* From Uiverse.io by SARAN2004 */ 
 
 button {
-  background-color: #E32629;
+  background-color: #eb1418;
   color: white;
   border: none;
   border-radius: 5px;
@@ -16,8 +16,7 @@ button:hover {
 
 .Endurance{
   color: #193666;
-  position: relative;
-  margin-top: -25%;
+  
   font-size: 1.5rem;  
   font-weight: bold;
   text-align: left;
@@ -46,7 +45,7 @@ button:hover {
   height: 7px;
   background: #ffff;
   animation: dominos 1s ease infinite;
-  box-shadow: 2px 2px 3px 0px black;
+  box-shadow: 2px 2px 3px 0px #000000;
 }
 
 .spinner span:nth-child(1) {
