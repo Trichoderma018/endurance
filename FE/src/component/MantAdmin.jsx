@@ -18,11 +18,6 @@ function MantAdmin() {
   function handleEmail(e) {
     setEmail(e.target.value)
   }
-  function handleUser(e) {
-    // Convertir a número o mantener como string vacío si no hay selección
-    setUser(e.target.value === '' ? '' : parseInt(e.target.value))
-  }
-
   useEffect(() => {
     obtenerAdministradores()
     obtenerUsuarios() // Cargar usuarios para el select
@@ -43,6 +38,8 @@ function MantAdmin() {
         const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
         console.log("Usuarios obtenidos:", response)
         setUsuarios(response.data || response)
+        console.log(response);
+        
     } catch (error) {
         console.error("Error obteniendo usuarios:", error)
     }
@@ -53,10 +50,11 @@ function MantAdmin() {
       const obj = {
         nombreCompleto: nombreCompleto,
         email: email,
-        user: parseInt(user) // Asegurar que se envíe como número
+        user: user // Asegurar que se envíe como número
       }
         
       console.log('Objeto a enviar:', obj) // Para debug
+      console.log(obj);
       const response = await Llamados.postData(obj, 'api/admin/')
       console.log('Response Data', response)
       limpiarFormulario()
@@ -158,11 +156,11 @@ function MantAdmin() {
               <select
                   id="user"
                   value={user}
-                  onChange={handleUser}
+                  onChange={(e)=>setUser(e.target.value)}
               >
                   <option key="empty-option" value="">Seleccione un usuario</option>
                   {usuarios && usuarios.length > 0 && usuarios.map((usuario, index) => (
-                      <option key={`user-${usuario.id}-${index}`} value={usuario.id}>
+                      <option key={usuario.id} value={usuario.id}>
                           {usuario.username}
                       </option>
                   ))}

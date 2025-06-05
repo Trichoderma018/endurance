@@ -49,8 +49,8 @@ function PaginaAgregar() {
             const obj = {
                 user_id: userExpediente,
                 rol: rolExpediente,
-                imagen: imagenExpediente,
                 activo: activoExpediente,
+                imagen: imagenExpediente,
                 genero: generoExpediente,
                 sede: sedeExpediente,
                 comentario1: comentario1Expediente,

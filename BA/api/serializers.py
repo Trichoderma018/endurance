@@ -8,9 +8,11 @@ class UserSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(write_only=True, style={'input_type': 'password'})
     email = serializers.CharField(required=False, allow_blank=True)
     sede = serializers.CharField(required=False, allow_blank=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model = CustomUser
-        fields = ['password', 'password_confirm', 'username', 'email', 'sede']
+        fields = ['password', 'password_confirm', 'username', 'email', 'sede',"user","id"]
         extra_kwargs = {
 
             'email': {'required': True},
