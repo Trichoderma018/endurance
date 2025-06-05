@@ -47,7 +47,7 @@ function PaginaAgregar() {
 
         try {
             const obj = {
-                user_id: userExpediente,
+                user: userExpediente,
                 rol: rolExpediente,
                 activo: activoExpediente,
                 imagen: imagenExpediente,
@@ -89,6 +89,34 @@ function PaginaAgregar() {
                     </select>
 
                     <input className='input' placeholder='imagen' type="wallpaper" name='wall' onChange={(e)=>setImagenExpediente(e.target.ariaValueNow)}/>
+                    {/* Sección de carga de imagen */}
+                    <div className="image-upload-section">
+                        <label htmlFor="product-image" className="file-input-label">
+                            Seleccionar imagen del producto
+                        </label>
+                        <input
+                            type="file"
+                            id="product-image"
+                            accept="image/*"
+                            onChange={(e)=>setImagenExpediente(e.target.files[0])}
+                            ref={fileInputRef}
+                            className="file-input"
+                        />
+                        
+                        {/* Vista previa de la imagen */}
+                        {/* {imagenPreview && (
+                            <div className="image-preview">
+                                <img 
+                                    src={imagenPreview} 
+                                    alt="Vista previa" 
+                                    className="preview-img" 
+                                />
+                            </div>
+                        )} */}
+                        
+                        {/* Mostrar estado de carga */}
+                        {uploading && <p className="uploading-message">Subiendo imagen...</p>}
+                    </div>
 
                     <select className='input' value={activoExpediente} onChange={(e)=>setActivoExpediente(e.target.value)} >
                         <option value="Estado" >estado</option>
