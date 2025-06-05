@@ -73,6 +73,7 @@ function Expediente() {
             <header className='Endurance'>ENDURANCE</header>
             <Navbar/>
             <Search/>
+
             <button onClick={() => navigate('/agregar')}>Agregar +</button>
             <div className='barra'>
 

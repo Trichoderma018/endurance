@@ -1,10 +1,15 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Navbar from './navbar';
+import Cards from './Cards';
 
 function PaginaAgregar() {
 
     
-    const [userExpediente,setUserExpediente] = useState("")
+    const [userExpediente,setUserExpediente] = useState("");
     const [rolExpediente, setRolExpediente] = useState("");
+    const [imagenExpediente, setImagenExpediente] = useState("")
     const [activoExpediente, setActivoExpediente] = useState("");
     const [generoExpediente, setGeneroExpediente] = useState("");
     const [sedeExpediente, setSedeExpediente] = useState("");
@@ -44,6 +49,7 @@ function PaginaAgregar() {
             const obj = {
                 user_id: userExpediente,
                 rol: rolExpediente,
+                imagen: imagenExpediente,
                 activo: activoExpediente,
                 genero: generoExpediente,
                 sede: sedeExpediente,
@@ -76,11 +82,13 @@ function PaginaAgregar() {
                     <input className='input' type="text" name="name"  onChange={(e)=>setUserExpediente(e.target.value)} placeholder="Full name" required />
 
                     <select className='input' name="Estado"  onChange={(e)=>setRolExpediente(e.target.value)} required>
-                        <option value="" >Seleccione Rol</option>
+                        <option value="">Rol</option>
                         <option value="atleta">Atleta</option>
                         <option value="entrenador">Entrenador</option>
                         <option value="staff">STAFF</option>
                     </select>
+
+                    <input className='input' placeholder='imagen' type="wallpaper" name='wall' onChange={(e)=>setImagenExpediente(e.target.ariaValueNow)}/>
 
                     <select className='input' value={activoExpediente} onChange={(e)=>setActivoExpediente(e.target.value)} >
                         <option value="Estado" >estado</option>
@@ -89,13 +97,13 @@ function PaginaAgregar() {
                     </select>
 
                     <select className='input' name="Genero" onChange={(e)=>setGeneroExpediente(e.target.value)} required>
-                        <option value="" > género</option>
+                        <option value="">género</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
                     <select className='input' name="Sede" onChange={(e)=>setSedeExpediente(e.target.value)} required>
-                        <option value=""> Sede</option>
+                        <option value="">Sede</option>
                         <option value="sede1">San Jose</option>
                         <option value="sede2">Limon</option>
                         <option value="sede3">Cartago</option>
