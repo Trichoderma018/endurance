@@ -8,17 +8,6 @@ import Cards from './Cards';
 import Search from './Search';
 
 function Expediente() {
-    
-    const [userExpediente,setUserExpediente] = useState("")
-    const [rolExpediente, setRolExpediente] = useState("");
-    const [generoExpediente, setGeneroExpediente] = useState("");
-    const [activoExpediente, setActivoExpediente] = useState("");
-    const [sedeExpediente, setSedeExpediente] = useState("");
-    const [comentario1Expediente, setComentario1Expediente] = useState("");
-    const [comentario2Expediente, setComentario2Expediente] = useState("");
-    const [comentario3Expediente, setComentario3Expediente] = useState("");
-    const [fechaExpediente, setFechaExpediente] = useState("");
-    
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     // Estado para almacenar el expediente
@@ -47,17 +36,7 @@ function Expediente() {
         // const imc = calculateIMC(pesoExpediente, alturaExpediente);
 
         try {
-            const obj = {
-                rol: rolExpediente,
-                genero: generoExpediente,
-                activo: activoExpediente,
-                sede: sedeExpediente,
-                comentario1: comentario1Expediente,
-                comentario2: comentario2Expediente,
-                comentario3: comentario3Expediente,
-                fecha: fechaExpediente,
-                user_id: userExpediente,
-            }
+    
             const response = await Llamados.postData(obj, 'api/expedientes/');
             console.log('Response Data', response);
         } catch (error) {
