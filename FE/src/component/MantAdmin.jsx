@@ -73,7 +73,7 @@ function MantAdmin() {
       }
         
       console.log('Objeto a actualizar:', administradorActualizado) // Para debug
-      await Llamados.patchData(administradorActualizado, "api/admin/", currentAdminId)
+      await Llamados.patchData(administradorActualizado, "api/admin", currentAdminId)
       limpiarFormulario()
       setEditMode(false)
       setCurrentAdminId(null)

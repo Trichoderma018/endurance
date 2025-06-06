@@ -7,12 +7,12 @@ function MantStaff() {
     const [cargo, setCargo] = React.useState('')
     const [activo, setActivo] = React.useState(true)
     const [departamento, setDepartamento] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [user, setUser] = React.useState('') // Agregado para seleccionar usuario
 
     const [staff, setStaff] = React.useState([])
+    const [usuarios, setUsuarios] = React.useState([]) // Para cargar los usuarios disponibles
     const [editMode, setEditMode] = React.useState(false)
     const [currentStaffId, setCurrentStaffId] = React.useState(null)
-    const [showPassword, setShowPassword] = React.useState(false)
 
     function handleNombreCompleto(e) {
         setNombreCompleto(e.target.value)
@@ -29,21 +29,30 @@ function MantStaff() {
     function handleDepartamento(e) {
         setDepartamento(e.target.value)
     }
-    function handlePassword(e) {
-        setPassword(e.target.value)
-    }
 
     useEffect(() => {
         obtenerStaff()
+        obtenerUsuarios() // Cargar usuarios para el select
     }, [])
 
     async function obtenerStaff() {
         try {
             const response = await Llamados.getData('api/staff/')
             console.log("Staff obtenido:", response)
-            setStaff(response.data || response) // Adaptar según la estructura de respuesta
+            setStaff(response.data || response)
         } catch (error) {
             console.error("Error obteniendo staff:", error)
+        }
+    }
+
+    async function obtenerUsuarios() {
+        try {
+            const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
+            console.log("Usuarios obtenidos:", response)
+            setUsuarios(response.data || response)
+            console.log(response);
+        } catch (error) {
+            console.error("Error obteniendo usuarios:", error)
         }
     }
 
@@ -55,13 +64,14 @@ function MantStaff() {
                 cargo: cargo,
                 activo: activo,
                 departamento: departamento,
-                password: password
+                user: user // Incluir el usuario seleccionado
             }
-            
+
+            console.log('Objeto a enviar:', obj) // Para debug
             const response = await Llamados.postData(obj, 'api/staff/')
             console.log('Response Data', response)
             limpiarFormulario()
-            obtenerStaff() // Refresh the list
+            obtenerStaff()
         } catch (error) {
             console.error("Error al crear staff:", error)
         }
@@ -75,14 +85,15 @@ function MantStaff() {
                 cargo: cargo,
                 activo: activo,
                 departamento: departamento,
-                password: password
+                user: user // Incluir el usuario seleccionado
             }
             
-            await Llamados.patchData(staffActualizado, `api/staff/${currentStaffId}/`)
+            console.log('Objeto a actualizar:', staffActualizado) // Para debug
+            await Llamados.patchData(staffActualizado, "api/staff", currentStaffId)
             limpiarFormulario()
             setEditMode(false)
             setCurrentStaffId(null)
-            obtenerStaff() // Refresh the list
+            obtenerStaff()
         } catch (error) {
             console.error("Error al actualizar staff:", error)
         }
@@ -91,8 +102,8 @@ function MantStaff() {
     async function eliminarStaff(id) {
         if (window.confirm("¿Está seguro que desea eliminar este miembro del staff?")) {
             try {
-                await Llamados.deleteData("api/staff/",id)
-                obtenerStaff() // Refresh the list
+                await Llamados.deleteData("api/staff", id)
+                obtenerStaff()
             } catch (error) {
                 console.error("Error al eliminar staff:", error)
             }
@@ -105,31 +116,34 @@ function MantStaff() {
         setCargo(staff.cargo)
         setActivo(staff.activo)
         setDepartamento(staff.departamento)
-        setPassword(staff.password || '') // Mostrar la contraseña actual
+        setUser(staff.user) // Cargar el usuario asociado
         setCurrentStaffId(staff.id)
         setEditMode(true)
     }
     
-    // Reset form fields
     function limpiarFormulario() {
         setNombreCompleto('')
         setEmail('')
         setCargo('')
         setActivo(true)
         setDepartamento('')
-        setPassword('')
+        setUser('') // Limpiar selección de usuario
         setEditMode(false)
         setCurrentStaffId(null)
-        setShowPassword(false)
     }
     
-    // Handle form submission based on mode
     function handleSubmit() {
         if (editMode) {
             actualizarStaff()
         } else {
             crearStaff()
         }
+    }
+
+    // Función para obtener el username del usuario
+    function getUsernameById(userId) {
+        const usuario = usuarios.find(u => u.id === userId)
+        return usuario ? usuario.username : 'Usuario no encontrado'
     }
 
     return (
@@ -182,6 +196,22 @@ function MantStaff() {
                         maxLength={30}
                     />
                 </div>
+
+                <div className="campo">
+                    <label htmlFor="user">Usuario</label>
+                    <select
+                        id="user"
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
+                    >
+                        <option key="empty-option" value="">Seleccione un usuario</option>
+                        {usuarios && usuarios.length > 0 && usuarios.map((usuario, index) => (
+                            <option key={usuario.id} value={usuario.id}>
+                                {usuario.username}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 
                 <div className="campo">
                     <label htmlFor="activo">
@@ -193,34 +223,6 @@ function MantStaff() {
                         />
                         Staff Activo
                     </label>
-                </div>
-                
-                <div className="campo">
-                    <label htmlFor="password">Contraseña</label>
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                        <input
-                            id="password"
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={handlePassword}
-                            placeholder="Contraseña"
-                            style={{ paddingRight: '40px', flex: 1 }}
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                border: 'none',
-                                background: 'transparent',
-                                cursor: 'pointer',
-                                fontSize: '14px'
-                            }}
-                        >
-                            {showPassword ? '👁️' : '👁️‍🗨️'}
-                        </button>
-                    </div>
                 </div>
                 
                 <div className="botones">
@@ -250,18 +252,19 @@ function MantStaff() {
                         <th>Email</th>
                         <th>Cargo</th>
                         <th>Departamento</th>
+                        <th>Usuario</th>
                         <th>Estado</th>
-                        <th>Contraseña</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {staff.map(miembro => (
-                        <tr key={miembro.id}>
+                    {staff && staff.length > 0 && staff.map((miembro, index) => (
+                        <tr key={`staff-${miembro.id}-${index}`}>
                             <td>{miembro.nombreCompleto}</td>
                             <td>{miembro.email}</td>
                             <td>{miembro.cargo}</td>
                             <td>{miembro.departamento}</td>
+                            <td>{getUsernameById(miembro.user)}</td>
                             <td>
                                 <span 
                                     style={{
@@ -274,11 +277,6 @@ function MantStaff() {
                                     }}
                                 >
                                     {miembro.activo ? 'ACTIVO' : 'INACTIVO'}
-                                </span>
-                            </td>
-                            <td>
-                                <span style={{ fontFamily: 'monospace' }}>
-                                    {'•'.repeat(miembro.password?.length || 8)}
                                 </span>
                             </td>
                             <td>
