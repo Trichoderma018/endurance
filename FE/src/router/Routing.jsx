@@ -6,6 +6,7 @@ import MantenimientoAdmin from '../pages/MantenimientoAdmin';
 import MantenimientoStaff from '../pages/MantenimientoStaff';
 import MantenimientoUser from '../pages/MantenimientoUser';
 import Agregar from '../pages/Agregar';
+import Prueba from '../component/Prueba';
 
 
 
@@ -23,7 +24,9 @@ function Routing() {
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
             <Route path='/mantUser' element={<MantenimientoUser/>}/>
-            
+             {/*Pruebas*/}
+             <Route path='/rfce' element={<Prueba/>}/>
+
         </Routes>
       </Router>
     </div>

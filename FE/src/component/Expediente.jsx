@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
+import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
 import "../style/ExpeNav.css";
 import "../style/pared.css"
@@ -10,6 +11,7 @@ import Search from './Search';
 function Expediente() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
     // Estado para almacenar el expediente
     // const [pesoExpediente, setPesoExpediente] = useState("");
     // const [alturaExpediente, setAlturaExpediente] = useState("");
@@ -48,7 +50,7 @@ function Expediente() {
     };
 
     return (
-        <div className='fondo'>
+        <div style={{height:'auto'}} className='fondo'>
             <header className='Endurance'>ENDURANCE</header>
             <Navbar/>
             <Search/>
