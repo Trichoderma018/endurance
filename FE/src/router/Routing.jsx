@@ -5,6 +5,7 @@ import Expediente from '../component/Expediente';
 import MantenimientoAdmin from '../pages/MantenimientoAdmin';
 import MantenimientoStaff from '../pages/MantenimientoStaff';
 import MantenimientoUser from '../pages/MantenimientoUser';
+import MantenimientoProyectos from '../pages/MantenimientoProyectos';
 import Agregar from '../pages/Agregar';
 import Prueba from '../component/Prueba';
 
@@ -24,6 +25,7 @@ function Routing() {
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
             <Route path='/mantUser' element={<MantenimientoUser/>}/>
+            <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
 
