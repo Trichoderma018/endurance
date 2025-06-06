@@ -42,7 +42,7 @@ async function patchData(valor,endpoint,id)
 {
 
     try {
-        const response = await fetch(`${API_URL}${endpoint}/${id}`, {
+        const response = await fetch(`${API_URL}${endpoint}/${id}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
