@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import "../style/Expediente.css"
 import Navbar from './navbar';
 import Cards from './Cards';
+
 
 function PaginaAgregar() {
 
@@ -20,6 +22,7 @@ function PaginaAgregar() {
     
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
     // Estado para almacenar el expediente
     // const [pesoExpediente, setPesoExpediente] = useState("");
     // const [alturaExpediente, setAlturaExpediente] = useState("");
@@ -39,7 +42,11 @@ function PaginaAgregar() {
             setIsLoading(false);
             return;
         }
-        
+        useEffect(() => {
+         setIsLoading(true);
+         const timer = setTimeout(() => setIsLoading(false), 2000);
+        return () => clearTimeout(timer); // Evita posibles fugas de memoria
+        }, []);
         // el usuario del audi user
 
         // Aquí podrías calcular el IMC si tuvieras los campos de peso y altura
@@ -71,7 +78,7 @@ function PaginaAgregar() {
 
     return (
         <div className='fondo'>
-            <Navbar/>
+           
             <div className='barra'>
             
             <header className='Endurance'>ENDURANCE</header>
@@ -88,20 +95,13 @@ function PaginaAgregar() {
                         <option value="staff">STAFF</option>
                     </select>
 
-                    <input className='input' placeholder='imagen' type="wallpaper" name='wall' onChange={(e)=>setImagenExpediente(e.target.ariaValueNow)}/>
+                    <input className='input' type="file" name='wall' accept="image/*" onChange={(e)=>setImagenExpediente(e.target.files[0])}/>
                     {/* Sección de carga de imagen */}
                     <div className="image-upload-section">
                         <label htmlFor="product-image" className="file-input-label">
-                            Seleccionar imagen del producto
+                        Foto de perfil
                         </label>
-                        <input
-                            type="file"
-                            id="product-image"
-                            accept="image/*"
-                            onChange={(e)=>setImagenExpediente(e.target.files[0])}
-                            ref={fileInputRef}
-                            className="file-input"
-                        />
+
                         
                         {/* Vista previa de la imagen */}
                         {/* {imagenPreview && (
@@ -146,8 +146,7 @@ function PaginaAgregar() {
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
 
-                    <button className='input' type="submit" onClick={(e)=>handleSubmit(e.target.value)}>Create Expedient</button>
-                  
+                    <button className='input' type="submit" onClick={(e)=>handleSubmit(e)}>Create Expedient</button>                  
                     {isLoading && (
                     <div className="spinner">
                         <span></span>
@@ -161,7 +160,6 @@ function PaginaAgregar() {
 
                     {error && <p className="error">{error}</p>}
 
-                    <Cards/>
                 </form> 
             </div>
         </div>
