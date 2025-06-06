@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import CustomUser, Admin, Staff, Expedientes, Visitas
-from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer
+from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Permisos
@@ -18,7 +18,7 @@ class UserListCreateView(ListCreateAPIView):
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     # permission_classes = [IsAuthenticated]
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UsuarioEditarSerializer
 
 class AdminListCreateView(ListCreateAPIView):
     queryset = Admin.objects.all()

@@ -69,7 +69,7 @@ function MantAdmin() {
       const administradorActualizado = {
         nombreCompleto: nombreCompleto,
         email: email,
-        user: parseInt(user) // Asegurar que se envíe como número
+        user: user
       }
         
       console.log('Objeto a actualizar:', administradorActualizado) // Para debug

@@ -114,10 +114,9 @@ function MantUser() {
             console.error("No se puede eliminar: ID de usuario no válido")
             return
         }
-        
         if (window.confirm("¿Está seguro que desea eliminar este usuario?")) {
             try {
-                await Llamados.deleteData("api/users/", id)
+                await Llamados.deleteData("api/users", currentUsuarioId)
                 obtenerUsuarios() // Refresh the list
             } catch (error) {
                 console.error("Error al eliminar usuario:", error)

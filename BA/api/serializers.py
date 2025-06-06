@@ -59,6 +59,12 @@ class UserSerializer(serializers.ModelSerializer):
         
         return user
 
+
+class UsuarioEditarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'sede']
+
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = Admin
