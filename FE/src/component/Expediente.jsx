@@ -26,11 +26,7 @@ function Expediente() {
         event.preventDefault();
         setIsLoading(true);
         setError(null);
-        if (!userExpediente || !sedeExpediente || !generoExpediente || !activoExpediente || !comentario1Expediente || !comentario2Expediente || !comentario3Expediente || !fechaExpediente) {
-            setError('Por favor, complete todos los campos.');
-            setIsLoading(false);
-            return;
-        }
+       
         
         // el usuario del audi user
 
@@ -55,14 +51,14 @@ function Expediente() {
             <Navbar/>
             <Search/>
 
-            <button onClick={() => navigate('/agregar')}>Agregar +</button>
+            <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
             <div className='barra'>
 
             
             </div>
             <div className="registro-container">
-                <h2>EXPEDIENTES</h2>
-
+                <h2>Lista de Expediente</h2>
+                  <Cards/>
                     {isLoading && (
                     <div className="spinner">
                         <span></span>
@@ -76,7 +72,7 @@ function Expediente() {
 
                     {error && <p className="error">{error}</p>}
 
-                    <Cards/>
+                    
             </div>
         </div>
     );

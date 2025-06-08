@@ -1,28 +1,26 @@
 import React from 'react'
-import { useState } from 'react';
 import { useEffect } from 'react';
-import "../style/Expediente.css"
-import Navbar from './navbar';
-import Cards from './Cards';
+import "../style/ExpeInput.css"
+
 
 
 function PaginaAgregar() {
 
     
-    const [userExpediente,setUserExpediente] = useState("");
-    const [rolExpediente, setRolExpediente] = useState("");
-    const [imagenExpediente, setImagenExpediente] = useState("")
-    const [activoExpediente, setActivoExpediente] = useState("");
-    const [generoExpediente, setGeneroExpediente] = useState("");
-    const [sedeExpediente, setSedeExpediente] = useState("");
-    const [comentario1Expediente, setComentario1Expediente] = useState("");
-    const [comentario2Expediente, setComentario2Expediente] = useState("");
-    const [comentario3Expediente, setComentario3Expediente] = useState("");
-    const [fechaExpediente, setFechaExpediente] = useState("");
+    const [userExpediente,setUserExpediente] = React.useState("");
+    const [rolExpediente, setRolExpediente] = React.useState("");
+    const [imagenExpediente, setImagenExpediente] = React.useState("")
+    const [activoExpediente, setActivoExpediente] = React.useState("");
+    const [generoExpediente, setGeneroExpediente] = React.useState("");
+    const [sedeExpediente, setSedeExpediente] = React.useState("");
+    const [comentario1Expediente, setComentario1Expediente] = React.useState("");
+    const [comentario2Expediente, setComentario2Expediente] = React.useState("");
+    const [comentario3Expediente, setComentario3Expediente] = React.useState("");
+    const [fechaExpediente, setFechaExpediente] = React.useState("");
     
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [uploading, setUploading] = useState(false);
+    const [error, setError] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [uploading, setUploading] = React.useState(false);
     // Estado para almacenar el expediente
     // const [pesoExpediente, setPesoExpediente] = useState("");
     // const [alturaExpediente, setAlturaExpediente] = useState("");
@@ -86,6 +84,7 @@ function PaginaAgregar() {
             <div className="registro-container">
                 <h2>EXPEDIENTES</h2>
                 <form >
+
                     <input className='input' type="text" name="name"  onChange={(e)=>setUserExpediente(e.target.value)} placeholder="Full name" required />
 
                     <select className='input' name="Estado"  onChange={(e)=>setRolExpediente(e.target.value)} required>
@@ -123,6 +122,7 @@ function PaginaAgregar() {
                         <option value="inactivo">Inactivo</option>
                         <option value="activo">Activo</option>
                     </select>
+            
 
                     <select className='input' name="Genero" onChange={(e)=>setGeneroExpediente(e.target.value)} required>
                         <option value="">género</option>
@@ -130,6 +130,7 @@ function PaginaAgregar() {
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
+               
                     <select className='input' name="Sede" onChange={(e)=>setSedeExpediente(e.target.value)} required>
                         <option value="">Sede</option>
                         <option value="sede1">San Jose</option>
@@ -140,13 +141,13 @@ function PaginaAgregar() {
                         <option value="sede6">Guanacaste</option>
                         <option value="sede7">Puntarenas</option>
                     </select>
-
+<br />
                     <input onChange={(e)=>setComentario1Expediente(e.target.value)} className='input' type="text" name="comentario1" placeholder="Comentario °1" required />
                     <input onChange={(e)=>setComentario2Expediente(e.target.value)} className='input' type="text" name="comentario2" placeholder="Comentario °2" required />
                     <input onChange={(e)=>setComentario3Expediente(e.target.value)} className='input' type="text" name="comentario3" placeholder="Comentario °3" required />
                     <input className='input' type="date" name="fecha" onChange={(e)=>setFechaExpediente(e.target.value)} required />
-
-                    <button className='input' type="submit" onClick={(e)=>handleSubmit(e)}>Create Expedient</button>                  
+<br />
+                    <button className='' type="submit" onClick={(e)=>handleSubmit(e)}>Create Expedient</button>                  
                     {isLoading && (
                     <div className="spinner">
                         <span></span>

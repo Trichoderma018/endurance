@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
+import Sidebar from './Sidebar'
+import "../style/admin.css"
 
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')
@@ -125,8 +127,10 @@ function MantAdmin() {
   }
 
   return (
-    <div>
+    <div className='form'>
       <Navbar/>
+
+      <Sidebar/>
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
       <div className="formulario">
           <div className="campo">
@@ -136,7 +140,7 @@ function MantAdmin() {
                   type="text"
                   value={nombreCompleto}
                   onChange={handleNombreCompleto}
-                  placeholder="Nombre Completo"
+                  
               />
           </div>
           
@@ -147,12 +151,12 @@ function MantAdmin() {
                   type="email"
                   value={email}
                   onChange={handleEmail}
-                  placeholder="Email"
+
               />
           </div>
           
           <div className="campo">
-              <label htmlFor="user">Usuario</label>
+              <label htmlFor="user"></label>
               <select
                   id="user"
                   value={user}
@@ -191,8 +195,11 @@ function MantAdmin() {
           <thead>
               <tr>
                   <th>Nombre Completo</th>
+                  <br />
                   <th>Email</th>
+                  <br />
                   <th>Usuario</th>
+                  <br />
                   <th>Acciones</th>
               </tr>
           </thead>
