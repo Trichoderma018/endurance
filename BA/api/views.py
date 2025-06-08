@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .models import CustomUser, Admin, Staff, Expedientes, Visitas
-from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer
+from .models import CustomUser, Admin, Staff, Expedientes, Visitas, Proyecto
+from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer, proyectoSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Permisos
@@ -59,3 +59,13 @@ class VisitasDetailView(RetrieveUpdateDestroyAPIView):
     # permission_classes = [ IsAuthenticated]
     queryset = Visitas.objects.all()
     serializer_class = VisitasSerializer
+
+class proyectoListCreateView(ListCreateAPIView):
+    # permission_classes = [ IsAuthenticated]
+    queryset = Proyecto.objects.all()
+    serializer_class = proyectoSerializer
+
+class proyectoDetailView(RetrieveUpdateDestroyAPIView):
+    # permission_classes = [ IsAuthenticated]
+    queryset = Proyecto.objects.all()
+    serializer_class = proyectoSerializer
