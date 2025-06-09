@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Admin, Staff, Expedientes, visitas, CustomUser
+from .models import Admin, Staff, Expedientes, Visitas, CustomUser, Proyecto
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,9 +8,11 @@ class UserSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(write_only=True, style={'input_type': 'password'})
     email = serializers.CharField(required=False, allow_blank=True)
     sede = serializers.CharField(required=False, allow_blank=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    id = serializers.IntegerField(read_only=True)
     class Meta:
         model = CustomUser
-        fields = ['password', 'password_confirm', 'username', 'email', 'sede']
+        fields = ['password', 'password_confirm', 'username', 'email', 'sede',"user","id"]
         extra_kwargs = {
 
             'email': {'required': True},
@@ -57,6 +59,12 @@ class UserSerializer(serializers.ModelSerializer):
         
         return user
 
+
+class UsuarioEditarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'sede']
+
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = Admin
@@ -74,5 +82,16 @@ class ExpedientesSerializer(serializers.ModelSerializer):
 
 class VisitasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = visitas
+        model = Visitas
         fields = '__all__'
+
+class proyectoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proyecto
+        fields = '__all__'
+        read_only_fields = ['id', 'user']  # Aseguramos que el ID y el usuario no se puedan modificar directamente
+
+    def create(self, validated_data):
+        user = self.context['request'].user  # Obtenemos el usuario actual desde el contexto
+        proyecto = Proyecto.objects.create(user=user, **validated_data)
+        return proyecto

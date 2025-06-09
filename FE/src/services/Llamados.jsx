@@ -21,7 +21,7 @@ async function getData(endpoint) {
 //////////LLAMADO POST//////////
 async function postData(obj,endpoint) { 
     try {
-        const response = await fetch(`${API_URL}/${endpoint}/`, { 
+        const response = await fetch(`${API_URL}${endpoint}`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ async function patchData(valor,endpoint,id)
 {
 
     try {
-        const response = await fetch(`${API_URL}${endpoint}/${id}`, {
+        const response = await fetch(`${API_URL}${endpoint}/${id}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

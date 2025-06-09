@@ -6,10 +6,10 @@ import Llamados from '../services/Llamados';
 function FormRegister() {
   const [formData, setFormData] = useState({
     username: '',
-    email: ''
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,9 +51,8 @@ function FormRegister() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!formData.username || !formData.email) {
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields.');
-      
       return;
     }
 
@@ -61,21 +60,13 @@ function FormRegister() {
     setError(null);
 
     try {
-      const objUsuario = {
-        password: password,
-        password_confirm: confirmPassword,
+      const response = await Llamados.postData({
+        password: formData.password,
+        password_confirm: formData.confirmPassword,
         username: formData.username,
         email: formData.email
-      }
-      console.log(objUsuario);
+      }, 'api/users/');
 
-      const response = await fetch(`http://127.0.0.1:8000/api/users/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(objUsuario)
-      });
       console.log('User registered successfully:', response);
       navigate('/');
 
@@ -88,6 +79,7 @@ function FormRegister() {
   };
 
   return (
+  <div className='bn'>
     <div className="form-container">
       <div className="container">
         <div className="heading">Sign In to your account</div>
@@ -119,7 +111,8 @@ function FormRegister() {
               type="password"
               id="password"
               name="password"
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               required
             />
             <label htmlFor="password">Password</label>
@@ -129,7 +122,8 @@ function FormRegister() {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={formData.confirmPassword}
+              onChange={handleChange}
               required
             />
             <label htmlFor="confirmPassword">Confirm Password</label>
@@ -146,10 +140,20 @@ function FormRegister() {
           {error && <div className="error">{error}</div>}
 
           <div className="btn-container">
-            <button className="btn" type="button" disabled={isLoading || !!error} onClick={handleSubmit}>
+            <button className="btn" type="submit" disabled={isLoading || !!error}>
               Submit
             </button>
-            {isLoading && <span className="loading">Loading...</span>}
+            {isLoading && <span className="loading"><div className="dot-spinner">
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+            <div className="dot-spinner__dot" />
+          </div>
+          </span>}
             <div className="acc-text">
               New here?{' '}
               <span onClick={() => navigate('/')} style={{ color: "#0197A6", cursor: "pointer" }}>
@@ -160,6 +164,7 @@ function FormRegister() {
         </form>
       </div>
     </div>
+  </div>
   );
 }
 

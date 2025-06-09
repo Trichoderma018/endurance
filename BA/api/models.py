@@ -34,13 +34,13 @@ class Expedientes(models.Model):
     imagen = models.CharField(max_length=150, blank=True, null=True)
     genero = models.CharField(max_length=10)
     sede = models.CharField(max_length=150)
-    comentario1 = models.TextField(blank=True, null=True)  # Corregir typo
-    comentario2 = models.TextField(blank=True, null=True)  # Corregir typo
-    comentario3 = models.TextField(blank=True, null=True)  # Corregir typo
+    comentario1 = models.TextField(blank=True, null=True) 
+    comentario2 = models.TextField(blank=True, null=True)  
+    comentario3 = models.TextField(blank=True, null=True)  
     fechaExpediente = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"Expediente de {self.user.username}"  # Corregir - nombreCompleto no existe
+        return f"Expediente de {self.user.username}" 
     
     class Meta:
         verbose_name_plural = "Expedientes"

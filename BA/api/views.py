@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .models import CustomUser, Admin, Staff, Expedientes, visitas
-from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer
+from .models import CustomUser, Admin, Staff, Expedientes, Visitas, Proyecto
+from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer, proyectoSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Permisos
@@ -18,7 +18,7 @@ class UserListCreateView(ListCreateAPIView):
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     # permission_classes = [IsAuthenticated]
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UsuarioEditarSerializer
 
 class AdminListCreateView(ListCreateAPIView):
     queryset = Admin.objects.all()
@@ -52,10 +52,20 @@ class ExpedientesDetailView(RetrieveUpdateDestroyAPIView):
 
 class VisitasListCreateView(ListCreateAPIView):
     # permission_classes = [ IsAuthenticated]
-    queryset = visitas.objects.all()
+    queryset = Visitas.objects.all()
     serializer_class = VisitasSerializer
 
 class VisitasDetailView(RetrieveUpdateDestroyAPIView):
     # permission_classes = [ IsAuthenticated]
-    queryset = visitas.objects.all()
+    queryset = Visitas.objects.all()
     serializer_class = VisitasSerializer
+
+class proyectoListCreateView(ListCreateAPIView):
+    # permission_classes = [ IsAuthenticated]
+    queryset = Proyecto.objects.all()
+    serializer_class = proyectoSerializer
+
+class proyectoDetailView(RetrieveUpdateDestroyAPIView):
+    # permission_classes = [ IsAuthenticated]
+    queryset = Proyecto.objects.all()
+    serializer_class = proyectoSerializer

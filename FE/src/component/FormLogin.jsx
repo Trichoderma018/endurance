@@ -20,7 +20,7 @@ const FormLogin = () => {
 
       console.log('Response Data', response);
       if (!response.token) {
-        navigate('/Expesiente'); // Redirige a Expediente
+        navigate('/Expediente'); // Redirige a Expediente
       }
     } catch (error) {
       console.error('Error during login:', error);
