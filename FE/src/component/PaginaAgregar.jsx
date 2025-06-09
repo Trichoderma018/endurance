@@ -16,6 +16,7 @@ function PaginaAgregar() {
     const [fechaExpediente, setFechaExpediente] = React.useState("")
     
     const [expedientes, setExpedientes] = React.useState([])
+    const [usuarios, setUsuarios] = React.useState([]) // Estado para usuarios
     const [editMode, setEditMode] = React.useState(false)
     const [currentExpedienteId, setCurrentExpedienteId] = React.useState(null)
     const [error, setError] = React.useState(null)
@@ -23,6 +24,7 @@ function PaginaAgregar() {
 
     useEffect(() => {
         obtenerExpedientes()
+        obtenerUsuarios() // Cargar usuarios para el select
     }, [])
 
     async function obtenerExpedientes() {
@@ -35,12 +37,32 @@ function PaginaAgregar() {
         }
     }
 
+    async function obtenerUsuarios() {
+        try {
+            const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
+            console.log("Usuarios obtenidos:", response)
+            setUsuarios(response.data || response)
+            console.log(response);
+            
+        } catch (error) {
+            console.error("Error obteniendo usuarios:", error)
+        }
+    }
+
+    // Función para obtener el nombre del usuario por ID
+    function obtenerNombreUsuario(userId) {
+        const usuario = usuarios.find(user => user.id === userId)
+        return usuario ? usuario.name || usuario.username || usuario.nombre : 'Usuario no encontrado'
+    }
+
     async function cargarDatos() {
+        console.log(userExpediente);
+        
         try {
             const obj = {
                 user: userExpediente,
                 rol: rolExpediente,
-                activo: activoExpediente,
+                activo: true, // Asumiendo que el estado activo es siempre true al crear un nuevo expediente
                 imagen: imagenExpediente,
                 genero: generoExpediente,
                 sede: sedeExpediente,
@@ -132,8 +154,7 @@ function PaginaAgregar() {
         setIsLoading(true)
         setError(null)
         
-        if (!userExpediente || !sedeExpediente || !generoExpediente || !activoExpediente || 
-            !comentario1Expediente || !comentario2Expediente || !comentario3Expediente || !fechaExpediente) {
+        if (!userExpediente || !sedeExpediente || !generoExpediente || !activoExpediente || !fechaExpediente) {
             setError('Por favor, complete todos los campos.')
             setIsLoading(false)
             return
@@ -156,15 +177,21 @@ function PaginaAgregar() {
             <div className="registro-container">
                 <h2>{editMode ? 'EDITAR EXPEDIENTE' : 'EXPEDIENTES'}</h2>
                 <form>
-                    <input 
+                    {/* Cambiado de input a select para seleccionar usuario por ID */}
+                    <select 
                         className='input' 
-                        type="text" 
-                        name="name" 
+                        name="user" 
                         value={userExpediente}
                         onChange={(e) => setUserExpediente(e.target.value)} 
-                        placeholder="Full name" 
-                        required 
-                    />
+                        required
+                    >
+                        <option value="">Name</option>
+                        {usuarios && usuarios.length > 0 && usuarios.map((usuario) => (
+                            <option key={usuario.id} value={usuario.id}>
+                                {usuario.name || usuario.username || usuario.nombre}
+                            </option>
+                        ))}
+                    </select>
 
                     <select 
                         className='input' 
@@ -311,7 +338,7 @@ function PaginaAgregar() {
                     <tbody>
                         {expedientes && expedientes.length > 0 && expedientes.map((expediente) => (
                             <tr key={`exp-${expediente.id}`}>
-                                <td>{expediente.user}</td>
+                                <td>{obtenerNombreUsuario(expediente.user)}</td>
                                 <td>{expediente.rol}</td>
                                 <td>{expediente.activo}</td>
                                 <td>{expediente.genero}</td>
