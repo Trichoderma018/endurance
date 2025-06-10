@@ -12,9 +12,6 @@ function PaginaAgregar() {
     const [imagenExpediente, setImagenExpediente] = useState("")
     const [activoExpediente, setActivoExpediente] = useState("") // Inicializar con cadena vacía
     
-    
-  
-    
     const [generoExpediente, setGeneroExpediente] = useState("")
     const [sedeExpediente, setSedeExpediente] = useState("")
     const [comentario1Expediente, setComentario1Expediente] = useState("")
