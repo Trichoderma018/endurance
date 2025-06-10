@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/Register.css';
+
 import Llamados from '../services/Llamados';
+import '../style/Register.css';
 
 function FormRegister() {
   const [formData, setFormData] = useState({

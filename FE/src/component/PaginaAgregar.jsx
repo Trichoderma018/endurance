@@ -214,6 +214,7 @@ function PaginaAgregar() {
                             </option>
                         ))}
                     </select>
+                    <br />
 
                     <select 
                         className='input' 
@@ -227,7 +228,7 @@ function PaginaAgregar() {
                         <option value="entrenador">Entrenador</option>
                         <option value="staff">STAFF</option>
                     </select>
-
+                            <br />
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -235,6 +236,7 @@ function PaginaAgregar() {
                         onChange={handleImageChange}
                         ref={fileInputRef}
                     />
+                    <br />
 
                     <select 
                         className='input' 
@@ -246,7 +248,7 @@ function PaginaAgregar() {
                         <option value="inactivo">Inactivo</option>
                         <option value="activo">Activo</option>
                     </select>
-
+                            <br />
                     <select 
                         className='input' 
                         name="Genero" 
@@ -259,7 +261,7 @@ function PaginaAgregar() {
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
-
+                            <br />
                     <select 
                         className='input' 
                         name="Sede" 
@@ -276,8 +278,7 @@ function PaginaAgregar() {
                         <option value="sede6">Guanacaste</option>
                         <option value="sede7">Puntarenas</option>
                     </select>
-                    <br />
-                    
+                    <br />  
                     <input 
                         value={comentario1Expediente}
                         onChange={(e) => setComentario1Expediente(e.target.value)} 
@@ -302,6 +303,7 @@ function PaginaAgregar() {
                         name="comentario3" 
                         placeholder="Comentario °3" 
                     />
+                    <br />  
                     <input 
                         className='input' 
                         type="date" 
@@ -310,16 +312,14 @@ function PaginaAgregar() {
                         onChange={(e) => setFechaExpediente(e.target.value)} 
                         required 
                     />
-                    <br />
-                    
-                    <button className='' type="submit">
-                        {editMode ? 'Actualizar Expediente' : 'Crear Expediente'}
-                    </button>
-                    
+
+
+                
+
                     {editMode && (
-                        <button 
-                            className='' 
-                            type="button" 
+                        <button
+                            className=''
+                            type="button"
                             onClick={limpiarFormulario}
                         >
                             Cancelar
@@ -336,24 +336,16 @@ function PaginaAgregar() {
                             <span></span>
                         </div>
                     )}
-
+                    {/* Mostrar error si existe */}
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
 
             <div className="registro-container">
-                <h2>Lista de Expedientes</h2>
+
                 <table style={{width: '100%', borderCollapse: 'collapse'}}>
                     <thead>
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Género</th>
-                            <th>Sede</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
-                        </tr>
+
                     </thead>
                     <tbody>
                         {expedientes && expedientes.length > 0 && expedientes.map((expediente) => (

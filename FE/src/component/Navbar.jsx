@@ -6,18 +6,9 @@ function Navbar() {
     <div>
         {/* <Link ></Link> */}
         <nav>
-            
+
             <div className="radio-input">
-            <label>
-                <input
-                defaultValue="value-1"
-                name="value-radio"
-                id="value-1"
-                type="radio"
-                defaultChecked=""
-                />
-                <span>Usuarios</span>
-            </label>
+                
             <label><Link to={"/Expediente"}>
                 <input
                 defaultValue="value-2"

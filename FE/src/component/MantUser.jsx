@@ -161,8 +161,10 @@ function MantUser() {
 
     return (
         <div>
+            <h1>Gestión de Usuarios</h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario">
+                
                 <div className="campo">
                     <label htmlFor="username">Nombre de Usuario</label>
                     <input
@@ -312,6 +314,7 @@ function MantUser() {
                                 >
                                     Eliminar
                                 </button>
+                                
                             </td>
                         </tr>
                     ))}
