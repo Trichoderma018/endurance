@@ -1,5 +1,5 @@
 import React from 'react'
-import "../style/prueba.css"
+
 
 function Prueba() {
   return (
@@ -7,10 +7,12 @@ function Prueba() {
       <header>
         <h1>ENDURANCE</h1>
         <nav>
-          <button>Usuarios</button>
-          <button>Expediente</button>
-          <button>Proyectos</button>
-          <button>Mantenimientos</button>
+          <select>
+            <option value="">Admin</option>
+            <option value="">STAFF</option>
+            <option value="">USER</option>
+            <option value="">PROYECTOS</option>
+          </select>
         </nav>
       </header>
       <aside>

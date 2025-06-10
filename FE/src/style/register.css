@@ -15,11 +15,13 @@
   background-color: #F8F3F7;
 }
 
+
 /* From Uiverse.io by Spacious74 */ 
 .container {  
   position: relative;
   border: solid 1px #000000;
   padding: 20px;
+
   border-radius: 20px;
   background-color: #F8F3F7;
 }
