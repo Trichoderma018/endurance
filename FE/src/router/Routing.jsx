@@ -29,7 +29,7 @@ function Routing() {
 
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
-             <Route path='/null' element={<Sidebar/>}/>
+             
 
         </Routes>
       </Router>
