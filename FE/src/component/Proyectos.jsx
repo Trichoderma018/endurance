@@ -29,7 +29,7 @@ function Proyectos() {
 
     async function obtenerProyectos() {
         try {
-            const response = await Llamados.getData('api/proyectos/')
+            const response = await Llamados.getData('api/proyecto/')
             console.log("Proyectos obtenidos:", response)
             setProyectos(response.data || response)
         } catch (error) {
@@ -89,7 +89,7 @@ function Proyectos() {
             }
             
             console.log('Objeto a enviar:', obj)
-            const response = await Llamados.postData(obj, 'api/proyectos/')
+            const response = await Llamados.postData(obj, 'api/proyecto/')
             console.log('Response Data', response)
             limpiarFormulario()
             obtenerProyectos()
@@ -113,7 +113,7 @@ function Proyectos() {
             }
             
             console.log('Objeto a actualizar:', proyectoActualizado)
-            await Llamados.patchData(proyectoActualizado, "api/proyectos", currentProyectoId)
+            await Llamados.patchData(proyectoActualizado, "api/proyecto", currentProyectoId)
             limpiarFormulario()
             setEditMode(false)
             setCurrentProyectoId(null)
@@ -127,7 +127,7 @@ function Proyectos() {
     async function eliminarProyecto(id) {
         if (window.confirm("¿Está seguro que desea eliminar este proyecto?")) {
             try {
-                await Llamados.deleteData("api/proyectos", id)
+                await Llamados.deleteData("api/proyecto", id)
                 obtenerProyectos()
             } catch (error) {
                 console.error("Error al eliminar proyecto:", error)
