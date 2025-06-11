@@ -26,8 +26,10 @@ function Routing() {
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
             <Route path='/mantUser' element={<MantenimientoUser/>}/>
             <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
+
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
+             <Route path='/null' element={<Sidebar/>}/>
 
         </Routes>
       </Router>

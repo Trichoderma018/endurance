@@ -1,37 +1,30 @@
-import React, { useState, useEffect, useRef} from 'react'
+import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
-import AWS from 'aws-sdk';
-import uploadImageToS3 from './credenciales';
 
 function PaginaAgregar() {
-    // Estados del formulario - Inicializar todos con cadenas vacías
-    const [userExpediente, setUserExpediente] = useState("")
-    const [rolExpediente, setRolExpediente] = useState("")
-    const fileInputRef = useRef(null);
-    const [imagenExpediente, setImagenExpediente] = useState("")
-    const [activoExpediente, setActivoExpediente] = useState("") // Inicializar con cadena vacía
+    // Estados del formulario
+    const [userExpediente, setUserExpediente] = React.useState("")
+    const [rolExpediente, setRolExpediente] = React.useState("")
+    const [imagenExpediente, setImagenExpediente] = React.useState("")
+    const [activoExpediente, setActivoExpediente] = React.useState("")
+    const [generoExpediente, setGeneroExpediente] = React.useState("")
+    const [sedeExpediente, setSedeExpediente] = React.useState("")
+    const [comentario1Expediente, setComentario1Expediente] = React.useState("")
+    const [comentario2Expediente, setComentario2Expediente] = React.useState("")
+    const [comentario3Expediente, setComentario3Expediente] = React.useState("")
+    const [fechaExpediente, setFechaExpediente] = React.useState("")
     
-    
-  
-    
-    const [generoExpediente, setGeneroExpediente] = useState("")
-    const [sedeExpediente, setSedeExpediente] = useState("")
-    const [comentario1Expediente, setComentario1Expediente] = useState("")
-    const [comentario2Expediente, setComentario2Expediente] = useState("")
-    const [comentario3Expediente, setComentario3Expediente] = useState("")
-    const [fechaExpediente, setFechaExpediente] = useState("")
-    
-    const [expedientes, setExpedientes] = useState([])
-    const [usuarios, setUsuarios] = useState([])
-    const [editMode, setEditMode] = useState(false)
-    const [currentExpedienteId, setCurrentExpedienteId] = useState(null)
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
+    const [expedientes, setExpedientes] = React.useState([])
+    const [usuarios, setUsuarios] = React.useState([]) // Estado para usuarios
+    const [editMode, setEditMode] = React.useState(false)
+    const [currentExpedienteId, setCurrentExpedienteId] = React.useState(null)
+    const [error, setError] = React.useState(null)
+    const [isLoading, setIsLoading] = React.useState(false)
 
     useEffect(() => {
         obtenerExpedientes()
-        obtenerUsuarios()
+        obtenerUsuarios() // Cargar usuarios para el select
     }, [])
 
     async function obtenerExpedientes() {
@@ -46,39 +39,30 @@ function PaginaAgregar() {
 
     async function obtenerUsuarios() {
         try {
-            const response = await Llamados.getData('api/users/')
+            const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
             console.log("Usuarios obtenidos:", response)
             setUsuarios(response.data || response)
+            console.log(response);
+            
         } catch (error) {
             console.error("Error obteniendo usuarios:", error)
         }
     }
 
+    // Función para obtener el nombre del usuario por ID
     function obtenerNombreUsuario(userId) {
         const usuario = usuarios.find(user => user.id === userId)
         return usuario ? usuario.name || usuario.username || usuario.nombre : 'Usuario no encontrado'
     }
 
-    const handleImageChange = async (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            try {
-              const result = await uploadImageToS3(file);
-              const imagenUrl = result.Location;
-              setImagenExpediente(imagenUrl)
-            } catch (error) {
-              console.error('Error al subir la imagen a S3:', error);
-              setError('No se pudo subir la imagen a S3');
-            }
-        }
-    };
-
     async function cargarDatos() {
+        console.log(userExpediente);
+        
         try {
             const obj = {
                 user: userExpediente,
                 rol: rolExpediente,
-                activo: activoExpediente === "activo", // Convertir a booleano
+                activo: true, // Asumiendo que el estado activo es siempre true al crear un nuevo expediente
                 imagen: imagenExpediente,
                 genero: generoExpediente,
                 sede: sedeExpediente,
@@ -95,7 +79,6 @@ function PaginaAgregar() {
             obtenerExpedientes()
         } catch (error) {
             console.error("Error al crear expediente:", error)
-            setError("Error al crear expediente")
         }
     }
 
@@ -104,7 +87,7 @@ function PaginaAgregar() {
             const expedienteActualizado = {
                 user: userExpediente,
                 rol: rolExpediente,
-                activo: activoExpediente === "activo", // Convertir a booleano
+                activo: activoExpediente,
                 imagen: imagenExpediente,
                 genero: generoExpediente,
                 sede: sedeExpediente,
@@ -122,7 +105,6 @@ function PaginaAgregar() {
             obtenerExpedientes()
         } catch (error) {
             console.error("Error al actualizar expediente:", error)
-            setError("Error al actualizar expediente")
         }
     }
 
@@ -133,24 +115,21 @@ function PaginaAgregar() {
                 obtenerExpedientes()
             } catch (error) {
                 console.error("Error al eliminar expediente:", error)
-                setError("Error al eliminar expediente")
             }
         }
     }
 
     function editarExpediente(expediente) {
-        // Asegurar que todos los valores sean strings, no undefined
-        setUserExpediente(expediente.user || "")
-        setRolExpediente(expediente.rol || "")
-        // Convertir el booleano activo a string para el select
-        setActivoExpediente(expediente.activo ? "activo" : "inactivo")
-        setImagenExpediente(expediente.imagen || "")
-        setGeneroExpediente(expediente.genero || "")
-        setSedeExpediente(expediente.sede || "")
-        setComentario1Expediente(expediente.comentario1 || "")
-        setComentario2Expediente(expediente.comentario2 || "")
-        setComentario3Expediente(expediente.comentario3 || "")
-        setFechaExpediente(expediente.fecha || "")
+        setUserExpediente(expediente.user)
+        setRolExpediente(expediente.rol)
+        setActivoExpediente(expediente.activo)
+        setImagenExpediente(expediente.imagen)
+        setGeneroExpediente(expediente.genero)
+        setSedeExpediente(expediente.sede)
+        setComentario1Expediente(expediente.comentario1)
+        setComentario2Expediente(expediente.comentario2)
+        setComentario3Expediente(expediente.comentario3)
+        setFechaExpediente(expediente.fecha)
         setCurrentExpedienteId(expediente.id)
         setEditMode(true)
     }
@@ -168,11 +147,6 @@ function PaginaAgregar() {
         setFechaExpediente("")
         setEditMode(false)
         setCurrentExpedienteId(null)
-        setError(null)
-
-        if (fileInputRef.current) {
-            fileInputRef.current.value = "";
-        }
     }
 
     function handleSubmit(event) {
@@ -202,7 +176,8 @@ function PaginaAgregar() {
             
             <div className="registro-container">
                 <h2>{editMode ? 'EDITAR EXPEDIENTE' : 'EXPEDIENTES'}</h2>
-                <form onSubmit={handleSubmit}>
+                <form>
+                    {/* Cambiado de input a select para seleccionar usuario por ID */}
                     <select 
                         className='input' 
                         name="user" 
@@ -233,11 +208,11 @@ function PaginaAgregar() {
                     </select>
                             <br />
                     <input 
+                        className='input' 
                         type="file" 
+                        name='wall' 
                         accept="image/*" 
-                        className='user-image' 
-                        onChange={handleImageChange}
-                        ref={fileInputRef}
+                        onChange={(e) => setImagenExpediente(e.target.files[0])}
                     />
                     <br />
 
@@ -245,9 +220,8 @@ function PaginaAgregar() {
                         className='input' 
                         value={activoExpediente} 
                         onChange={(e) => setActivoExpediente(e.target.value)}
-                        required
                     >
-                        <option value="">Estado</option>
+                        <option value="">estado</option>
                         <option value="inactivo">Inactivo</option>
                         <option value="activo">Activo</option>
                     </select>
@@ -259,7 +233,7 @@ function PaginaAgregar() {
                         onChange={(e) => setGeneroExpediente(e.target.value)} 
                         required
                     >
-                        <option value="">Género</option>
+                        <option value="">género</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
@@ -273,15 +247,16 @@ function PaginaAgregar() {
                         required
                     >
                         <option value="">Sede</option>
-                        <option value="sede1">San José</option>
-                        <option value="sede2">Limón</option>
+                        <option value="sede1">San Jose</option>
+                        <option value="sede2">Limon</option>
                         <option value="sede3">Cartago</option>
                         <option value="sede4">Heredia</option>
                         <option value="sede5">Alajuela</option>
                         <option value="sede6">Guanacaste</option>
                         <option value="sede7">Puntarenas</option>
                     </select>
-                    <br />  
+                    <br />
+                    
                     <input 
                         value={comentario1Expediente}
                         onChange={(e) => setComentario1Expediente(e.target.value)} 
@@ -289,6 +264,7 @@ function PaginaAgregar() {
                         type="text" 
                         name="comentario1" 
                         placeholder="Comentario °1" 
+                        required 
                     />
                     <input 
                         value={comentario2Expediente}
@@ -297,6 +273,7 @@ function PaginaAgregar() {
                         type="text" 
                         name="comentario2" 
                         placeholder="Comentario °2" 
+                        required 
                     />
                     <input 
                         value={comentario3Expediente}
@@ -305,8 +282,9 @@ function PaginaAgregar() {
                         type="text" 
                         name="comentario3" 
                         placeholder="Comentario °3" 
+                        required 
                     />
-                    <br />  
+                    <br />
                     <input 
                         className='input' 
                         type="date" 
@@ -315,14 +293,16 @@ function PaginaAgregar() {
                         onChange={(e) => setFechaExpediente(e.target.value)} 
                         required 
                     />
-
-
-                
-
+                    <br />
+                    
+                    <button className='' type="submit" onClick={(e) => handleSubmit(e)}>
+                        {editMode ? 'Update Expedient' : 'Create Expedient'}
+                    </button>
+                    
                     {editMode && (
-                        <button
-                            className=''
-                            type="button"
+                        <button 
+                            className='' 
+                            type="button" 
                             onClick={limpiarFormulario}
                         >
                             Cancelar
@@ -339,7 +319,7 @@ function PaginaAgregar() {
                             <span></span>
                         </div>
                     )}
-                    {/* Mostrar error si existe */}
+
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
@@ -355,7 +335,7 @@ function PaginaAgregar() {
                             <tr key={`exp-${expediente.id}`}>
                                 <td>{obtenerNombreUsuario(expediente.user)}</td>
                                 <td>{expediente.rol}</td>
-                                <td>{expediente.activo ? "Activo" : "Inactivo"}</td>
+                                <td>{expediente.activo}</td>
                                 <td>{expediente.genero}</td>
                                 <td>{expediente.sede}</td>
                                 <td>{expediente.fecha}</td>
