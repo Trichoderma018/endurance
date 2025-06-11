@@ -14,6 +14,19 @@ function PaginaAgregar() {
     const [comentario2Expediente, setComentario2Expediente] = React.useState("")
     const [comentario3Expediente, setComentario3Expediente] = React.useState("")
     const [fechaExpediente, setFechaExpediente] = React.useState("")
+    // Estados del formulario - Inicializar todos con cadenas vacías
+    const [userExpediente, setUserExpediente] = useState("")
+    const [rolExpediente, setRolExpediente] = useState("")
+    const fileInputRef = useRef(null);
+    const [imagenExpediente, setImagenExpediente] = useState("")
+    const [activoExpediente, setActivoExpediente] = useState("") // Inicializar con cadena vacía
+    
+    const [generoExpediente, setGeneroExpediente] = useState("")
+    const [sedeExpediente, setSedeExpediente] = useState("")
+    const [comentario1Expediente, setComentario1Expediente] = useState("")
+    const [comentario2Expediente, setComentario2Expediente] = useState("")
+    const [comentario3Expediente, setComentario3Expediente] = useState("")
+    const [fechaExpediente, setFechaExpediente] = useState("")
     
     const [expedientes, setExpedientes] = React.useState([])
     const [usuarios, setUsuarios] = React.useState([]) // Estado para usuarios
