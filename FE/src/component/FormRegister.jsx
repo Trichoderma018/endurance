@@ -144,15 +144,7 @@ function FormRegister() {
             <button className="btn" type="submit" disabled={isLoading || !!error}>
               Submit
             </button>
-            {isLoading && <span className="loading"><div className="dot-spinner">
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
-            <div className="dot-spinner__dot" />
+            {isLoading && <span className="loader"><div className="dot-spinner">
           </div>
           </span>}
             <div className="acc-text">

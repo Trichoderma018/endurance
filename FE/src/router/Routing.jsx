@@ -29,7 +29,6 @@ function Routing() {
 
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
-             
 
         </Routes>
       </Router>
