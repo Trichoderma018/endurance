@@ -18,13 +18,13 @@ function Navbar() {
                 /></Link>
                 <span>Expedientes</span>
             </label>
-            <label>
+            <label><Link to={"/proyectos"}>
                 <input
                 defaultValue="value-3"
                 name="value-radio"
                 id="value-3"
                 type="radio"
-                />
+                /></Link>
                 <span>Proyectos</span>
             </label>
             <label>
