@@ -11,6 +11,7 @@ import Search from './Search';
 function Expediente() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const[users, setUsers] = useState([]);
     const navigate = useNavigate()
     // Estado para almacenar el expediente
     // const [pesoExpediente, setPesoExpediente] = useState("");
@@ -20,6 +21,15 @@ function Expediente() {
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 2000);
+    }, []);
+
+    useEffect(() => {
+        async function info() {
+            const users = await Llamados.getData('api/expedientes/');
+            console.log('Response Data', users);
+            setUsers(users);
+        }
+        info();
     }, []);
 
     const handleSubmit = async (event) => {
@@ -58,21 +68,15 @@ function Expediente() {
             </div>
             <div className="registro-container">
                 <h2>Lista de Expediente</h2>
-                  <Cards/>
-                    {isLoading && (
-                    <div className="spinner">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    )}
-
-                    {error && <p className="error">{error}</p>}
-
-                    
+                {users.map((user) => (
+                    <Cards
+                        key={user.id}
+                        imagen={user.imagen}
+                        descripcion={user.descripcion}
+                        nombre={user.nombre}
+                        rol={user.id}
+                    />
+                ))}
             </div>
         </div>
     );

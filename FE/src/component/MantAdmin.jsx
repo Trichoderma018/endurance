@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
-import Sidebar from './Sidebar'
-import "../style/admin.css"
+
 
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')

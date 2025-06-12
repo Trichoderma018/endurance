@@ -9,7 +9,7 @@
               Key: file.name,
               Body: file,
               ContentType: file.type,
-            };
+            }; 
             return s3.upload(params).promise();
         }
 

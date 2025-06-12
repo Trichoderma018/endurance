@@ -1,22 +1,25 @@
 import React from 'react'
 import "../style/Cards.css"
 
-function Cards() {
+function Cards({nombre, imagen, descripcion, rol , view}) {
   return (
-    <div>
-  <div className="card">
-  <div className="image" />
-  <div className="card-info">
-    <p className="card-info">josepht monge</p>
-    <p className="card-info">Sport</p>
-  </div>
-  <a href="#" className="button">
-    view
-  </a>
+  <div>
+    <div className="card">
+      <div className="image" />
+        <p className="card-info">{rol}</p>
+      <div className="card-description">
+        <p>{descripcion}</p>
+      </div>
+      <div className="card-info">
+        
+      </div>
+      <a href="#" className="button" onClick={view}>
+        view
+      </a>
+ </div>
+
+
 </div>
-
-
-    </div>
   )
 }
 
