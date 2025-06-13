@@ -122,8 +122,6 @@ class Visitas(models.Model):  # Cambiar nombre a PascalCase
 
 class Proyecto(models.Model):
     nombreProyecto = models.CharField(max_length=150)
-    # Cambiar de CharField a ManyToMany para múltiples usuarios
-    usuarios = models.ManyToManyField(CustomUser, related_name='proyectos')
     objetivo = models.TextField()
     imagen = models.CharField(max_length=150, blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
