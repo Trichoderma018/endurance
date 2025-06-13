@@ -155,3 +155,14 @@ class FamiliarExpediente(models.Model):
     
     class Meta:
         verbose_name_plural = "Familiares de Expedientes"
+
+class ProyectoUsuarios(models.Model):
+    """Modelo para manejar la relación entre proyectos y usuarios"""
+    proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, related_name='usuarios')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='proyectos')
+    
+    class Meta:
+        verbose_name_plural = "Proyectos de Usuarios"
+    
+    def __str__(self):
+        return f"{self.user.username} en {self.proyecto.nombreProyecto}"
