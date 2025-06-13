@@ -13,9 +13,9 @@ function Cards({nombre, imagen, descripcion, rol , view}) {
       <div className="card-info">
         
       </div>
-      <a href="#" className="button" onClick={view}>
+      <button  className="button" onClick={view}>
         view
-      </a>
+      </button>
  </div>
 
 

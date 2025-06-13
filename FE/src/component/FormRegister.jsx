@@ -21,6 +21,8 @@ function FormRegister() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+
+
   useEffect(() => {
     if (!formData.confirmPassword) {
       setError(null);
@@ -61,22 +63,29 @@ function FormRegister() {
     setError(null);
 
     try {
-      const response = await Llamados.postData({
-        password: formData.password,
-        password_confirm: formData.confirmPassword,
-        username: formData.username,
-        email: formData.email
-      }, 'api/users/');
+  const response = await Llamados.postData({
+    password: formData.password,
+    password_confirm: formData.confirmPassword,
+    username: formData.username,
+    email: formData.email
+  }, 'api/users/');
 
-      console.log('User registered successfully:', response);
-      navigate('/');
+  console.log('User registered successfully:', response);
 
-    } catch (error) {
-      console.error('Registration error:', error);
-      setError(error.response?.data?.message || 'Registration failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+  // Simular una demora para mostrar el spinner
+  setTimeout(() => {
+    setIsLoading(false);
+    navigate('/'); // Redirigir al login después de 1.5 segundos
+  }, 1500); // 1.5 segundos de demora
+
+} catch (error) {
+  console.error('Registration error:', error);
+  setError(error.response?.data?.message || 'Registration failed. Please try again.');
+} finally {
+  // Mover esto dentro del timeout si quieres que el loading dure hasta que navegue
+  setTimeout(() => setIsLoading(false), 3000);
+}
+
   };
 
   return (
@@ -145,22 +154,12 @@ function FormRegister() {
               Submit
             </button>
             {isLoading && <span className="loading">
-            <div className="spinner center">
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-            <div className="spinner-blade" />
-          </div>
+      <div className="loading-spinner">
+      <div className="spinner"></div>
+      <span className="loading-text">Loading...</span>
+    </div>
 
-          <span className="loading-text">Loading...</span>
+     
           </span>}
             <div className="acc-text">
               New here?{' '}

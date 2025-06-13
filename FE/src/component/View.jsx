@@ -67,8 +67,33 @@ function View() {
     return (
         <div>
 
+            <h2>User Information</h2>
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <div>
+                    <p><strong>Username:</strong> {userInfo.username}</p>
+                    <p><strong>Email:</strong> {userInfo.email}</p>
+                    <p><strong>First Name:</strong> {userInfo.first_name}</p>
+                    <p><strong>Last Name:</strong> {userInfo.last_name}</p>
+                    {/* Add more fields as needed */}
+                </div>
+            )}
+            <div>
+                <h3>Users List</h3>
+                <ul>
+                    {users.map(user => (
+                        <li key={user.id} onClick={() => handleUserClick(user.id)}>
+                            {user.username}
+                        </li>
+                    ))}
+                </ul>
+                <button onClick={() => setId(null)}>Back to Users List</button>
+            </div>
         </div>
-      )
-}
+    )
+
 
 export default View

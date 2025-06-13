@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
-import "../style/ExpeNav.css";
-import "../style/pared.css"
+
 import Navbar from './navbar'
 import Cards from './Cards';
 import Search from './Search';
@@ -70,11 +69,11 @@ function Expediente() {
                 <h2>Lista de Expediente</h2>
                 {users.map((user) => (
                     <Cards
-                        key={user.id}
+                        key={user.id} 
                         imagen={user.imagen}
                         descripcion={user.descripcion}
                         nombre={user.nombre}
-                        rol={user.id}
+                        rol={user.rol}
                     />
                 ))}
             </div>
