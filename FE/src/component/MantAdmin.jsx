@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
-
+import '../style/MantAdmin.css'
+import Sidebar from './Sidebar'
 
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')
@@ -129,33 +130,36 @@ function MantAdmin() {
     <div className='form'>
       <Navbar/>
 
-    
+      
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
       <div className="formulario">
-          <div className="campo">
-              <label htmlFor="nombreCompleto">Nombre Completo</label>
+          <div className='inp-form'>
+              <label htmlFor="nombreCompleto" className='textUser'></label>
               <input
+                  className='inp'
                   id="nombreCompleto"
                   type="text"
                   value={nombreCompleto}
                   onChange={handleNombreCompleto}
+                  placeholder='Ingrese su nombre completo'
                   
               />
           </div>
-          
-          <div className="campo">
-              <label htmlFor="email">Email</label>
+
+          <div className="inp-form">
+              <label htmlFor="email" className='textUser'></label>
               <input
+                  className='inp'
                   id="email"
                   type="email"
                   value={email}
                   onChange={handleEmail}
-
-              />
+                  placeholder='Ingrese su email'
+              /> 
           </div>
           
-          <div className="campo">
-              <label htmlFor="user"></label>
+          <div className="inp-form">
+              <label htmlFor="user" className='textUser' ></label>
               <select
                   id="user"
                   value={user}
@@ -173,7 +177,7 @@ function MantAdmin() {
           <div className="botones">
               <button 
                   onClick={handleSubmit}
-                  className="btn-primary"
+                  className="btn"
               >
                   {editMode ? 'Actualizar' : 'Crear'} Administrador
               </button>
@@ -181,44 +185,47 @@ function MantAdmin() {
               {editMode && (
                   <button 
                       onClick={limpiarFormulario}
-                      className="btn-secondary"
+                      className="btn"
                   >
                       Cancelar
                   </button>
               )}
           </div>
       </div>
+      <Sidebar />
       
       <h2>Lista de Administradores</h2>
       <table className="tabla-administradores">
-          <thead>
-              <tr>
-                  <th>Nombre Completo</th>
-                  <br />
-                  <th>Email</th>
-                  <br />
-                  <th>Usuario</th>
-                  <br />
-                  <th>Acciones</th>
-              </tr>
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <br />
+                <th>Email</th>
+                <br />
+                <th>Usuario</th>
+                <br />
+                <th>Acciones</th>
+            </tr>
           </thead>
-        <tbody>
-          {administradores && administradores.length > 0 && administradores.map((administrador, index) => (
-            <tr key={`admin-${administrador.id}-${index}`}>
-                <td>{administrador.nombreCompleto}</td>
-                <td>{administrador.email}</td>
-                <td>{getUsernameById(administrador.user)}</td>
-              <td>
-                <button 
-                  onClick={() => editarAdministrador(administrador)}
-                  className="btn-edit"
+          <tbody>
+            {administradores && administradores.length > 0 && administradores.map((administrador, index) => (
+              <tr key={`admin-${administrador.id}-${index}`}>
+                  <td>{administrador.nombreCompleto}</td>
+                  <td>{administrador.email}</td>
+                  <td>{getUsernameById(administrador.user)}</td>
+                <td>
+                  <button 
+                    onClick={() => editarAdministrador(administrador)}
+                    className="btn-edit"
                 >
+                  <i className="fas fa-edit"></i>
                   Editar
                 </button>
                 <button 
                   onClick={() => eliminarAdministrador(administrador.id)}
                   className="btn-delete"
                 >
+                  <i className="fas fa-trash"></i>
                   Eliminar
                 </button>
               </td>
