@@ -129,7 +129,7 @@ function MantAdmin() {
   return (
     <div className='form'>
       <Navbar/>
-
+      <Sidebar/>
       
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
       <div className="formulario">
@@ -192,7 +192,6 @@ function MantAdmin() {
               )}
           </div>
       </div>
-      <Sidebar />
       
       <h2>Lista de Administradores</h2>
       <table className="tabla-administradores">

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
+import Navbar from './navbar'
+import Sidebar from './Sidebar'
 
 function MantUser() {
     const [username, setUsername] = React.useState('')
@@ -161,6 +163,8 @@ function MantUser() {
 
     return (
         <div>
+            <Navbar/>
+            <Sidebar/>
             <h1>Gestión de Usuarios</h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario">
