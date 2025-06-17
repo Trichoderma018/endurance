@@ -223,13 +223,21 @@ function PaginaAgregar() {
                         <option value="staff">STAFF</option>
                     </select>
 
-                    <input type="file" accept="image/*" className='user-image' onChange={handleImageChange} ref={fileInputRef} />
-
-                    {imagenExpediente && (
-                        <div>
-                            <img src={imagenExpediente} alt="Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />
+                    <div className="campo">
+                        <label htmlFor="imagen">Imagen del Expediente</label> <br />
+                        <input
+                        id="imagen"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        ref={fileInputRef}
+                        />
+                        {imagenExpediente && (
+                        <div style={{marginTop: '10px'}}>
+                            <img src={imagenExpediente} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
                         </div>
-                    )}
+                        )}
+                    </div>
 
                     <select className='input' value={activoExpediente} onChange={e => setActivoExpediente(e.target.value)} required>
                         <option value="">Estado</option>
