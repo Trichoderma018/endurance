@@ -86,6 +86,7 @@ class VisitasSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class proyectoSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Proyecto
         fields = '__all__'

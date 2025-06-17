@@ -292,14 +292,21 @@ function Proyectos() {
                     />
                     <br />
 
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        className='user-image' 
+                    <div className="campo">
+                        <label htmlFor="imagen">Imagen del Proyecto</label> <br />
+                        <input
+                        id="imagen"
+                        type="file"
+                        accept="image/*"
                         onChange={handleImageChange}
                         ref={fileInputRef}
-                    />
-                    <br />
+                        />
+                        {imagenProyecto && (
+                        <div style={{marginTop: '10px'}}>
+                            <img src={imagenProyecto} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
+                        </div>
+                        )}
+                    </div>
 
                     <textarea 
                         value={descripcionProyecto}
