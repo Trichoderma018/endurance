@@ -17,7 +17,7 @@ function Navbar() {
                 id="value-2"
                 type="button"
                 className='inp-radio'
-                /></Link>
+            /></Link>
             </label>
             <label><Link to={"/proyectos"}>
                 <input
@@ -26,7 +26,7 @@ function Navbar() {
                 id="value-3"
                 type="button"
                 className='inp-radio'
-                /></Link>
+            /></Link>
             </label>
             <label>
                  <Link to="/MantAdmin">
@@ -36,8 +36,7 @@ function Navbar() {
                 id="value-3"
                 type="button"
                 className='inp-radio'
-                /></Link>
-
+            /></Link>
             </label>
           
             </div>
