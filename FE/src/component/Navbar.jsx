@@ -1,45 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../style/Navbar.css' 
+import '../style/Navbar.css'
+
 function Navbar() {
   return (
     <div>
         {/* <Link ></Link> */}
         <nav>
 
-            <div className="cont-rutas">
-            <label>
-                <Link to={"/Expediente"}>
+            <div className="">
+
+            <label><Link to={"/Expediente"}>
                 <input
-                defaultValue="Expedientes"
+                defaultValue="expediente"
                 name="value-radio"
                 id="value-2"
-                className='inp-radio'
                 type="button"
+
                 /></Link>
             </label>
             <label><Link to={"/proyectos"}>
                 <input
-                defaultValue="value-3"
+                defaultValue="proyecto"
                 name="value-radio"
                 id="value-3"
-                type="radio"
+                type="button"
                 /></Link>
-                <span>Proyectos</span>
+             
             </label>
             <label>
                  <Link to="/MantAdmin">
                 <input
-                defaultValue="value-3"
+                defaultValue="mantenimiento"
                 name="value-radio"
                 id="value-3"
-                type="radio"
+                type="button"
+
                 /></Link> 
-                <span>Mantenimientos</span>
-            </label>
-            <span className="selection" />
-            </div>
             
+            </label>
+          
+            </div>
+
             
         </nav>
     </div>
