@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Admin, Staff, Expedientes, Visitas, CustomUser, Proyecto
+from .models import Admin, Staff, Expedientes, Visitas, CustomUser, Proyecto, ProyectoUsuarios
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -86,12 +86,14 @@ class VisitasSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class proyectoSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Proyecto
         fields = '__all__'
-        read_only_fields = ['id', 'user']  # Aseguramos que el ID y el usuario no se puedan modificar directamente
+        read_only_fields = ['id']  # Aseguramos que el ID no se pueda modificar directamente
 
-    def create(self, validated_data):
-        user = self.context['request'].user  # Obtenemos el usuario actual desde el contexto
-        proyecto = Proyecto.objects.create(user=user, **validated_data)
-        return proyecto
+class ProyectoUsuariosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProyectoUsuarios
+        fields = ['id', 'proyecto', 'user']
+        read_only_fields = ['id']  # Aseguramos que el ID no se pueda modificar directamente

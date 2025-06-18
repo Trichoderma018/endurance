@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserListCreateView, UserDetailView, ExpedientesListCreateView, ExpedientesDetailView, AdminListCreateView, AdminDetailView, StaffListCreateView, StaffDetailView, VisitasListCreateView, VisitasDetailView, proyectoListCreateView, proyectoDetailView
+from .views import UserListCreateView, UserDetailView, ExpedientesListCreateView, ExpedientesDetailView, AdminListCreateView, AdminDetailView, StaffListCreateView, StaffDetailView, VisitasListCreateView, VisitasDetailView, proyectoListCreateView, proyectoDetailView, ProyectoUsuariosListCreateView, ProyectoUsuariosDetailView
 
 urlpatterns = [
     path('users/', UserListCreateView.as_view(), name='user-list-create'),
@@ -14,4 +14,6 @@ urlpatterns = [
     path('visitas/<int:pk>/', VisitasDetailView.as_view(), name='visitas-detail'),
     path('proyecto/', proyectoListCreateView.as_view(), name='proyecto-list-create'),
     path('proyecto/<int:pk>/', proyectoDetailView.as_view(), name='proyecto-detail'),
+    path('proyecto-usuarios/', ProyectoUsuariosListCreateView.as_view(), name='proyecto-usuarios-list-create'),
+    path('proyecto-usuarios/<int:pk>/', ProyectoUsuariosDetailView.as_view(), name='proyecto-usuarios-detail'),
 ]

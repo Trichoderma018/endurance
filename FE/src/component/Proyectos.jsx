@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
 import uploadImageToS3 from './credenciales';
+import Navbar from './navbar'
 
 function Proyectos() {
     // Estados del formulario
@@ -77,9 +78,9 @@ function Proyectos() {
 
     async function cargarDatos() {
         try {
-            const obj = {
+            // 1. Crear el proyecto primero
+            const objProyecto = {
                 nombreProyecto: nombreProyecto,
-                usuarios: usuariosProyecto,
                 objetivo: objetivoProyecto,
                 imagen: imagenProyecto,
                 descripcion: descripcionProyecto,
@@ -88,22 +89,48 @@ function Proyectos() {
                 activo: activoProyecto === "activo"
             }
             
-            console.log('Objeto a enviar:', obj)
-            const response = await Llamados.postData(obj, 'api/proyecto/')
-            console.log('Response Data', response)
+            console.log('Objeto proyecto a enviar:', objProyecto)
+            const responseProyecto = await Llamados.postData(objProyecto, 'api/proyecto/')
+            console.log('Response Proyecto:', responseProyecto)
+            
+            // 2. Obtener el ID del proyecto creado
+            const proyectoId = responseProyecto.id || responseProyecto.data?.id
+            
+            if (!proyectoId) {
+                throw new Error('No se pudo obtener el ID del proyecto creado')
+            }
+            
+            // 3. Crear las relaciones en ProyectoUsuarios para cada usuario seleccionado
+            if (usuariosProyecto && usuariosProyecto.length > 0) {
+                const promesasUsuarios = usuariosProyecto.map(async (userId) => {
+                    const objProyectoUsuario = {
+                        proyecto: proyectoId,
+                        user: userId
+                    }
+                    
+                    console.log('Creando relación proyecto-usuario:', objProyectoUsuario)
+                    return await Llamados.postData(objProyectoUsuario, 'api/proyecto-usuarios/')
+                })
+                
+                // Esperar a que todas las relaciones se creen
+                //await Promise.all(promesasUsuarios)
+                console.log('Todas las relaciones proyecto-usuario creadas exitosamente')
+            }
+            
             limpiarFormulario()
             obtenerProyectos()
+            
         } catch (error) {
-            console.error("Error al crear proyecto:", error)
-            setError("Error al crear proyecto")
+            console.error("Error al crear proyecto y relaciones:", error)
+            setError("Error al crear proyecto y asignar usuarios")
         }
     }
 
     async function actualizarProyecto() {
         try {
+            // 1. Actualizar el proyecto
             const proyectoActualizado = {
                 nombreProyecto: nombreProyecto,
-                usuarios: usuariosProyecto,
                 objetivo: objetivoProyecto,
                 imagen: imagenProyecto,
                 descripcion: descripcionProyecto,
@@ -114,13 +141,38 @@ function Proyectos() {
             
             console.log('Objeto a actualizar:', proyectoActualizado)
             await Llamados.patchData(proyectoActualizado, "api/proyecto", currentProyectoId)
+            
+            // 2. Eliminar todas las relaciones existentes del proyecto
+            try {
+                await Llamados.deleteData(`api/proyecto-usuarios/proyecto/${currentProyectoId}`)
+            } catch (error) {
+                console.log('No hay relaciones existentes para eliminar o error:', error)
+            }
+            
+            // 3. Crear las nuevas relaciones
+            if (usuariosProyecto && usuariosProyecto.length > 0) {
+                const promesasUsuarios = usuariosProyecto.map(async (userId) => {
+                    const objProyectoUsuario = {
+                        proyecto: currentProyectoId,
+                        user: userId
+                    }
+                    
+                    console.log('Creando nueva relación proyecto-usuario:', objProyectoUsuario)
+                    return await Llamados.postData(objProyectoUsuario, 'api/proyecto-usuarios/')
+                })
+                
+                await Promise.all(promesasUsuarios)
+                console.log('Todas las nuevas relaciones proyecto-usuario creadas exitosamente')
+            }
+            
             limpiarFormulario()
             setEditMode(false)
             setCurrentProyectoId(null)
             obtenerProyectos()
+            
         } catch (error) {
             console.error("Error al actualizar proyecto:", error)
-            setError("Error al actualizar proyecto")
+            setError("Error al actualizar proyecto y usuarios")
         }
     }
 
@@ -194,6 +246,7 @@ function Proyectos() {
 
     return (
         <div className='fondo'>
+            <Navbar/>
             <div className='barra'>
                 <header className='Endurance'>ENDURANCE</header>
             </div>
@@ -241,14 +294,21 @@ function Proyectos() {
                     />
                     <br />
 
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        className='user-image' 
+                    <div className="campo">
+                        <label htmlFor="imagen">Imagen del Proyecto</label> <br />
+                        <input
+                        id="imagen"
+                        type="file"
+                        accept="image/*"
                         onChange={handleImageChange}
                         ref={fileInputRef}
-                    />
-                    <br />
+                        />
+                        {imagenProyecto && (
+                        <div style={{marginTop: '10px'}}>
+                            <img src={imagenProyecto} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
+                        </div>
+                        )}
+                    </div>
 
                     <textarea 
                         value={descripcionProyecto}
