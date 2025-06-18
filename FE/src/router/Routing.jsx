@@ -11,6 +11,7 @@ import Prueba from '../component/Prueba';
 import PageProyectos from '../pages/PageProyectos';
 import View from '../component/View';
 import Sidebar from '../component/Sidebar';
+import PageVisita from '../pages/PageVisita';
 
 
 
@@ -30,6 +31,8 @@ function Routing() {
             <Route path='/mantUser' element={<MantenimientoUser/>}/>
             <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
             <Route path='/proyectos' element={<PageProyectos />} />
+            <Route path='/visita' element={<PageVisita />} />
+
             <Route path='/view' element={<View />} />
 
              {/*Pruebas*/}
