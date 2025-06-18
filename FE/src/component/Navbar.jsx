@@ -1,22 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../style/Navbar.css' 
+
 function Navbar() {
   return (
     <div>
         {/* <Link ></Link> */}
         <nav>
 
-            <div className="cont-rutas">
-            <label>
-                <Link to={"/Expediente"}>
+            <div className="radio-input">
+                
+            <label><Link to={"/Expediente"}>
                 <input
-                defaultValue="Expedientes"
+                defaultValue="value-2"
                 name="value-radio"
                 id="value-2"
-                className='inp-radio'
-                type="button"
+                type="radio"
                 /></Link>
+                <span>Expedientes</span>
             </label>
             <label><Link to={"/proyectos"}>
                 <input
@@ -39,7 +39,7 @@ function Navbar() {
             </label>
             <span className="selection" />
             </div>
-            
+
             
         </nav>
     </div>
