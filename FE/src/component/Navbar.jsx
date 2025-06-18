@@ -8,7 +8,7 @@ function Navbar() {
         {/* <Link ></Link> */}
         <nav>
 
-            <div className="">
+            <div className="cont-rutas">
 
             <label><Link to={"/Expediente"}>
                 <input
@@ -16,7 +16,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-2"
                 type="button"
-
+                className='inp-radio'
                 /></Link>
             </label>
             <label><Link to={"/proyectos"}>
@@ -25,8 +25,8 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
+                className='inp-radio'
                 /></Link>
-             
             </label>
             <label>
                  <Link to="/MantAdmin">
@@ -35,9 +35,9 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
+                className='inp-radio'
+                /></Link>
 
-                /></Link> 
-            
             </label>
           
             </div>
