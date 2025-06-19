@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
-import uploadImageToS3 from './Credenciales'
+import uploadImageToS3 from './credenciales'
 import Navbar from './Navbar'
 
 function Visita() {
@@ -459,8 +459,9 @@ function Visita() {
 
     return (
         <div className='fondo'>
-            <Navbar/>
+            
             <div className='barra'>
+             <Navbar/>
                 <header className='Endurance'>ENDURANCE</header>
             </div>
             
