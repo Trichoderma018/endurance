@@ -76,9 +76,11 @@ class StaffSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ExpedientesSerializer(serializers.ModelSerializer):
+    nombreCompleto = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Expedientes
-        fields = '__all__'
+        fields = ['id', 'nombreCompleto', 'rol', 'activo', 'imagen', 'genero', 'sede',
+                  'comentario1', 'comentario2', 'comentario3', 'fechaExpediente', 'user']
 
 class VisitasSerializer(serializers.ModelSerializer):
     class Meta:
