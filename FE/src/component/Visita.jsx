@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
+import "../style/visita.css"
 import uploadImageToS3 from './Credenciales'
-import Navbar from './Navbar'
+import Navbar from './navbar'
 
 function Visita() {
     // Estados para información básica
@@ -458,514 +459,711 @@ function Visita() {
     }
 
     return (
-        <div className='fondo'>
+        <div className='visita-container'>
+            <br />
             <Navbar/>
-            <div className='barra'>
-                <header className='Endurance'>ENDURANCE</header>
+            <div className='header-bar'>
+                <header className='title'>ENDURANCE</header>
             </div>
             
-            <div className="registro-container">
-                <h2>{editMode ? 'EDITAR VISITA' : 'NUEVA VISITA'}</h2>
-                <form onSubmit={handleSubmit}>
+            <div className="form-container">
+                <div className="form-header">
+                    <h2>{editMode ? 'EDITAR VISITA' : 'NUEVA VISITA'}</h2>
+                </div>
+                
+                <form onSubmit={handleSubmit} className="visita-form">
                     {/* Información Básica */}
-                    <div className="seccion">
-                        <h3>Información Básica</h3>
-                        <select 
-                            className='input' 
-                            value={expedienteSeleccionado}
-                            onChange={(e) => setExpedienteSeleccionado(e.target.value)}
-                            required
-                        >
-                            <option value="">Seleccionar Expediente</option>
-                            {expedientes && expedientes.map((expediente) => (
-                                <option key={expediente.id} value={expediente.id}>
-                                    {expediente.user?.username || expediente.user?.name || `ID: ${expediente.id}`}
-                                </option>
-                            ))}
-                        </select>
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información Básica</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Expediente *</label>
+                                <select 
+                                    className='form-input' 
+                                    value={expedienteSeleccionado}
+                                    onChange={(e) => setExpedienteSeleccionado(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Seleccionar Expediente</option>
+                                    {expedientes && expedientes.map((expediente) => (
+                                        <option key={expediente.id} value={expediente.id}>
+                                            {expediente.user?.username || expediente.user?.name || `ID: ${expediente.id}`}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <input 
-                            value={nombreCompleto}
-                            onChange={(e) => setNombreCompleto(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Nombre Completo" 
-                            required
-                        />
+                            <div className="field-group">
+                                <label>Nombre Completo *</label>
+                                <input 
+                                    value={nombreCompleto}
+                                    onChange={(e) => setNombreCompleto(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Nombre Completo" 
+                                    required
+                                />
+                            </div>
 
-                        <input 
-                            value={rol}
-                            onChange={(e) => setRol(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Rol" 
-                        />
+                            <div className="field-group">
+                                <label>Rol</label>
+                                <input 
+                                    value={rol}
+                                    onChange={(e) => setRol(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Rol" 
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Notas Académicas */}
-                    <div className="seccion">
-                        <h3>Información Académica</h3>
-                        <input 
-                            value={institucion}
-                            onChange={(e) => setInstitucion(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Institución" 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información Académica</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Institución</label>
+                                <input 
+                                    value={institucion}
+                                    onChange={(e) => setInstitucion(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Institución" 
+                                />
+                            </div>
 
-                        <input 
-                            value={anoAcademico}
-                            onChange={(e) => setAnoAcademico(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Año Académico" 
-                        />
+                            <div className="field-group">
+                                <label>Año Académico</label>
+                                <input 
+                                    value={anoAcademico}
+                                    onChange={(e) => setAnoAcademico(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Año Académico" 
+                                />
+                            </div>
 
-                        <input 
-                            value={adecuacion}
-                            onChange={(e) => setAdecuacion(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Adecuación" 
-                        />
+                            <div className="field-group">
+                                <label>Adecuación</label>
+                                <input 
+                                    value={adecuacion}
+                                    onChange={(e) => setAdecuacion(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Adecuación" 
+                                />
+                            </div>
 
-                        <input 
-                            value={tipoAdecuacion}
-                            onChange={(e) => setTipoAdecuacion(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Tipo de Adecuación" 
-                        />
+                            <div className="field-group">
+                                <label>Tipo de Adecuación</label>
+                                <input 
+                                    value={tipoAdecuacion}
+                                    onChange={(e) => setTipoAdecuacion(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Tipo de Adecuación" 
+                                />
+                            </div>
 
-                        <select 
-                            className='input' 
-                            value={beca}
-                            onChange={(e) => setBeca(e.target.value)}
-                        >
-                            <option value="">¿Tiene beca?</option>
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                        </select>
+                            <div className="field-group">
+                                <label>¿Tiene beca?</label>
+                                <select 
+                                    className='form-input' 
+                                    value={beca}
+                                    onChange={(e) => setBeca(e.target.value)}
+                                >
+                                    <option value="">Seleccionar</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
 
-                        <input 
-                            value={montoBeca}
-                            onChange={(e) => setMontoBeca(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Monto de la Beca" 
-                        />
+                            <div className="field-group">
+                                <label>Monto de la Beca</label>
+                                <input 
+                                    value={montoBeca}
+                                    onChange={(e) => setMontoBeca(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Monto de la Beca" 
+                                />
+                            </div>
 
-                        <input 
-                            value={institucionBeca}
-                            onChange={(e) => setInstitucionBeca(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Institución que otorga la Beca" 
-                        />
+                            <div className="field-group full-width">
+                                <label>Institución que otorga la Beca</label>
+                                <input 
+                                    value={institucionBeca}
+                                    onChange={(e) => setInstitucionBeca(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Institución que otorga la Beca" 
+                                />
+                            </div>
 
-                        <textarea 
-                            value={comentario}
-                            onChange={(e) => setComentario(e.target.value)} 
-                            className='input' 
-                            placeholder="Comentarios Académicos" 
-                            rows="3"
-                        />
+                            <div className="field-group full-width">
+                                <label>Comentarios Académicos</label>
+                                <textarea 
+                                    value={comentario}
+                                    onChange={(e) => setComentario(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Comentarios Académicos" 
+                                    rows="3"
+                                />
+                            </div>
 
-                        <div className="campo">
-                            <label htmlFor="adjunto">Adjunto de Notas</label>
-                            <input
-                                id="adjunto"
-                                type="file"
-                                onChange={handleFileChange}
-                                ref={fileInputRef}
-                            />
-                            {adjuntoNotas && (
-                                <div style={{marginTop: '10px'}}>
-                                    <a href={adjuntoNotas} target="_blank" rel="noopener noreferrer">
-                                        Ver archivo adjunto
-                                    </a>
-                                </div>
-                            )}
+                            <div className="field-group full-width">
+                                <label htmlFor="adjunto">Adjunto de Notas</label>
+                                <input
+                                    id="adjunto"
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    ref={fileInputRef}
+                                    className="file-input"
+                                />
+                                {adjuntoNotas && (
+                                    <div className="file-preview">
+                                        <a href={adjuntoNotas} target="_blank" rel="noopener noreferrer">
+                                            Ver archivo adjunto
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                     
                     {/* Datos Personales */}
-                    <div className="seccion">
-                        <h3>Datos Personales</h3>
-                        <label>Fecha de Nacimiento:</label>
-                        <input 
-                            className='input' 
-                            type="date" 
-                            value={fechaNacimiento}
-                            onChange={(e) => setFechaNacimiento(e.target.value)} 
-                            required 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Datos Personales</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Fecha de Nacimiento *</label>
+                                <input 
+                                    className='form-input' 
+                                    type="date" 
+                                    value={fechaNacimiento}
+                                    onChange={(e) => setFechaNacimiento(e.target.value)} 
+                                    required 
+                                />
+                            </div>
 
-                        <input 
-                            value={edad}
-                            onChange={(e) => setEdad(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Edad" 
-                        />
+                            <div className="field-group">
+                                <label>Edad</label>
+                                <input 
+                                    value={edad}
+                                    onChange={(e) => setEdad(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Edad" 
+                                />
+                            </div>
 
-                        <input 
-                            value={cedula}
-                            onChange={(e) => setCedula(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Cédula" 
-                            required
-                        />
+                            <div className="field-group">
+                                <label>Cédula *</label>
+                                <input 
+                                    value={cedula}
+                                    onChange={(e) => setCedula(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Cédula" 
+                                    required
+                                />
+                            </div>
 
-                        <input 
-                            value={telefono1}
-                            onChange={(e) => setTelefono1(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Teléfono Principal" 
-                            required
-                        />
+                            <div className="field-group">
+                                <label>Teléfono Principal *</label>
+                                <input 
+                                    value={telefono1}
+                                    onChange={(e) => setTelefono1(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Teléfono Principal" 
+                                    required
+                                />
+                            </div>
 
-                        <input 
-                            value={telefono2}
-                            onChange={(e) => setTelefono2(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Teléfono Secundario" 
-                        />
+                            <div className="field-group">
+                                <label>Teléfono Secundario</label>
+                                <input 
+                                    value={telefono2}
+                                    onChange={(e) => setTelefono2(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Teléfono Secundario" 
+                                />
+                            </div>
 
-                        <textarea 
-                            value={lugarResidencia}
-                            onChange={(e) => setLugarResidencia(e.target.value)} 
-                            className='input' 
-                            placeholder="Lugar de Residencia" 
-                            rows="2"
-                        />
+                            <div className="field-group full-width">
+                                <label>Lugar de Residencia</label>
+                                <textarea 
+                                    value={lugarResidencia}
+                                    onChange={(e) => setLugarResidencia(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Lugar de Residencia" 
+                                    rows="2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Datos Técnicos/Médicos */}
-                    <div className="seccion">
-                        <h3>Información Médica</h3>
-                        <textarea 
-                            value={lesiones}
-                            onChange={(e) => setLesiones(e.target.value)} 
-                            className='input' 
-                            placeholder="Lesiones" 
-                            rows="2"
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información Médica</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Lesiones</label>
+                                <textarea 
+                                    value={lesiones}
+                                    onChange={(e) => setLesiones(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Lesiones" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={enfermedades}
-                            onChange={(e) => setEnfermedades(e.target.value)} 
-                            className='input' 
-                            placeholder="Enfermedades" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Enfermedades</label>
+                                <textarea 
+                                    value={enfermedades}
+                                    onChange={(e) => setEnfermedades(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Enfermedades" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={tratamientos}
-                            onChange={(e) => setTratamientos(e.target.value)} 
-                            className='input' 
-                            placeholder="Tratamientos" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Tratamientos</label>
+                                <textarea 
+                                    value={tratamientos}
+                                    onChange={(e) => setTratamientos(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Tratamientos" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={atencionMedica}
-                            onChange={(e) => setAtencionMedica(e.target.value)} 
-                            className='input' 
-                            placeholder="Atención Médica" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Atención Médica</label>
+                                <textarea 
+                                    value={atencionMedica}
+                                    onChange={(e) => setAtencionMedica(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Atención Médica" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={drogas}
-                            onChange={(e) => setDrogas(e.target.value)} 
-                            className='input' 
-                            placeholder="Uso de Drogas/Medicamentos" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Uso de Drogas/Medicamentos</label>
+                                <textarea 
+                                    value={drogas}
+                                    onChange={(e) => setDrogas(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Uso de Drogas/Medicamentos" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={disponibilidad}
-                            onChange={(e) => setDisponibilidad(e.target.value)} 
-                            className='input' 
-                            placeholder="Disponibilidad" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Disponibilidad</label>
+                                <textarea 
+                                    value={disponibilidad}
+                                    onChange={(e) => setDisponibilidad(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Disponibilidad" 
+                                    rows="2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Vivienda */}
-                    <div className="seccion">
-                        <h3>Información de Vivienda</h3>
-                        <input 
-                            value={casa}
-                            onChange={(e) => setCasa(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Tipo de Casa" 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información de Vivienda</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Tipo de Casa</label>
+                                <input 
+                                    value={casa}
+                                    onChange={(e) => setCasa(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Tipo de Casa" 
+                                />
+                            </div>
 
-                        <input 
-                            value={montoCasa}
-                            onChange={(e) => setMontoCasa(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Monto de Casa/Alquiler" 
-                        />
+                            <div className="field-group">
+                                <label>Monto de Casa/Alquiler</label>
+                                <input 
+                                    value={montoCasa}
+                                    onChange={(e) => setMontoCasa(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Monto de Casa/Alquiler" 
+                                />
+                            </div>
 
-                        <textarea 
-                            value={especificaciones}
-                            onChange={(e) => setEspecificaciones(e.target.value)} 
-                            className='input' 
-                            placeholder="Especificaciones de la Vivienda" 
-                            rows="3"
-                        />
+                            <div className="field-group full-width">
+                                <label>Especificaciones de la Vivienda</label>
+                                <textarea 
+                                    value={especificaciones}
+                                    onChange={(e) => setEspecificaciones(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Especificaciones de la Vivienda" 
+                                    rows="3"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={comentario4}
-                            onChange={(e) => setComentario4(e.target.value)} 
-                            className='input' 
-                            placeholder="Comentarios sobre Vivienda" 
-                            rows="2"
-                        />
+                            <div className="field-group full-width">
+                                <label>Comentarios sobre Vivienda</label>
+                                <textarea 
+                                    value={comentario4}
+                                    onChange={(e) => setComentario4(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Comentarios sobre Vivienda" 
+                                    rows="2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Trabajo */}
-                    <div className="seccion">
-                        <h3>Información Laboral</h3>
-                        <select 
-                            className='input' 
-                            value={trabaja}
-                            onChange={(e) => setTrabaja(e.target.value)}
-                        >
-                            <option value="">¿Trabaja actualmente?</option>
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                        </select>
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información Laboral</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>¿Trabaja actualmente?</label>
+                                <select 
+                                    className='form-input' 
+                                    value={trabaja}
+                                    onChange={(e) => setTrabaja(e.target.value)}
+                                >
+                                    <option value="">Seleccionar</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
 
-                        <input 
-                            value={empresa}
-                            onChange={(e) => setEmpresa(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Empresa/Lugar de Trabajo" 
-                        />
+                            <div className="field-group">
+                                <label>Empresa/Lugar de Trabajo</label>
+                                <input 
+                                    value={empresa}
+                                    onChange={(e) => setEmpresa(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Empresa/Lugar de Trabajo" 
+                                />
+                            </div>
 
-                        <input 
-                            value={salario}
-                            onChange={(e) => setSalario(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Salario" 
-                        />
+                            <div className="field-group">
+                                <label>Salario</label>
+                                <input 
+                                    value={salario}
+                                    onChange={(e) => setSalario(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Salario" 
+                                />
+                            </div>
 
-                        <textarea 
-                            value={comentario5}
-                            onChange={(e) => setComentario5(e.target.value)} 
-                            className='input' 
-                            placeholder="Comentarios sobre Trabajo" 
-                            rows="2"
-                        />
+                            <div className="field-group full-width">
+                                <label>Comentarios sobre Trabajo</label>
+                                <textarea 
+                                    value={comentario5}
+                                    onChange={(e) => setComentario5(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Comentarios sobre Trabajo" 
+                                    rows="2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Información Familiar */}
-                    <div className="seccion">
-                        <h3>Información Familiar</h3>
-                        <input 
-                            value={nombreFamiliar}
-                            onChange={(e) => setNombreFamiliar(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Nombre del Familiar" 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Información Familiar</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Nombre del Familiar</label>
+                                <input 
+                                    value={nombreFamiliar}
+                                    onChange={(e) => setNombreFamiliar(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Nombre del Familiar" 
+                                />
+                            </div>
 
-                        <input 
-                            value={edadFamiliar}
-                            onChange={(e) => setEdadFamiliar(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Edad del Familiar" 
-                        />
+                            <div className="field-group">
+                                <label>Edad del Familiar</label>
+                                <input 
+                                    value={edadFamiliar}
+                                    onChange={(e) => setEdadFamiliar(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Edad del Familiar" 
+                                />
+                            </div>
 
-                        <input 
-                            value={parentesco}
-                            onChange={(e) => setParentesco(e.target.value)} 
-                            className='input' 
-                            type="text" 
-                            placeholder="Parentesco" 
-                        />
+                            <div className="field-group">
+                                <label>Parentesco</label>
+                                <input 
+                                    value={parentesco}
+                                    onChange={(e) => setParentesco(e.target.value)} 
+                                    className='form-input' 
+                                    type="text" 
+                                    placeholder="Parentesco" 
+                                />
+                            </div>
 
-                        <textarea 
-                            value={ocupacion}
-                            onChange={(e) => setOcupacion(e.target.value)} 
-                            className='input' 
-                            placeholder="Ocupación del Familiar" 
-                            rows="2"
-                        />
+                            <div className="field-group">
+                                <label>Ingreso Mensual del Familiar</label>
+                                <input 
+                                    value={ingresoMensual}
+                                    onChange={(e) => setIngresoMensual(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Ingreso Mensual del Familiar" 
+                                />
+                            </div>
 
-                        <input 
-                            value={ingresoMensual}
-                            onChange={(e) => setIngresoMensual(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Ingreso Mensual del Familiar" 
-                        />
+                            <div className="field-group full-width">
+                                <label>Ocupación del Familiar</label>
+                                <textarea 
+                                    value={ocupacion}
+                                    onChange={(e) => setOcupacion(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Ocupación del Familiar" 
+                                    rows="2"
+                                />
+                            </div>
 
-                        <textarea 
-                            value={lugarTrabajo}
-                            onChange={(e) => setLugarTrabajo(e.target.value)} 
-                            className='input' 
-                            placeholder="Lugar de Trabajo del Familiar" 
-                            rows="2"
-                        />
+                            <div className="field-group full-width">
+                                <label>Lugar de Trabajo del Familiar</label>
+                                <textarea 
+                                    value={lugarTrabajo}
+                                    onChange={(e) => setLugarTrabajo(e.target.value)} 
+                                    className='form-input form-textarea' 
+                                    placeholder="Lugar de Trabajo del Familiar" 
+                                    rows="2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Ingresos y Gastos */}
-                    <div className="seccion">
-                        <h3>Ingresos Familiares</h3>
-                        <input 
-                            value={ingresos}
-                            onChange={(e) => setIngresos(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Ingresos Totales" 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Ingresos Familiares</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Ingresos Totales</label>
+                                <input 
+                                    value={ingresos}
+                                    onChange={(e) => setIngresos(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Ingresos Totales" 
+                                />
+                            </div>
 
-                        <input 
-                            value={salario2}
-                            onChange={(e) => setSalario2(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Salario Adicional" 
-                        />
+                            <div className="field-group">
+                                <label>Salario Adicional</label>
+                                <input 
+                                    value={salario2}
+                                    onChange={(e) => setSalario2(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Salario Adicional" 
+                                />
+                            </div>
 
-                        <input 
-                            value={pension}
-                            onChange={(e) => setPension(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Pensión" 
-                        />
+                            <div className="field-group">
+                                <label>Pensión</label>
+                                <input 
+                                    value={pension}
+                                    onChange={(e) => setPension(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Pensión" 
+                                />
+                            </div>
 
-                        <input 
-                            value={beca2}
-                            onChange={(e) => setBeca2(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Beca (Ingreso)" 
-                        />
+                            <div className="field-group">
+                                <label>Beca (Ingreso)</label>
+                                <input 
+                                    value={beca2}
+                                    onChange={(e) => setBeca2(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Beca (Ingreso)" 
+                                />
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="seccion">
-                        <h3>Gastos Familiares</h3>
-                        <input 
-                            value={gastos}
-                            onChange={(e) => setGastos(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos Totales" 
-                        />
+                    <div className="form-section">
+                        <div className="section-header">
+                            <h3>Gastos Familiares</h3>
+                        </div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label>Gastos Totales</label>
+                                <input 
+                                    value={gastos}
+                                    onChange={(e) => setGastos(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos Totales" 
+                                />
+                            </div>
 
-                        <input 
-                            value={comida}
-                            onChange={(e) => setComida(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos en Comida" 
-                        />
+                            <div className="field-group">
+                                <label>Gastos en Comida</label>
+                                <input 
+                                    value={comida}
+                                    onChange={(e) => setComida(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos en Comida" 
+                                />
+                            </div>
 
-                        <input 
-                            value={agua}
-                            onChange={(e) => setAgua(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos en Agua" 
-                        />
+                            <div className="field-group">
+                                <label>Gastos en Agua</label>
+                                <input 
+                                    value={agua}
+                                    onChange={(e) => setAgua(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos en Agua" 
+                                />
+                            </div>
 
-                        <input 
-                            value={luz}
-                            onChange={(e) => setLuz(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos en Electricidad" 
-                        />
+                            <div className="field-group">
+                                <label>Gastos en Electricidad</label>
+                                <input 
+                                    value={luz}
+                                    onChange={(e) => setLuz(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos en Electricidad" 
+                                />
+                            </div>
 
-                        <input 
-                            value={internetCable}
-                            onChange={(e) => setInternetCable(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Internet y Cable" 
-                        />
+                            <div className="field-group">
+                                <label>Internet y Cable</label>
+                                <input 
+                                    value={internetCable}
+                                    onChange={(e) => setInternetCable(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Internet y Cable" 
+                                />
+                            </div>
 
-                        <input 
-                            value={celular}
-                            onChange={(e) => setCelular(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos en Celular" 
-                        />
+                            <div className="field-group">
+                                <label>Gastos en Celular</label>
+                                <input 
+                                    value={celular}
+                                    onChange={(e) => setCelular(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos en Celular" 
+                                />
+                            </div>
 
-                        <input 
-                            value={viaticos}
-                            onChange={(e) => setViaticos(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Viáticos" 
-                        />
+                            <div className="field-group">
+                                <label>Viáticos</label>
+                                <input 
+                                    value={viaticos}
+                                    onChange={(e) => setViaticos(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Viáticos" 
+                                />
+                            </div>
 
-                        <input 
-                            value={salud}
-                            onChange={(e) => setSalud(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Gastos en Salud" 
-                        />
+                            <div className="field-group">
+                                <label>Gastos en Salud</label>
+                                <input 
+                                    value={salud}
+                                    onChange={(e) => setSalud(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Gastos en Salud" 
+                                />
+                            </div>
 
-                        <input 
-                            value={deudas}
-                            onChange={(e) => setDeudas(e.target.value)} 
-                            className='input' 
-                            type="number" 
-                            placeholder="Deudas" 
-                        />
+                            <div className="field-group">
+                                <label>Deudas</label>
+                                <input 
+                                    value={deudas}
+                                    onChange={(e) => setDeudas(e.target.value)} 
+                                    className='form-input' 
+                                    type="number" 
+                                    placeholder="Deudas" 
+                                />
+                            </div>
+                        </div>
                     </div>
 
-                    <button type="submit" disabled={isLoading}>
-                        {editMode ? 'Actualizar Visita' : 'Crear Visita'}
-                    </button>
-
-                    {editMode && (
-                        <button
-                            type="button"
-                            onClick={limpiarFormulario}
-                        >
-                            Cancelar
+                    <div className="form-actions">
+                        <button type="submit" className="btn-primary" disabled={isLoading}>
+                            {editMode ? 'Actualizar Visita' : 'Crear Visita'}
                         </button>
-                    )}
+
+                        {editMode && (
+                            <button
+                                type="button"
+                                className="btn-secondary"
+                                onClick={limpiarFormulario}
+                            >
+                                Cancelar
+                            </button>
+                        )}
+                    </div>
                     
                     {isLoading && (
-                        <div className="spinner">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div className="loading-container">
+                            <div className="spinner">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     )}
                     
-                    {error && <p className="error">{error}</p>}
+                    {error && <div className="error-message">{error}</div>}
                 </form>
             </div>
 
             {/* Lista de Visitas */}
-            <div className="registro-container">
-                <h3>Lista de Visitas</h3>
-                <div style={{overflowX: 'auto'}}>
-                    <table style={{width: '100%', borderCollapse: 'collapse', minWidth: '1200px'}}>
+            <div className="table-container">
+                <div className="table-header">
+                    <h3>Lista de Visitas</h3>
+                </div>
+                <div className="table-wrapper">
+                    <table className="visitas-table">
                         <thead>
                             <tr>
                                 <th>Expediente</th>
@@ -991,12 +1189,20 @@ function Visita() {
                                     <td>{visita.telefono1}</td>
                                     <td>{visita.fechaVisita ? new Date(visita.fechaVisita).toLocaleDateString() : 'N/A'}</td>
                                     <td>
-                                        <button onClick={() => editarVisita(visita)}>
-                                            Editar
-                                        </button>
-                                        <button onClick={() => eliminarVisita(visita.id)}>
-                                            Eliminar
-                                        </button>
+                                        <div className="action-buttons">
+                                            <button 
+                                                className="btn-edit" 
+                                                onClick={() => editarVisita(visita)}
+                                            >
+                                                Editar
+                                            </button>
+                                            <button 
+                                                className="btn-delete" 
+                                                onClick={() => eliminarVisita(visita.id)}
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -1005,130 +1211,9 @@ function Visita() {
                 </div>
                 
                 {visitas && visitas.length === 0 && (
-                    <p>No hay visitas registradas.</p>
+                    <div className="no-data">No hay visitas registradas.</div>
                 )}
             </div>
-
-            <style jsx>{`
-                .seccion {
-                    margin-bottom: 30px;
-                    padding: 20px;
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    background-color: #f9f9f9;
-                }
-                
-                .seccion h3 {
-                    margin-top: 0;
-                    margin-bottom: 15px;
-                    color: #333;
-                    border-bottom: 2px solid #4CAF50;
-                    padding-bottom: 5px;
-                }
-                
-                .campo {
-                    margin-bottom: 15px;
-                }
-                
-                .campo label {
-                    display: block;
-                    margin-bottom: 5px;
-                    font-weight: bold;
-                    color: #555;
-                }
-                
-                table {
-                    border: 1px solid #ddd;
-                }
-                
-                th, td {
-                    padding: 8px 12px;
-                    text-align: left;
-                    border-bottom: 1px solid #ddd;
-                    border-right: 1px solid #ddd;
-                }
-                
-                th {
-                    background-color: #f2f2f2;
-                    font-weight: bold;
-                }
-                
-                tr:hover {
-                    background-color: #f5f5f5;
-                }
-                
-                .error {
-                    color: red;
-                    margin-top: 10px;
-                    padding: 10px;
-                    background-color: #ffebee;
-                    border: 1px solid #f44336;
-                    border-radius: 4px;
-                }
-                
-                .spinner {
-                    display: inline-block;
-                    position: relative;
-                    width: 64px;
-                    height: 64px;
-                    margin: 20px;
-                }
-                
-                .spinner span {
-                    position: absolute;
-                    top: 27px;
-                    left: 27px;
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 50%;
-                    background: #4CAF50;
-                    animation: spinner 1.2s linear infinite;
-                }
-                
-                .spinner span:nth-child(1) { animation-delay: 0s; }
-                .spinner span:nth-child(2) { animation-delay: -0.1s; }
-                .spinner span:nth-child(3) { animation-delay: -0.2s; }
-                .spinner span:nth-child(4) { animation-delay: -0.3s; }
-                .spinner span:nth-child(5) { animation-delay: -0.4s; }
-                .spinner span:nth-child(6) { animation-delay: -0.5s; }
-                
-                @keyframes spinner {
-                    0%, 20%, 80%, 100% {
-                        transform: scale(1);
-                    }
-                    50% {
-                        transform: scale(1.5);
-                    }
-                }
-                
-                button {
-                    margin: 5px;
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-size: 14px;
-                }
-                
-                button[type="submit"] {
-                    background-color: #4CAF50;
-                    color: white;
-                }
-                
-                button[type="button"] {
-                    background-color: #f44336;
-                    color: white;
-                }
-                
-                button:hover {
-                    opacity: 0.8;
-                }
-                
-                button:disabled {
-                    background-color: #cccccc;
-                    cursor: not-allowed;
-                }
-            `}</style>
         </div>
     )
 }
