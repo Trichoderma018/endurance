@@ -1,0 +1,19 @@
+.model {
+  background-color: #ffffff;
+  max-width: 190px;
+  height: 40px;
+  padding: 10px;
+  /* text-align: center; */
+  border: 2px solid white;
+  border-radius: 5px;
+  /* box-shadow: 3px 3px 2px rgb(249, 255, 85); */
+}
+
+.model:focus {
+  color: #0197A6;
+  background-color: #ffffff;
+  outline-color: #0197A6;
+  box-shadow: -3px -3px 15px #0197A6;
+  transition: .1s;
+  transition-property: box-shadow;
+}

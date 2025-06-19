@@ -1,7 +1,8 @@
 import AWS from 'aws-sdk';
 
 //Aqui van las credenciales
-     
+
+
 const uploadImageToS3 = async (file) => {
     const params = {
       Bucket: S3_BUCKET,

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
+import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
+import '../style/boton.css' // Asegúrate de tener este archivo CSS
 
 function MantProyectos() {
   // Estados del formulario
@@ -269,8 +271,9 @@ function MantProyectos() {
       <form onSubmit={handleSubmit}>
         <div className="formulario">
           <div className="campo">
-            <label htmlFor="nombreProyecto">Nombre del Proyecto *</label>
+            <label htmlFor="nombreProyecto"></label>
             <input
+              className="model"
               id="nombreProyecto"
               type="text"
               value={nombreProyecto}
@@ -282,6 +285,7 @@ function MantProyectos() {
           
           <div className="campo">
             <label htmlFor="usuarios">Usuarios Asignados</label>
+            <br />
             <select
               id="usuarios"
               value={usuarios}
@@ -301,6 +305,7 @@ function MantProyectos() {
           
           <div className="campo">
             <label htmlFor="objetivo">Objetivo *</label>
+            <br />
             <textarea
               id="objetivo"
               value={objetivo}
@@ -313,6 +318,7 @@ function MantProyectos() {
 
           <div className="campo">
             <label htmlFor="imagen">Imagen del Proyecto</label>
+            <br />
             <input
               id="imagen"
               type="file"
@@ -329,6 +335,7 @@ function MantProyectos() {
 
           <div className="campo">
             <label htmlFor="descripcion">Descripción</label>
+            <br />
             <textarea
               id="descripcion"
               value={descripcion}
@@ -341,6 +348,7 @@ function MantProyectos() {
           <div className="campo">
             <label htmlFor="fechaInicio">Fecha de Inicio *</label>
             <input
+              className='model'
               id="fechaInicio"
               type="date"
               value={fechaInicio}
@@ -352,6 +360,7 @@ function MantProyectos() {
           <div className="campo">
             <label htmlFor="fechaFin">Fecha de Fin *</label>
             <input
+              className='model'
               id="fechaFin"
               type="date"
               value={fechaFin}
@@ -377,7 +386,7 @@ function MantProyectos() {
           <div className="botones">
             <button 
               type="submit"
-              className="btn-primary"
+              className="button"
               disabled={isLoading}
             >
               {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Crear') + ' Proyecto'}

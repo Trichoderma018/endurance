@@ -5,29 +5,31 @@ import '../style/Navbar.css'
 function Navbar() {
   return (
     <div>
+
         {/* <Link ></Link> */}
-        <nav>
 
-            <div className="cont-rutas">
-
+    <nav>
+        <div className="cont-rutas">
             <label><Link to={"/Expediente"}>
                 <input
                 defaultValue="expediente"
                 name="value-radio"
                 id="value-2"
                 type="button"
-                className='inp-radio'
+                className='inp'
             /></Link>
             </label>
+            
             <label><Link to={"/proyectos"}>
                 <input
                 defaultValue="proyecto"
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='inp-radio'
+                className='inp'
             /></Link>
             </label>
+            
             <label>
                  <Link to="/MantAdmin">
                 <input
@@ -35,15 +37,12 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='inp-radio'
+                className='inp'
             /></Link>
-            </label>
-          
-            </div>
-
-            
-        </nav>
+        </label> 
     </div>
+</nav>
+</div>
   )
 }
 

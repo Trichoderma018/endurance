@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
+import '../style/inputspeed.css' // Asegúrate de tener este archivo CSS
+import '../style/boton.css' // Asegúrate de tener este archivo CSS
 
 function MantUser() {
     const [username, setUsername] = React.useState('')
@@ -165,47 +167,54 @@ function MantUser() {
         <div>
             <Navbar/>
             <Sidebar/>
-            <h1>Gestión de Usuarios</h1>
+            <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario">
                 
                 <div className="campo">
-                    <label htmlFor="username">Nombre de Usuario</label>
+                    <label htmlFor="username"></label>
                     <input
                         id="username"
                         type="text"
                         value={username}
                         onChange={handleUsername}
                         placeholder="Nombre de Usuario"
+                        className="in"
                     />
                 </div>
+                <br />
                 
                 <div className="campo">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"></label>
                     <input
                         id="email"
                         type="email"
                         value={email}
                         onChange={handleEmail}
                         placeholder="Email"
+                        className="in"
                     />
                 </div>
+                <br />
                 
                 <div className="campo">
-                    <label htmlFor="sede">Sede</label>
+                    <label htmlFor="sede"></label>
                     <input
                         id="sede"
                         type="text"
                         value={sede}
                         onChange={handleSede}
                         placeholder="Sede"
+                        className="in"
                     />
                 </div>
+                <br />
                 
                 <div className="campo">
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="password"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input
+                            className='in'
                             id="password"
                             type={showPassword ? "text" : "password"}
                             value={password}
@@ -213,6 +222,7 @@ function MantUser() {
                             placeholder="Contraseña"
                             style={{ paddingRight: '40px', flex: 1 }}
                         />
+
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
@@ -231,9 +241,10 @@ function MantUser() {
                 </div>
                 
                 <div className="campo">
-                    <label htmlFor="passwordConfirm">Confirmar Contraseña</label>
+                    <label htmlFor="passwordConfirm"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input
+                            className="in"
                             id="passwordConfirm"
                             type={showPasswordConfirm ? "text" : "password"}
                             value={passwordConfirm}
@@ -242,6 +253,7 @@ function MantUser() {
                             style={{ paddingRight: '40px', flex: 1 }}
                         />
                         <button
+                        className='btn'
                             type="button"
                             onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
                             style={{
@@ -262,15 +274,17 @@ function MantUser() {
                         </div>
                     )}
                 </div>
+                <br />
                 
                 <div className="botones">
                     <button 
                         onClick={handleSubmit}
-                        className="btn-primary"
+                        className="button"
                         disabled={passwordError !== ''}
                     >
                         {editMode ? 'Actualizar' : 'Crear'} Usuario
                     </button>
+                    <br />
                     
                     {editMode && (
                         <button 

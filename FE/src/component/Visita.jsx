@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
+<<<<<<< HEAD
 import "../style/visita.css"
 import uploadImageToS3 from './Credenciales'
 import Navbar from './navbar'
+=======
+import uploadImageToS3 from './credenciales'
+import Navbar from './Navbar'
+>>>>>>> f636ecb9c395f2b63daf684cb1234ad38521e49f
 
 function Visita() {
     // Estados para información básica
@@ -464,6 +469,7 @@ function Visita() {
             <Navbar/>
             <div className='header-bar'>
                 <header className='title'>ENDURANCE</header>
+
             </div>
             
             <div className="form-container">

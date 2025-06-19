@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
+import '../style/MantAdmin.css' // Asegúrate de tener este archivo CSS
+import '../style/boton.css' // Asegúrate de tener este archivo CSS
 
 
 function MantAdmin() {
@@ -136,30 +138,34 @@ function MantAdmin() {
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
       <div className="formulario">
           <div className="campo">
-              <label htmlFor="nombreCompleto">Nombre Completo</label>
+              <label htmlFor="nombreCompleto"></label>
               <input
                   id="nombreCompleto"
                   type="text"
+                  placeholder="Ingrese su nombre "
                   value={nombreCompleto}
                   onChange={handleNombreCompleto}
-                  
+                  className='in'
               />
           </div>
-          
+          <br />
           <div className="campo">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" ></label>
               <input
+                  className='in'
                   id="email"
                   type="email"
+                  placeholder="Ingrese su email"
                   value={email}
                   onChange={handleEmail}
 
               />
           </div>
-          
+          <br />
           <div className="campo">
               <label htmlFor="user"></label>
               <select
+                  className='in'
                   id="user"
                   value={user}
                   onChange={(e)=>setUser(e.target.value)}
@@ -172,19 +178,20 @@ function MantAdmin() {
                   ))}
               </select>
           </div>
-          
+          <br />
           <div className="botones">
               <button 
+                  
                   onClick={handleSubmit}
-                  className="btn-primary"
+                  className="button"
               >
-                  {editMode ? 'Actualizar' : 'Crear'} Administrador
+                  {editMode ? 'Actualizar' : 'Crear'} 
               </button>
               
               {editMode && (
                   <button 
                       onClick={limpiarFormulario}
-                      className="btn-secondary"
+                      className="btn-cancelar"
                   >
                       Cancelar
                   </button>
