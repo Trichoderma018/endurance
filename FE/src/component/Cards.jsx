@@ -10,7 +10,8 @@ function Cards({nombre, imagen, descripcion, rol , view}) {
       <div className="image" />
         <p className="card-info">{rol}</p>
       <div className="card-description">
-        <p>{descripcion}</p>
+        <p style={{backgroundColor: 'transparent'}}>{nombre}</p>
+        <p style={{backgroundColor: 'transparent'}}>{descripcion}</p>
       </div>
       <div className="card-info">
         
