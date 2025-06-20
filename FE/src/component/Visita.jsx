@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-
 import "../style/ExpeInput.css"
 import "../style/visita.css"
+import uploadImageToS3 from './Credenciales'
 
 
 
@@ -460,9 +460,9 @@ function Visita() {
     }
 
     return (
-        
         <div className='visita-container'>
-
+            <br />
+            <Navbar/>
             <div className='header-bar'>
                 <header className='title'>ENDURANCE</header>
 

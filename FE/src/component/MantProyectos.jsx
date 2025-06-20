@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './Navbar'
+import Navbar from './navbar'
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './Credenciales'
 import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
