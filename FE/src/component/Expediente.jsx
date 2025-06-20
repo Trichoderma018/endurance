@@ -72,7 +72,7 @@ function Expediente() {
                         key={user.id} 
                         imagen={user.imagen}
                         descripcion={user.descripcion}
-                        nombre={user.nombre}
+                        nombre={user.nombreCompleto}
                         rol={user.rol}
                     />
                 ))}
