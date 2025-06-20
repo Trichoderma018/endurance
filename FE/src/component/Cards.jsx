@@ -2,19 +2,20 @@ import React from 'react'
 import "../style/Cards.css"
 import { useNavigate } from 'react-router-dom'
 
-function Cards({nombre, imagen, descripcion, rol , view}) {
+function Cards({id, nombre, imagen, descripcion, rol , view}) {
   const navigate = useNavigate();
   const handleView = () => {
     navigate('/views');
+    localStorage.setItem('id', id);
   }
   return (
   <div>
     <div className="card">
       <div className="image" />
+        <p>{nombre}</p>
         <p className="card-info">{rol}</p>
-        <p style={{backgroundColor: 'transparent'}}>{nombre}</p>
       <div className="card-description">
-        <p style={{backgroundColor: 'transparent'}}>{descripcion}</p>
+        <p>{descripcion}</p>
       </div>
       <div className="card-info">
         

@@ -70,6 +70,7 @@ function Expediente() {
                 {users.map((user) => (
                     <Cards
                         key={user.id} 
+                        id={user.id}
                         imagen={user.imagen}
                         descripcion={user.descripcion}
                         nombre={user.nombreCompleto}

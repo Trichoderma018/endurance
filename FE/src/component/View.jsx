@@ -10,45 +10,42 @@ function View() {
     const [isLoading, setIsLoading] = useState(false);
     const [id, setId] = useState(null);
 
-    const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-    const [isLoadingUserInfo, setIsLoadingUserInfo] = useState(false);
 
     const [users, setUsers] = useState([]); // lista de usuarios
 
     useEffect(() => {
-        setIsLoadingUsers(true);
-        setTimeout(() => setIsLoadingUsers(false), 2000);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 2000);
     }, []);
 
 
     useEffect(() => {
         async function fetchUserInfo() {
             if (id) {
-                setIsLoadingUserInfo(true);
+                setIsLoading(true);
                 try {
                     const response = await Llamados.getData(`api/usuarios/${id}/`);
                     setUserInfo(response);
                 } catch (error) {
                     setError('Error fetching user information');
                 } finally {
-                    setIsLoadingUserInfo(false);
+                    setIsLoading(false);
                 }
             }
         }
-        // Fetch user info only if id is set
+
         fetchUserInfo();
     }, [id]);
 
-    
 
-    // Fetch users when the component mounts
-    // This will populate the users list
     useEffect(() => {
         async function fetchUsers() {
             setIsLoading(true);
             try {
-                const users = await Llamados.getData('api/usuarios/');
-                setUsers(users);
+                const usersResponse = await Llamados.getData(`api/users/${localStorage.getItem('id')}/`);
+                setUsers(Array.isArray(usersResponse) ? usersResponse : []);
+                console.log(usersResponse);
+
             } catch (error) {
                 setError('Error fetching users');
             } finally {
@@ -70,35 +67,15 @@ function View() {
 
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            {(isLoadingUsers || isLoadingUserInfo) && <p>Loading...</p>}
 
-            {userInfo ? (
-                <div>
-                    <p><strong>Username:</strong> {userInfo.username}</p>
-                    <p><strong>Email:</strong> {userInfo.email}</p>
-                    <p><strong>First Name:</strong> {userInfo.first_name}</p>
-                    <p><strong>Last Name:</strong> {userInfo.last_name}</p>
-                    <button onClick={() => setId (null)}>Back to Users List</button>
-                </div>
+            <ul>
+                {users.map((user) => (
+                    <li key={user.id} onClick={() => handleUserClick(user.id)} style={{ cursor: 'pointer' }}>
+                        {user.username}
+                    </li>
+                ))}
+            </ul>
 
-            ) : (
-                <div>
-                    <h3>Users List</h3>
-                    <ul>
-                        
-                        {isLoadingUsers ? (
-                            <p>Loading users...</p>
-                        ) : (
-                            users.map(user => (
-                                <li key={user.id} onClick={() => handleUserClick(user.id)}>
-                                    {user.username}
-                                </li>
-
-                            ))
-                        )}
-                    </ul>
-                </div>
-            )}
         </div>
     );
 }

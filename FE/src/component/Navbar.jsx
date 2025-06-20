@@ -16,7 +16,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-2"
                 type="button"
-                className='inp'
+                className='bord'
             /></Link>
             </label>
             
@@ -26,7 +26,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='inp'
+                className='bord'
             /></Link>
             </label>
             
@@ -37,7 +37,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='inp'
+                className='bord'
             /></Link>
         </label> 
     </div>
