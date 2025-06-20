@@ -31,28 +31,6 @@ function Expediente() {
         info();
     }, []);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setIsLoading(true);
-        setError(null);
-       
-        
-        // el usuario del audi user
-
-        // Aquí podrías calcular el IMC si tuvieras los campos de peso y altura
-        // const imc = calculateIMC(pesoExpediente, alturaExpediente);
-
-        try {
-    
-            const response = await Llamados.postData(obj, 'api/expedientes/');
-            console.log('Response Data', response);
-        } catch (error) {
-            setError('Hubo un error al enviar el expediente.');
-        }
-
-        setIsLoading(false);
-
-    };
 
     return (
         <div style={{height:'auto'}} className='fondo'>
