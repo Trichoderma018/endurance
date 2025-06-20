@@ -461,7 +461,7 @@ function Visita() {
     return (
         <div className='visita-container'>
             <br />
-            <Navbar/>
+            
             <div className='header-bar'>
                 <header className='title'>ENDURANCE</header>
 
