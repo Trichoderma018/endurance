@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
 import "../style/visita.css"
-import uploadImageToS3 from './Credenciales'
-import Navbar from './navbar'
+
 
 
 function Visita() {
