@@ -39,6 +39,8 @@ function View() {
         fetchUserInfo();
     }, [id]);
 
+    
+
     // Fetch users when the component mounts
     // This will populate the users list
     useEffect(() => {
