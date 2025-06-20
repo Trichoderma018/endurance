@@ -28,6 +28,7 @@
 
 /* Contenedor principal */
 .visita-container {
+  margin-top: 3900px;
   min-height: 100vh;
   background: linear-gradient(135deg, var(--light-blue) 0%, var(--gray-50) 100%);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
@@ -47,6 +48,7 @@
   font-weight: bold;
   letter-spacing: 2px;
   margin: 0;
+  background-color: transparent;
 }
 
 /* Contenedor del formulario */

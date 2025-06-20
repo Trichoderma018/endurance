@@ -460,9 +460,9 @@ function Visita() {
     }
 
     return (
+        
         <div className='visita-container'>
 
-            
             <div className='header-bar'>
                 <header className='title'>ENDURANCE</header>
 
