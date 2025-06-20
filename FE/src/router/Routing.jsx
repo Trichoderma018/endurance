@@ -32,8 +32,8 @@ function Routing() {
             <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
             <Route path='/proyectos' element={<PageProyectos />} />
             <Route path='/visita' element={<PageVisita />} />
-
-            <Route path='/view' element={<View />} />
+            {/* Rutas de mantenimiento */}
+            <Route path='/views' element={<View />} />
 
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
@@ -44,4 +44,5 @@ function Routing() {
     </div>
   );
 }
+
 export default Routing;

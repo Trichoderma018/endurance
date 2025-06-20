@@ -10,30 +10,37 @@ function View() {
     const [isLoading, setIsLoading] = useState(false);
     const [id, setId] = useState(null);
 
+    const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+    const [isLoadingUserInfo, setIsLoadingUserInfo] = useState(false);
+
     const [users, setUsers] = useState([]); // lista de usuarios
 
     useEffect(() => {
-        setIsLoading(true);
-        setTimeout(() => setIsLoading(false), 2000);
+        setIsLoadingUsers(true);
+        setTimeout(() => setIsLoadingUsers(false), 2000);
     }, []);
+
 
     useEffect(() => {
         async function fetchUserInfo() {
             if (id) {
-                setIsLoading(true);
+                setIsLoadingUserInfo(true);
                 try {
                     const response = await Llamados.getData(`api/usuarios/${id}/`);
                     setUserInfo(response);
                 } catch (error) {
                     setError('Error fetching user information');
                 } finally {
-                    setIsLoading(false);
+                    setIsLoadingUserInfo(false);
                 }
             }
         }
+        // Fetch user info only if id is set
         fetchUserInfo();
     }, [id]);
 
+    // Fetch users when the component mounts
+    // This will populate the users list
     useEffect(() => {
         async function fetchUsers() {
             setIsLoading(true);
@@ -49,6 +56,7 @@ function View() {
         fetchUsers();
     }, []);
 
+
     const handleUserClick = (userId) => {
         setId(userId);
         setUserInfo(null); // Reset user info to show loading state
@@ -60,6 +68,7 @@ function View() {
 
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
+            {(isLoadingUsers || isLoadingUserInfo) && <p>Loading...</p>}
 
             {userInfo ? (
                 <div>
@@ -69,15 +78,22 @@ function View() {
                     <p><strong>Last Name:</strong> {userInfo.last_name}</p>
                     <button onClick={() => setId (null)}>Back to Users List</button>
                 </div>
+
             ) : (
                 <div>
                     <h3>Users List</h3>
                     <ul>
-                        {users.map(user => (
-                            <li key={user.id} onClick={() => handleUserClick(user.id)}>
-                                {user.username}
-                            </li>
-                        ))}
+                        
+                        {isLoadingUsers ? (
+                            <p>Loading users...</p>
+                        ) : (
+                            users.map(user => (
+                                <li key={user.id} onClick={() => handleUserClick(user.id)}>
+                                    {user.username}
+                                </li>
+
+                            ))
+                        )}
                     </ul>
                 </div>
             )}

@@ -1,9 +1,12 @@
 import React from 'react'
 import "../style/Cards.css"
-import { Navigate } from 'react-router-dom'
-const navigate = Navigate
+import { useNavigate } from 'react-router-dom'
 
 function Cards({nombre, imagen, descripcion, rol , view}) {
+  const navigate = useNavigate();
+  const handleView = () => {
+    navigate('/views');
+  }
   return (
   <div>
     <div className="card">
@@ -16,7 +19,7 @@ function Cards({nombre, imagen, descripcion, rol , view}) {
       <div className="card-info">
         
       </div>
-      <button onClick={() => navigate('/view')} className="button">
+      <button onClick={handleView} className="button">
         view
       </button>
  </div>
