@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
-import uploadImageToS3 from './credenciales'
+import uploadImageToS3 from './Credenciales'
 import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
 import '../style/boton.css' // Asegúrate de tener este archivo CSS
 
@@ -273,7 +273,7 @@ function MantProyectos() {
           <div className="campo">
             <label htmlFor="nombreProyecto"></label>
             <input
-              className="model"
+              className="in"
               id="nombreProyecto"
               type="text"
               value={nombreProyecto}
@@ -287,6 +287,7 @@ function MantProyectos() {
             <label htmlFor="usuarios">Usuarios Asignados</label>
             <br />
             <select
+              className="in"
               id="usuarios"
               value={usuarios}
               onChange={handleUsuarioChange}
@@ -307,6 +308,7 @@ function MantProyectos() {
             <label htmlFor="objetivo">Objetivo *</label>
             <br />
             <textarea
+              className="in"
               id="objetivo"
               value={objetivo}
               onChange={(e) => setObjetivo(e.target.value)}
@@ -320,6 +322,7 @@ function MantProyectos() {
             <label htmlFor="imagen">Imagen del Proyecto</label>
             <br />
             <input
+              className="in"
               id="imagen"
               type="file"
               accept="image/*"
@@ -337,6 +340,7 @@ function MantProyectos() {
             <label htmlFor="descripcion">Descripción</label>
             <br />
             <textarea
+              className="in"
               id="descripcion"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
@@ -348,7 +352,7 @@ function MantProyectos() {
           <div className="campo">
             <label htmlFor="fechaInicio">Fecha de Inicio *</label>
             <input
-              className='model'
+              className='in'
               id="fechaInicio"
               type="date"
               value={fechaInicio}
@@ -360,7 +364,7 @@ function MantProyectos() {
           <div className="campo">
             <label htmlFor="fechaFin">Fecha de Fin *</label>
             <input
-              className='model'
+              className='in'
               id="fechaFin"
               type="date"
               value={fechaFin}

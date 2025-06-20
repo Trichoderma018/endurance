@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
+
 import "../style/ExpeInput.css"
 import "../style/visita.css"
 
@@ -460,8 +461,8 @@ function Visita() {
 
     return (
         <div className='visita-container'>
-            <br />
-            <Navbar/>
+
+            
             <div className='header-bar'>
                 <header className='title'>ENDURANCE</header>
 
