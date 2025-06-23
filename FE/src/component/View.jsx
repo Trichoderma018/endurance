@@ -165,7 +165,7 @@ function View() {
                         </div>
                     </div>
                 )}
-                {/* Boton pata crear visita */}
+                {/* Boton pata crear visitaa */}
                 <button onClick={handleCrearVisita} className="btn-crear-visita">Crear Visita</button>
             </div>
         </div>
