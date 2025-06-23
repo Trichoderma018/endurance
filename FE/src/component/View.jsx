@@ -78,12 +78,23 @@ function View() {
     }
 
     return (
-        <div className="view-container">
-            <div className="view-header">
-                <button onClick={handleVolver} className="btn-volver">← Volver</button>
-                <h1>Expediente Endurance</h1>
-                <button onClick={handleEditar} className="btn-editar">Editar</button>
-            </div>
+
+        <div>
+            <h2>User Information</h2>
+            
+
+            {isLoading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+
+
+            <ul>
+                {users.map((user) => (
+                    <li key={user.id} onClick={() => handleUserClick(user.id)} style={{ cursor: 'pointer' }}>
+                        {user.username}
+                    </li>
+                ))}
+            </ul>
+
 
             <div className="expediente-card">
                 {/* Información del Usuario */}

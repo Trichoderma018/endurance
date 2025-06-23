@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
-
+import '../style/fondo.css'
 import Navbar from './navbar'
 import Cards from './Cards';
 import Search from './Search';

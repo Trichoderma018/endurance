@@ -4,6 +4,9 @@
   justify-content: center;
   gap: 20px;
   justify-content: center;
+  background-color: #fcfcfc;
+  color: #000;
+  
 }
 .bord-radio {
     border: 1px solid #000;
