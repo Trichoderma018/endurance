@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
+import CardsVisita from './CardsVisita';
 import '../style/View.css';
 
 function View() {
@@ -166,6 +167,8 @@ function View() {
                     </div>
                 )}
                 <button onClick={handleCrearVisita} className="btn-visita">Crear Visita</button>
+
+                <CardsVisita expedienteId={expediente.id} />
             </div>
         </div>
     );

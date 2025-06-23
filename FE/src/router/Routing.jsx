@@ -12,6 +12,7 @@ import PageProyectos from '../pages/PageProyectos';
 import View from '../component/View';
 import Sidebar from '../component/Sidebar';
 import PageVisita from '../pages/PageVisita';
+import PageViewVisita from '../pages/PageViewVisita';
 
 
 
@@ -32,6 +33,7 @@ function Routing() {
             <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
             <Route path='/proyectos' element={<PageProyectos />} />
             <Route path='/visita' element={<PageVisita />} />
+            <Route path='/view-visita' element={<PageViewVisita />} />
             {/* Rutas de mantenimiento */}
             <Route path='/views' element={<View />} />
 
