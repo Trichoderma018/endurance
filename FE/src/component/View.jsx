@@ -64,9 +64,11 @@ function View() {
     return (
         <div>
             <h2>User Information</h2>
+            
 
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
+
 
             <ul>
                 {users.map((user) => (

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../style/Navbar.css'
+import '../style/fondo.css'
 
 function Navbar() {
   return (
@@ -8,7 +9,7 @@ function Navbar() {
 
         {/* <Link ></Link> */}
 
-    <nav>
+    <nav >
         <div className="cont-rutas">
             <label><Link to={"/Expediente"}>
                 <input
