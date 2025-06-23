@@ -78,23 +78,12 @@ function View() {
     }
 
     return (
-
-        <div>
-            <h2>User Information</h2>
-            
-
-            {isLoading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-
-
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id} onClick={() => handleUserClick(user.id)} style={{ cursor: 'pointer' }}>
-                        {user.username}
-                    </li>
-                ))}
-            </ul>
-
+        <div className="view-container">
+            <div className="view-header">
+                <button onClick={handleVolver} className="btn-volver">← Volver</button>
+                <h1>Expediente Endurance</h1>
+                <button onClick={handleEditar} className="btn-editar">Editar</button>
+            </div>
 
             <div className="expediente-card">
                 {/* Información del Usuario */}
@@ -144,7 +133,7 @@ function View() {
                     </div>
                 )}
 
-                {/* Comentarioss */}
+                {/* Comentarios */}
                 {(expediente.comentario1 || expediente.comentario2 || expediente.comentario3) && (
                     <div className="info-section">
                         <h2>Comentarios</h2>
@@ -170,6 +159,7 @@ function View() {
                         </div>
                     </div>
                 )}
+                <button onClick={() => navigate('/visita')} className="btn-visita">Crear Visita</button>
             </div>
         </div>
     );

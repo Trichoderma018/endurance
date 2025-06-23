@@ -48,6 +48,25 @@
     background-color: #0056b3;
 }
 
+.btn-visita {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn-visita:hover {
+    background-color: #218838;
+}
+
 .expediente-card {
     background: white;
     border-radius: 12px;
