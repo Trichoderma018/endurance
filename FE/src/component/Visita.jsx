@@ -89,6 +89,53 @@ function Visita() {
         obtenerVisitas()
     }, [])
 
+    useEffect(() => {
+    // Verificar si viene de View con un expediente preseleccionado
+    const expedienteParaVisitaId = localStorage.getItem('expedienteParaVisita');
+    
+    if (expedienteParaVisitaId && expedientes.length > 0) {
+        cargarDatosExpedientePreseleccionado(expedienteParaVisitaId);
+        // Limpiar localStorage después de usar
+        localStorage.removeItem('expedienteParaVisita');
+    }
+}, [expedientes]); // Dependencia en expedientes para asegurar que estén cargados
+
+// Nueva función para cargar datos del expediente preseleccionado
+async function cargarDatosExpedientePreseleccionado(expedienteId) {
+    try {
+        // Buscar el expediente en la lista ya cargada
+        const expedienteSeleccionado = expedientes.find(exp => exp.id === parseInt(expedienteId));
+        
+        if (expedienteSeleccionado) {
+            // Llenar campos básicos automáticamente
+            setExpedienteSeleccionado(expedienteId);
+            setRol(expedienteSeleccionado.rol || "");
+            
+            // Obtener datos del usuario asociado al expediente
+            if (expedienteSeleccionado.user) {
+                try {
+                    const usuarioData = await Llamados.getData(`api/users/${expedienteSeleccionado.user}/`);
+                    setNombreCompleto(usuarioData.name || usuarioData.username || "");
+                } catch (error) {
+                    console.error("Error obteniendo datos del usuario:", error);
+                    // Fallback: intentar usar datos que ya puedan estar disponibles
+                    setNombreCompleto(expedienteSeleccionado.user?.name || expedienteSeleccionado.user?.username || "");
+                }
+            }
+            
+            console.log("Datos del expediente preseleccionado cargados:", {
+                expediente: expedienteId,
+                rol: expedienteSeleccionado.rol,
+                usuario: expedienteSeleccionado.user
+            });
+        } else {
+            console.warn("No se encontró el expediente con ID:", expedienteId);
+        }
+    } catch (error) {
+        console.error("Error cargando datos del expediente preseleccionado:", error);
+    }
+}
+
     async function obtenerExpedientes() {
         try {
             const response = await Llamados.getData('api/expedientes/')
