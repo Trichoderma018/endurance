@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './Navbar'
+import Navbar from './navbar'
 import Sidebar from './Sidebar'
 import '../style/MantAdmin.css' // Asegúrate de tener este archivo CSS
 import '../style/boton.css' // Asegúrate de tener este archivo CSS
