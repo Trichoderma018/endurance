@@ -144,7 +144,7 @@ function View() {
                     </div>
                 )}
 
-                {/* Comentarios */}
+                {/* Comentarioss */}
                 {(expediente.comentario1 || expediente.comentario2 || expediente.comentario3) && (
                     <div className="info-section">
                         <h2>Comentarios</h2>
