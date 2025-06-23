@@ -43,10 +43,8 @@ function View() {
     };
 
     const handleEditar = () => {
-        // Guardar los datos del expediente para que PaginaAgregar los use
-        localStorage.setItem('expedienteEditar', JSON.stringify(expediente));
-        localStorage.setItem('modoEdicion', 'true');
-        navigate('/agregar');
+        navigate('/agregar'); // Redirige a PaginaAgregar en modo edición
+        // Podrías pasar parámetros para indicar que es edición
     };
 
     const handleVolver = () => {
@@ -79,12 +77,6 @@ function View() {
         );
     }
 
-    const handleCrearVisita = () => {
-    // Guardar el ID del expediente para preseleccionarlo en el formulario de visita
-    localStorage.setItem('expedienteParaVisita', expediente.id);
-    navigate('/visita');
-};
-
     return (
         <div className="view-container">
             <div className="view-header">
@@ -94,19 +86,6 @@ function View() {
             </div>
 
             <div className="expediente-card">
-                {/* Imagen */}
-                {expediente.imagen && (
-                    <div className="info-section">
-                        <h2>Imagen del Atleta</h2>
-                        <div className="image-container">
-                            <img 
-                                src={expediente.imagen} 
-                                alt="Expediente" 
-                                className="expediente-imagen"
-                            />
-                        </div>
-                    </div>
-                )}
                 {/* Información del Usuario */}
                 <div className="info-section">
                     <h2>Información General</h2>
@@ -135,10 +114,25 @@ function View() {
                         </div>
                         <div className="info-item">
                             <span className="label">Fecha:</span>
-                            <span className="value">{expediente.fecha || 'Sin fecha'}</span>
+                            <span className="value">{expediente.fecha}</span>
                         </div>
                     </div>
                 </div>
+
+                {/* Imagen */}
+                {expediente.imagen && (
+                    <div className="info-section">
+                        <h2>Imagen</h2>
+                        <div className="image-container">
+                            <img 
+                                src={expediente.imagen} 
+                                alt="Expediente" 
+                                className="expediente-imagen"
+                            />
+                        </div>
+                    </div>
+                )}
+
                 {/* Comentarios */}
                 {(expediente.comentario1 || expediente.comentario2 || expediente.comentario3) && (
                     <div className="info-section">
@@ -165,7 +159,7 @@ function View() {
                         </div>
                     </div>
                 )}
-                {/* Boton pata crear visitaa */}
+                {/* Boton pata crear visita */}
                 <button onClick={handleCrearVisita} className="btn-crear-visita">Crear Visita</button>
             </div>
         </div>

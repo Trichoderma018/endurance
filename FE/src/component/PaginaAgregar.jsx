@@ -24,43 +24,14 @@ function PaginaAgregar() {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     
+   
+    // Cargar expedientes y usuarios al montar el componente
+    // Esto se puede optimizar para que solo se carguen una vez
+
     useEffect(() => {
         obtenerExpedientes();
         obtenerUsuarios();
-        
-        // Verificar si viene del componente View en modo edición
-        const modoEdicion = localStorage.getItem('modoEdicion');
-        const expedienteEditar = localStorage.getItem('expedienteEditar');
-        
-        if (modoEdicion === 'true' && expedienteEditar) {
-            try {
-                const expediente = JSON.parse(expedienteEditar);
-                cargarDatosParaEdicion(expediente);
-                
-                // Limpiar localStorage después de cargar
-                localStorage.removeItem('modoEdicion');
-                localStorage.removeItem('expedienteEditar');
-            } catch (error) {
-                console.error('Error al parsear expediente para edición:', error);
-            }
-        }
     }, []);
-
-    // Nueva función para cargar datos cuando viene del View
-    function cargarDatosParaEdicion(expediente) {
-        setUserExpediente(expediente.user || '');
-        setRolExpediente(expediente.rol || '');
-        setActivoExpediente(expediente.activo ? 'activo' : 'inactivo');
-        setImagenExpediente(expediente.imagen || '');
-        setGeneroExpediente(expediente.genero || '');
-        setSedeExpediente(expediente.sede || '');
-        setComentario1Expediente(expediente.comentario1 || '');
-        setComentario2Expediente(expediente.comentario2 || '');
-        setComentario3Expediente(expediente.comentario3 || '');
-        setFechaExpediente(expediente.fecha || '');
-        setCurrentExpedienteId(expediente.id);
-        setEditMode(true);
-    }
 
     async function obtenerExpedientes() {
         try {
@@ -80,6 +51,7 @@ function PaginaAgregar() {
         }
     }
 
+ 
     function obtenerNombreUsuario(userId) {
         const usuario = usuarios.find(user => user.id === userId);
         return usuario ? usuario.name || usuario.username || usuario.nombre : 'Usuario no encontrado';
@@ -114,15 +86,12 @@ function PaginaAgregar() {
         };
 
         try {
-            const response = await Llamados.postData(obj, 'api/expedientes/');
+            await Llamados.postData(obj, 'api/expedientes/');
             limpiarFormulario();
             obtenerExpedientes();
-            // Navegar a la página de expedientes después de crear exitosamente
-            navigate('/expediente');
-            return response;
         } catch (error) {
             console.error('Error al crear expediente:', error);
-            throw error;
+            setError('Error al crear expediente');
         }
     }
 
@@ -142,18 +111,10 @@ function PaginaAgregar() {
 
         try {
             await Llamados.patchData(expedienteActualizado, 'api/expedientes', currentExpedienteId);
-            
-            // Guardar el ID antes de limpiar el formulario
-            const expedienteId = currentExpedienteId;
-            
             limpiarFormulario();
             setEditMode(false);
             setCurrentExpedienteId(null);
             obtenerExpedientes();
-            
-            // Navegar de vuelta al view del expediente editado
-            localStorage.setItem('id', expedienteId);
-            navigate('/views');
         } catch (error) {
             console.error('Error al actualizar expediente:', error);
             setError('Error al actualizar expediente');
@@ -210,13 +171,7 @@ function PaginaAgregar() {
         setError(null);
 
         if (!userExpediente || !sedeExpediente || !generoExpediente || !activoExpediente || !fechaExpediente) {
-            setError('Por favor, complete todos los campos obligatorios.');
-            setIsLoading(false);
-            return;
-        }
-
-        if (!fechaExpediente.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            setError('Por favor, seleccione una fecha válida.');
+            setError('Por favor, complete todos los campos.');
             setIsLoading(false);
             return;
         }
@@ -228,11 +183,18 @@ function PaginaAgregar() {
                 await cargarDatos();
             }
         } catch (error) {
-            setError('Error en el envío del formulario: ' + error.message);
+            setError('Error en el envío del formulario.');
         } finally {
             setIsLoading(false);
         }
     }
+
+    const handleConfirm = () => {
+        if (window.confirm('¿Está seguro que desea confirmar este expediente?')) {
+            cargarDatos("confirmar");
+        }
+        navigate('/expediente');
+    };
 
     return (
         <div className='fondo'>
@@ -250,7 +212,9 @@ function PaginaAgregar() {
                                 {usuario.name || usuario.username || usuario.nombre}
                             </option>
                         ))}
+
                     </select>
+
 
                     <select className='input' value={rolExpediente} onChange={e => setRolExpediente(e.target.value)} required>
                         <option value="">Rol</option>
@@ -262,16 +226,16 @@ function PaginaAgregar() {
                     <div className="campo">
                         <label htmlFor="imagen">Imagen del Expediente</label> <br />
                         <input
-                            id="imagen"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            ref={fileInputRef}
+                        id="imagen"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        ref={fileInputRef}
                         />
                         {imagenExpediente && (
-                            <div style={{marginTop: '10px'}}>
-                                <img src={imagenExpediente} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
-                            </div>
+                        <div style={{marginTop: '10px'}}>
+                            <img src={imagenExpediente} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
+                        </div>
                         )}
                     </div>
 
@@ -303,38 +267,20 @@ function PaginaAgregar() {
                     <input className='input' type="text" value={comentario2Expediente} onChange={e => setComentario2Expediente(e.target.value)} placeholder="Comentario °2" />
                     <input className='input' type="text" value={comentario3Expediente} onChange={e => setComentario3Expediente(e.target.value)} placeholder="Comentario °3" />
 
-                    <input 
-                        className='input' 
-                        type="date" 
-                        value={fechaExpediente} 
-                        onChange={e => setFechaExpediente(e.target.value)} 
-                        required 
-                    />
+                    <input className='input' type="date" value={fechaExpediente} onChange={e => setFechaExpediente(e.target.value)} required />
 
                     <div style={{ marginTop: '10px' }}>
-                        <button type="submit" disabled={isLoading}>
-                            {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Agregar')}
-                        </button>
-                        {editMode && (
-                            <button 
-                                type="button" 
-                                onClick={() => {
-                                    limpiarFormulario();
-                                    navigate('/views'); // Volver al view si cancela edición
-                                }} 
-                                style={{ marginLeft: '10px' }}
-                            >
-                                Cancelar
-                            </button>
-                        )}
+                        <button type="submit">{editMode ? 'Actualizar' : 'Agregar'}</button>
+                        {editMode && <button type="button" onClick={limpiarFormulario} style={{ marginLeft: '10px' }}>Cancelar</button>}
                     </div>
 
                     {isLoading && <div className="spinner"><span></span><span></span><span></span></div>}
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
+            <button onClick={handleConfirm}>Confirmar expediente</button>
 
-            {/* <div className="registro-container">
+            <div className="registro-container">
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                         <tr>
@@ -364,7 +310,7 @@ function PaginaAgregar() {
                         ))}
                     </tbody>
                 </table>
-            </div> */}
+            </div>
         </div>
     );
 }
