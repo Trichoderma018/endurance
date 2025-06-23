@@ -86,7 +86,7 @@ function View() {
 };
 
     return (
-<<<<<<< HEAD
+
         <div>
             <h2>User Information</h2>
             
@@ -102,14 +102,7 @@ function View() {
                     </li>
                 ))}
             </ul>
-=======
-        <div className="view-container">
-            <div className="view-header">
-                <button onClick={handleVolver} className="btn-volver">← Volver</button>
-                <h1>Expediente Endurance</h1>
-                <button onClick={handleEditar} className="btn-editar">Editar</button>
-            </div>
->>>>>>> 9bc1a5f2f53640d5d6c939f5aa51df65ea1c983f
+
 
             <div className="expediente-card">
                 {/* Imagen */}
