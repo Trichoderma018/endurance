@@ -94,3 +94,10 @@ button:hover {
 .radio-input label:nth-child(4):has(input:checked) ~ .selection {
   transform: translateX(calc(var(--container_width) * 3/4));
 }
+
+.static{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
