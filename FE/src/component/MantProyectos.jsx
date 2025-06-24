@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
 import Sidebar from './Sidebar'
-import uploadImageToS3 from './Credenciales'
+import uploadImageToS3 from './credenciales'
 import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
 import '../style/boton.css' // Asegúrate de tener este archivo CSS
 
@@ -263,7 +263,7 @@ function MantProyectos() {
   }
 
   return (
-    <div>
+    <div className="mant-proyectos">
       <Navbar/>
       <Sidebar/>
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>

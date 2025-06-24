@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Llamados from '../services/Llamados';
-import uploadImageToS3 from './Credenciales';
+import uploadImageToS3 from './credenciales';
 import '../style/ViewVisita.css';
 
 function ViewVisita() {

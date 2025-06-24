@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Llamados from '../services/Llamados';
 import '../style/ExpeInput.css'; 
-import uploadImageToS3 from './Credenciales';
+import uploadImageToS3 from './credenciales';
 import { useNavigate } from 'react-router-dom';
 
 function PaginaAgregar() {
