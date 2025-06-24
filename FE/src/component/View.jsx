@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
+import CardsVisita from './CardsVisita';
 import '../style/View.css';
 
 function View() {
@@ -43,8 +44,10 @@ function View() {
     };
 
     const handleEditar = () => {
-        navigate('/agregar'); // Redirige a PaginaAgregar en modo edición
-        // Podrías pasar parámetros para indicar que es edición
+        // Guardar los datos del expediente para que PaginaAgregar los use
+        localStorage.setItem('expedienteEditar', JSON.stringify(expediente));
+        localStorage.setItem('modoEdicion', 'true');
+        navigate('/agregar');
     };
 
     const handleVolver = () => {
@@ -77,6 +80,12 @@ function View() {
         );
     }
 
+    const handleCrearVisita = () => {
+        // Guardar el ID del expediente para preseleccionarlo en el formulario de visita
+        localStorage.setItem('expedienteParaVisita', expediente.id);
+        navigate('/visita');
+    };
+
     return (
         <div className="view-container">
             <div className="view-header">
@@ -86,43 +95,10 @@ function View() {
             </div>
 
             <div className="expediente-card">
-                {/* Información del Usuario */}
-                <div className="info-section">
-                    <h2>Información General</h2>
-                    <div className="info-grid">
-                        <div className="info-item">
-                            <span className="label">Nombre:</span>
-                            <span className="value">{usuario?.name || usuario?.username || 'No disponible'}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Rol:</span>
-                            <span className="value role">{expediente.rol}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Estado:</span>
-                            <span className={`value status ${expediente.activo ? 'activo' : 'inactivo'}`}>
-                                {expediente.activo ? 'Activo' : 'Inactivo'}
-                            </span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Género:</span>
-                            <span className="value">{expediente.genero}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Sede:</span>
-                            <span className="value">{expediente.sede}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Fecha:</span>
-                            <span className="value">{expediente.fecha}</span>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Imagen */}
                 {expediente.imagen && (
                     <div className="info-section">
-                        <h2>Imagen</h2>
+                        <h2>Imagen del Atleta</h2>
                         <div className="image-container">
                             <img 
                                 src={expediente.imagen} 
@@ -132,7 +108,38 @@ function View() {
                         </div>
                     </div>
                 )}
-
+                {/* Información del Usuario */}
+                <div className="info-section">
+                    <h2>Información General</h2>
+                    <div className="info-grid">
+                        <div className="info-item">
+                            {/* <span className="label">Nombre:</span> */}
+                            <span className="value">{usuario?.name || usuario?.username || 'No disponible'}</span>
+                        </div>
+                        <div className="info-item">
+                            {/* <span className="label">Rol:</span> */}
+                            <span className="value role">{expediente.rol}</span>
+                        </div>
+                        <div className="info-item">
+                            {/* <span className="label">Estado:</span> */}
+                            <span className={`value status ${expediente.activo ? 'activo' : 'inactivo'}`}>
+                                {expediente.activo ? 'Activo' : 'Inactivo'}
+                            </span>
+                        </div>
+                        <div className="info-item">
+                            {/* <span className="label">Género:</span> */}
+                            <span className="value">{expediente.genero}</span>
+                        </div>
+                        <div className="info-item">
+                            {/* <span className="label">Sede:</span> */}
+                            <span className="value">{expediente.sede}</span>
+                        </div>
+                        <div className="info-item">
+                            {/* <span className="label">Fecha:</span> */}
+                            <span className="value">{expediente.fechaExpediente || 'Sin fecha'}</span>
+                        </div>
+                    </div>
+                </div>
                 {/* Comentarios */}
                 {(expediente.comentario1 || expediente.comentario2 || expediente.comentario3) && (
                     <div className="info-section">
@@ -159,7 +166,9 @@ function View() {
                         </div>
                     </div>
                 )}
-                <button onClick={() => navigate('/visita')} className="btn-visita">Crear Visita</button>
+                <button onClick={handleCrearVisita} className="btn-visita">Crear Visita</button>
+
+                <CardsVisita expedienteId={expediente.id} />
             </div>
         </div>
     );
