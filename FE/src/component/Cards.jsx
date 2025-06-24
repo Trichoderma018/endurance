@@ -11,7 +11,7 @@ function Cards({id, nombre, imagen, descripcion, rol , view}) {
   return (
   <div>
     <div className="card">
-      <div className="image" />
+      <img className="image" src={imagen} alt={nombre} />
         <p>{nombre}</p>
         <p className="card-info">{rol}</p>
       <div className="card-description">
