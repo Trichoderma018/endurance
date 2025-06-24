@@ -13,6 +13,8 @@ import View from '../component/View';
 import Sidebar from '../component/Sidebar';
 import PageVisita from '../pages/PageVisita';
 import PageViewVisita from '../pages/PageViewVisita';
+import Confits from '../pages/Confits';
+import Cerrar from '../pages/Cerrar';
 
 
 
@@ -23,23 +25,44 @@ function Routing() {
     <div>
       <Router>
         <Routes>
+
+            {/* pagina de logueo */}
             <Route path='/' element={<Login/>}/>
+
+            {/* registra nuevos usuarios */}
             <Route path="/register" element={<Register />} />
+
+            {/* agregar nuevos usuarios */}
             <Route path='/agregar' element={<Agregar/>}/>
+
+            {/* expediente personale */}
             <Route path='/Expediente' element={<Expediente/>}/>
+
+            {/* Los mantenimientos */}
             <Route path='/mantAdmin' element={<MantenimientoAdmin/>}/>
             <Route path='/mantStaff' element={<MantenimientoStaff/>}/>
             <Route path='/mantUser' element={<MantenimientoUser/>}/>
-            <Route path='/mantProyects' element={<MantenimientoProyectos/>}/>
+            <Route path='/mantProyects' element={<MantenimientoProyectos/>}/> 
+
+            {/* proyecos personales */}
             <Route path='/proyectos' element={<PageProyectos />} />
+
+            {/* visita del usuario */}
             <Route path='/visita' element={<PageVisita />} />
             <Route path='/view-visita' element={<PageViewVisita />} />
+
             {/* Rutas de mantenimiento */}
             <Route path='/views' element={<View />} />
 
              {/*Pruebas*/}
              <Route path='/rfce' element={<Prueba/>}/>
             <Route path='/side' element={<Sidebar/>}/>
+
+            {/* configuraciones */}
+            <Route path='/configurations' element={<Confits/>}/>
+
+            {/* cerrar sesions */}
+            <Route path='/' element={<Cerrar/>}/>
 
         </Routes>
       </Router>
