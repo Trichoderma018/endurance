@@ -292,13 +292,13 @@ function PaginaAgregar() {
 
                     <select className='inp' value={sedeExpediente} onChange={e => setSedeExpediente(e.target.value)} required>
                         <option value="">Sede</option>
-                        <option value="sede1">San José</option>
-                        <option value="sede2">Limón</option>
-                        <option value="sede3">Cartago</option>
-                        <option value="sede4">Heredia</option>
-                        <option value="sede5">Alajuela</option>
-                        <option value="sede6">Guanacaste</option>
-                        <option value="sede7">Puntarenas</option>
+                        <option value="San José">San José</option>
+                        <option value="Limón">Limón</option>
+                        <option value="Cartago">Cartago</option>
+                        <option value="Heredia">Heredia</option>
+                        <option value="Alajuela">Alajuela</option>
+                        <option value="Guanacaste">Guanacaste</option>
+                        <option value="Puntarenas">Puntarenas</option>
                     </select>
 
                     <input className='inp' type="text" value={comentario1Expediente} onChange={e => setComentario1Expediente(e.target.value)} placeholder="Comentario °1" />
