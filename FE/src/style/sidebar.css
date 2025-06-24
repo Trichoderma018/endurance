@@ -1,5 +1,6 @@
 /* From uiverse.io by @alexruix */
 .inp {
+ /* font-family: 'Courier New', Courier, monospace; */
  line-height: 28px;
  border: 2px solid transparent;
  border-bottom-color: #777;
@@ -117,6 +118,7 @@
 }
 /* Estilo del contenedor de la barra lateral */
 .sidebar-container {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   width: 250px;
   height: 100vh;
   background-color: #222;

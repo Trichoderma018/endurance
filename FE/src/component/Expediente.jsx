@@ -36,13 +36,17 @@ function Expediente() {
       <div className='static'>
       <header className='Endurance'>ENDURANCE</header>
       <Navbar />
+      <div className='tablita'>
       <Search />
+        <div className='acomodar'>
       <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
+        </div>
       </div>
+      </div>
+        <h2>Lista de Expediente</h2>
       <div className='barra'></div>
 
       <div className="registro-container">
-        <h2>Lista de Expediente</h2>
 
         {isLoading && <p className="mensaje-cargando">Cargando expedientes...</p>}
         {error && <p className="mensaje-error">{error}</p>}

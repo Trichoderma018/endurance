@@ -4,7 +4,7 @@ import Navbar from './navbar'
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
 import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
-import '../style/boton.css' // Asegúrate de tener este archivo CSS
+// Asegúrate de tener este archivo CSS
 
 function MantProyectos() {
   // Estados del formulario
