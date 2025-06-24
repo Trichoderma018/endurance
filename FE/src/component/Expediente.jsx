@@ -38,7 +38,7 @@ function Expediente() {
       <Navbar />
       <div className='tablita'>
       <Search />
-        <div className='acomodar'>
+        <div className='acomodar10'>
       <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
         </div>
       </div>
