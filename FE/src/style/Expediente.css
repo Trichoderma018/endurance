@@ -103,15 +103,15 @@ button:hover {
 }
 
 .registro-container{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) ;
-  gap: 18px 94px;
-  margin-top: 52%;
- 
+  display: flex;
+  width: 95vw;
+  flex-wrap: wrap;
+  margin-top: 40vh;
+  gap: 20px;
+  justify-content: center;
 }
 
 .acomodar10{
   position: relative;
-  
-  top: -54px ;
+
 }
