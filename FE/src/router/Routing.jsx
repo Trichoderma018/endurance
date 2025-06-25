@@ -62,7 +62,7 @@ function Routing() {
             <Route path='/configurations' element={<Confits/>}/>
 
             {/* cerrar sesions */}
-            <Route path='/' element={<Cerrar/>}/>
+            <Route path='/null' element={<Cerrar/>}/>
 
         </Routes>
       </Router>

@@ -119,7 +119,7 @@
 /* Estilo del contenedor de la barra lateral */
 .sidebar-container {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  width: 250px;
+  width: 210px;
   height: 100vh;
   background-color: #222;
   position: fixed;
@@ -156,7 +156,7 @@
 }
 /* Estilo del contenedor de la barra lateral al hacer hover */
 .sidebar-container:hover {
-  width: 300px; /* Ancho al hacer hover */
+  width: 270px; /* Ancho al hacer hover */
 }
 /* Estilo del contenido principal al hacer hover en la barra lateral */
 .main-content:hover {
