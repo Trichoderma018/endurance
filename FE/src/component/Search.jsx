@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../style/search.css'; // Asegúrate de que existe este archivo con los estilos que deseas
+import '../style/search.css';
 
 function Search() {
   const [query, setQuery] = useState('');
@@ -7,12 +7,12 @@ function Search() {
   const [allPeople, setAllPeople] = useState([]);
 
   useEffect(() => {
-    // Simulación de datos traídos desde una API
     const fetchPeople = async () => {
       try {
-        const response = await fetch();
+        const response = await fetch('https://api.example.com/people');
+        const data = await response.json();
         setAllPeople(data);
-        setResults(data); // Inicialmente mostramos todos
+        setResults(data);
       } catch (error) {
         console.error('Error al obtener datos:', error);
       }
@@ -21,14 +21,23 @@ function Search() {
     fetchPeople();
   }, []);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const value = query.toLowerCase();
+      const filtered = allPeople.filter(person =>
+        person.name.toLowerCase().includes(value) ||
+        person.username.toLowerCase().includes(value) ||
+        person.email?.toLowerCase().includes(value) ||
+        person.city?.toLowerCase().includes(value)
+      );
+      setResults(filtered);
+    }, 300); // Espera 300ms antes de aplicar el filtro
 
-    const filtered = allPeople.filter(person =>
-      person.username.toLowerCase().includes(value.toLowerCase())
-    );
-    setResults(filtered);
+    return () => clearTimeout(timeoutId);
+  }, [query, allPeople]);
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
   };
 
   return (
@@ -36,13 +45,15 @@ function Search() {
       <input
         type="text"
         className="search-input"
-        placeholder="Buscar por username..."
+        placeholder="Buscar por nombre, username, email o ciudad..."
         value={query}
         onChange={handleInputChange}
       />
       <ul>
         {results.map(person => (
-          <li key={person.id}>{person.username}</li>
+          <li key={person.id}>
+            {person.name} <span style={{ color: '#888' }}>({person.username})</span>
+          </li>
         ))}
       </ul>
     </div>
