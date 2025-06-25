@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Llamados from '../services/Llamados';
 import '../style/ExpeInput.css'; 
+
 import uploadImageToS3 from './credenciales';
 import { useNavigate } from 'react-router-dom';
 
@@ -243,7 +244,7 @@ function PaginaAgregar() {
             <div className="registro-container">
                 <h2>{editMode ? 'EDITAR EXPEDIENTE' : 'EXPEDIENTES'}</h2>
                 <form onSubmit={handleSubmit}>
-                    <select className='input' value={userExpediente} onChange={e => setUserExpediente(e.target.value)} required>
+                    <select className='inp' value={userExpediente} onChange={e => setUserExpediente(e.target.value)} required>
                         <option value="">Name</option>
                         {usuarios.map(usuario => (
                             <option key={usuario.id} value={usuario.id}>
@@ -252,7 +253,7 @@ function PaginaAgregar() {
                         ))}
                     </select>
 
-                    <select className='input' value={rolExpediente} onChange={e => setRolExpediente(e.target.value)} required>
+                    <select className='inp' value={rolExpediente} onChange={e => setRolExpediente(e.target.value)} required>
                         <option value="">Rol</option>
                         <option value="atleta">Atleta</option>
                         <option value="entrenador">Entrenador</option>
@@ -262,6 +263,7 @@ function PaginaAgregar() {
                     <div className="campo">
                         <label htmlFor="imagen">Imagen del Expediente</label> <br />
                         <input
+                            className='inp'
                             id="imagen"
                             type="file"
                             accept="image/*"
@@ -275,20 +277,20 @@ function PaginaAgregar() {
                         )}
                     </div>
 
-                    <select className='input' value={activoExpediente} onChange={e => setActivoExpediente(e.target.value)} required>
+                    <select className='inp' value={activoExpediente} onChange={e => setActivoExpediente(e.target.value)} required>
                         <option value="">Estado</option>
                         <option value="inactivo">Inactivo</option>
                         <option value="activo">Activo</option>
                     </select>
 
-                    <select className='input' value={generoExpediente} onChange={e => setGeneroExpediente(e.target.value)} required>
+                    <select className='inp' value={generoExpediente} onChange={e => setGeneroExpediente(e.target.value)} required>
                         <option value="">Género</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
 
-                    <select className='input' value={sedeExpediente} onChange={e => setSedeExpediente(e.target.value)} required>
+                    <select className='inp' value={sedeExpediente} onChange={e => setSedeExpediente(e.target.value)} required>
                         <option value="">Sede</option>
                         <option value="San José">San José</option>
                         <option value="Limón">Limón</option>
@@ -299,12 +301,12 @@ function PaginaAgregar() {
                         <option value="Puntarenas">Puntarenas</option>
                     </select>
 
-                    <input className='input' type="text" value={comentario1Expediente} onChange={e => setComentario1Expediente(e.target.value)} placeholder="Comentario °1" />
-                    <input className='input' type="text" value={comentario2Expediente} onChange={e => setComentario2Expediente(e.target.value)} placeholder="Comentario °2" />
-                    <input className='input' type="text" value={comentario3Expediente} onChange={e => setComentario3Expediente(e.target.value)} placeholder="Comentario °3" />
+                    <input className='inp' type="text" value={comentario1Expediente} onChange={e => setComentario1Expediente(e.target.value)} placeholder="Comentario °1" />
+                    <input className='inp' type="text" value={comentario2Expediente} onChange={e => setComentario2Expediente(e.target.value)} placeholder="Comentario °2" />
+                    <input className='inp' type="text" value={comentario3Expediente} onChange={e => setComentario3Expediente(e.target.value)} placeholder="Comentario °3" />
 
                     <input 
-                        className='input' 
+                        className='inp' 
                         type="date" 
                         value={fechaExpediente} 
                         onChange={e => setFechaExpediente(e.target.value)} 
@@ -312,7 +314,7 @@ function PaginaAgregar() {
                     />
 
                     <div style={{ marginTop: '10px' }}>
-                        <button type="submit" disabled={isLoading}>
+                        <button className='button' type="submit" disabled={isLoading}>
                             {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Agregar')}
                         </button>
                         {editMode && (
@@ -338,18 +340,18 @@ function PaginaAgregar() {
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Género</th>
-                            <th>Sede</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
+                            <th className='in'>Usuario</th>
+                            <th className='in'>Rol</th>
+                            <th className='in'>Estado</th>
+                            <th className='in'>Género</th>
+                            <th className='in'>Sede</th>
+                            <th className='in'>Fecha</th>
+                            <th className='in'>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {expedientes.map(expediente => (
-                            <tr key={`exp-${expediente.id}`}>
+                            <tr key={`exp-${expediente.id}`} className='in'>
                                 <td>{obtenerNombreUsuario(expediente.user)}</td>
                                 <td>{expediente.rol}</td>
                                 <td>{expediente.activo ? 'Activo' : 'Inactivo'}</td>
@@ -357,8 +359,8 @@ function PaginaAgregar() {
                                 <td>{expediente.sede}</td>
                                 <td>{expediente.fechaExpediente}</td>
                                 <td>
-                                    <button onClick={() => editarExpediente(expediente)}>Editar</button>
-                                    <button onClick={() => eliminarExpediente(expediente.id)}>Eliminar</button>
+                                    <button onClick={() => editarExpediente(expediente)} className='FLR'>Editar</button>
+                                    <button onClick={() => eliminarExpediente(expediente.id)} className='FLR'>Eliminar</button>
                                 </td>
                             </tr>
                         ))}
