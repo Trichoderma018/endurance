@@ -41,6 +41,14 @@ function Navbar() {
                 className='bord'
             /></Link>
         </label> 
+        <label>
+            <div className='movete'>
+                <Link to="/null" className="btn-sidebar">
+                <i className="fas fa-sign-out-alt"></i>
+                Cerrar Sesión
+                </Link>
+          </div>
+        </label>
     </div>
 </nav>
 </div>

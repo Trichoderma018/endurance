@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/ExpeInput.css"
 import uploadImageToS3 from './credenciales'
+import Navbar from './navbar'
 
 
 function Proyectos() {
@@ -247,6 +248,7 @@ function Proyectos() {
     return (
         <div className='fondo'>
             <div className='barra'>
+                 
                 <header className='Endurance'>ENDURANCE</header>
             </div>
             

@@ -1,6 +1,6 @@
 import React from 'react'
 import Proyectos from '../component/Proyectos'
-import Navbar from '../component/Navbar'
+import Navbar from '../component/navbar'
 
 function PageProyectos() {
   return (

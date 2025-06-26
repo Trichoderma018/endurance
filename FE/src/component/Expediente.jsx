@@ -40,6 +40,7 @@ function Expediente() {
       <Search />
         <div className='acomodar10'>
       <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
+      
         </div>
       </div>
       </div>
