@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
 import Sidebar from './Sidebar'
-import '../style/MantAdmin.css' // Asegúrate de tener este archivo CSS
-import '../style/boton.css' // Asegúrate de tener este archivo CSS
+
+
 
 
 function MantAdmin() {
@@ -129,30 +129,30 @@ function MantAdmin() {
   }
 
   return (
-    <div className='form'>
+    <div className='mant-admin'>
       <Navbar/>
 
     
       <Sidebar/>
       
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
-      <div className="formulario">
-          <div className="campo">
-              <label htmlFor="nombreCompleto"></label>
+      <div className="mant-admin-formulario">
+          <div className="formulario-campo">
+              <label htmlFor="campo-nombreCompleto"></label>
               <input
                   id="nombreCompleto"
                   type="text"
                   placeholder="Ingrese su nombre "
                   value={nombreCompleto}
                   onChange={handleNombreCompleto}
-                  className='in'
+                  className='input-nombreCompleto'
               />
           </div>
           <br />
-          <div className="campo">
-              <label htmlFor="email" ></label>
+          <div className="formulario-campo">
+              <label htmlFor="campo-email" ></label>
               <input
-                  className='in'
+                  className='input-email'
                   id="email"
                   type="email"
                   placeholder="Ingrese su email"
@@ -162,10 +162,10 @@ function MantAdmin() {
               />
           </div>
           <br />
-          <div className="campo">
-              <label htmlFor="user"></label>
+          <div className="formulario-campo">
+              <label htmlFor="campo-user"></label>
               <select
-                  className='in'
+                  className='input-user'
                   id="user"
                   value={user}
                   onChange={(e)=>setUser(e.target.value)}
@@ -179,11 +179,11 @@ function MantAdmin() {
               </select>
           </div>
           <br />
-          <div className="botones">
+          <div className="formulario-botones">
               <button 
                   
                   onClick={handleSubmit}
-                  className="button"
+                  className="boton-submit"
               >
                   {editMode ? 'Actualizar' : 'Crear'} 
               </button>
@@ -191,7 +191,7 @@ function MantAdmin() {
               {editMode && (
                   <button 
                       onClick={limpiarFormulario}
-                      className="btn-cancelar"
+                      className="boton-cancelar"
                   >
                       Cancelar
                   </button>
@@ -221,13 +221,13 @@ function MantAdmin() {
               <td>
                 <button 
                   onClick={() => editarAdministrador(administrador)}
-                  className="btn-edit"
+                  className="boton-edit"
                 >
                   Editar
                 </button>
                 <button 
                   onClick={() => eliminarAdministrador(administrador.id)}
-                  className="btn-delete"
+                  className="boton-delete"
                 >
                   Eliminar
                 </button>

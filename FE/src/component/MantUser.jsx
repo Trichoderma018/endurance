@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
 import Sidebar from './Sidebar'
-import '../style/inputspeed.css' // Asegúrate de tener este archivo CSS
-import '../style/boton.css' // Asegúrate de tener este archivo CSS
+import '../style/MantUser.css'
 
 function MantUser() {
     const [username, setUsername] = React.useState('')
@@ -169,9 +168,9 @@ function MantUser() {
             <Sidebar/>
             <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
-            <div className="formulario">
-                
-                <div className="campo">
+            <div className="formulario-user">
+
+                <div className="campo-name">
                     <label htmlFor="username"></label>
                     <input
                         id="username"
@@ -179,12 +178,12 @@ function MantUser() {
                         value={username}
                         onChange={handleUsername}
                         placeholder="Nombre de Usuario"
-                        className="in"
+                        className="input-name"
                     />
                 </div>
                 <br />
-                
-                <div className="campo">
+
+                <div className="campo-correo">
                     <label htmlFor="email"></label>
                     <input
                         id="email"
@@ -192,12 +191,12 @@ function MantUser() {
                         value={email}
                         onChange={handleEmail}
                         placeholder="Email"
-                        className="in"
+                        className="input-correo"
                     />
                 </div>
                 <br />
-                
-                <div className="campo">
+
+                <div className="campo-sede">
                     <label htmlFor="sede"></label>
                     <input
                         id="sede"
@@ -205,16 +204,16 @@ function MantUser() {
                         value={sede}
                         onChange={handleSede}
                         placeholder="Sede"
-                        className="in"
+                        className="input-sede"
                     />
                 </div>
                 <br />
-                
-                <div className="campo">
+
+                <div className="campo-password">
                     <label htmlFor="password"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input
-                            className='in'
+                            className='inp-password'
                             id="password"
                             type={showPassword ? "text" : "password"}
                             value={password}
@@ -240,11 +239,11 @@ function MantUser() {
                     </div>
                 </div>
                 
-                <div className="campo">
+                <div className="campo-password-confirm">
                     <label htmlFor="passwordConfirm"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                         <input
-                            className="in"
+                            className="inp-password-confirm"
                             id="passwordConfirm"
                             type={showPasswordConfirm ? "text" : "password"}
                             value={passwordConfirm}
@@ -253,7 +252,7 @@ function MantUser() {
                             style={{ paddingRight: '40px', flex: 1 }}
                         />
                         <button
-                        className='btn'
+                        className='button'
                             type="button"
                             onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
                             style={{
@@ -275,11 +274,11 @@ function MantUser() {
                     )}
                 </div>
                 <br />
-                
-                <div className="botones">
+
+                <div className="botones-formulario">
                     <button 
                         onClick={handleSubmit}
-                        className="button"
+                        className="button-submit"
                         disabled={passwordError !== ''}
                     >
                         {editMode ? 'Actualizar' : 'Crear'} Usuario
@@ -289,7 +288,7 @@ function MantUser() {
                     {editMode && (
                         <button 
                             onClick={limpiarFormulario}
-                            className="btn-secondary"
+                            className="button-secondary"
                         >
                             Cancelar
                         </button>
@@ -322,13 +321,13 @@ function MantUser() {
                             <td>
                                 <button 
                                     onClick={() => editarUsuario(usuario)}
-                                    className="btn-edit"
+                                    className="button-edit"
                                 >
                                     Editar
                                 </button>
                                 <button 
                                     onClick={() => eliminarUsuario(usuario.id)}
-                                    className="btn-delete"
+                                    className="button-delete"
                                 >
                                     Eliminar
                                 </button>

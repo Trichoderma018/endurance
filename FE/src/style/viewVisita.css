@@ -1,6 +1,6 @@
 /* ViewVisita.css */
 .view-visita-master {
-    margin-top: 3650px;
+    margin-top: 4100px;
 }
 
 .view-visita-container {
@@ -396,4 +396,28 @@
     .economic-balance {
         padding: 15px;
     }
+}
+
+/* Agregar a tu archivo ViewVisita.css */
+.btn-descargar-pdf {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-descargar-pdf:hover {
+    background-color: #c0392b;
+}
+
+.btn-descargar-pdf:active {
+    transform: scale(0.98);
 }

@@ -1,22 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import Llamados from '../services/Llamados';
-import uploadImageToS3 from './credenciales';
 import '../style/ViewVisita.css';
 
 function ViewVisita() {
     const [visita, setVisita] = useState(null);
     const [expediente, setExpediente] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isEditing, setIsEditing] = useState(false);
-    const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
-    const fileInputRef = useRef(null);
-
-    // Estados para edición
-    const [formData, setFormData] = useState({});
 
     useEffect(() => {
         cargarVisita();
@@ -24,7 +18,7 @@ function ViewVisita() {
 
     const cargarVisita = async () => {
         const visitaId = localStorage.getItem('visitaId');
-        
+
         if (!visitaId) {
             setError('No se encontró el ID de la visita');
             setIsLoading(false);
@@ -35,7 +29,6 @@ function ViewVisita() {
             // Obtener datos de la visita
             const visitaData = await Llamados.getData(`api/visitas/${visitaId}/`);
             setVisita(visitaData);
-            setFormData(visitaData);
 
             // Obtener datos del expediente asociado
             if (visitaData.expediente) {
@@ -56,104 +49,6 @@ function ViewVisita() {
         navigate('/views');
     };
 
-    const handleEdit = () => {
-        setIsEditing(true);
-        setError(null);
-        setSuccessMessage('');
-    };
-
-    const handleCancelEdit = () => {
-        setIsEditing(false);
-        setFormData(visita); // Restaurar datos originales
-        setError(null);
-        setSuccessMessage('');
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
-    };
-
-    const handleInputChange = (field, value) => {
-        setFormData(prev => ({
-            ...prev,
-            [field]: value
-        }));
-    };
-
-    const handleFileChange = async (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            try {
-                const result = await uploadImageToS3(file);
-                setFormData(prev => ({
-                    ...prev,
-                    adjuntoNotas: result.Location
-                }));
-            } catch (error) {
-                console.error('Error al subir archivo:', error);
-                setError('No se pudo subir el archivo');
-            }
-        }
-    };
-
-    const handleSave = async () => {
-        setIsSaving(true);
-        setError(null);
-        setSuccessMessage('');
-
-        try {
-            // Preparar datos para envío
-            const dataToSend = {
-                ...formData,
-                montoBeca: parseInt(formData.montoBeca) || 0,
-                montoCasa: parseInt(formData.montoCasa) || 0,
-                salario: parseInt(formData.salario) || 0,
-                ingresoMensual: parseInt(formData.ingresoMensual) || 0,
-                ingresos: parseInt(formData.ingresos) || 0,
-                salario2: parseInt(formData.salario2) || 0,
-                pension: parseInt(formData.pension) || 0,
-                beca2: parseInt(formData.beca2) || 0,
-                gastos: parseInt(formData.gastos) || 0,
-                comida: parseInt(formData.comida) || 0,
-                agua: parseInt(formData.agua) || 0,
-                luz: parseInt(formData.luz) || 0,
-                internetCable: parseInt(formData.internetCable) || 0,
-                celular: parseInt(formData.celular) || 0,
-                viaticos: parseInt(formData.viaticos) || 0,
-                salud: parseInt(formData.salud) || 0,
-                deudas: parseInt(formData.deudas) || 0
-            };
-
-            await Llamados.patchData(dataToSend, "api/visitas", visita.id);
-            
-            // Actualizar el estado local
-            setVisita(formData);
-            setIsEditing(false);
-            setSuccessMessage('Visita actualizada correctamente');
-            
-            // Ocultar mensaje después de 3 segundos
-            setTimeout(() => setSuccessMessage(''), 3000);
-
-        } catch (error) {
-            console.error("Error al actualizar visita:", error);
-            setError("Error al actualizar la visita");
-        } finally {
-            setIsSaving(false);
-        }
-    };
-
-    const handleDelete = async () => {
-        if (window.confirm("¿Está seguro que desea eliminar esta visita? Esta acción no se puede deshacer.")) {
-            try {
-                await Llamados.deleteData("api/visitas", visita.id);
-                localStorage.removeItem('visitaId');
-                navigate('/views');
-            } catch (error) {
-                console.error("Error al eliminar visita:", error);
-                setError("Error al eliminar visita");
-            }
-        }
-    };
-
     const formatearFecha = (fecha) => {
         if (!fecha) return 'No disponible';
         try {
@@ -165,6 +60,302 @@ function ViewVisita() {
         } catch {
             return 'Fecha no válida';
         }
+    };
+
+    const formatearMoneda = (valor) => {
+        if (valor === null || valor === undefined || valor === '') {
+            return 'No disponible';
+        }
+
+        const numero = typeof valor === 'string' ? parseFloat(valor) : valor;
+
+        if (isNaN(numero)) {
+            return 'No disponible';
+        }
+
+        // Formateo con comas
+        const numeroFormateado = numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return `CRC ${numeroFormateado}`;
+    };
+
+    const generarPDF = () => {
+        const doc = new jsPDF();
+        let yPosition = 20;
+        const pageHeight = 280; // Altura útil de la página
+        const margin = 14;
+
+        // Función helper para verificar si necesitamos nueva página
+        const checkNewPage = (requiredSpace = 20) => {
+            if (yPosition + requiredSpace > pageHeight) {
+                doc.addPage();
+                yPosition = 20;
+            }
+        };
+
+        // Función helper para añadir sección con título
+        const addSectionTitle = (title) => {
+            checkNewPage(25);
+            doc.setFontSize(16);
+            doc.setTextColor(52, 73, 94);
+            doc.text(title, margin, yPosition);
+            yPosition += 15;
+        };
+
+        // Función helper para añadir item de detalle
+        const addDetailItem = (label, value, isLongText = false) => {
+            checkNewPage(isLongText ? 15 : 8);
+
+            doc.setFont(undefined, 'bold');
+            doc.setFontSize(11);
+            doc.setTextColor(0, 0, 0);
+            doc.text(label, margin, yPosition);
+
+            doc.setFont(undefined, 'normal');
+
+            if (isLongText) {
+                yPosition += 7;
+                const lines = doc.splitTextToSize(value, 180);
+                lines.forEach(line => {
+                    checkNewPage(6);
+                    doc.text(line, margin, yPosition);
+                    yPosition += 5;
+                });
+                yPosition += 3;
+            } else {
+                doc.text(value, 60, yPosition);
+                yPosition += 7;
+            }
+        };
+
+        // TÍTULO PRINCIPAL
+        doc.setFontSize(20);
+        doc.setTextColor(44, 62, 80);
+        doc.text(`Detalle de Visita #${visita.id}`, 105, yPosition, { align: 'center' });
+        yPosition += 25;
+
+        // INFORMACIÓN BÁSICA
+        addSectionTitle('Información Básica');
+
+        const infoBasica = [
+            ['Nombre Completo:', visita.nombreCompleto || 'No disponible'],
+            ['Rol:', visita.rol || 'No disponible'],
+            ['Fecha de Visita:', formatearFecha(visita.fechaVisita || visita.created_at)]
+        ];
+
+        infoBasica.forEach(([label, value]) => {
+            addDetailItem(label, value);
+        });
+
+        yPosition += 10;
+
+        // INFORMACIÓN ACADÉMICA
+        addSectionTitle('Información Académica');
+
+        const infoAcademica = [
+            ['Institución:', visita.institucion || 'No disponible'],
+            ['Año Académico:', visita.anoAcademico || 'No disponible'],
+            ['Adecuación:', visita.adecuacion || 'No disponible'],
+            ['Tipo de Adecuación:', visita.tipoAdecuacion || 'No disponible'],
+            ['¿Tiene beca?:', visita.beca === 'si' ? 'Sí' : visita.beca === 'no' ? 'No' : 'No especificado'],
+            ['Monto de Beca:', visita.montoBeca ? formatearMoneda(visita.montoBeca) : 'No disponible'],
+            ['Institución que otorga:', visita.institucionBeca || 'No disponible']
+        ];
+
+        infoAcademica.forEach(([label, value]) => {
+            addDetailItem(label, value);
+        });
+
+        // Comentarios académicos (texto largo)
+        if (visita.comentario) {
+            addDetailItem('Comentarios Académicos:', visita.comentario, true);
+        }
+
+        yPosition += 10;
+
+        // DATOS PERSONALES
+        addSectionTitle('Datos Personales');
+
+        const datosPersonales = [
+            ['Fecha de Nacimiento:', visita.fechaNacimiento ? formatearFecha(visita.fechaNacimiento) : 'No disponible'],
+            ['Edad:', visita.edad || 'No disponible'],
+            ['Cédula:', visita.cedula || 'No disponible'],
+            ['Teléfono Principal:', visita.telefono1 || 'No disponible'],
+            ['Teléfono Secundario:', visita.telefono2 || 'No disponible']
+        ];
+
+        datosPersonales.forEach(([label, value]) => {
+            addDetailItem(label, value);
+        });
+
+        // Lugar de residencia (texto largo)
+        if (visita.lugarResidencia) {
+            addDetailItem('Lugar de Residencia:', visita.lugarResidencia, true);
+        }
+
+        yPosition += 10;
+
+        // RESUMEN ECONÓMICO - Nueva página para asegurar que la tabla quepa completa
+        doc.addPage();
+        yPosition = 20;
+
+        addSectionTitle('Resumen Económico');
+
+        const economicData = [
+            ['INGRESOS', ''],
+            ['Ingresos Totales', formatearMoneda(visita.ingresos || 0)],
+            ['Salario', formatearMoneda(visita.salario || 0)],
+            ['Pensión', formatearMoneda(visita.pension || 0)],
+            ['Beca', formatearMoneda(visita.beca2 || 0)],
+            ['', ''],
+            ['GASTOS', ''],
+            ['Gastos Totales', formatearMoneda(visita.gastos || 0)],
+            ['Comida', formatearMoneda(visita.comida || 0)],
+            ['Agua', formatearMoneda(visita.agua || 0)],
+            ['Luz', formatearMoneda(visita.luz || 0)],
+            ['Internet/Cable', formatearMoneda(visita.internetCable || 0)],
+            ['Celular', formatearMoneda(visita.celular || 0)],
+            ['Transporte', formatearMoneda(visita.viaticos || 0)],
+            ['Salud', formatearMoneda(visita.salud || 0)],
+            ['Deudas', formatearMoneda(visita.deudas || 0)],
+            ['', ''],
+            ['BALANCE', formatearMoneda((visita.ingresos || 0) - (visita.gastos || 0))]
+        ];
+
+        autoTable(doc, {
+            startY: yPosition,
+            head: [],
+            body: economicData,
+            theme: 'grid',
+            styles: {
+                fontSize: 10,
+                cellPadding: 3
+            },
+            columnStyles: {
+                0: { cellWidth: 100 },
+                1: { halign: 'right', cellWidth: 70 }
+            },
+            tableWidth: 'wrap',
+            margin: { left: 14, right: 14 },
+            didParseCell: function (data) {
+                if (data.row.index === 0 || data.row.index === 6) {
+                    data.cell.styles.fontStyle = 'bold';
+                    data.cell.styles.fillColor = [240, 240, 240];
+                }
+                if (data.row.index === 17) {
+                    data.cell.styles.fontStyle = 'bold';
+                    data.cell.styles.fillColor = [220, 220, 220];
+                }
+            }
+        });
+
+        // Obtener la posición Y después de la tabla
+        yPosition = doc.lastAutoTable.finalY + 20;
+
+        // VIVIENDA
+        addSectionTitle('Información de Vivienda');
+
+        const vivienda = [
+            ['Tipo de Casa:', visita.casa || 'No disponible'],
+            ['Monto Casa/Alquiler:', visita.montoCasa ? formatearMoneda(visita.montoCasa) : 'No disponible']
+        ];
+
+        vivienda.forEach(([label, value]) => {
+            addDetailItem(label, value);
+        });
+
+        // Especificaciones de vivienda (texto largo)
+        if (visita.especificaciones) {
+            addDetailItem('Especificaciones de Vivienda:', visita.especificaciones, true);
+        }
+
+        // Comentarios de vivienda (texto largo)
+        if (visita.comentario4) {
+            addDetailItem('Comentarios sobre Vivienda:', visita.comentario4, true);
+        }
+
+        yPosition += 10;
+
+        // TRABAJO
+        addSectionTitle('Información Laboral');
+
+        const trabajo = [
+            ['¿Trabaja actualmente?:', visita.trabaja === 'si' ? 'Sí' : visita.trabaja === 'no' ? 'No' : 'No especificado'],
+            ['Empresa:', visita.empresa || 'No disponible'],
+            ['Salario:', visita.salario ? formatearMoneda(visita.salario) : 'No disponible']
+        ];
+
+        trabajo.forEach(([label, value]) => {
+            addDetailItem(label, value);
+        });
+
+        // Comentarios sobre trabajo (texto largo)
+        if (visita.comentario5) {
+            addDetailItem('Comentarios sobre Trabajo:', visita.comentario5, true);
+        }
+
+        yPosition += 10;
+
+        // INFORMACIÓN MÉDICA - Nueva página si hay contenido médico
+        if (visita.lesiones || visita.enfermedades || visita.tratamientos || visita.atencionMedica || visita.drogas || visita.disponibilidad) {
+            // Verificar si necesitamos nueva página para la sección médica
+            checkNewPage(50);
+
+            addSectionTitle('Información Médica');
+
+            const infoMedica = [
+                ['Lesiones:', visita.lesiones || 'No disponible'],
+                ['Enfermedades:', visita.enfermedades || 'No disponible'],
+                ['Tratamientos:', visita.tratamientos || 'No disponible'],
+                ['Atención Médica:', visita.atencionMedica || 'No disponible'],
+                ['Drogas/Medicamentos:', visita.drogas || 'No disponible'],
+                ['Disponibilidad:', visita.disponibilidad || 'No disponible']
+            ];
+
+            infoMedica.forEach(([label, value]) => {
+                if (value && value !== 'No disponible' && value.length > 50) {
+                    addDetailItem(label, value, true);
+                } else {
+                    addDetailItem(label, value);
+                }
+            });
+
+            yPosition += 10;
+        }
+
+        // INFORMACIÓN FAMILIAR - Nueva página si hay contenido familiar
+        if (visita.nombreFamiliar || visita.parentesco) {
+            // Verificar si necesitamos nueva página para la sección familiar
+            checkNewPage(50);
+
+            addSectionTitle('Información Familiar');
+
+            const infoFamiliar = [
+                ['Nombre del Familiar:', visita.nombreFamiliar || 'No disponible'],
+                ['Edad del Familiar:', visita.edadFamiliar || 'No disponible'],
+                ['Parentesco:', visita.parentesco || 'No disponible'],
+                ['Ingreso Mensual:', visita.ingresoMensual ? formatearMoneda(visita.ingresoMensual) : 'No disponible'],
+                ['Ocupación:', visita.ocupacion || 'No disponible'],
+                ['Lugar de Trabajo:', visita.lugarTrabajo || 'No disponible']
+            ];
+
+            infoFamiliar.forEach(([label, value]) => {
+                addDetailItem(label, value);
+            });
+        }
+
+        // PIE DE PÁGINA
+        // Ir a la última página para añadir el pie de página
+        const totalPages = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= totalPages; i++) {
+            doc.setPage(i);
+            doc.setFontSize(9);
+            doc.setTextColor(128, 128, 128);
+            doc.text(`Página ${i} de ${totalPages}`, 105, 285, { align: 'center' });
+            doc.text(`Documento generado el ${new Date().toLocaleDateString('es-ES')}`, 105, 290, { align: 'center' });
+        }
+
+        // Guardar el PDF
+        doc.save(`Visita_${visita.id}_${new Date().toISOString().split('T')[0]}.pdf`);
     };
 
     if (isLoading) {
@@ -194,34 +385,17 @@ function ViewVisita() {
     }
 
     return (
-        <div className="view-visita-master">
+        <div className='view-visita-master'>
             <div className="view-visita-container">
                 <div className="view-header">
                     <button onClick={handleVolver} className="btn-volver">← Volver</button>
                     <h1>Detalle de Visita #{visita.id}</h1>
                     <div className="header-actions">
-                        {!isEditing ? (
-                            <>
-                                <button onClick={handleEdit} className="btn-editar">Editar</button>
-                                <button onClick={handleDelete} className="btn-eliminar">Eliminar</button>
-                            </>
-                        ) : (
-                            <>
-                                <button 
-                                    onClick={handleSave} 
-                                    className="btn-guardar"
-                                    disabled={isSaving}
-                                >
-                                    {isSaving ? 'Guardando...' : 'Guardar'}
-                                </button>
-                                <button onClick={handleCancelEdit} className="btn-cancelar">Cancelar</button>
-                            </>
-                        )}
+                        <button onClick={generarPDF} className="btn-descargar-pdf">
+                            📄 Descargar PDF
+                        </button>
                     </div>
                 </div>
-
-                {error && <div className="error-message">{error}</div>}
-                {successMessage && <div className="success-message">{successMessage}</div>}
 
                 <div className="visita-details">
                     {/* Información Básica */}
@@ -229,34 +403,12 @@ function ViewVisita() {
                         <h2>Información Básica</h2>
                         <div className="detail-grid">
                             <div className="detail-item">
-                                <label>Expediente:</label>
-                                <span>{expediente?.user?.username || expediente?.user?.name || `ID: ${visita.expediente}`}</span>
-                            </div>
-                            <div className="detail-item">
                                 <label>Nombre Completo:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.nombreCompleto || ''}
-                                        onChange={(e) => handleInputChange('nombreCompleto', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.nombreCompleto || 'No disponible'}</span>
-                                )}
+                                <span>{visita.nombreCompleto || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Rol:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.rol || ''}
-                                        onChange={(e) => handleInputChange('rol', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.rol || 'No disponible'}</span>
-                                )}
+                                <span>{visita.rol || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Fecha de Visita:</label>
@@ -271,143 +423,46 @@ function ViewVisita() {
                         <div className="detail-grid">
                             <div className="detail-item">
                                 <label>Institución:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.institucion || ''}
-                                        onChange={(e) => handleInputChange('institucion', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.institucion || 'No disponible'}</span>
-                                )}
+                                <span>{visita.institucion || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Año Académico:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.anoAcademico || ''}
-                                        onChange={(e) => handleInputChange('anoAcademico', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.anoAcademico || 'No disponible'}</span>
-                                )}
+                                <span>{visita.anoAcademico || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Adecuación:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.adecuacion || ''}
-                                        onChange={(e) => handleInputChange('adecuacion', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.adecuacion || 'No disponible'}</span>
-                                )}
+                                <span>{visita.adecuacion || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Tipo de Adecuación:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.tipoAdecuacion || ''}
-                                        onChange={(e) => handleInputChange('tipoAdecuacion', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.tipoAdecuacion || 'No disponible'}</span>
-                                )}
+                                <span>{visita.tipoAdecuacion || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>¿Tiene beca?:</label>
-                                {isEditing ? (
-                                    <select
-                                        value={formData.beca || ''}
-                                        onChange={(e) => handleInputChange('beca', e.target.value)}
-                                        className="edit-input"
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="si">Sí</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                ) : (
-                                    <span>{visita.beca === 'si' ? 'Sí' : visita.beca === 'no' ? 'No' : 'No especificado'}</span>
-                                )}
+                                <span>{visita.beca === 'si' ? 'Sí' : visita.beca === 'no' ? 'No' : 'No especificado'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Monto de Beca:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="number"
-                                        value={formData.montoBeca || ''}
-                                        onChange={(e) => handleInputChange('montoBeca', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.montoBeca ? `₡${visita.montoBeca.toLocaleString()}` : 'No disponible'}</span>
-                                )}
+                                <span>{visita.montoBeca ? `₡${visita.montoBeca.toLocaleString()}` : 'No disponible'}</span>
                             </div>
                         </div>
-                        
+
                         <div className="detail-item full-width">
                             <label>Institución que otorga la Beca:</label>
-                            {isEditing ? (
-                                <input
-                                    type="text"
-                                    value={formData.institucionBeca || ''}
-                                    onChange={(e) => handleInputChange('institucionBeca', e.target.value)}
-                                    className="edit-input"
-                                />
-                            ) : (
-                                <span>{visita.institucionBeca || 'No disponible'}</span>
-                            )}
-                        </div>
-                        
-                        <div className="detail-item full-width">
-                            <label>Comentarios Académicos:</label>
-                            {isEditing ? (
-                                <textarea
-                                    value={formData.comentario || ''}
-                                    onChange={(e) => handleInputChange('comentario', e.target.value)}
-                                    className="edit-textarea"
-                                    rows="3"
-                                />
-                            ) : (
-                                <span>{visita.comentario || 'No disponible'}</span>
-                            )}
+                            <span>{visita.institucionBeca || 'No disponible'}</span>
                         </div>
 
-                        {(visita.adjuntoNotas || isEditing) && (
+                        <div className="detail-item full-width">
+                            <label>Comentarios Académicos:</label>
+                            <span>{visita.comentario || 'No disponible'}</span>
+                        </div>
+
+                        {visita.adjuntoNotas && (
                             <div className="detail-item full-width">
                                 <label>Adjunto de Notas:</label>
-                                {isEditing ? (
-                                    <div>
-                                        <input
-                                            type="file"
-                                            onChange={handleFileChange}
-                                            ref={fileInputRef}
-                                            className="file-input"
-                                        />
-                                        {formData.adjuntoNotas && (
-                                            <div className="file-preview">
-                                                <a href={formData.adjuntoNotas} target="_blank" rel="noopener noreferrer">
-                                                    Ver archivo actual
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                ) : (
-                                    visita.adjuntoNotas ? (
-                                        <a href={visita.adjuntoNotas} target="_blank" rel="noopener noreferrer" className="file-link">
-                                            Ver archivo adjunto
-                                        </a>
-                                    ) : (
-                                        <span>No hay archivo adjunto</span>
-                                    )
-                                )}
+                                <a href={visita.adjuntoNotas} target="_blank" rel="noopener noreferrer" className="file-link">
+                                    Ver archivo adjunto
+                                </a>
                             </div>
                         )}
                     </div>
@@ -418,169 +473,63 @@ function ViewVisita() {
                         <div className="detail-grid">
                             <div className="detail-item">
                                 <label>Fecha de Nacimiento:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="date"
-                                        value={formData.fechaNacimiento || ''}
-                                        onChange={(e) => handleInputChange('fechaNacimiento', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.fechaNacimiento ? formatearFecha(visita.fechaNacimiento) : 'No disponible'}</span>
-                                )}
+                                <span>{visita.fechaNacimiento ? formatearFecha(visita.fechaNacimiento) : 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Edad:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.edad || ''}
-                                        onChange={(e) => handleInputChange('edad', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.edad || 'No disponible'}</span>
-                                )}
+                                <span>{visita.edad || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Cédula:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.cedula || ''}
-                                        onChange={(e) => handleInputChange('cedula', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.cedula || 'No disponible'}</span>
-                                )}
+                                <span>{visita.cedula || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Teléfono Principal:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.telefono1 || ''}
-                                        onChange={(e) => handleInputChange('telefono1', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.telefono1 || 'No disponible'}</span>
-                                )}
+                                <span>{visita.telefono1 || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Teléfono Secundario:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.telefono2 || ''}
-                                        onChange={(e) => handleInputChange('telefono2', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.telefono2 || 'No disponible'}</span>
-                                )}
+                                <span>{visita.telefono2 || 'No disponible'}</span>
                             </div>
                             <div className="detail-item full-width">
                                 <label>Lugar de Residencia:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.lugarResidencia || ''}
-                                        onChange={(e) => handleInputChange('lugarResidencia', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
-                                    <span>{visita.lugarResidencia || 'No disponible'}</span>
-                                )}
+                                <span>{visita.lugarResidencia || 'No disponible'}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Información Médica */}
-                    <div className="detail-section">
-                        <h2>Información Médica</h2>
-                        <div className="detail-grid">
-                            <div className="detail-item">
-                                <label>Lesiones:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.lesiones || ''}
-                                        onChange={(e) => handleInputChange('lesiones', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                    {(visita.lesiones || visita.enfermedades || visita.tratamientos || visita.atencionMedica || visita.drogas || visita.disponibilidad) && (
+                        <div className="detail-section">
+                            <h2>Información Médica</h2>
+                            <div className="detail-grid">
+                                <div className="detail-item">
+                                    <label>Lesiones:</label>
                                     <span>{visita.lesiones || 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Enfermedades:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.enfermedades || ''}
-                                        onChange={(e) => handleInputChange('enfermedades', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                                </div>
+                                <div className="detail-item">
+                                    <label>Enfermedades:</label>
                                     <span>{visita.enfermedades || 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Tratamientos:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.tratamientos || ''}
-                                        onChange={(e) => handleInputChange('tratamientos', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                                </div>
+                                <div className="detail-item">
+                                    <label>Tratamientos:</label>
                                     <span>{visita.tratamientos || 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Atención Médica:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.atencionMedica || ''}
-                                        onChange={(e) => handleInputChange('atencionMedica', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                                </div>
+                                <div className="detail-item">
+                                    <label>Atención Médica:</label>
                                     <span>{visita.atencionMedica || 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Drogas/Medicamentos:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.drogas || ''}
-                                        onChange={(e) => handleInputChange('drogas', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                                </div>
+                                <div className="detail-item">
+                                    <label>Drogas/Medicamentos:</label>
                                     <span>{visita.drogas || 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Disponibilidad:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.disponibilidad || ''}
-                                        onChange={(e) => handleInputChange('disponibilidad', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="2"
-                                    />
-                                ) : (
+                                </div>
+                                <div className="detail-item">
+                                    <label>Disponibilidad:</label>
                                     <span>{visita.disponibilidad || 'No disponible'}</span>
-                                )}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
                     {/* Resumen Económico */}
                     <div className="detail-section">
@@ -607,7 +556,7 @@ function ViewVisita() {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div className="economic-block">
                                 <h3>Gastos</h3>
                                 <div className="economic-grid">
@@ -641,7 +590,7 @@ function ViewVisita() {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div className="economic-balance">
                                 <div className="balance-item">
                                     <label>Balance:</label>
@@ -653,174 +602,81 @@ function ViewVisita() {
                         </div>
                     </div>
 
-                    {/* Información de Vivienda y Trabajo */}
+                    {/* Información de Vivienda */}
                     <div className="detail-section">
-                        <h2>Vivienda y Trabajo</h2>
+                        <h2>Información de Vivienda</h2>
                         <div className="detail-grid">
                             <div className="detail-item">
                                 <label>Tipo de Casa:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.casa || ''}
-                                        onChange={(e) => handleInputChange('casa', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.casa || 'No disponible'}</span>
-                                )}
+                                <span>{visita.casa || 'No disponible'}</span>
                             </div>
                             <div className="detail-item">
                                 <label>Monto Casa/Alquiler:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="number"
-                                        value={formData.montoCasa || ''}
-                                        onChange={(e) => handleInputChange('montoCasa', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.montoCasa ? `₡${visita.montoCasa.toLocaleString()}` : 'No disponible'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>¿Trabaja actualmente?:</label>
-                                {isEditing ? (
-                                    <select
-                                        value={formData.trabaja || ''}
-                                        onChange={(e) => handleInputChange('trabaja', e.target.value)}
-                                        className="edit-input"
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="si">Sí</option>
-                                        <option value="no">No</option>
-                                    </select>
-                                ) : (
-                                    <span>{visita.trabaja === 'si' ? 'Sí' : visita.trabaja === 'no' ? 'No' : 'No especificado'}</span>
-                                )}
-                            </div>
-                            <div className="detail-item">
-                                <label>Empresa:</label>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={formData.empresa || ''}
-                                        onChange={(e) => handleInputChange('empresa', e.target.value)}
-                                        className="edit-input"
-                                    />
-                                ) : (
-                                    <span>{visita.empresa || 'No disponible'}</span>
-                                )}
+                                <span>{visita.montoCasa ? `₡${visita.montoCasa.toLocaleString()}` : 'No disponible'}</span>
                             </div>
                             <div className="detail-item full-width">
                                 <label>Especificaciones de Vivienda:</label>
-                                {isEditing ? (
-                                    <textarea
-                                        value={formData.especificaciones || ''}
-                                        onChange={(e) => handleInputChange('especificaciones', e.target.value)}
-                                        className="edit-textarea"
-                                        rows="3"
-                                    />
-                                ) : (
-                                    <span>{visita.especificaciones || 'No disponible'}</span>
-                                )}
+                                <span>{visita.especificaciones || 'No disponible'}</span>
+                            </div>
+                            <div className="detail-item full-width">
+                                <label>Comentarios sobre Vivienda:</label>
+                                <span>{visita.comentario4 || 'No disponible'}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Información Laboral */}
+                    <div className="detail-section">
+                        <h2>Información Laboral</h2>
+                        <div className="detail-grid">
+                            <div className="detail-item">
+                                <label>¿Trabaja actualmente?:</label>
+                                <span>{visita.trabaja === 'si' ? 'Sí' : visita.trabaja === 'no' ? 'No' : 'No especificado'}</span>
+                            </div>
+                            <div className="detail-item">
+                                <label>Empresa:</label>
+                                <span>{visita.empresa || 'No disponible'}</span>
+                            </div>
+                            <div className="detail-item">
+                                <label>Salario:</label>
+                                <span>{visita.salario ? `₡${visita.salario.toLocaleString()}` : 'No disponible'}</span>
+                            </div>
+                            <div className="detail-item full-width">
+                                <label>Comentarios sobre Trabajo:</label>
+                                <span>{visita.comentario5 || 'No disponible'}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Información Familiar */}
-                    {(visita.nombreFamiliar || visita.parentesco || isEditing) && (
+                    {(visita.nombreFamiliar || visita.parentesco) && (
                         <div className="detail-section">
                             <h2>Información Familiar</h2>
                             <div className="detail-grid">
                                 <div className="detail-item">
                                     <label>Nombre del Familiar:</label>
-                                    {isEditing ? (
-                                        <input
-                                            type="text"
-                                            value={formData.nombreFamiliar || ''}
-                                            onChange={(e) => handleInputChange('nombreFamiliar', e.target.value)}
-                                            className="edit-input"
-                                        />
-                                    ) : (
-                                        <span>{visita.nombreFamiliar || 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.nombreFamiliar || 'No disponible'}</span>
                                 </div>
                                 <div className="detail-item">
                                     <label>Edad del Familiar:</label>
-                                    {isEditing ? (
-                                        <input
-                                            type="text"
-                                            value={formData.edadFamiliar || ''}
-                                            onChange={(e) => handleInputChange('edadFamiliar', e.target.value)}
-                                            className="edit-input"
-                                        />
-                                    ) : (
-                                        <span>{visita.edadFamiliar || 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.edadFamiliar || 'No disponible'}</span>
                                 </div>
                                 <div className="detail-item">
                                     <label>Parentesco:</label>
-                                    {isEditing ? (
-                                        <input
-                                            type="text"
-                                            value={formData.parentesco || ''}
-                                            onChange={(e) => handleInputChange('parentesco', e.target.value)}
-                                            className="edit-input"
-                                        />
-                                    ) : (
-                                        <span>{visita.parentesco || 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.parentesco || 'No disponible'}</span>
                                 </div>
                                 <div className="detail-item">
                                     <label>Ingreso Mensual del Familiar:</label>
-                                    {isEditing ? (
-                                        <input
-                                            type="number"
-                                            value={formData.ingresoMensual || ''}
-                                            onChange={(e) => handleInputChange('ingresoMensual', e.target.value)}
-                                            className="edit-input"
-                                        />
-                                    ) : (
-                                        <span>{visita.ingresoMensual ? `₡${visita.ingresoMensual.toLocaleString()}` : 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.ingresoMensual ? `₡${visita.ingresoMensual.toLocaleString()}` : 'No disponible'}</span>
                                 </div>
                                 <div className="detail-item full-width">
                                     <label>Ocupación del Familiar:</label>
-                                    {isEditing ? (
-                                        <textarea
-                                            value={formData.ocupacion || ''}
-                                            onChange={(e) => handleInputChange('ocupacion', e.target.value)}
-                                            className="edit-textarea"
-                                            rows="2"
-                                        />
-                                    ) : (
-                                        <span>{visita.ocupacion || 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.ocupacion || 'No disponible'}</span>
                                 </div>
                                 <div className="detail-item full-width">
                                     <label>Lugar de Trabajo del Familiar:</label>
-                                    {isEditing ? (
-                                        <textarea
-                                            value={formData.lugarTrabajo || ''}
-                                            onChange={(e) => handleInputChange('lugarTrabajo', e.target.value)}
-                                            className="edit-textarea"
-                                            rows="2"
-                                        />
-                                    ) : (
-                                        <span>{visita.lugarTrabajo || 'No disponible'}</span>
-                                    )}
+                                    <span>{visita.lugarTrabajo || 'No disponible'}</span>
                                 </div>
-                                {isEditing && (
-                                <div className="save-button-container">
-                                    <button 
-                                        onClick={handleSave} 
-                                        className="btn-guardar-cambios"
-                                        disabled={isSaving}
-                                    >
-                                        {isSaving ? 'Guardando...' : 'Guardar Todos los Cambios'}
-                                    </button>
-                                </div>)}
                             </div>
                         </div>
                     )}

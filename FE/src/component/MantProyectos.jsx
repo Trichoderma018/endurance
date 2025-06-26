@@ -3,8 +3,7 @@ import Llamados from '../services/Llamados'
 import Navbar from './navbar'
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
-import '../style/MantProyectos.css' // Asegúrate de tener este archivo CSS
-// Asegúrate de tener este archivo CSS
+//import '../style/MantAdmin.css'
 
 function MantProyectos() {
   // Estados del formulario
@@ -269,11 +268,11 @@ function MantProyectos() {
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>
       
       <form onSubmit={handleSubmit}>
-        <div className="formulario">
-          <div className="campo">
+        <div className="formulario-mant-proyectos">
+          <div className="campo-formulario">
             <label htmlFor="nombreProyecto"></label>
             <input
-              className="in"
+              className="inp-nombreProyecto"
               id="nombreProyecto"
               type="text"
               value={nombreProyecto}
@@ -282,12 +281,12 @@ function MantProyectos() {
               required
             />
           </div>
-          
-          <div className="campo">
+
+          <div className="campo-formulario">
             <label htmlFor="usuarios">Usuarios Asignados</label>
             <br />
             <select
-              className="in"
+              className="inp-usuarios"
               id="usuarios"
               value={usuarios}
               onChange={handleUsuarioChange}
@@ -304,11 +303,11 @@ function MantProyectos() {
             </select>
           </div>
           
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="objetivo">Objetivo *</label>
             <br />
             <textarea
-              className="in"
+              className="inp-objetivo"
               id="objetivo"
               value={objetivo}
               onChange={(e) => setObjetivo(e.target.value)}
@@ -318,11 +317,11 @@ function MantProyectos() {
             />
           </div>
 
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="imagen">Imagen del Proyecto</label>
             <br />
             <input
-              className="in"
+              className="inp-imagen"
               id="imagen"
               type="file"
               accept="image/*"
@@ -336,11 +335,11 @@ function MantProyectos() {
             )}
           </div>
 
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="descripcion">Descripción</label>
             <br />
             <textarea
-              className="in"
+              className="inp-descripcion"
               id="descripcion"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
@@ -349,10 +348,10 @@ function MantProyectos() {
             />
           </div>
           
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="fechaInicio">Fecha de Inicio *</label>
             <input
-              className='in'
+              className='inp-fechaInicio'
               id="fechaInicio"
               type="date"
               value={fechaInicio}
@@ -361,10 +360,10 @@ function MantProyectos() {
             />
           </div>
           
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="fechaFin">Fecha de Fin *</label>
             <input
-              className='in'
+              className='inp-fechaFin'
               id="fechaFin"
               type="date"
               value={fechaFin}
@@ -373,7 +372,7 @@ function MantProyectos() {
             />
           </div>
 
-          <div className="campo">
+          <div className="campo-formulario">
             <label htmlFor="activo">Estado del Proyecto *</label>
             <select
               id="activo"
@@ -387,10 +386,10 @@ function MantProyectos() {
             </select>
           </div>
           
-          <div className="botones">
+          <div className="botones-formulario">
             <button 
               type="submit"
-              className="button"
+              className="boto-submit"
               disabled={isLoading}
             >
               {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Crear') + ' Proyecto'}
@@ -400,7 +399,7 @@ function MantProyectos() {
               <button 
                 type="button"
                 onClick={limpiarFormulario}
-                className="btn-secondary"
+                className="boto-secondary"
                 disabled={isLoading}
               >
                 Cancelar
@@ -441,14 +440,14 @@ function MantProyectos() {
               <td>
                 <button 
                   onClick={() => editarProyecto(proyecto)}
-                  className="btn-edit"
+                  className="boto-edit"
                   disabled={isLoading}
                 >
                   Editar
                 </button>
                 <button 
                   onClick={() => eliminarProyecto(proyecto.id)}
-                  className="btn-delete"
+                  className="boto-delete"
                   disabled={isLoading}
                 >
                   Eliminar

@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Navbar from './navbar'
 import Sidebar from './Sidebar'
-import '../style/inputspeed.css' // Asegúrate de tener este archivo CSS
-import '../style/boton.css' // Asegúrate de tener este archivo CSS
+import '../style/MantStaff.css'
 
 function MantStaff() {
     const [nombreCompleto, setNombreCompleto] = React.useState('')
@@ -155,8 +154,8 @@ function MantStaff() {
             <Navbar/>
             <Sidebar/>
             <h2>{editMode ? 'Editar Staff' : 'Crear Staff'}</h2>
-            <div className="formulario">
-                <div className="campo">
+            <div className="formu">
+                <div className="campo-nombre">
                     <label htmlFor="nombreCompleto"></label>
                     <input
                         id="nombreCompleto"
@@ -165,11 +164,11 @@ function MantStaff() {
                         onChange={handleNombreCompleto}
                         placeholder="Nombre Completo"
                         maxLength={150}
-                        className="in"
+                        className="input-nombreCompleto"
                     />
                 </div>
                 <br />
-                <div className="campo">
+                <div className="campo-email">
                     <label htmlFor="email"></label>
                     <input
                         id="email"
@@ -177,11 +176,11 @@ function MantStaff() {
                         value={email}
                         onChange={handleEmail}
                         placeholder="Email"
-                        className="in"
+                        className="input-email"
                     />
                 </div>
                 <br />
-                <div className="campo">
+                <div className="campo-cargo">
                     <label htmlFor="cargo"></label>
                     <input
                         id="cargo"
@@ -190,11 +189,11 @@ function MantStaff() {
                         onChange={handleCargo}
                         placeholder="Cargo"
                         maxLength={30}
-                        className="in"
+                        className="input-cargo"
                     />
                 </div>
                 <br />
-                <div className="campo">
+                <div className="campo-departamento">
                     <label htmlFor="departamento"></label>
                     <input
                         id="departamento"
@@ -203,11 +202,11 @@ function MantStaff() {
                         onChange={handleDepartamento}
                         placeholder="Departamento"
                         maxLength={30}
-                        className="in"
+                        className="input-departamento"
                     />
                 </div>
 
-                <div className="campo">
+                <div className="campo-user">
                     <label htmlFor="user"></label>
                     <select
                         id="user"
@@ -223,7 +222,7 @@ function MantStaff() {
                     </select>
                 </div>
                 
-                <div className="campo">
+                <div className="campo-activo">
                     <label htmlFor="activo">
                         <input
                             id="activo"
@@ -235,10 +234,10 @@ function MantStaff() {
                     </label>
                 </div>
                 
-                <div className="botones">
+                <div className="botone-formulario">
                     <button 
                         onClick={handleSubmit}
-                        className="button"
+                        className="bot-submit"
                     >
                         {editMode ? 'Actualizar' : 'Crear'} Staff
                     </button>
@@ -246,7 +245,7 @@ function MantStaff() {
                     {editMode && (
                         <button 
                             onClick={limpiarFormulario}
-                            className="btn-secondary"
+                            className="bot-secondary"
                         >
                             Cancelar
                         </button>
@@ -292,13 +291,13 @@ function MantStaff() {
                             <td>
                                 <button 
                                     onClick={() => editarStaff(miembro)}
-                                    className="btn-edit"
+                                    className="boto-edit"
                                 >
                                     Editar
                                 </button>
                                 <button 
                                     onClick={() => eliminarStaff(miembro.id)}
-                                    className="btn-delete"
+                                    className="boto-delete"
                                 >
                                     Eliminar
                                 </button>
