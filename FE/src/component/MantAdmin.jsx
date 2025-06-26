@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+
 import Sidebar from './Sidebar'
 
 
@@ -130,7 +130,7 @@ function MantAdmin() {
 
   return (
     <div className='mant-admin'>
-      <Navbar/>
+   
 
     
       <Sidebar/>

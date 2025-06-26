@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+
 import Sidebar from './Sidebar'
 import '../style/MantStaff.css'
 
@@ -151,7 +151,7 @@ function MantStaff() {
 
     return (
         <div>
-            <Navbar/>
+         
             <Sidebar/>
             <h2>{editMode ? 'Editar Staff' : 'Crear Staff'}</h2>
             <div className="formu">
