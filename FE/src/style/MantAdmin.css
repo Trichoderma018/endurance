@@ -1,0 +1,165 @@
+/* MantAdmin.css */
+.mant-admin { 
+  margin-left: 210px;
+  padding: 40px;
+  background: #f5f7fa;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+.sidebar-container:hover ~ .mant-admin { margin-left: 270px; }
+
+.mant-admin h2 { 
+  font-size: 24px;
+  color: #0d0c22;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.mant-admin-formulario, .tabla-administradores { 
+  max-width: 900px;
+  margin: 0 auto 30px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.formulario-campo { margin-bottom: 20px; }
+
+.input-nombreCompleto, .input-email, .input-user { 
+  width: 100%;
+  max-width: 400px;
+  line-height: 28px;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-bottom-color: #777;
+  border-radius: 1rem;
+  background: transparent;
+  color: #0d0c22;
+  transition: 0.3s;
+  font-size: 16px;
+}
+.input-nombreCompleto:focus, .input-email:focus, .input-user:focus { 
+  outline: none;
+  border-color: #7a9cc6;
+  box-shadow: 0 0 10px rgba(122,156,198,0.2);
+}
+.input-nombreCompleto::placeholder, .input-email::placeholder { color: #0d0c22; opacity: 0.7; }
+.input-nombreCompleto:focus::placeholder, .input-email:focus::placeholder { opacity: 0; }
+
+select.input-user {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3rem;
+  appearance: none;
+}
+
+.formulario-botones { 
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.boton-submit, .boton-cancelar { 
+  display: inline-block;
+  padding: .8rem 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.boton-submit { 
+  background: #ff3636;
+  color: #fff;
+  border: none;
+}
+.boton-submit::before, .boton-submit::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: 0.3s;
+}
+.boton-submit::before {
+  left: 5px;
+  top: 5px;
+  border-top: 2px solid #ff3636;
+  border-left: 2px solid #ff3636;
+}
+.boton-submit::after {
+  right: 5px;
+  bottom: 5px;
+  border-bottom: 2px solid #ff3636;
+  border-right: 2px solid #ff3636;
+}
+.boton-submit:hover { box-shadow: 4px 4px 10px rgb(184,184,184); }
+.boton-submit:hover::before, .boton-submit:hover::after {
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+}
+
+.boton-cancelar { 
+  background: transparent;
+  color: #ff3636;
+  border: 1px solid #ff3636;
+}
+.boton-cancelar:hover { 
+  background: #ff3636;
+  color: white;
+}
+
+.tabla-administradores { 
+  width: 100%;
+  overflow-x: auto;
+}
+.tabla-administradores thead { background: #f8f9fa; }
+.tabla-administradores th { 
+  padding: 15px;
+  text-align: left;
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.tabla-administradores td { padding: 15px; color: #0d0c22; }
+.tabla-administradores tbody tr { 
+  border-bottom: 1px solid #f0f0f0;
+  transition: 0.2s;
+}
+.tabla-administradores tbody tr:hover { background: #f8f9fa; }
+
+.boton-edit, .boton-delete { 
+  padding: .5rem 1rem;
+  margin: 0 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.boton-edit { background: #edf10b; color: #333; }
+.boton-delete { background: #ff2929; }
+.boton-edit:hover, .boton-delete:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .mant-admin { margin-left: 0; padding: 20px; }
+  .mant-admin-formulario, .tabla-administradores { padding: 20px; }
+  .formulario-botones { flex-direction: column; }
+  .boton-submit, .boton-cancelar { width: 100%; }
+  .input-nombreCompleto, .input-email, .input-user { max-width: 100%; }
+}
