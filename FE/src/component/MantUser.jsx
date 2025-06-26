@@ -164,7 +164,7 @@ function MantUser() {
 
     return (
         <div>
-            <Navbar/>
+            
             <Sidebar/>
             <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
 //import '../style/MantAdmin.css'
@@ -263,7 +263,7 @@ function MantProyectos() {
 
   return (
     <div className="mant-proyectos">
-      <Navbar/>
+ 
       <Sidebar/>
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>
       
