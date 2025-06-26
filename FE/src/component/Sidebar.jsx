@@ -31,7 +31,10 @@ function Sidebar() {
           Configuración
 
         </Link>
-
+        <Link to="/null" className="btn-sidebar">
+          <i className="fas fa-sign-out-alt"></i>
+          Cerrar Sesión
+        </Link>
       </div>
   </div>
  );
