@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-import "../style/ExpeInput.css"
 import uploadImageToS3 from './credenciales'
 import Navbar from './Navbar'
-
+import '../style/proyectos.css'
 
 function Proyectos() {
     // Estados del formulario
@@ -246,36 +245,32 @@ function Proyectos() {
     }
 
     return (
-        <div className='fondo'>
-            <Navbar/>
-
-            <div className='barra'>
-
-                <header className='Endurance'>ENDURANCE</header>
+        <div className='proyectos-fondo'>
+            <div className='proyectos-barra'>
+                <header className='proyectos-endurance'>ENDURANCE</header>
             </div>
+            <Navbar/>
             
-            <div className="registro-container">
-                <h2>{editMode ? 'EDITAR PROYECTO' : 'PROYECTOS'}</h2>
-                <form onSubmit={handleSubmit}>
+            <div className="proyectos-container">
+                <h2 className="proyectos-titulo">{editMode ? 'EDITAR PROYECTO' : 'PROYECTOS'}</h2>
+                <form className="proyectos-form" onSubmit={handleSubmit}>
                     <input 
                         value={nombreProyecto}
                         onChange={(e) => setNombreProyecto(e.target.value)} 
-                        className='input' 
+                        className='proyectos-input' 
                         type="text" 
                         name="nombreProyecto" 
                         placeholder="Nombre del Proyecto" 
                         required
                     />
-                    <br />
 
                     <select 
-                        className='input' 
+                        className='proyectos-select-multiple' 
                         name="usuarios" 
                         value={usuariosProyecto}
                         onChange={handleUsuarioChange}
                         multiple
                         size="5"
-                        style={{height: '120px'}}
                     >
                         <option value="" disabled>Seleccionar Usuarios (Ctrl+Click para múltiples)</option>
                         {usuarios && usuarios.length > 0 && usuarios.map((usuario) => (
@@ -284,69 +279,69 @@ function Proyectos() {
                             </option>
                         ))}
                     </select>
-                    <br />
 
                     <textarea 
                         value={objetivoProyecto}
                         onChange={(e) => setObjetivoProyecto(e.target.value)} 
-                        className='input' 
+                        className='proyectos-textarea' 
                         name="objetivo" 
                         placeholder="Objetivo del Proyecto" 
                         rows="4"
                         required
                     />
-                    <br />
 
-                    <div className="campo">
-                        <label htmlFor="imagen">Imagen del Proyecto</label> <br />
+                    <div className="proyectos-campo-imagen">
+                        <label className="proyectos-label" htmlFor="imagen">Imagen del Proyecto</label>
                         <input
-                        id="imagen"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        ref={fileInputRef}
+                            id="imagen"
+                            className="proyectos-file-input"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            ref={fileInputRef}
                         />
                         {imagenProyecto && (
-                        <div style={{marginTop: '10px'}}>
-                            <img src={imagenProyecto} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
-                        </div>
+                            <div className="proyectos-preview-container">
+                                <img 
+                                    src={imagenProyecto} 
+                                    alt="Preview" 
+                                    className="proyectos-preview-img"
+                                />
+                            </div>
                         )}
                     </div>
 
                     <textarea 
                         value={descripcionProyecto}
                         onChange={(e) => setDescripcionProyecto(e.target.value)} 
-                        className='input' 
+                        className='proyectos-textarea' 
                         name="descripcion" 
                         placeholder="Descripción del Proyecto" 
                         rows="4"
                     />
-                    <br />
 
-                    <label>Fecha de Inicio:</label>
+                    <label className="proyectos-label">Fecha de Inicio:</label>
                     <input 
-                        className='input' 
+                        className='proyectos-input' 
                         type="date" 
                         name="fechaInicio" 
                         value={fechaInicioProyecto}
                         onChange={(e) => setFechaInicioProyecto(e.target.value)} 
                         required 
                     />
-                    <br />
 
-                    <label>Fecha de Fin:</label>
+                    <label className="proyectos-label">Fecha de Fin:</label>
                     <input 
-                        className='input' 
+                        className='proyectos-input' 
                         type="date" 
                         name="fechaFin" 
                         value={fechaFinProyecto}
                         onChange={(e) => setFechaFinProyecto(e.target.value)} 
                         required 
                     />
-                    <br />
 
                     <select 
-                        className='input' 
+                        className='proyectos-select' 
                         value={activoProyecto} 
                         onChange={(e) => setActivoProyecto(e.target.value)}
                         required
@@ -355,23 +350,29 @@ function Proyectos() {
                         <option value="inactivo">Inactivo</option>
                         <option value="activo">Activo</option>
                     </select>
-                    <br />
 
-                    <button type="submit" disabled={isLoading}>
-                        {editMode ? 'Actualizar Proyecto' : 'Crear Proyecto'}
-                    </button>
-
-                    {editMode && (
-                        <button
-                            type="button"
-                            onClick={limpiarFormulario}
+                    <div className="proyectos-botones">
+                        <button 
+                            className="proyectos-btn-submit" 
+                            type="submit" 
+                            disabled={isLoading}
                         >
-                            Cancelar
+                            {editMode ? 'Actualizar Proyecto' : 'Crear Proyecto'}
                         </button>
-                    )}
+
+                        {editMode && (
+                            <button
+                                className="proyectos-btn-cancelar"
+                                type="button"
+                                onClick={limpiarFormulario}
+                            >
+                                Cancelar
+                            </button>
+                        )}
+                    </div>
                     
                     {isLoading && (
-                        <div className="spinner">
+                        <div className="proyectos-spinner">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -381,45 +382,57 @@ function Proyectos() {
                         </div>
                     )}
                     
-                    {error && <p className="error">{error}</p>}
+                    {error && <p className="proyectos-error">{error}</p>}
                 </form>
             </div>
 
-            <div className="registro-container">
-                <h3>Lista de Proyectos</h3>
-                <table style={{width: '100%', borderCollapse: 'collapse'}}>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Usuarios</th>
-                            <th>Objetivo</th>
-                            <th>Fecha Inicio</th>
-                            <th>Fecha Fin</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {proyectos && proyectos.length > 0 && proyectos.map((proyecto) => (
-                            <tr key={`proyecto-${proyecto.id}`}>
-                                <td>{proyecto.nombreProyecto}</td>
-                                <td>{obtenerNombresUsuarios(proyecto.usuarios)}</td>
-                                <td>{proyecto.objetivo?.substring(0, 50)}...</td>
-                                <td>{proyecto.fechaInicio}</td>
-                                <td>{proyecto.fechaFin}</td>
-                                <td>{proyecto.activo ? "Activo" : "Inactivo"}</td>
-                                <td>
-                                    <button onClick={() => editarProyecto(proyecto)}>
-                                        Editar
-                                    </button>
-                                    <button onClick={() => eliminarProyecto(proyecto.id)}>
-                                        Eliminar
-                                    </button>
-                                </td>
+            <div className="proyectos-container">
+                <h3 className="proyectos-subtitulo">Lista de Proyectos</h3>
+                <div className="proyectos-tabla-container">
+                    <table className="proyectos-tabla">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Usuarios</th>
+                                <th>Objetivo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {proyectos && proyectos.length > 0 && proyectos.map((proyecto) => (
+                                <tr key={`proyecto-${proyecto.id}`}>
+                                    <td>{proyecto.nombreProyecto}</td>
+                                    <td>{obtenerNombresUsuarios(proyecto.usuarios)}</td>
+                                    <td>{proyecto.objetivo?.substring(0, 50)}...</td>
+                                    <td>{proyecto.fechaInicio}</td>
+                                    <td>{proyecto.fechaFin}</td>
+                                    <td>
+                                        <span className={`proyectos-estado ${proyecto.activo ? 'proyectos-estado-activo' : 'proyectos-estado-inactivo'}`}>
+                                            {proyecto.activo ? "Activo" : "Inactivo"}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button 
+                                            className="proyectos-btn-editar"
+                                            onClick={() => editarProyecto(proyecto)}
+                                        >
+                                            Editar
+                                        </button>
+                                        <button 
+                                            className="proyectos-btn-eliminar"
+                                            onClick={() => eliminarProyecto(proyecto.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
