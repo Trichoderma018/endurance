@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './navbar'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import '../style/MantUser.css'
 
