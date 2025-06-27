@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-
+import "../style/MantAdmin.css"
 import Sidebar from './Sidebar'
 
 

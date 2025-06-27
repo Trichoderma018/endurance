@@ -3,7 +3,7 @@ import MantProyectos from '../component/MantProyectos'
 
 function MantenimientoProyectos() {
   return (
-    <div>
+    <div style={{position: 'relative', top: '680px', width: '100%'}}>
         <MantProyectos/>
     </div>
   )

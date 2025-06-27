@@ -4,7 +4,7 @@ import MantAdmin from '../component/MantAdmin'
 
 function MantenimientoAdmin() {
   return (
-    <div>
+    <div style={{position: 'relative', top: '120px', width: '100%'}}>
         <MantAdmin/>
     </div>
   )

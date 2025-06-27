@@ -4,7 +4,7 @@ function MantenimientoStaff() {
 
 
   return (
-    <div>
+    <div style={{position: 'relative', top: '150px', width: '100%', justifycontent: 'center'}}>
       <MantStaff />
     </div>
   )

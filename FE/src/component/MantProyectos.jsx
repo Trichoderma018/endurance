@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Llamados from '../services/Llamados'
-
+import "../style/MantProyectos.css"
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
 //import '../style/MantAdmin.css'
