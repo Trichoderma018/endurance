@@ -6,7 +6,7 @@
  border-bottom-color: #777;
  padding: .2rem 0;
  outline: none;
- background-color: transparent;
+ background-color: black;
  color: #0d0c22;
 }
 
@@ -26,7 +26,11 @@
 }
 
 
-
+/* colocacion y acomodo */
+.colocation{
+  position: relative;
+  bottom: -47%;
+}
 
 
 /* Botones */

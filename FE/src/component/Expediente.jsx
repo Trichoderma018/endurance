@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
-import '../style/fondo.css';
+
 import Navbar from './Navbar';
 import Cards from './Cards';
 import Search from './Search';
@@ -38,10 +38,9 @@ function Expediente() {
       <Navbar />
       <div className='tablita'>
       <Search />
-        <div className='acomodar10'>
+     
       <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
       
-        </div>
       </div>
       </div>
         <h2>Lista de Expediente</h2>

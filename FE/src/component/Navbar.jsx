@@ -11,24 +11,28 @@ function Navbar() {
 
     <nav >
         <div className="cont-rutas">
-            <label><Link to={"/Expediente"}>
+            <label>
+                <Link to={"/Expediente"}>
                 <input
                 defaultValue="expediente"
                 name="value-radio"
                 id="value-2"
                 type="button"
                 className='bord'
-            /></Link>
+            />
+            </Link>
             </label>
             
-            <label><Link to={"/proyectos"}>
+            <label>
+                <Link to={"/proyectos"}>
                 <input
                 defaultValue="proyecto"
                 name="value-radio"
                 id="value-3"
                 type="button"
                 className='bord'
-            /></Link>
+            />
+            </Link>
             </label>
             
             <label>
@@ -39,9 +43,10 @@ function Navbar() {
                 id="value-3"
                 type="button"
                 className='bord'
-            /></Link>
+            />
+            </Link>
         </label> 
-        <label>
+        <label className='borrado'>
             <div className='movete'>
                 <Link to="/null" className="btn-sidebar">
                 <i className="fas fa-sign-out-alt"></i>

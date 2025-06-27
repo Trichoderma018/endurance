@@ -35,11 +35,11 @@ function Sidebar() {
           <i className="fas fa-sign-out-alt"></i>
           Cerrar Sesión
         </Link>
-        <br />
-          <Link to="/Expediente" className="btn-sidebar">
+     <div className='colocation'>
+        <Link to="/Expediente" className="btn-sidebar">
           <i className="fas -sign-out-alt"></i>
           volver
-        </Link>
+        </Link></div>
       </div>
   </div>
  );
