@@ -202,14 +202,11 @@ function MantAdmin() {
       <h2>Lista de Administradores</h2>
       <table className="tabla-administradores">
           <thead>
-              <tr>
-                  <th>Nombre Completo</th>
-                  <br />
-                  <th>Email</th>
-                  <br />
-                  <th>Usuario</th>
-                  <br />
-                  <th>Acciones</th>
+              <tr className="tabla-titulos">
+                  <th className='nombre'>Nombre Completo</th>
+                  <th className='email'>Email</th>
+                  <th className='usuario'>Usuario</th>
+                  <th className='acciones'>Acciones</th>
               </tr>
           </thead>
         <tbody>

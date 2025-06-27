@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../style/Navbar.css'
-import '../style/fondo.css'
+
 
 function Navbar() {
   return (

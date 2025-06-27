@@ -10,7 +10,7 @@ function Cards({id, nombre, imagen, descripcion, rol , view}) {
     localStorage.setItem('id', id);
   }
   return (
-  <div>
+  <div className='card-container'>
     <div className="card">
       {imagen != "" ? <img className="image" src={imagen} alt={PersonIcon} /> : <PersonIcon className="image" style={{ fontSize: 100 }} />}
         <p>{nombre}</p>
