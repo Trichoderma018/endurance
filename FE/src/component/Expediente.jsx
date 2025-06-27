@@ -41,7 +41,8 @@ function Expediente() {
      
       <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
       
-      </div>
+        </div>
+ 
       </div>
         <h2>Lista de Expediente</h2>
       <div className='barra'></div>
