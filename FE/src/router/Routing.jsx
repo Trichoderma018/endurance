@@ -15,6 +15,7 @@ import PageVisita from '../pages/PageVisita';
 import PageViewVisita from '../pages/PageViewVisita';
 import Confits from '../pages/Confits';
 import Cerrar from '../pages/Cerrar';
+import Exit from '../component/Exit';
 
 
 
@@ -63,6 +64,7 @@ function Routing() {
 
             {/* cerrar sesions */}
             <Route path='/null' element={<Cerrar/>}/>
+            <Route path='/devolver' element={<Exit/>}/>
 
         </Routes>
       </Router>

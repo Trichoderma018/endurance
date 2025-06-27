@@ -35,6 +35,11 @@ function Sidebar() {
           <i className="fas fa-sign-out-alt"></i>
           Cerrar Sesión
         </Link>
+        <br />
+          <Link to="/Expediente" className="btn-sidebar">
+          <i className="fas -sign-out-alt"></i>
+          volver
+        </Link>
       </div>
   </div>
  );
