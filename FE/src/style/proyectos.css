@@ -17,6 +17,9 @@
   background-color: var(--gris-claro);
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 130%;
+  position: relative;
+  left: -14.7%;
 }
 
 /* Barra superior */

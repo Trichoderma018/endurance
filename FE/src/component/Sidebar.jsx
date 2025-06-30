@@ -26,7 +26,7 @@ function Sidebar() {
           <i className="fas fa-user"></i>
           Mantenimiento Proyectos
         </Link>
-        <Link to="/configuracion" className="btn-sidebar">
+        <Link to="/configurations" className="btn-sidebar">
           <i className="fas fa-cog"></i>
           Configuración
 

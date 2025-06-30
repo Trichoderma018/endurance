@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
+import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Cards from './Cards';
@@ -33,9 +34,13 @@ function Expediente() {
 
   return (
     <div className='fondo'>
+      
       <div className='static'>
       <header className='Endurance'>ENDURANCE</header>
       <Navbar />
+      <label className='borrado'>
+
+        </label>
       <div className='tablita'>
       <Search />
      
@@ -48,7 +53,7 @@ function Expediente() {
       <div className='barra'></div>
 
       <div className="registro-container">
-
+      
         {isLoading && <p className="mensaje-cargando">Cargando expedientes...</p>}
         {error && <p className="mensaje-error">{error}</p>}
 
@@ -67,6 +72,7 @@ function Expediente() {
           <p className="mensaje-vacio">No hay expedientes disponibles.</p>
         )}
       </div>
+      
     </div>
   );
 }

@@ -18,7 +18,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-2"
                 type="button"
-                className='bord'
+                className='brecks'
             />
             </Link>
             </label>
@@ -30,7 +30,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='bord'
+                className='brecks'
             />
             </Link>
             </label>
@@ -42,18 +42,16 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='bord'
+                className='brecks'
             />
             </Link>
         </label> 
-        <label className='borrado'>
-            <div className='movete'>
-                <Link to="/null" className="btn-sidebar">
+            <div className='afuera'>
+                <Link to="/null" className="boton">
                 <i className="fas fa-sign-out-alt"></i>
                 Cerrar Sesión
                 </Link>
           </div>
-        </label>
     </div>
 </nav>
 </div>

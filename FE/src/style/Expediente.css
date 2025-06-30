@@ -4,6 +4,14 @@
   height: auto;
 }
 
+.afuera{
+  position: relative;
+  left: 25%;
+  background-color: white;
+
+
+}
+
 
 .buttong {
   position: relative;
@@ -24,7 +32,8 @@ button:hover {
 
 .Endurance{
   color: #193666;
-  
+  position: relative;
+  right: -41%;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: left;
@@ -121,4 +130,34 @@ button:hover {
 .acomodar10{
   position: relative;
 
+}
+
+/* fondo de pantalla */
+
+.cosmic-plasma {
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    from 45deg,
+    rgba(255, 0, 0, 0.4),
+    rgba(0, 0, 255, 0.4),
+    rgba(255, 0, 255, 0.4),
+    rgba(0, 255, 0, 0.4),
+    rgba(255, 0, 0, 0.4)
+  );
+  filter: url(#plasma-texture);
+  position: relative;
+}
+
+.plasma-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 70%
+  );
 }

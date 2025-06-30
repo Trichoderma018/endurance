@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import Routing from './router/Routing.jsx'
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Routing/>
