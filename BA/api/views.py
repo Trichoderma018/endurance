@@ -3,6 +3,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from .models import CustomUser, Admin, Staff, Expedientes, Visitas, Proyecto, ProyectoUsuarios
 from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer, proyectoSerializer, ProyectoUsuariosSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
+#from .permisions import IsAdmin, IsStaff, IsUser  # Importar las clases de permisos si las tienes definidas
+
 
 # Permisos
 
