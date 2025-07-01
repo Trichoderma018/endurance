@@ -18,7 +18,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-2"
                 type="button"
-                className='brecks'
+                className='lar'
             />
             </Link>
             </label>
@@ -30,7 +30,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='brecks'
+                className='lar'
             />
             </Link>
             </label>
@@ -42,7 +42,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='brecks'
+                className='lar'
             />
             </Link>
         </label> 

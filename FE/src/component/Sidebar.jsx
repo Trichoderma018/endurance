@@ -39,7 +39,8 @@ function Sidebar() {
         <Link to="/Expediente" className="btn-sidebar">
           <i className="fas -sign-out-alt"></i>
           volver
-        </Link></div>
+        </Link>
+        </div>
       </div>
   </div>
  );

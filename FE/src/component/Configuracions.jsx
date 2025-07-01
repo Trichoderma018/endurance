@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import { ThemeProvider, createTheme, useColorScheme } from '@mui/material/styles';
+
 
 function Configuraciones() {
   const navigate = useNavigate();
@@ -51,34 +60,54 @@ function Configuraciones() {
         return null;
     }
   };
-
+  const { mode, setMode } = useColorScheme();
+  if (!mode) {
+    return null;
+  }
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h2>⚙️ Panel de Configuraciones</h2>
-
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-        <thead>
-          <tr>
-            <th style={thStyle}>Opción</th>
-            <th style={thStyle}>Configuración</th>
-          </tr>
-        </thead>
-        <tbody>
-          {config.map((item, index) => (
-            <tr key={index}>
-              <td style={tdStyle}>{item.opcion}</td>
-              <td style={tdStyle}>{renderInput(item, index)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <button onClick={() => navigate(-1)} style={{ marginTop: '20px' }}>🔙 Regresar</button>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: 'background.default',
+        color: 'text.primary',
+        borderRadius: 1,
+        p: 3,
+        minHeight: '56px',
+      }}
+    >
+      <FormControl>
+        <FormLabel id="demo-theme-toggle">Theme</FormLabel>
+        <RadioGroup
+          aria-labelledby="demo-theme-toggle"
+          name="theme-toggle"
+          row
+          value={mode}
+          // onChange={(event) =>
+          //   setMode(event.target.value as 'system' || 'light' || 'dark')
+          // }
+        >
+          <FormControlLabel value="system" control={<Radio />} label="System" />
+          <FormControlLabel value="light" control={<Radio />} label="Light" />
+          <FormControlLabel value="dark" control={<Radio />} label="Dark" />
+        </RadioGroup>
+      </FormControl>
+    </Box>
   );
 }
 
-const thStyle = { border: '1px solid #ccc', padding: '8px', backgroundColor: '#f0f0f0' };
-const tdStyle = { border: '1px solid #ccc', padding: '8px' };
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
+
+  return (
+    <ThemeProvider theme={theme}>
+      <MyApp />
+    </ThemeProvider>
+  );
 
 export default Configuraciones;
