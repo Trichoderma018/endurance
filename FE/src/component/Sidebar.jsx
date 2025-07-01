@@ -1,7 +1,7 @@
 import React from 'react'  
 
 import { Link } from 'react-router-dom'; // Importa Link si necesitas navegación
-
+import MiscellaneousServicesOutlinedIcon from '@mui/icons-material/MiscellaneousServicesOutlined';
 
 import '../style/Sidebar.css'; // Asegúrate de tener este archivo CSS para los estilos
 // Asegúrate de que la ruta sea correcta según tu estructura de carpetas
@@ -14,23 +14,31 @@ function Sidebar() {
           <i className="fas fa-user"></i>
           Mantenimiento Admin
         </Link>
+        
         <Link to="/mantStaff" className="btn-sidebar">
           <i className="fas fa-user"></i>
           Mantenimiento Staff
         </Link>
+
         <Link to="/mantUser" className="btn-sidebar">
           <i className="fas fa-user"></i>
           Mantenimiento Users
         </Link>
+
         <Link to="/mantProyects" className="btn-sidebar">
           <i className="fas fa-user"></i>
           Mantenimiento Proyectos
         </Link>
+
         <Link to="/configurations" className="btn-sidebar">
+        <div className='migy'>
+        <MiscellaneousServicesOutlinedIcon/> 
+        </div>
           <i className="fas fa-cog"></i>
           Configuración
-
+        
         </Link>
+
         <Link to="/null" className="btn-sidebar">
           <i className="fas fa-sign-out-alt"></i>
           Cerrar Sesión

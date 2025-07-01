@@ -96,8 +96,9 @@
   background-color: #ff2929;
 }
 
-
-
+.migy{
+  background-color: transparent;
+}
 
 /* Botones de la barra lateral */
 .btn-sidebar {
@@ -106,7 +107,7 @@
   justify-content: center;
   width: 100%;
   height: 50px;
-  background-color: #333;
+  background-color: #8d2c2c;
   color: #fff;
   border: none;
   cursor: pointer;
