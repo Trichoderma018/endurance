@@ -22,7 +22,7 @@ const FormLogin = () => {
 
       if (response.access) {
         localStorage.setItem('token', response.token); // Guardar el token en almacenamiento local
-        navigate('/Expediente'); // Redirigir a Expediente
+       navigate('/Expediente'); // Redirigir a Expediente
       } else {
         setError('Credenciales incorrectas, inténtalo de nuevo.');
       }
