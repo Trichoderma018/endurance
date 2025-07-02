@@ -46,7 +46,6 @@ button:hover {
 }
 
 .radio-input {
-  --container_width: 300px;
   position: relative;
   left: -103%;
   top: -10px;    

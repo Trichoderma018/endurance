@@ -5,6 +5,8 @@ function Confits() {
   return (
     <div>
         <Configuracions/>
+
+        
     </div>
   )
 }
