@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Llamados from '../services/Llamados';
 import { useNavigate } from 'react-router-dom';
 import '../style/Expediente.css';
-import { Link } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Cards from './Cards';
@@ -34,13 +33,16 @@ function Expediente() {
 
   return (
     <div className='fondo'>
-      
+
       <div className='static'>
       <header className='Endurance'>ENDURANCE</header>
+    
+
       <Navbar />
+
       <label className='borrado'>
 
-        </label>
+      </label>
       <div className='tablita'>
       <Search />
      
@@ -49,8 +51,8 @@ function Expediente() {
         </div>
  
       </div>
+      
         <h2>Lista de Expediente</h2>
-      <div className='barra'></div>
 
       <div className="registro-container">
       

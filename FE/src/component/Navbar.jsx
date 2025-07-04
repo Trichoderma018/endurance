@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../style/Navbar.css'
-
+import Logo from '../assets/img/Logo-Endurance.jpg'; 
 
 function Navbar() {
   return (
@@ -10,7 +10,9 @@ function Navbar() {
         {/* <Link ></Link> */}
 
     <nav >
+
         <div className="cont-rutas">
+                  <img className="montage" src={Logo} alt="Logo" />
             <label>
                 <Link to={"/Expediente"}>
                 <input

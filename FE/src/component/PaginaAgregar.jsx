@@ -336,9 +336,9 @@ function PaginaAgregar() {
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
-
-            <div className="registro-container">
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+             {/* registro del expediente */}
+            <div className="">
+                <table>
                     <thead>
                         <tr>
                             <th className='inyou'>Usuario</th>

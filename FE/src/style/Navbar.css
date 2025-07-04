@@ -4,7 +4,17 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.montage{
+  width: 100px; /* o cualquier valor como 50%, 10rem, etc. */
+  height: auto; /* mantiene la proporción original */
+  position: relative;
+  left: -20%;
+}
+.boton{
+  position: relative;
+  left: -60%;
+  background-color: transparent;
+}
 .lar {
   align-items: center;
   appearance: none;
@@ -55,7 +65,7 @@
 /* grande */
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #f4f4f4;
 }
 .borrado{
@@ -117,4 +127,10 @@ body {
 .movete{
   position: relative;
   left: 390%;
+}
+
+.afuera{
+position: relative;
+left: 24%;
+background-color: transparent;
 }
