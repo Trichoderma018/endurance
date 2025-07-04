@@ -50,7 +50,7 @@
   text-align: center;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin: 0;
+  margin: -0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -523,3 +523,4 @@ label {
     min-width: 60px;
   }
 }
+

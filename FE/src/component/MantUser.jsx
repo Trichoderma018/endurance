@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import '../style/MantUser.css'
 
@@ -163,7 +162,7 @@ function MantUser() {
     }
 
     return (
-        <div>
+        <div className='lonjevo'>
             
             <Sidebar/>
             <h1></h1>

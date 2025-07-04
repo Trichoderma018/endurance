@@ -245,6 +245,7 @@ function Proyectos() {
     }
 
     return (
+    <div className='acomodo'>
         <div className='proyectos-fondo'>
             <div className='proyectos-barra'>
                 <header className='proyectos-endurance'>ENDURANCE</header>
@@ -434,7 +435,8 @@ function Proyectos() {
                     </table>
                 </div>
             </div>
-        </div>
+     </div>   
+    </div>
     )
 }
 

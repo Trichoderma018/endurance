@@ -1,6 +1,6 @@
   .inyou {
     width: 200px;
-    padding: 12px;
+    padding: 10px;
     border: 2px solid #ffffff;
     border-radius: 8px;
     outline: none;
@@ -27,6 +27,8 @@
   .inyou {
     background-color: #f0f8ff;
   }
+
+  
 
 /* card del expediente */
 .expe {
@@ -94,4 +96,17 @@
   }
 }
 
+
+/* mover el agregado */
+
+.moverpage{
+  position: relative;
+  left: 1.2%;
+}
+
+.crf{
+  background-color: #ff0000;
+  border-color: #0f007f8f;
+  border-style: dotted;
+}
 
