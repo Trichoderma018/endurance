@@ -145,12 +145,7 @@ function MantUser() {
         }
     }
     return (
-<<<<<<< HEAD
-        <div>
-=======
         <div className='lonjevo'>
-            
->>>>>>> 6db8ca02c414e1268258c9bfcdd6bfe4a57c740e
             <Sidebar/>
             <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
