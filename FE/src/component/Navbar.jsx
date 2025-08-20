@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../style/Navbar.css'
-
+import Logo from '../assets/img/Logo-Endurance.jpg'; 
 
 function Navbar() {
   return (
@@ -10,7 +10,9 @@ function Navbar() {
         {/* <Link ></Link> */}
 
     <nav >
+
         <div className="cont-rutas">
+                  <img className="montage" src={Logo} alt="Logo" />
             <label>
                 <Link to={"/Expediente"}>
                 <input
@@ -18,7 +20,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-2"
                 type="button"
-                className='bord'
+                className='lar'
             />
             </Link>
             </label>
@@ -30,7 +32,7 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='bord'
+                className='lar'
             />
             </Link>
             </label>
@@ -42,18 +44,16 @@ function Navbar() {
                 name="value-radio"
                 id="value-3"
                 type="button"
-                className='bord'
+                className='lar'
             />
             </Link>
         </label> 
-        <label className='borrado'>
-            <div className='movete'>
-                <Link to="/null" className="btn-sidebar">
+            <div className='afuera'>
+                <Link to="/null" className="boton">
                 <i className="fas fa-sign-out-alt"></i>
                 Cerrar Sesión
                 </Link>
           </div>
-        </label>
     </div>
 </nav>
 </div>

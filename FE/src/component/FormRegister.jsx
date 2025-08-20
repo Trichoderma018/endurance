@@ -83,7 +83,7 @@ function FormRegister() {
   setError(error.response?.data?.message || 'Registration failed. Please try again.');
 } finally {
   // Mover esto dentro del timeout si quieres que el loading dure hasta que navegue
-  setTimeout(() => setIsLoading(false), 3000);
+  setTimeout(() => setIsLoading(false), 5000);
 }
 
   };
@@ -153,7 +153,7 @@ function FormRegister() {
             <button className="btn" type="submit" disabled={isLoading || !!error}>
               Submit
             </button>
-            {isLoading && <span className="loading">
+            {isLoading && <span className="">
       <div className="loading-spinner">
       <div className="spinner"></div>
       <span className="loading-text">Loading...</span>

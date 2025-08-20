@@ -33,9 +33,16 @@ function Expediente() {
 
   return (
     <div className='fondo'>
+
       <div className='static'>
       <header className='Endurance'>ENDURANCE</header>
+    
+
       <Navbar />
+
+      <label className='borrado'>
+
+      </label>
       <div className='tablita'>
       <Search />
      
@@ -44,11 +51,11 @@ function Expediente() {
         </div>
  
       </div>
+      
         <h2>Lista de Expediente</h2>
-      <div className='barra'></div>
 
       <div className="registro-container">
-
+      
         {isLoading && <p className="mensaje-cargando">Cargando expedientes...</p>}
         {error && <p className="mensaje-error">{error}</p>}
 
@@ -67,6 +74,7 @@ function Expediente() {
           <p className="mensaje-vacio">No hay expedientes disponibles.</p>
         )}
       </div>
+      
     </div>
   );
 }

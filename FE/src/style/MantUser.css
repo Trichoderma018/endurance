@@ -209,3 +209,9 @@ h2 {
   .input-name, .input-correo, .input-sede, .inp-password, .inp-password-confirm { max-width: 100%; }
   .tabla-usuarios { display: block; }
 }
+
+
+.lonjevo{
+  position: relative;
+  margin-top: 20%;
+}

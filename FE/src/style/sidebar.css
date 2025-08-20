@@ -96,8 +96,9 @@
   background-color: #ff2929;
 }
 
-
-
+.migy{
+  background-color: transparent;
+}
 
 /* Botones de la barra lateral */
 .btn-sidebar {
@@ -106,7 +107,7 @@
   justify-content: center;
   width: 100%;
   height: 50px;
-  background-color: #333;
+  background-color: #8d2c2c;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -170,4 +171,8 @@
 .toggle-sidebar:hover {
   background-color: #555; /* Color de fondo al hacer hover */
 }
-/* Estilo del icono del botón de alternar la barra 
+/* Estilo del icono del botón de alternar la barra */
+
+
+
+

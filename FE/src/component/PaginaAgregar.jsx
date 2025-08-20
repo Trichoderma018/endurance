@@ -242,7 +242,7 @@ function PaginaAgregar() {
                 <header className='Endurance'>ENDURANCE</header>
             </div>
 
-            <div className="">
+            <div className="crf">
                 <h2>{editMode ? 'EDITAR EXPEDIENTE' : 'EXPEDIENTES'}</h2>
                 <form onSubmit={handleSubmit}>
                     <select className='inyou' value={userExpediente} onChange={e => setUserExpediente(e.target.value)} required>
@@ -273,7 +273,7 @@ function PaginaAgregar() {
                         />
                         {imagenExpediente && (
                             <div style={{marginTop: '10px'}}>
-                                <img src={imagenExpediente} alt="Preview" style={{maxWidth: '200px', maxHeight: '200px'}} />
+                                <img src={imagenExpediente}  />
                             </div>
                         )}
                     </div>
@@ -318,6 +318,9 @@ function PaginaAgregar() {
                         <button className='button' type="submit" disabled={isLoading}>
                             {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Agregar')}
                         </button>
+                            <button className='button' onClick={() => navigate(-1)}>
+                             ⬅️ Regresar
+                            </button>
                         {editMode && (
                             <button 
                                 type="button" 
@@ -336,9 +339,9 @@ function PaginaAgregar() {
                     {error && <p className="error">{error}</p>}
                 </form>
             </div>
-
-            <div className="registro-container">
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+             {/* registro del expediente */}
+            <div className="">
+                <table>
                     <thead>
                         <tr>
                             <th className='inyou'>Usuario</th>
@@ -350,7 +353,7 @@ function PaginaAgregar() {
                             <th className='inyou'>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='moverpage'>
                         {expedientes.map(expediente => (
                             <tr key={`exp-${expediente.id}`} className='inyou'>
                                 <td>{obtenerNombreUsuario(expediente.user)}</td>
