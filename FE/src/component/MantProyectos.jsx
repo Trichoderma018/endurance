@@ -3,8 +3,6 @@ import Llamados from '../services/Llamados'
 import "../style/MantProyectos.css"
 import Sidebar from './Sidebar'
 import uploadImageToS3 from './credenciales'
-//import '../style/MantAdmin.css'
-
 function MantProyectos() {
   // Estados del formulario
   const [nombreProyecto, setNombreProyecto] = React.useState('')
@@ -15,7 +13,6 @@ function MantProyectos() {
   const [fechaFin, setFechaFin] = React.useState('')
   const [usuarios, setUsuarios] = React.useState([]) // Cambiado a array para múltiples usuarios
   const [activo, setActivo] = React.useState('')
-
   // Estados de control
   const [proyectos, setProyectos] = React.useState([])
   const [usuariosDisponibles, setUsuariosDisponibles] = React.useState([])
@@ -23,14 +20,11 @@ function MantProyectos() {
   const [currentProyectoId, setCurrentProyectoId] = React.useState(null)
   const [error, setError] = React.useState(null)
   const [isLoading, setIsLoading] = React.useState(false)
-
   const fileInputRef = useRef(null)
-
   useEffect(() => {
     obtenerProyectos()
     obtenerUsuarios()
   }, [])
-
   async function obtenerProyectos() {
     try {
       const response = await Llamados.getData('api/proyecto/') // Actualizado endpoint
@@ -41,7 +35,6 @@ function MantProyectos() {
       setError("Error al cargar proyectos")
     }
   }
-
   async function obtenerUsuarios() {
     try {
       const response = await Llamados.getData('api/users/')
@@ -52,7 +45,6 @@ function MantProyectos() {
       setError("Error al cargar usuarios")
     }
   }
-
   const handleImageChange = async (event) => {
     const file = event.target.files[0]
     if (file) {
@@ -69,12 +61,10 @@ function MantProyectos() {
       }
     }
   }
-
   const handleUsuarioChange = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, option => parseInt(option.value))
     setUsuarios(selectedOptions)
   }
-
   function obtenerNombresUsuarios(usuariosIds) {
     if (!usuariosIds || usuariosIds.length === 0) return 'Sin usuarios asignados'
     const nombres = usuariosIds.map(userId => {
@@ -83,12 +73,10 @@ function MantProyectos() {
     })
     return nombres.join(', ')
   }
-
   async function cargarDatos() {
     try {
       setIsLoading(true)
       setError(null)
-      
       // 1. Crear el proyecto primero
       const objProyecto = {
         nombreProyecto: nombreProyecto,
@@ -99,18 +87,14 @@ function MantProyectos() {
         fechaFin: fechaFin,
         activo: activo === "activo"
       }
-      
       console.log('Objeto proyecto a enviar:', objProyecto)
       const responseProyecto = await Llamados.postData(objProyecto, 'api/proyecto/')
       console.log('Response Proyecto:', responseProyecto)
-      
       // 2. Obtener el ID del proyecto creado
       const proyectoId = responseProyecto.id || responseProyecto.data?.id
-      
       if (!proyectoId) {
         throw new Error('No se pudo obtener el ID del proyecto creado')
       }
-      
       // 3. Crear las relaciones en ProyectoUsuarios para cada usuario seleccionado
       if (usuarios && usuarios.length > 0) {
         const promesasUsuarios = usuarios.map(async (userId) => {
@@ -118,31 +102,25 @@ function MantProyectos() {
             proyecto: proyectoId,
             user: userId
           }
-          
           console.log('Creando relación proyecto-usuario:', objProyectoUsuario)
           return await Llamados.postData(objProyectoUsuario, 'api/proyecto-usuarios/')
         })
-        
         await Promise.all(promesasUsuarios)
         console.log('Todas las relaciones proyecto-usuario creadas exitosamente')
       }
-      
       limpiarFormulario()
       obtenerProyectos()
       setIsLoading(false)
-      
     } catch (error) {
       console.error("Error al crear proyecto y relaciones:", error)
       setError("Error al crear proyecto y asignar usuarios")
       setIsLoading(false)
     }
   }
-
   async function actualizarProyecto() {
     try {
       setIsLoading(true)
       setError(null)
-      
       // 1. Actualizar el proyecto
       const proyectoActualizado = {
         nombreProyecto: nombreProyecto,
@@ -153,17 +131,14 @@ function MantProyectos() {
         fechaFin: fechaFin,
         activo: activo === "activo"
       }
-      
       console.log('Objeto a actualizar:', proyectoActualizado)
       await Llamados.patchData(proyectoActualizado, "api/proyecto", currentProyectoId)
-      
       // 2. Eliminar todas las relaciones existentes del proyecto
       try {
         await Llamados.deleteData(`api/proyecto-usuarios/proyecto/${currentProyectoId}`)
       } catch (error) {
         console.log('No hay relaciones existentes para eliminar o error:', error)
       }
-      
       // 3. Crear las nuevas relaciones
       if (usuarios && usuarios.length > 0) {
         const promesasUsuarios = usuarios.map(async (userId) => {
@@ -171,28 +146,23 @@ function MantProyectos() {
             proyecto: currentProyectoId,
             user: userId
           }
-          
           console.log('Creando nueva relación proyecto-usuario:', objProyectoUsuario)
           return await Llamados.postData(objProyectoUsuario, 'api/proyecto-usuarios/')
         })
-        
         await Promise.all(promesasUsuarios)
         console.log('Todas las nuevas relaciones proyecto-usuario creadas exitosamente')
       }
-      
       limpiarFormulario()
       setEditMode(false)
       setCurrentProyectoId(null)
       obtenerProyectos()
       setIsLoading(false)
-      
     } catch (error) {
       console.error("Error al actualizar proyecto:", error)
       setError("Error al actualizar proyecto y usuarios")
       setIsLoading(false)
     }
   }
-
   async function eliminarProyecto(id) {
     if (window.confirm("¿Está seguro que desea eliminar este proyecto?")) {
       try {
@@ -207,7 +177,6 @@ function MantProyectos() {
       }
     }
   }
-
   function editarProyecto(proyecto) {
     setNombreProyecto(proyecto.nombreProyecto || "")
     setObjetivo(proyecto.objetivo || "")
@@ -220,7 +189,6 @@ function MantProyectos() {
     setCurrentProyectoId(proyecto.id)
     setEditMode(true)
   }
-    
   function limpiarFormulario() {
     setNombreProyecto('')
     setObjetivo('')
@@ -233,40 +201,32 @@ function MantProyectos() {
     setEditMode(false)
     setCurrentProyectoId(null)
     setError(null)
-
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
   }
-    
   function handleSubmit(event) {
     event.preventDefault()
     setError(null)
-    
     // Validaciones
     if (!nombreProyecto || !objetivo || !fechaInicio || !fechaFin || !activo) {
       setError('Por favor, complete todos los campos obligatorios.')
       return
     }
-
     if (new Date(fechaFin) < new Date(fechaInicio)) {
       setError('La fecha de fin no puede ser anterior a la fecha de inicio.')
       return
     }
-    
     if (editMode) {
       actualizarProyecto()
     } else {
       cargarDatos()
     }
   }
-
   return (
     <div className="mant-proyectos">
- 
       <Sidebar/>
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>
-      
       <form onSubmit={handleSubmit}>
         <div className="formulario-mant-proyectos">
           <div className="campo-formulario">
@@ -281,7 +241,6 @@ function MantProyectos() {
               required
             />
           </div>
-
           <div className="campo-formulario">
             <label htmlFor="usuarios">Usuarios Asignados</label>
             <br />
@@ -302,7 +261,6 @@ function MantProyectos() {
               ))}
             </select>
           </div>
-          
           <div className="campo-formulario">
             <label htmlFor="objetivo">Objetivo *</label>
             <br />
@@ -316,7 +274,6 @@ function MantProyectos() {
               required
             />
           </div>
-
           <div className="campo-formulario">
             <label htmlFor="imagen">Imagen del Proyecto</label>
             <br />
@@ -334,7 +291,6 @@ function MantProyectos() {
               </div>
             )}
           </div>
-
           <div className="campo-formulario">
             <label htmlFor="descripcion">Descripción</label>
             <br />
@@ -347,7 +303,6 @@ function MantProyectos() {
               rows="4"
             />
           </div>
-          
           <div className="campo-formulario">
             <label htmlFor="fechaInicio">Fecha de Inicio *</label>
             <input
@@ -359,7 +314,6 @@ function MantProyectos() {
               required
             />
           </div>
-          
           <div className="campo-formulario">
             <label htmlFor="fechaFin">Fecha de Fin *</label>
             <input
@@ -371,7 +325,6 @@ function MantProyectos() {
               required
             />
           </div>
-
           <div className="campo-formulario">
             <label htmlFor="activo">Estado del Proyecto *</label>
             <select
@@ -385,7 +338,6 @@ function MantProyectos() {
               <option value="activo">Activo</option>
             </select>
           </div>
-          
           <div className="botones-formulario">
             <button 
               type="submit"
@@ -394,7 +346,6 @@ function MantProyectos() {
             >
               {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Crear') + ' Proyecto'}
             </button>
-            
             {editMode && (
               <button 
                 type="button"
@@ -406,7 +357,6 @@ function MantProyectos() {
               </button>
             )}
           </div>
-
           {error && (
             <div className="error" style={{color: 'red', marginTop: '10px'}}>
               {error}
@@ -414,7 +364,6 @@ function MantProyectos() {
           )}
         </div>
       </form>
-      
       <h2>Lista de Proyectos</h2>
       <table className="tabla-proyectos" style={{width: '100%', borderCollapse: 'collapse'}}>
         <thead>
@@ -457,7 +406,6 @@ function MantProyectos() {
           ))}
         </tbody>
       </table>
-
       {isLoading && (
         <div style={{textAlign: 'center', margin: '20px'}}>
           Cargando...
@@ -466,5 +414,4 @@ function MantProyectos() {
     </div>
   )
 }
-
 export default MantProyectos

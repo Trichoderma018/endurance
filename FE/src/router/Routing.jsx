@@ -51,8 +51,6 @@ function Routing() {
             {/* visita del usuario */}
             <Route path='/visita' element={<PageVisita />} />
             <Route path='/view-visita' element={<PageViewVisita />} />
-
-            {/* Rutas de mantenimiento */}
             <Route path='/views' element={<View />} />
 
              {/*Pruebas*/}
