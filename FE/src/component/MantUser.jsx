@@ -2,21 +2,18 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Sidebar from './Sidebar'
 import '../style/MantUser.css'
-
 function MantUser() {
     const [username, setUsername] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [passwordConfirm, setPasswordConfirm] = React.useState('')
     const [sede, setSede] = React.useState('')
-
     const [usuarios, setUsuarios] = React.useState([])
     const [editMode, setEditMode] = React.useState(false)
     const [currentUsuarioId, setCurrentUsuarioId] = React.useState(null)
     const [showPassword, setShowPassword] = React.useState(false)
     const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false)
     const [passwordError, setPasswordError] = React.useState('')
-
     function handleUsername(e) {
         setUsername(e.target.value)
     }   
@@ -34,7 +31,6 @@ function MantUser() {
     function handleSede(e) {
         setSede(e.target.value)
     }
-
     function validatePasswords(pass, confirmPass) {
         if (pass && confirmPass && pass !== confirmPass) {
             setPasswordError('Las contraseñas no coinciden')
@@ -42,11 +38,9 @@ function MantUser() {
             setPasswordError('')
         }
     }
-
     useEffect(() => {
         obtenerUsuarios()
     }, [])
-
     async function obtenerUsuarios() {
         try {
             const response = await Llamados.getData('api/users/')
@@ -56,13 +50,11 @@ function MantUser() {
             console.error("Error obteniendo usuarios:", error)
         }
     }
-
     async function crearUsuario() {
         if (password !== passwordConfirm) {
             setPasswordError('Las contraseñas no coinciden')
             return
         }
-
         try {
             const obj = {
                 username: username,
@@ -71,7 +63,6 @@ function MantUser() {
                 password_confirm: passwordConfirm,
                 sede: sede
             }
-            
             const response = await Llamados.postData(obj, 'api/users/')
             console.log('Response Data', response)
             limpiarFormulario()
@@ -80,7 +71,6 @@ function MantUser() {
             console.error("Error al crear usuario:", error)
         }
     }
-
     async function actualizarUsuario() {
         if (password !== passwordConfirm) {
             setPasswordError('Las contraseñas no coinciden')
@@ -91,7 +81,6 @@ function MantUser() {
             console.error("No se puede actualizar: ID de usuario no válido")
             return
         }
-
         try {
             const usuarioActualizado = {
                 username: username,
@@ -100,7 +89,6 @@ function MantUser() {
                 password_confirm: passwordConfirm,
                 sede: sede
             }
-            
             await Llamados.patchData(usuarioActualizado, "api/users",currentUsuarioId)
             limpiarFormulario()
             setEditMode(false)
@@ -110,7 +98,6 @@ function MantUser() {
             console.error("Error al actualizar usuario:", error)
         }
     }
-
     async function eliminarUsuario(currentUsuarioId) {
         if (!currentUsuarioId) {
             console.error("No se puede eliminar: ID de usuario no válido")
@@ -125,7 +112,6 @@ function MantUser() {
             }
         }
     }
-
     function editarUsuario(usuario) {
         console.log("Editando usuario:", ) //debugging
         setUsername(usuario.username || '')
@@ -137,7 +123,6 @@ function MantUser() {
         setCurrentUsuarioId(usuario.id)
         setEditMode(true)
     }
-    
     // Reset form fields
     function limpiarFormulario() {
         setUsername('')
@@ -151,7 +136,6 @@ function MantUser() {
         setShowPasswordConfirm(false)
         setPasswordError('')
     }
-    
     // Handle form submission based on mode
     function handleSubmit() {
         if (editMode) {
@@ -160,15 +144,17 @@ function MantUser() {
             crearUsuario()
         }
     }
-
     return (
+<<<<<<< HEAD
+        <div>
+=======
         <div className='lonjevo'>
             
+>>>>>>> 6db8ca02c414e1268258c9bfcdd6bfe4a57c740e
             <Sidebar/>
             <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario-user">
-
                 <div className="campo-name">
                     <label htmlFor="username"></label>
                     <input
@@ -181,7 +167,6 @@ function MantUser() {
                     />
                 </div>
                 <br />
-
                 <div className="campo-correo">
                     <label htmlFor="email"></label>
                     <input
@@ -194,7 +179,6 @@ function MantUser() {
                     />
                 </div>
                 <br />
-
                 <div className="campo-sede">
                     <label htmlFor="sede"></label>
                     <input
@@ -207,7 +191,6 @@ function MantUser() {
                     />
                 </div>
                 <br />
-
                 <div className="campo-password">
                     <label htmlFor="password"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -220,7 +203,6 @@ function MantUser() {
                             placeholder="Contraseña"
                             style={{ paddingRight: '40px', flex: 1 }}
                         />
-
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
@@ -237,7 +219,6 @@ function MantUser() {
                         </button>
                     </div>
                 </div>
-                
                 <div className="campo-password-confirm">
                     <label htmlFor="passwordConfirm"></label>
                     <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -273,7 +254,6 @@ function MantUser() {
                     )}
                 </div>
                 <br />
-
                 <div className="botones-formulario">
                     <button 
                         onClick={handleSubmit}
@@ -283,7 +263,6 @@ function MantUser() {
                         {editMode ? 'Actualizar' : 'Crear'} Usuario
                     </button>
                     <br />
-                    
                     {editMode && (
                         <button 
                             onClick={limpiarFormulario}
@@ -294,7 +273,6 @@ function MantUser() {
                     )}
                 </div>
             </div>
-            
             <h2>Lista de Usuarios</h2>
             <table className="tabla-usuarios">
                 <thead>
@@ -330,7 +308,6 @@ function MantUser() {
                                 >
                                     Eliminar
                                 </button>
-                                
                             </td>
                         </tr>
                     ))}
@@ -339,5 +316,4 @@ function MantUser() {
         </div>
     )
 }
-
 export default MantUser

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
-
 import Sidebar from './Sidebar'
 import '../style/MantStaff.css'
-
 function MantStaff() {
     const [nombreCompleto, setNombreCompleto] = React.useState('')
     const [email, setEmail] = React.useState('')
@@ -11,12 +9,10 @@ function MantStaff() {
     const [activo, setActivo] = React.useState(true)
     const [departamento, setDepartamento] = React.useState('')
     const [user, setUser] = React.useState('') // Agregado para seleccionar usuario
-
     const [staff, setStaff] = React.useState([])
     const [usuarios, setUsuarios] = React.useState([]) // Para cargar los usuarios disponibles
     const [editMode, setEditMode] = React.useState(false)
     const [currentStaffId, setCurrentStaffId] = React.useState(null)
-
     function handleNombreCompleto(e) {
         setNombreCompleto(e.target.value)
     }   
@@ -32,12 +28,10 @@ function MantStaff() {
     function handleDepartamento(e) {
         setDepartamento(e.target.value)
     }
-
     useEffect(() => {
         obtenerStaff()
         obtenerUsuarios() // Cargar usuarios para el select
     }, [])
-
     async function obtenerStaff() {
         try {
             const response = await Llamados.getData('api/staff/')
@@ -47,7 +41,6 @@ function MantStaff() {
             console.error("Error obteniendo staff:", error)
         }
     }
-
     async function obtenerUsuarios() {
         try {
             const response = await Llamados.getData('api/users/') // Ajusta la URL según tu API
@@ -58,7 +51,6 @@ function MantStaff() {
             console.error("Error obteniendo usuarios:", error)
         }
     }
-
     async function crearStaff() {
         try {
             const obj = {
@@ -69,7 +61,6 @@ function MantStaff() {
                 departamento: departamento,
                 user: user // Incluir el usuario seleccionado
             }
-
             console.log('Objeto a enviar:', obj) // Para debug
             const response = await Llamados.postData(obj, 'api/staff/')
             console.log('Response Data', response)
@@ -79,7 +70,6 @@ function MantStaff() {
             console.error("Error al crear staff:", error)
         }
     }
-
     async function actualizarStaff() {
         try {
             const staffActualizado = {
@@ -89,8 +79,7 @@ function MantStaff() {
                 activo: activo,
                 departamento: departamento,
                 user: user // Incluir el usuario seleccionado
-            }
-            
+            } 
             console.log('Objeto a actualizar:', staffActualizado) // Para debug
             await Llamados.patchData(staffActualizado, "api/staff", currentStaffId)
             limpiarFormulario()
@@ -101,7 +90,6 @@ function MantStaff() {
             console.error("Error al actualizar staff:", error)
         }
     }
-
     async function eliminarStaff(id) {
         if (window.confirm("¿Está seguro que desea eliminar este miembro del staff?")) {
             try {
@@ -112,7 +100,6 @@ function MantStaff() {
             }
         }
     }
-
     function editarStaff(staff) {
         setNombreCompleto(staff.nombreCompleto)
         setEmail(staff.email)
@@ -123,7 +110,6 @@ function MantStaff() {
         setCurrentStaffId(staff.id)
         setEditMode(true)
     }
-    
     function limpiarFormulario() {
         setNombreCompleto('')
         setEmail('')
@@ -134,7 +120,6 @@ function MantStaff() {
         setEditMode(false)
         setCurrentStaffId(null)
     }
-    
     function handleSubmit() {
         if (editMode) {
             actualizarStaff()
@@ -142,16 +127,13 @@ function MantStaff() {
             crearStaff()
         }
     }
-
     // Función para obtener el username del usuario
     function getUsernameById(userId) {
         const usuario = usuarios.find(u => u.id === userId)
         return usuario ? usuario.username : 'Usuario no encontrado'
     }
-
     return (
         <div>
-         
             <Sidebar/>
             <h2>{editMode ? 'Editar Staff' : 'Crear Staff'}</h2>
             <div className="formu">
@@ -205,7 +187,6 @@ function MantStaff() {
                         className="input-departamento"
                     />
                 </div>
-
                 <div className="campo-user">
                     <label htmlFor="user"></label>
                     <select
@@ -221,7 +202,6 @@ function MantStaff() {
                         ))}
                     </select>
                 </div>
-                
                 <div className="campo-activo">
                     <label htmlFor="activo">
                         <input
@@ -233,7 +213,6 @@ function MantStaff() {
                         Staff Activo
                     </label>
                 </div>
-                
                 <div className="botone-formulario">
                     <button 
                         onClick={handleSubmit}
@@ -241,7 +220,6 @@ function MantStaff() {
                     >
                         {editMode ? 'Actualizar' : 'Crear'} Staff
                     </button>
-                    
                     {editMode && (
                         <button 
                             onClick={limpiarFormulario}
@@ -252,7 +230,6 @@ function MantStaff() {
                     )}
                 </div>
             </div>
-            
             <h2>Lista de Staff</h2>
             <table className="tabla-staff">
                 <thead>
@@ -309,5 +286,4 @@ function MantStaff() {
         </div>
     )
 }
-
 export default MantStaff

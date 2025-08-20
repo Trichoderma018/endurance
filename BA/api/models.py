@@ -63,7 +63,7 @@ class Visitas(models.Model):  # Cambiar nombre a PascalCase
     fechaNacimiento = models.DateField()
     edad = models.CharField(max_length=3)  # Cambiar nombre
     cedula = models.CharField(max_length=20)
-    telefono1 = models.CharField(max_length=30)
+    telefono1 = models.CharField(max_length=30) #validaciones para números de teléfono
     telefono2 = models.CharField(max_length=30, blank=True, null=True)
     lugarResidencia = models.CharField(max_length=300)
     

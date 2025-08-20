@@ -1,12 +1,39 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Para este proyecto es necesario hacer la instalación de las siguientes librerias
 
-Currently, two official plugins are available:
+Frontend
+- aws-sdk | npm install aws-sdk
+- react-router-dom | npm install react-router-dom   
+- jspdf | npm install jspdf jspdf-autotable
+- jspdf-autotable | npm install jspdf jspdf-autotable
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend
+- rest_framework | pip install djangorestframework
+- corsheaders | pip install django-cors-headers
+- Django | py -m pip install Django = 5.1.2
+- mysqlclient | pip install mysqlclient   
+- jwt | pip install djangorestframework-simplejwt
+- argon2 | pip install django[argon2]
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Lista de versiones
+argon2-cffi                   23.1.0
+argon2-cffi-bindings          21.2.0
+asgiref                       3.8.1
+cffi                          1.17.1
+colorama                      0.4.6
+Django                        5.2
+django-cors-headers           4.7.0
+djangorestframework           3.16.0
+djangorestframework_simplejwt 5.5.0
+iniconfig                     2.1.0
+mysqlclient                   2.2.7
+packaging                     24.2
+pip                           25.2
+pluggy                        1.5.0
+pycparser                     2.22
+pyenv-win                     3.1.1
+PyJWT                         2.9.0
+pytest                        8.3.5
+sqlparse                      0.5.3
+tzdata                        2025.2
