@@ -4,12 +4,8 @@ from .models import CustomUser, Admin, Staff, Expedientes, Visitas, Proyecto, Pr
 from .serializers import UserSerializer, AdminSerializer, StaffSerializer, ExpedientesSerializer, VisitasSerializer,UsuarioEditarSerializer, proyectoSerializer, ProyectoUsuariosSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 #from .permisions import IsAdmin, IsStaff, IsUser  # Importar las clases de permisos si las tienes definidas
-
-
 # Permisos
-
 #Vistas de los modelos creados por Django
-
 
 # Modelo usuario
 class UserListCreateView(ListCreateAPIView):
@@ -27,7 +23,6 @@ class AdminListCreateView(ListCreateAPIView):
     serializer_class = AdminSerializer
 
 class AdminDetailView(RetrieveUpdateDestroyAPIView):
-    
     queryset = Admin.objects.all()
     serializer_class = AdminSerializer
 
@@ -40,7 +35,6 @@ class StaffDetailView(RetrieveUpdateDestroyAPIView):
     # permission_classes = [ IsAuthenticated]
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
-
 
 class ExpedientesListCreateView(ListCreateAPIView):
     # permission_classes = [IsAuthenticated]

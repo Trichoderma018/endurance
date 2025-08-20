@@ -53,7 +53,6 @@ function View() {
     const handleVolver = () => {
         navigate('/expediente');
     };
-
     if (isLoading) {
         return (
             <div className="view-container">
@@ -61,7 +60,6 @@ function View() {
             </div>
         );
     }
-
     if (error) {
         return (
             <div className="view-container">
@@ -70,7 +68,6 @@ function View() {
             </div>
         );
     }
-
     if (!expediente) {
         return (
             <div className="view-container">
@@ -167,11 +164,9 @@ function View() {
                     </div>
                 )}
                 <button onClick={handleCrearVisita} className="btn-visita">Crear Visita</button>
-
                 <CardsVisita expedienteId={expediente.id} />
             </div>
         </div>
     );
 }
-
 export default View;

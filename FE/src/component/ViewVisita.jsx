@@ -68,8 +68,7 @@ function ViewVisita() {
         }
 
         const numero = typeof valor === 'string' ? parseFloat(valor) : valor;
-
-        if (isNaN(numero)) {
+            if (isNaN(numero)) {
             return 'No disponible';
         }
 
@@ -104,12 +103,10 @@ function ViewVisita() {
         // Función helper para añadir item de detalle
         const addDetailItem = (label, value, isLongText = false) => {
             checkNewPage(isLongText ? 15 : 8);
-
             doc.setFont(undefined, 'bold');
             doc.setFontSize(11);
             doc.setTextColor(0, 0, 0);
             doc.text(label, margin, yPosition);
-
             doc.setFont(undefined, 'normal');
 
             if (isLongText) {
@@ -145,7 +142,6 @@ function ViewVisita() {
         infoBasica.forEach(([label, value]) => {
             addDetailItem(label, value);
         });
-
         yPosition += 10;
 
         // INFORMACIÓN ACADÉMICA
@@ -169,7 +165,6 @@ function ViewVisita() {
         if (visita.comentario) {
             addDetailItem('Comentarios Académicos:', visita.comentario, true);
         }
-
         yPosition += 10;
 
         // DATOS PERSONALES
@@ -191,7 +186,6 @@ function ViewVisita() {
         if (visita.lugarResidencia) {
             addDetailItem('Lugar de Residencia:', visita.lugarResidencia, true);
         }
-
         yPosition += 10;
 
         // RESUMEN ECONÓMICO - Nueva página para asegurar que la tabla quepa completa
@@ -247,13 +241,11 @@ function ViewVisita() {
                 }
             }
         });
-
         // Obtener la posición Y después de la tabla
         yPosition = doc.lastAutoTable.finalY + 20;
 
         // VIVIENDA
         addSectionTitle('Información de Vivienda');
-
         const vivienda = [
             ['Tipo de Casa:', visita.casa || 'No disponible'],
             ['Monto Casa/Alquiler:', visita.montoCasa ? formatearMoneda(visita.montoCasa) : 'No disponible']
@@ -272,7 +264,6 @@ function ViewVisita() {
         if (visita.comentario4) {
             addDetailItem('Comentarios sobre Vivienda:', visita.comentario4, true);
         }
-
         yPosition += 10;
 
         // TRABAJO
@@ -292,7 +283,6 @@ function ViewVisita() {
         if (visita.comentario5) {
             addDetailItem('Comentarios sobre Trabajo:', visita.comentario5, true);
         }
-
         yPosition += 10;
 
         // INFORMACIÓN MÉDICA - Nueva página si hay contenido médico
@@ -318,7 +308,6 @@ function ViewVisita() {
                     addDetailItem(label, value);
                 }
             });
-
             yPosition += 10;
         }
 
@@ -365,7 +354,6 @@ function ViewVisita() {
             </div>
         );
     }
-
     if (error && !visita) {
         return (
             <div className="view-visita-container">
@@ -374,7 +362,6 @@ function ViewVisita() {
             </div>
         );
     }
-
     if (!visita) {
         return (
             <div className="view-visita-container">
@@ -383,7 +370,6 @@ function ViewVisita() {
             </div>
         );
     }
-
     return (
         <div className='view-visita-master'>
             <div className="view-visita-container">
@@ -685,5 +671,4 @@ function ViewVisita() {
         </div>
     );
 }
-
 export default ViewVisita;

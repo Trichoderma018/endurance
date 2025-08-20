@@ -14,7 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['password', 'password_confirm', 'username', 'email', 'sede',"user","id"]
         extra_kwargs = {
-
             'email': {'required': True},
             'sede': {'required': False},
         }
@@ -35,7 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Este correo electrónico ya está en uso.")
         return value
 
-
     def validate_password(self, value):
         if len(value) < 8:
             raise serializers.ValidationError("La contraseña debe tener al menos 8 caracteres.")
@@ -47,7 +45,6 @@ class UserSerializer(serializers.ModelSerializer):
         
         # Guardar la contraseña para usarla después
         password = validated_data.pop('password')
-
         
         # Crear el usuario sin la contraseña
         user = CustomUser.objects.create(**validated_data)
@@ -56,9 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
 
         user.save()
-        
         return user
-
 
 class UsuarioEditarSerializer(serializers.ModelSerializer):
     class Meta:
