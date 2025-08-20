@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-
 class CustomUser(AbstractUser):
     sede = models.CharField(max_length=150, blank=True, null=True)
 
@@ -25,7 +24,6 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.nombreCompleto
-    
 
 class Expedientes(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='expedientes')
