@@ -1,40 +1,25 @@
-/* From uiverse.io by @alexruix */
+/* ================= INPUTS ================= */
 .inp {
- /* font-family: 'Courier New', Courier, monospace; */
- line-height: 28px;
- border: 2px solid transparent;
- border-bottom-color: #777;
- padding: .2rem 0;
- outline: none;
- background-color: rgb(168, 83, 83);
- color: #0d0c22;
-}
-
-.inp{
- outline: none;
- padding: 1rem 1rem;
- border-radius: 1rem;
- border-color: #7a9cc6;
+  line-height: 28px;
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  border-bottom-color: #777;
+  border-color: #7a9cc6;
+  outline: none;
+  background-color: rgb(168, 83, 83);
+  color: #0d0c22;
 }
 
 .inp::placeholder {
- color: #0d0c22;
+  color: #0d0c22;
 }
 
 .inp:focus::placeholder {
- opacity: 0;
+  opacity: 0;
 }
 
-
-/* colocacion y acomodo */
-.colocation{
-  position: relative;
-  bottom: -47%;
-}
-
-
-/* Botones */
-
+/* ================= BOTONES ================= */
 .btn {
   outline: none;
   display: inline-block;
@@ -48,35 +33,35 @@
   position: relative;
 }
 
-.btn::before {
+.btn::before,
+.btn::after {
   content: '';
   position: absolute;
-  left: 5px;
-  top: 5px;
-  border-top: 2px solid #ff3636;
-  border-left: 2px solid #ff3636;
   width: 0px;
   height: 0px;
   opacity: 0;
 }
 
+.btn::before {
+  left: 5px;
+  top: 5px;
+  border-top: 2px solid #ff3636;
+  border-left: 2px solid #ff3636;
+}
+
 .btn::after {
-  content: '';
-  position: absolute;
   right: 5px;
   bottom: 5px;
   border-bottom: 2px solid #ff3636;
   border-right: 2px solid #ff3636;
-  width: 0px;
-  height: 0px;
-  opacity: 0;
 }
 
 .btn:hover {
   box-shadow: 4px 4px 10px rgb(184, 184, 184);
 }
 
-.btn:hover::after, .btn:hover::before {
+.btn:hover::after,
+.btn:hover::before {
   height: 20px;
   width: 20px;
   opacity: 1;
@@ -96,50 +81,71 @@
   background-color: #ff2929;
 }
 
-.migy{
+.migy {
   background-color: transparent;
 }
 
-/* Botones de la barra lateral */
+/* ================= SIDEBAR ================= */
+.sidebar-container {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 210px;
+  height: 100vh;
+  background-color: #222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-container:hover {
+  width: 220px;
+}
+
+/* ================= BOTONES SIDEBAR ================= */
 .btn-sidebar {
   display: flex;
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: #8d2c2c;
+  background-color: rgba(121, 31, 31, 0.443);
   margin-bottom: 2px;
   color: #fff;
   border: none;
   cursor: pointer;
   padding-left: 20px;
+  text-decoration: none;
 }
+
 .btn-sidebar:hover {
+  transform: scale(1.02);
   background-color: #555;
 }
-/* Iconos de la barra lateral */
+
 .btn-sidebar i {
   margin-right: 10px;
   font-size: 20px;
   color: #fff;
 }
-/* Estilo del contenedor de la barra lateral */
-.sidebar-container {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: 210px;
-    height: 100vh;
-    background-color: #222;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
+
+/* ================= COLOCACIÓN ================= */
+.colocation {
+  position: absolute;
+  bottom: 0;  
+  width: 100%;
 }
-/* Estilo del contenido principal */
+
+/* ================= CONTENIDO PRINCIPAL ================= */
 .main-content {
   margin-left: 250px;
   padding: 20px;
 }
-/* Estilo del botón de alternar la barra lateral */
+
+.main-content:hover {
+  margin-left: 300px;
+}
+
+/* ================= TOGGLE SIDEBAR ================= */
 .toggle-sidebar {
   position: fixed;
   top: 20px;
@@ -151,29 +157,12 @@
   cursor: pointer;
   z-index: 1000;
 }
-/* Estilo del botón de alternar la barra lateral al hacer hover */
+
 .toggle-sidebar:hover {
   background-color: #555;
 }
-/* Estilo del icono del botón de alternar la barra lateral */
+
 .toggle-sidebar i {
   font-size: 20px;
   color: #fff;
 }
-/* Estilo del contenedor de la barra lateral al hacer hover */
-.sidebar-container:hover {
-  width: 270px; /* Ancho al hacer hover */
-}
-/* Estilo del contenido principal al hacer hover en la barra lateral */
-.main-content:hover {
-  margin-left: 300px; /* Ancho del contenido principal al hacer hover */
-}
-/* Estilo del botón de alternar la barra lateral al hacer hover */
-.toggle-sidebar:hover {
-  background-color: #555; /* Color de fondo al hacer hover */
-}
-/* Estilo del icono del botón de alternar la barra */
-
-
-
-

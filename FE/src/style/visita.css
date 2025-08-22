@@ -33,14 +33,14 @@
 
 /* Contenedor principal */
 .visita-container {
-  margin-top: 4009px;
-  min-height: 100vh;
+  height: 100vh;
   background: linear-gradient(135deg, var(--light-blue) 0%, var(--gray-50) 100%);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
 /* Barra de header */
 .header-bar {
+  width: 100%;
   background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
   padding: 1rem 0;
   box-shadow: var(--shadow-md);
@@ -62,10 +62,9 @@
 
 /* Contenedor del formulario */
 .form-container {
-  max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
-  width: 100%;
+  width: 70%;
 }
 
 .form-header {
@@ -239,12 +238,10 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 2rem;
-  padding: clamp(1.5rem, 3vw, 2rem);
   background: var(--gray-50);
   border-radius: var(--border-radius-lg);
-  border: 1px solid var(--gray-200);
   flex-wrap: wrap;
+  background-color: transparent;
 }
 
 .btn-primary {
@@ -359,14 +356,12 @@
 
 /* Contenedor de tabla */
 .table-container {
-  max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
   background: var(--white);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  width: 100%;
 }
 
 .table-header {

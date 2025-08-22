@@ -18,6 +18,7 @@ import Cerrar from '../pages/Cerrar';
 import Exit from '../component/Exit';
 import PageGraficas from '../pages/PageGraficas';
 
+import Proteger from '../component/RutasPrivadas';
 
 
 // <Route path='/' element={</>}/>
@@ -27,10 +28,10 @@ function Routing() {
     <div>
       <Router>
         <Routes>
-
             {/* pagina de logueo */}
             <Route path='/' element={<Login/>}/>
 
+            {/* ======================================================== */}
             {/* registra nuevos usuarios */}
             <Route path="/register" element={<Register />} />
 
@@ -65,6 +66,8 @@ function Routing() {
             <Route path='/null' element={<Cerrar/>}/>
             <Route path='/devolver' element={<Exit/>}/>
             <Route path='/graficas' element={<PageGraficas/>}/>
+            {/* ======================================================== */}
+
 
         </Routes>
       </Router>

@@ -9,10 +9,9 @@ function Navbar() {
 
         {/* <Link ></Link> */}
 
-    <nav >
-
+    <nav className='NavBar'>
+        <img className="montage" src={Logo} alt="Logo" />
         <div className="cont-rutas">
-                  <img className="montage" src={Logo} alt="Logo" />
             <label>
                 <Link to={"/Expediente"}>
                 <input
@@ -47,15 +46,13 @@ function Navbar() {
                 className='lar'
             />
             </Link>
-        </label> 
-            <div className='afuera'>
-                <Link to="/null" className="boton">
-                <i className="fas fa-sign-out-alt"></i>
-                Cerrar Sesión
-                </Link>
-          </div>
-    </div>
-</nav>
+            </label>
+        </div>
+        <Link to="/null" className="BtnCerrar">
+            <i className="fas fa-sign-out-alt"></i>
+            Cerrar Sesión
+        </Link>
+    </nav>
 </div>
   )
 }

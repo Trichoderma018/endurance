@@ -21,9 +21,8 @@
   background-color: var(--gris-claro);
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 130%;
+  width: 100%;
   position: relative;
-  left: -14.7%;
   /* background-color: red; */
 }
 
@@ -68,6 +67,7 @@
   box-shadow: 0 5px 20px var(--sombra-suave);
   transition: transform 0.3s ease;
   animation: fadeInUp 0.5s ease-out;
+  width: 80%;
 }
 
 .proyectos-container:hover {

@@ -43,12 +43,11 @@ function Expediente() {
       <label className='borrado'>
 
       </label>
-      <div className='tablita'>
-      <Search />
-     
-      <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
       
-        </div>
+      <div className='tablita'>
+        <Search />
+        <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
+      </div>
  
       </div>
       

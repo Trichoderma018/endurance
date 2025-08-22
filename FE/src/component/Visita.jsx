@@ -630,7 +630,7 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
 
                             <div className="field-group">
                                 <label>Cédula *</label>
-                                <input value={cedula} onChange={(e) => setCedula(e.target.value)} className='form-input' type="text" placeholder="Cédula"  required/>
+                                <input value={cedula} onChange={(e) => setCedula(e.target.value)} className='form-input' type="number" placeholder="Cédula"  required/>
                             </div>
 
                             <div className="field-group">

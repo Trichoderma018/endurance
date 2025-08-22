@@ -11,6 +11,11 @@ import '../style/Sidebar.css'; // Asegúrate de que esta ruta sea correcta
 function Sidebar() {
   return (
     <div className="sidebar-container">
+      <Link to="/Expediente" className="btn-sidebar">
+        <ArrowBackIcon style={{ marginRight: '10px' }} />
+        Volver
+      </Link>
+
       <Link to="/mantAdmin" className="btn-sidebar">
         <PersonIcon style={{ marginRight: '10px' }} />
         Mantenimiento Admin
@@ -31,22 +36,15 @@ function Sidebar() {
         Mantenimiento Proyectos
       </Link>
 
-      <Link to="/configurations" className="btn-sidebar">
+      {/* <Link to="/configurations" className="btn-sidebar">
         <MiscellaneousServicesOutlinedIcon style={{ marginRight: '10px' }} />
         Configuración
-      </Link>
+      </Link> */}
 
       <Link to="/null" className="btn-sidebar">
         <ExitToAppIcon style={{ marginRight: '10px' }} />
         Cerrar Sesión
       </Link>
-
-      <div className="colocation">
-        <Link to="/Expediente" className="btn-sidebar">
-          <ArrowBackIcon style={{ marginRight: '10px' }} />
-          Volver
-        </Link>
-      </div>
     </div>
   );
 }
