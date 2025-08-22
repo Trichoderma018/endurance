@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import Llamados from '../services/Llamados';
 import '../style/Register.css';
 
 function FormRegister() {
+  
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const strengthLabels = ["", "Weak", "Moderate", "Good", "Strong"];
+  const strengthLabel = strengthLabels[passwordStrength];
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -12,17 +17,11 @@ function FormRegister() {
     confirmPassword: ''
   });
 
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-
-
-
+  
   useEffect(() => {
     if (!formData.confirmPassword) {
       setError(null);
@@ -47,9 +46,7 @@ function FormRegister() {
     formData.password === formData.confirmPassword
       ? evaluatePasswordStrength(formData.password)
       : 0;
-
-  const strengthLabels = ["", "Weak", "Moderate", "Good", "Strong"];
-  const strengthLabel = strengthLabels[passwordStrength];
+      
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -85,7 +82,6 @@ function FormRegister() {
   // Mover esto dentro del timeout si quieres que el loading dure hasta que navegue
   setTimeout(() => setIsLoading(false), 5000);
 }
-
   };
 
   return (
@@ -95,47 +91,19 @@ function FormRegister() {
         <div className="heading">Sign In to your account</div>
         <form className="form" onSubmit={handleSubmit}>
           <div className="input-field">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
             <label htmlFor="username">Full Name</label>
           </div>
           <div className="input-field">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/>
             <label htmlFor="email">Email</label>
           </div>
           <div className="input-field">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required/>
             <label htmlFor="password">Password</label>
           </div>
           <div className="input-field">
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+            <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required/>
             <label htmlFor="confirmPassword">Confirm Password</label>
           </div>
 
@@ -150,22 +118,18 @@ function FormRegister() {
           {error && <div className="error">{error}</div>}
 
           <div className="btn-container">
-            <button className="btn" type="submit" disabled={isLoading || !!error}>
-              Submit
-            </button>
-            {isLoading && <span className="">
-      <div className="loading-spinner">
-      <div className="spinner"></div>
-      <span className="loading-text">Loading...</span>
-    </div>
-
-     
-          </span>}
+            <button className="btn" type="submit" disabled={isLoading || !!error}> Submit </button>
+            {isLoading && <
+              span className="">
+                <div className="loading-spinner">
+                  <div className="spinner"></div>
+                  <span className="loading-text">Loading...</span>
+                </div>     
+              </span>
+            }
             <div className="acc-text">
               New here?{' '}
-              <span onClick={() => navigate('/')} style={{ color: "#0197A6", cursor: "pointer" }}>
-                Create Account
-              </span>
+              <span onClick={() => navigate('/')} style={{ color: "#0197A6", cursor: "pointer" }}> Create Account </span>
             </div>
           </div>
         </form>

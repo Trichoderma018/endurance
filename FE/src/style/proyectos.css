@@ -12,14 +12,19 @@
   --sombra-media: rgba(0, 0, 0, 0.15);
 }
 
+.acomodo {
+  background-color: red;
+}
+
 /* Estilos generales del componente Proyectos */
 .proyectos-fondo {
   background-color: var(--gris-claro);
-  min-height: 100vh;
+  height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 130%;
   position: relative;
   left: -14.7%;
+  /* background-color: red; */
 }
 
 /* Barra superior */
@@ -59,7 +64,6 @@
   background: var(--blanco);
   margin: 30px auto;
   padding: 40px;
-  max-width: 1200px;
   border-radius: 15px;
   box-shadow: 0 5px 20px var(--sombra-suave);
   transition: transform 0.3s ease;

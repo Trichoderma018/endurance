@@ -133,7 +133,7 @@ function MantStaff() {
         return usuario ? usuario.username : 'Usuario no encontrado'
     }
     return (
-        <div>
+        <div className='mant-admin'>
             <Sidebar/>
             <h2>{editMode ? 'Editar Staff' : 'Crear Staff'}</h2>
             <div className="formu">
@@ -146,7 +146,7 @@ function MantStaff() {
                         onChange={handleNombreCompleto}
                         placeholder="Nombre Completo"
                         maxLength={150}
-                        className="input-nombreCompleto"
+                        className="input-nombreCompleto1"
                     />
                 </div>
                 <br />
@@ -158,7 +158,7 @@ function MantStaff() {
                         value={email}
                         onChange={handleEmail}
                         placeholder="Email"
-                        className="input-email"
+                        className="input-email1"
                     />
                 </div>
                 <br />
@@ -171,7 +171,7 @@ function MantStaff() {
                         onChange={handleCargo}
                         placeholder="Cargo"
                         maxLength={30}
-                        className="input-cargo"
+                        className="input-cargo1"
                     />
                 </div>
                 <br />
@@ -184,10 +184,10 @@ function MantStaff() {
                         onChange={handleDepartamento}
                         placeholder="Departamento"
                         maxLength={30}
-                        className="input-departamento"
+                        className="input-departamento1"
                     />
                 </div>
-                <div className="campo-user">
+                <div className="campo-user1  ">
                     <label htmlFor="user"></label>
                     <select
                         id="user"
@@ -202,6 +202,8 @@ function MantStaff() {
                         ))}
                     </select>
                 </div>
+                <br />
+
                 <div className="campo-activo">
                     <label htmlFor="activo">
                         <input
@@ -230,6 +232,7 @@ function MantStaff() {
                     )}
                 </div>
             </div>
+            <br />
             <h2>Lista de Staff</h2>
             <table className="tabla-staff">
                 <thead>
