@@ -29,6 +29,8 @@ Frontend
 - react-router-dom | npm install react-router-dom   
 - jspdf | npm install jspdf jspdf-autotable
 - jspdf-autotable | npm install jspdf jspdf-autotable
+- npm install jspdf html2canvas
+- npm install --save react-apexcharts apexcharts
 
 Backend
 - rest_framework | pip install djangorestframework
