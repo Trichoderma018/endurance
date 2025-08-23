@@ -1,112 +1,136 @@
-  .inyou {
-    width: 200px;
-    padding: 10px;
-    border: 2px solid #ffffff;
-    border-radius: 8px;
-    outline: none;
-    font-size: 18px;
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    background-color: #fff;
-    color: #ffffff;
-    box-sizing: border-box;
-  }
 
-  .inyou {
-    border-color: #2980b9;
-    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
-    transform: scale(1.02);
-  }
 
-  /* Placeholder Styling */
-  .inyou {
-    color: #000000;
-    font-style: italic;
-  }
+/* Animación suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  /* Hover Effect */
-  .inyou {
-    background-color: #f0f8ff;
-  }
 
-  
-
-/* card del expediente */
-.expe {
-  position: relative;
-  width: 200px;
-  height: 250px;
+/* CONTENEDOR DEL FORMULARIO */
+.crf {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px 35px;
+  background: #ffffff;
+  border: 3px solid var(--primary-red);
   border-radius: 14px;
-  z-index: 1111;
-  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+
+/* Título dentro del formulario */
+.crf h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff0000; /* Rojo original */
+}
+
+/* INPUTS Y SELECTS */
+.inyou {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #ff0000; /* Bordes consistentes en rojo */
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 15px; /* Espaciado entre campos */
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+  color: #000; /* Texto oscuro para contraste */
+  box-sizing: border-box;
+}
+
+.inyou:focus {
+  border-color: #b30000; /* Rojo más intenso en focus */
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+  outline: none;
+}
+
+/* Placeholder en itálica */
+.inyou::placeholder {
+  font-style: italic;
+  color: #666;
+}
+
+/* BOTONES */
+.button {
+  background-color: #2980b9; /* Azul original */
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #1f6390;
+}
+
+/* .visita-container {
+  margin-top: 4009px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--light-blue) 0%, var(--gray-50) 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+/* Barra de header */
+/* .header-bar {
+  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  padding: 1rem 0;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}  */
+
+
+/* HEADER CON LOGO Y TÍTULO */
+.Endurance {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 25px;
+}
+
+.Endurance .logo {
+  height: 110px;
+  margin-bottom: 8px;
+}
+
+.Endurance h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-red);
+  /* display: flex;
   justify-content: center;
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-  ;
+  text-align: center; */
+}
+/* TABLA DE EXPEDIENTES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
 }
 
-.bg {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 190px;
-  height: 240px;
-  z-index: 2;
-  background: rgba(255, 255, 255, .95);
-  backdrop-filter: blur(24px);
-  border-radius: 10px;
-  overflow: hidden;
-  outline: 2px solid white;
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
-.blob {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #ff0000;
-  opacity: 1;
-  filter: blur(12px);
-  animation: blob-bounce 5s infinite ease;
+table th {
+  background-color: #2980b9; /* Azul original */
+  color: white;
+  font-weight: bold;
 }
 
-@keyframes blob-bounce {
-  0% {
-    transform: translate(-100%, -100%) translate3d(0, 0, 0);
-  }
-
-  25% {
-    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
-  }
-
-  50% {
-    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
-  }
-
-  75% {
-    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
-  }
-
-  100% {
-    transform: translate(-100%, -100%) translate3d(0, 0, 0);
-  }
+table tr:hover {
+  background-color: #f9f9f9;
 }
-
-
-/* mover el agregado */
-
-.moverpage{
-  position: relative;
-  left: 1.2%;
-}
-
-.crf{
-  background-color: #ff0000;
-  border-color: #0f007f8f;
-  border-style: dotted;
-}
-
