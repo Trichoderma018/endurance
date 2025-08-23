@@ -47,17 +47,6 @@
   opacity: 0.1;
 }
 
-.proyectos-endurance {
-  color: var(--rojo-hover);
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin: -0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
 /* Contenedor principal de proyectos */
 .proyectos-container {
   background: var(--blanco);

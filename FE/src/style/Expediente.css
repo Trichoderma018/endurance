@@ -1,45 +1,34 @@
-/* From Uiverse.io by SARAN2004 */ 
-
-*{
-  height: auto;
+* {
 }
 
 .montage{
 font-style: normal;  
 }
-.afuera{
-  position: relative;
-  left: 25%;
-  background-color: white;
-
-
-}
 
 .tablita {
-  background-color: red;
   display: flex;
-  gap: 50px;
+  align-items: center;
   justify-content: center;
+  gap: 50px;
+  padding: 0 50px;
 }
 
-
-/* 
 .buttong {
   position: relative;
-  left: 90%;
-  top: -50px;
   color: white;
   border: none;
+  height: 40px;
   border-radius: 5px;
-  padding: 10px 15px;
+  padding: 5px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  background-color: red;
-} */
-/* 
+  background-color: #152741;
+}
+
 button:hover {
-  background-color: #E32629;
-} */
+  background-color: #205db4;
+  transform: scale(1.05);
+}
 
 .Endurance{
   color: #193666;
@@ -49,8 +38,6 @@ button:hover {
   font-weight: bold;
   text-align: left;
 }
-
-
 
 .radio-input input {
   display: none;
@@ -96,27 +83,18 @@ button:hover {
   color: #000000;
 }
 
-.static{
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
 .registro-container{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
   padding: 50px;
+  padding-top: 0px;
 }
 
 .acomodar10{
   position: relative;
 
-}
-
-.fondo {
-  background-color: blue;
 }
 
 /* fondo de pantalla */

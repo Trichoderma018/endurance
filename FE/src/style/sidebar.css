@@ -90,7 +90,7 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   width: 210px;
   height: 100vh;
-  background-color: #222;
+  background-color: #152741;
   position: fixed;
   top: 0;
   left: 0;
@@ -108,7 +108,7 @@
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: rgba(121, 31, 31, 0.443);
+  background-color: #1c4379;
   margin-bottom: 2px;
   color: #fff;
   border: none;

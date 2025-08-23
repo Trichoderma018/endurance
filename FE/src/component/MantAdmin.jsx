@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/MantAdmin.css"
 import Sidebar from './Sidebar'
+import Navbar from './Navbar'
+
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -111,6 +113,7 @@ function MantAdmin() {
   }
   return (
     <div className='mant-admin'>
+
       <Sidebar/>
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
       <div className="mant-admin-formulario">

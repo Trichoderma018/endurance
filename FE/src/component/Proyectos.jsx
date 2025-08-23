@@ -246,10 +246,8 @@ function Proyectos() {
     return (
     <div className='acomodo2'>
         <div className='proyectos-fondo'>
-            <div className='proyectos-barra'>
-                <header className='proyectos-endurance'>ENDURANCE</header>
-            </div>
-            {/* <Navbar/> -----------------------------------------------------------*/} 
+
+            <Navbar/> 
             
             <div className="proyectos-container">
                 <h2 className="proyectos-titulo">{editMode ? 'EDITAR PROYECTO' : 'PROYECTOS'}</h2>
