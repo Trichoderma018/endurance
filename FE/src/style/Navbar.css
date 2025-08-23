@@ -1,20 +1,11 @@
-/* Reset básico */
+Reset básico
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.montage{
-  width: 100px; /* o cualquier valor como 50%, 10rem, etc. */
-  height: auto; /* mantiene la proporción original */
-  position: relative;
-  left: -20%;
-}
-.boton{
-  position: relative;
-  left: -60%;
-  background-color: transparent;
-}
+
+
 .lar {
   align-items: center;
   appearance: none;
@@ -72,20 +63,33 @@ body {
   background-color: transparent;
 }
 
-/* Navbar container */
-.cont-rutas {
+.Container-NAV {
+  height: 200px;
+  width: 100%;
+
+}
+
+.proyectos-endurance {
+  color: var(--rojo-hover);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.montage{
+  width: 100px;
+}
+
+.NavBar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  background-color: #ffffff;
-  color: #000;
-  padding: 15px 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  justify-content: space-around;
+  background-color: rgba(255, 255, 255, 0.868);
 }
+
 
 /* Logo */
 .logo {
@@ -93,6 +97,12 @@ body {
   font-size: 1.5rem;
   color: #000;
   margin-right: auto;
+}
+
+.cont-rutas {
+  display: flex;
+  gap: 20px;
+  background-color: transparent;
 }
 
 /* Nav items */
@@ -111,6 +121,29 @@ body {
   color: #fff;
 }
 
+.movete{
+  position: relative;
+  left: 390%;
+}
+
+.BtnCerrar {
+  position: relative;
+  color: white;
+  border: none;
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #152741;
+  text-decoration: none;
+}
+
+.BtnCerrar:hover {
+  background-color: #536DFE;
+  transform: scale(1.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .cont-rutas {
@@ -122,15 +155,4 @@ body {
     width: 100%;
     text-align: center;
   }
-}
-
-.movete{
-  position: relative;
-  left: 390%;
-}
-
-.afuera{
-position: relative;
-left: 24%;
-background-color: transparent;
 }

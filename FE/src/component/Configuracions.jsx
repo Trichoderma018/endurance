@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Sidebar from './Sidebar'
 import '../style/configura.css';
 
 import {
@@ -64,10 +65,12 @@ function Configuracions() {
   };
 
   return (
-    <div className="impet">
+    <div className="mant-admin ">
+      <Sidebar />
+          
+          <h2>Configuraciones</h2>
       <Box className="config-box">
         <Typography variant="h5" gutterBottom>
-          Configuraciones
         </Typography>
 
         <Divider sx={{ my: 2 }} />
@@ -118,7 +121,7 @@ function Configuracions() {
           variant="outlined"
         />
 
-        <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
+        <Box sx={{ mt: 3, display: 'flex', gap: 2, margin: '20px auto'}}>
           <Button variant="contained" color="primary" onClick={handleSave}>
             Guardar cambios
           </Button>
