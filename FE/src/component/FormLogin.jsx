@@ -44,7 +44,7 @@ const FormLogin = () => {
       <form className="login-form" onSubmit={handleSubmit}>
         <img className="logo" src={Logo} alt="Logo" />
         <div className="input-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Nombre</label>
           <input
             type="text"
             id="username"
@@ -54,7 +54,7 @@ const FormLogin = () => {
           />
         </div>
         <div className="input-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input
             type="password"
             id="password"
@@ -65,13 +65,13 @@ const FormLogin = () => {
         </div>
         {error && <p className="error-message">{error}</p>}
         <button className="submit" type="submit" disabled={loading}>
-          {loading ? 'loading...' : 'Log In'}
+          {loading ? 'Cargando...' : 'Iniciar Sesión'}
         </button>
         <div className="forgot-password">
           <a href="#" onClick={openModal}>¿Olvidaste tu contraseña?</a>
         </div>
         <div className="signup-link" onClick={() => navigate('/register')}>
-          Don't have an account? <a href="#">Sign up</a>
+          ¿No tienes cuenta? <a href="#">Iniciar sesión</a>
         </div>
       </form>
 

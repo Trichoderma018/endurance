@@ -88,22 +88,22 @@ function FormRegister() {
     <div className='login-container'> {/* Cambiado de 'bn' a 'login-container' */}
       <form className="login-form" onSubmit={handleSubmit}> {/* Cambiado de 'form' a 'login-form' */}
         <img src={Logo} alt="Logo" className="logo" />
-        <div className="form-heading">Sign Up</div>
+        <div className="form-heading">Crear cuenta</div>
         <div className="input-group"> {/* Cambiado de 'input-field' a 'input-group' */}
           <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
-          <label htmlFor="username">Full Name</label>
+          <label htmlFor="username">Nombre completo</label>
         </div>
         <div className="input-group">
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Correo electrónico</label>
         </div>
         <div className="input-group">
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
         </div>
         <div className="input-group">
           <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirmar contraseña</label>
         </div>
 
         {formData.password &&
@@ -116,16 +116,16 @@ function FormRegister() {
 
         {error && <p className="error-message">{error}</p>} {/* Cambiado de 'error' a 'error-message' */}
 
-        <button className="submit" type="submit" disabled={isLoading || !!error}>Sign Up</button> {/* Cambiado de 'btn' a 'submit' */}
+        <button className="submit" type="submit" disabled={isLoading || !!error}>Crear cuenta</button> {/* Cambiado de 'btn' a 'submit' */}
         {isLoading && (
           <div className="loading-spinner">
             <div className="spinner"></div>
-            <span className="loading-text">Loading...</span>
+            <span className="loading-text">Cargando</span>
           </div>
         )}
         <div className="signup-link"> {/* Cambiado de 'acc-text' a 'signup-link' */}
-          Already have an account?{' '}
-          <a href="#" onClick={() => navigate('/')}>Sign In</a>
+          Ya tienes cuenta?{' '}
+          <a href="#" onClick={() => navigate('/')}>Iniciar sesión</a>
         </div>
       </form>
     </div>
