@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.core import serializers
 from django.apps import apps
 # Para ejecutar el respaldo python manage.py backup_single
+BACKUP_DIR = 'backups'
 
 class Command(BaseCommand):
     help = 'Crea un respaldo único en un solo archivo JSON con todos los modelos'
