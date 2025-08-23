@@ -1,12 +1,12 @@
-import React from 'react'
-import PaginaAgregar from '../component/PaginaAgregar'
+import React from 'react';
+import PaginaAgregar from '../component/PaginaAgregar';
 
 function Agregar() {
   return (
-    <div>
-        <PaginaAgregar/>
+    <div className="form-container">
+      <PaginaAgregar />
     </div>
-  )
+  );
 }
 
-export default Agregar
+export default Agregar;

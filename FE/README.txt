@@ -1,0 +1,11 @@
+Este proyecto está construido sobre la biblioteca React, que permite desarrollar interfaces de usuario dinámicas y reactivas. Se hace uso extensivo de hooks como useState, useEffect y useRef para manejar el estado, los efectos secundarios y referencias a elementos del DOM. Además, se emplea React Router DOM para gestionar la navegación entre vistas, utilizando componentes como useNavigate y Link para redirigir y enlazar páginas dentro de la aplicación.
+
+Para el diseño visual, se han incorporado múltiples archivos CSS personalizados que definen estilos específicos para componentes como formularios de experiencia, vistas de visitas, tarjetas y paneles de administración. Estos estilos se encuentran organizados en carpetas como ../style/ y permiten mantener una separación clara entre la lógica y la presentación.
+
+En cuanto a la generación de documentos, se utiliza la librería jsPDF junto con su extensión jspdf-autotable. Estas herramientas permiten crear archivos PDF directamente desde el frontend, incluyendo tablas con datos estructurados, lo cual es útil para reportes, exportaciones o documentación generada por el usuario.
+
+La integración con AWS se realiza mediante el SDK oficial aws-sdk, que facilita la conexión con servicios como Amazon S3. A través de una función personalizada llamada uploadImageToS3, se permite subir imágenes al almacenamiento en la nube, lo que resulta esencial para funcionalidades como descarga de evidencias o gestión de archivos multimedia.
+
+También se incorporan íconos de Material UI para enriquecer la interfaz gráfica. Se utilizan componentes como PersonIcon, ExitToAppIcon, FolderOpenIcon y ArrowBackIcon, que aportan claridad visual y mejoran la experiencia del usuario al representar acciones comunes como navegación, cierre de sesión o acceso a carpetas.
+
+Por último, el proyecto incluye módulos personalizados como Llamados, que centraliza las llamadas a la API, y Sidebar, que proporciona una navegación lateral estructurada. Estos componentes reflejan una arquitectura modular y reutilizable, orientada a mantener el código limpio, escalable y fácil de mantener.

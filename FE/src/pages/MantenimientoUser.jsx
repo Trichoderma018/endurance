@@ -1,11 +1,9 @@
 
 import MantUser from '../component/MantUser'
 
-
-
 function MantenimientoUser() {
   return (
-    <div style={{position: 'relative', top: '365px', width: '100%'}}>
+    <div>
       <MantUser />
     </div>
   )

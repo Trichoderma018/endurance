@@ -9,6 +9,7 @@ function Cards({id, nombre, imagen, descripcion, rol , view}) {
     navigate('/views');
     localStorage.setItem('id', id);
   }
+  
   return (
   <div className='card-container'>
     <div className="card">

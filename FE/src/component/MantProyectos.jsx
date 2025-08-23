@@ -224,8 +224,9 @@ function MantProyectos() {
     }
   }
   return (
-    <div className="mant-proyectos">
+    <div className="mant-admin">
       <Sidebar/>
+      
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="formulario-mant-proyectos">
@@ -362,8 +363,11 @@ function MantProyectos() {
               {error}
             </div>
           )}
+          <br />
         </div>
+        <br />
       </form>
+      
       <h2>Lista de Proyectos</h2>
       <table className="tabla-proyectos" style={{width: '100%', borderCollapse: 'collapse'}}>
         <thead>

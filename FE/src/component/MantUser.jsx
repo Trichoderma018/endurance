@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import Sidebar from './Sidebar'
 import '../style/MantUser.css'
+
 function MantUser() {
     const [username, setUsername] = React.useState('')
     const [email, setEmail] = React.useState('')
@@ -145,14 +146,8 @@ function MantUser() {
         }
     }
     return (
-<<<<<<< HEAD
-        <div>
-=======
-        <div className='lonjevo'>
-            
->>>>>>> 6db8ca02c414e1268258c9bfcdd6bfe4a57c740e
+        <div className='mant-admin'>
             <Sidebar/>
-            <h1></h1>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario-user">
                 <div className="campo-name">

@@ -32,28 +32,24 @@ function Expediente() {
   }, []);
 
   return (
-    <div className='fondo'>
+    <div >
 
       <div className='static'>
-      <header className='Endurance'>ENDURANCE</header>
-    
-
       <Navbar />
 
       <label className='borrado'>
 
       </label>
-      <div className='tablita'>
-      <Search />
-     
-      <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
-      
-        </div>
- 
-      </div>
-      
-        <h2>Lista de Expediente</h2>
 
+      <div className='tablita'>
+        <Search />
+        <button className='buttong' onClick={() => navigate('/agregar')}>Agregar +</button>
+      </div>
+      <br />
+      <h2>Lista de Expediente</h2>
+      <hr />
+      </div>
+    
       <div className="registro-container">
       
         {isLoading && <p className="mensaje-cargando">Cargando expedientes...</p>}

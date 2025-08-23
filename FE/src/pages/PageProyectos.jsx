@@ -4,7 +4,7 @@ import Proyectos from '../component/Proyectos'
 
 function PageProyectos() {
   return (
-    <div style={{position: 'relative', top: '750px', width: '100%'}}>
+    <div className='proyectos-fondo'>
       <Proyectos />
     </div>
   )
