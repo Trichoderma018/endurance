@@ -237,9 +237,14 @@ function PaginaAgregar() {
     }
 
     return (
-        <div className=''>
-            <div className=''>
-                <header className='Endurance'>ENDURANCE</header>
+        <div className='visita-container'>
+            <div className='header-inner'>
+                <header className='Endurance'>
+                    <img src="./assets/img/Logo-Endurance.jpg" alt="Logo Endurance" className="logo" />
+                    <h1>ENDURANCE</h1>
+                    
+
+                </header>
             </div>
 
             <div className="crf">

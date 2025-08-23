@@ -1,12 +1,4 @@
 /* MantUser.css */
-.user-container { 
-  margin-left: 210px;
-  padding: 40px;
-  background: #f5f7fa;
-  min-height: 100vh;
-  transition: margin-left 0.3s ease;
-}
-.sidebar-container:hover ~ .user-container { margin-left: 270px; }
 
 h1 { font-size: 28px; color: #0d0c22; margin-bottom: 10px; }
 h2 { 
@@ -17,25 +9,22 @@ h2 {
 }
 
 .formulario-user, .tabla-usuarios { 
-  max-width: 950px;
   margin: 0 auto 30px;
-  background: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 80%;
 }
 
 .campo-name, .campo-correo, .campo-sede, .campo-password, .campo-password-confirm { 
   margin-bottom: 20px; 
-  position: relative; 
 }
 
 .input-name, .input-correo, .input-sede, .inp-password, .inp-password-confirm { 
   width: 100%;
-  max-width: 400px;
   line-height: 28px;
   padding: 1rem;
-  border: 2px solid transparent;
+  border: 2px solid;
   border-bottom-color: #777;
   border-radius: 1rem;
   background: transparent;

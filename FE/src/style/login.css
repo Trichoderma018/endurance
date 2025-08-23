@@ -3,21 +3,10 @@
     color: black;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #F8F3F7;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.rtflx {
- background-color: #F8F3F7;
+/* .rtflx {
+ background-color: #cf26ad;
  color: #000000;
-}
+} */
 
 
 /* From Uiverse.io by rajesh_4474 */ 
@@ -33,21 +22,38 @@ body {
     background: linear-gradient(45deg, #ff7e5f, #feb47b);
   }
 }
+.login-container {
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../assets/img/Fondo.png")
+}
 
 .login-form {
-    position: relative;
-  max-width: 420px;
-  width: 100%;
-  padding: 40px;
-  background: #F8F3F7;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 1.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  width: 30%;
+  border: solid 0.5px;
+  border-radius: 20px;
+}
+
+.logo {
+  width: 50%;
+  height: 40%;
+  margin: 0 auto 20px;
 }
 
 .form-heading {
   text-align: center;
-  background-color: #F8F3F7;
   color: #333;
   font-size: 2rem;
   font-weight: 600;
@@ -62,7 +68,7 @@ body {
   background-color: transparent;
 }
 
-.input-group .label {
+ .input-group .label {
   position: absolute;
   top: -16px;
   left: 12px;
@@ -71,7 +77,7 @@ body {
   font-weight: 600;
   transition: all 0.3s ease;
   opacity: 0.7;
-}
+} 
 
 .input-group input {
   width: 105%;
@@ -80,7 +86,7 @@ body {
   color: #333;
   background-color: #F8F3F7;
   border: 2px solid #828282;
-  border-radius: 10px;
+  border-radius: 10px !important;
   outline: none;
   transition: all 0.3s ease;
 }
@@ -173,6 +179,85 @@ body {
   .login-form {
     padding: 30px;
     width: 90%;
+  }
+}
+
+/* Mejorar responsividad del formulario */
+.login-form {
+  max-width: 420px;    
+  width: 90%;         
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .login-form {
+    width: 60%;       
+  }
+}
+
+
+.auth-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  color: #0056b3;
+}
+
+/* Fondo oscuro para modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+/* Botón cerrar */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

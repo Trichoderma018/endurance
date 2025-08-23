@@ -527,11 +527,7 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Expediente *</label>
-                                <select 
-                                    className='form-input' 
-                                    value={expedienteSeleccionado}
-                                    onChange={(e) => setExpedienteSeleccionado(e.target.value)}
-                                    required
+                                <select  className='form-input' value={expedienteSeleccionado} onChange={(e) => setExpedienteSeleccionado(e.target.value)} required
                                 >
                                     <option value="">Seleccionar Expediente</option>
                                     {expedientes && expedientes.map((expediente) => (
@@ -544,25 +540,12 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
 
                             <div className="field-group">
                                 <label>Nombre Completo *</label>
-                                <input 
-                                    value={nombreCompleto}
-                                    onChange={(e) => setNombreCompleto(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Nombre Completo" 
-                                    required
-                                />
+                                <input  value={nombreCompleto} onChange={(e) => setNombreCompleto(e.target.value)}  className='form-input' type="text" placeholder="Nombre Completo"  required/>
                             </div>
 
                             <div className="field-group">
                                 <label>Rol</label>
-                                <input 
-                                    value={rol}
-                                    onChange={(e) => setRol(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Rol" 
-                                />
+                                <input value={rol} onChange={(e) => setRol(e.target.value)} className='form-input' type="text" placeholder="Rol" />
                             </div>
                         </div>
                     </div>
@@ -575,55 +558,27 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Institución</label>
-                                <input 
-                                    value={institucion}
-                                    onChange={(e) => setInstitucion(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Institución" 
-                                />
+                                <input value={institucion} onChange={(e) => setInstitucion(e.target.value)} className='form-input' type="text" placeholder="Institución" />
                             </div>
 
                             <div className="field-group">
                                 <label>Año Académico</label>
-                                <input 
-                                    value={anoAcademico}
-                                    onChange={(e) => setAnoAcademico(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Año Académico" 
-                                />
+                                <input value={anoAcademico} onChange={(e) => setAnoAcademico(e.target.value)} className='form-input' type="text" placeholder="Año Académico" />
                             </div>
 
                             <div className="field-group">
                                 <label>Adecuación</label>
-                                <input 
-                                    value={adecuacion}
-                                    onChange={(e) => setAdecuacion(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Adecuación" 
-                                />
+                                <input value={adecuacion} onChange={(e) => setAdecuacion(e.target.value)} className='form-input' type="text" placeholder="Adecuación" />
                             </div>
 
                             <div className="field-group">
                                 <label>Tipo de Adecuación</label>
-                                <input 
-                                    value={tipoAdecuacion}
-                                    onChange={(e) => setTipoAdecuacion(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Tipo de Adecuación" 
-                                />
+                                <input value={tipoAdecuacion} onChange={(e) => setTipoAdecuacion(e.target.value)} className='form-input' type="text" placeholder="Tipo de Adecuación" />
                             </div>
 
                             <div className="field-group">
                                 <label>¿Tiene beca?</label>
-                                <select 
-                                    className='form-input' 
-                                    value={beca}
-                                    onChange={(e) => setBeca(e.target.value)}
-                                >
+                                <select className='form-input' value={beca} onChange={(e) => setBeca(e.target.value)}>
                                     <option value="">Seleccionar</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
@@ -632,51 +587,25 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
 
                             <div className="field-group">
                                 <label>Monto de la Beca</label>
-                                <input 
-                                    value={montoBeca}
-                                    onChange={(e) => setMontoBeca(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Monto de la Beca" 
-                                />
+                                <input value={montoBeca} onChange={(e) => setMontoBeca(e.target.value)} className='form-input' type="number" placeholder="Monto de la Beca" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Institución que otorga la Beca</label>
-                                <input 
-                                    value={institucionBeca}
-                                    onChange={(e) => setInstitucionBeca(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Institución que otorga la Beca" 
-                                />
+                                <input value={institucionBeca} onChange={(e) => setInstitucionBeca(e.target.value)} className='form-input' type="text" placeholder="Institución que otorga la Beca" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Comentarios Académicos</label>
-                                <textarea 
-                                    value={comentario}
-                                    onChange={(e) => setComentario(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Comentarios Académicos" 
-                                    rows="3"
-                                />
+                                <textarea value={comentario} onChange={(e) => setComentario(e.target.value)} className='form-input form-textarea' placeholder="Comentarios Académicos" rows="3"/>
                             </div>
 
                             <div className="field-group full-width">
                                 <label htmlFor="adjunto">Adjunto de Notas</label>
-                                <input
-                                    id="adjunto"
-                                    type="file"
-                                    onChange={handleFileChange}
-                                    ref={fileInputRef}
-                                    className="file-input"
-                                />
+                                <input id="adjunto"type="file" onChange={handleFileChange} ref={fileInputRef} className="file-input"/>
                                 {adjuntoNotas && (
                                     <div className="file-preview">
-                                        <a href={adjuntoNotas} target="_blank" rel="noopener noreferrer">
-                                            Ver archivo adjunto
-                                        </a>
+                                        <a href={adjuntoNotas} target="_blank" rel="noopener noreferrer">Ver archivo adjunto</a>
                                     </div>
                                 )}
                             </div>
@@ -691,70 +620,32 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Fecha de Nacimiento *</label>
-                                <input 
-                                    className='form-input' 
-                                    type="date" 
-                                    value={fechaNacimiento}
-                                    onChange={(e) => setFechaNacimiento(e.target.value)} 
-                                    required 
-                                />
+                                <input className='form-input' type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)}  required />
                             </div>
 
                             <div className="field-group">
                                 <label>Edad</label>
-                                <input 
-                                    value={edad}
-                                    onChange={(e) => setEdad(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Edad" 
-                                />
+                                <input value={edad} onChange={(e) => setEdad(e.target.value)} className='form-input' type="text" placeholder="Edad" />
                             </div>
 
                             <div className="field-group">
                                 <label>Cédula *</label>
-                                <input 
-                                    value={cedula}
-                                    onChange={(e) => setCedula(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Cédula" 
-                                    required
-                                />
+                                <input value={cedula} onChange={(e) => setCedula(e.target.value)} className='form-input' type="number" placeholder="Cédula"  required/>
                             </div>
 
                             <div className="field-group">
                                 <label>Teléfono Principal *</label>
-                                <input 
-                                    value={telefono1}
-                                    onChange={(e) => setTelefono1(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Teléfono Principal" 
-                                    required
-                                />
+                                <input value={telefono1} onChange={(e) => setTelefono1(e.target.value)} className='form-input' type="text" placeholder="Teléfono Principal"  required/>
                             </div>
 
                             <div className="field-group">
                                 <label>Teléfono Secundario</label>
-                                <input 
-                                    value={telefono2}
-                                    onChange={(e) => setTelefono2(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Teléfono Secundario" 
-                                />
+                                <input value={telefono2} onChange={(e) => setTelefono2(e.target.value)} className='form-input' type="text" placeholder="Teléfono Secundario" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Lugar de Residencia</label>
-                                <textarea 
-                                    value={lugarResidencia}
-                                    onChange={(e) => setLugarResidencia(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Lugar de Residencia" 
-                                    rows="2"
-                                />
+                                <textarea value={lugarResidencia} onChange={(e) => setLugarResidencia(e.target.value)} className='form-input form-textarea' placeholder="Lugar de Residencia" rows="2"/>
                             </div>
                         </div>
                     </div>
@@ -767,68 +658,32 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Lesiones</label>
-                                <textarea 
-                                    value={lesiones}
-                                    onChange={(e) => setLesiones(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Lesiones" 
-                                    rows="2"
-                                />
+                                <textarea value={lesiones} onChange={(e) => setLesiones(e.target.value)} className='form-input form-textarea' placeholder="Lesiones" rows="2"/>
                             </div>
 
                             <div className="field-group">
                                 <label>Enfermedades</label>
-                                <textarea 
-                                    value={enfermedades}
-                                    onChange={(e) => setEnfermedades(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Enfermedades" 
-                                    rows="2"
-                                />
+                                <textarea value={enfermedades} onChange={(e) => setEnfermedades(e.target.value)} className='form-input form-textarea' placeholder="Enfermedades" rows="2" />
                             </div>
 
                             <div className="field-group">
                                 <label>Tratamientos</label>
-                                <textarea 
-                                    value={tratamientos}
-                                    onChange={(e) => setTratamientos(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Tratamientos" 
-                                    rows="2"
-                                />
+                                <textarea value={tratamientos} onChange={(e) => setTratamientos(e.target.value)} className='form-input form-textarea' placeholder="Tratamientos" rows="2" />
                             </div>
 
                             <div className="field-group">
                                 <label>Atención Médica</label>
-                                <textarea 
-                                    value={atencionMedica}
-                                    onChange={(e) => setAtencionMedica(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Atención Médica" 
-                                    rows="2"
-                                />
+                                <textarea value={atencionMedica} onChange={(e) => setAtencionMedica(e.target.value)} className='form-input form-textarea' placeholder="Atención Médica" rows="2" />
                             </div>
 
                             <div className="field-group">
                                 <label>Uso de Drogas/Medicamentos</label>
-                                <textarea 
-                                    value={drogas}
-                                    onChange={(e) => setDrogas(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Uso de Drogas/Medicamentos" 
-                                    rows="2"
-                                />
+                                <textarea alue={drogas}onChange={(e) => setDrogas(e.target.value)} className='form-input form-textarea' placeholder="Uso de Drogas/Medicamentos" rows="2"/>
                             </div>
 
                             <div className="field-group">
                                 <label>Disponibilidad</label>
-                                <textarea 
-                                    value={disponibilidad}
-                                    onChange={(e) => setDisponibilidad(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Disponibilidad" 
-                                    rows="2"
-                                />
+                                <textarea value={disponibilidad} onChange={(e) => setDisponibilidad(e.target.value)} className='form-input form-textarea' placeholder="Disponibilidad" rows="2"/>
                             </div>
                         </div>
                     </div>
@@ -841,46 +696,22 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Tipo de Casa</label>
-                                <input 
-                                    value={casa}
-                                    onChange={(e) => setCasa(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Tipo de Casa" 
-                                />
+                                <input value={casa} onChange={(e) => setCasa(e.target.value)} className='form-input' type="text" placeholder="Tipo de Casa" />
                             </div>
 
                             <div className="field-group">
                                 <label>Monto de Casa/Alquiler</label>
-                                <input 
-                                    value={montoCasa}
-                                    onChange={(e) => setMontoCasa(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Monto de Casa/Alquiler" 
-                                />
+                                <input value={montoCasa} onChange={(e) => setMontoCasa(e.target.value)} className='form-input' type="number" placeholder="Monto de Casa/Alquiler" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Especificaciones de la Vivienda</label>
-                                <textarea 
-                                    value={especificaciones}
-                                    onChange={(e) => setEspecificaciones(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Especificaciones de la Vivienda" 
-                                    rows="3"
-                                />
+                                <textarea value={especificaciones} onChange={(e) => setEspecificaciones(e.target.value)} className='form-input form-textarea' placeholder="Especificaciones de la Vivienda" rows="3"/>
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Comentarios sobre Vivienda</label>
-                                <textarea 
-                                    value={comentario4}
-                                    onChange={(e) => setComentario4(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Comentarios sobre Vivienda" 
-                                    rows="2"
-                                />
+                                <textarea value={comentario4} onChange={(e) => setComentario4(e.target.value)} className='form-input form-textarea' placeholder="Comentarios sobre Vivienda"  rows="2"/>
                             </div>
                         </div>
                     </div>
@@ -893,11 +724,7 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>¿Trabaja actualmente?</label>
-                                <select 
-                                    className='form-input' 
-                                    value={trabaja}
-                                    onChange={(e) => setTrabaja(e.target.value)}
-                                >
+                                <select className='form-input' value={trabaja} onChange={(e) => setTrabaja(e.target.value)}>
                                     <option value="">Seleccionar</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
@@ -906,35 +733,17 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
 
                             <div className="field-group">
                                 <label>Empresa/Lugar de Trabajo</label>
-                                <input 
-                                    value={empresa}
-                                    onChange={(e) => setEmpresa(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Empresa/Lugar de Trabajo" 
-                                />
+                                <input  value={empresa} onChange={(e) => setEmpresa(e.target.value)} className='form-input' type="text" placeholder="Empresa/Lugar de Trabajo" />
                             </div>
 
                             <div className="field-group">
                                 <label>Salario</label>
-                                <input 
-                                    value={salario}
-                                    onChange={(e) => setSalario(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Salario" 
-                                />
+                                <input value={salario} onChange={(e) => setSalario(e.target.value)} className='form-input' type="number" placeholder="Salario" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Comentarios sobre Trabajo</label>
-                                <textarea 
-                                    value={comentario5}
-                                    onChange={(e) => setComentario5(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Comentarios sobre Trabajo" 
-                                    rows="2"
-                                />
+                                <textarea value={comentario5} onChange={(e) => setComentario5(e.target.value)} className='form-input form-textarea' placeholder="Comentarios sobre Trabajo" rows="2"/>
                             </div>
                         </div>
                     </div>
@@ -947,68 +756,32 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Nombre del Familiar</label>
-                                <input 
-                                    value={nombreFamiliar}
-                                    onChange={(e) => setNombreFamiliar(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Nombre del Familiar" 
-                                />
+                                <input value={nombreFamiliar} onChange={(e) => setNombreFamiliar(e.target.value)} className='form-input' type="text" placeholder="Nombre del Familiar" />
                             </div>
 
                             <div className="field-group">
                                 <label>Edad del Familiar</label>
-                                <input 
-                                    value={edadFamiliar}
-                                    onChange={(e) => setEdadFamiliar(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Edad del Familiar" 
-                                />
+                                <input value={edadFamiliar} onChange={(e) => setEdadFamiliar(e.target.value)} className='form-input' type="text" placeholder="Edad del Familiar" />
                             </div>
 
                             <div className="field-group">
                                 <label>Parentesco</label>
-                                <input 
-                                    value={parentesco}
-                                    onChange={(e) => setParentesco(e.target.value)} 
-                                    className='form-input' 
-                                    type="text" 
-                                    placeholder="Parentesco" 
-                                />
+                                <input value={parentesco}onChange={(e) => setParentesco(e.target.value)} className='form-input' type="text" placeholder="Parentesco" />
                             </div>
 
                             <div className="field-group">
                                 <label>Ingreso Mensual del Familiar</label>
-                                <input 
-                                    value={ingresoMensual}
-                                    onChange={(e) => setIngresoMensual(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Ingreso Mensual del Familiar" 
-                                />
+                                <input value={ingresoMensual} onChange={(e) => setIngresoMensual(e.target.value)} className='form-input' type="number" placeholder="Ingreso Mensual del Familiar" />
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Ocupación del Familiar</label>
-                                <textarea 
-                                    value={ocupacion}
-                                    onChange={(e) => setOcupacion(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Ocupación del Familiar" 
-                                    rows="2"
-                                />
+                                <textarea value={ocupacion} onChange={(e) => setOcupacion(e.target.value)} className='form-input form-textarea' placeholder="Ocupación del Familiar" rows="2"/>
                             </div>
 
                             <div className="field-group full-width">
                                 <label>Lugar de Trabajo del Familiar</label>
-                                <textarea 
-                                    value={lugarTrabajo}
-                                    onChange={(e) => setLugarTrabajo(e.target.value)} 
-                                    className='form-input form-textarea' 
-                                    placeholder="Lugar de Trabajo del Familiar" 
-                                    rows="2"
-                                />
+                                <textarea value={lugarTrabajo} onChange={(e) => setLugarTrabajo(e.target.value)} className='form-input form-textarea' placeholder="Lugar de Trabajo del Familiar" rows="2"/>
                             </div>
                         </div>
                     </div>
@@ -1021,46 +794,22 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Ingresos Totales</label>
-                                <input 
-                                    value={ingresos}
-                                    onChange={(e) => setIngresos(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Ingresos Totales" 
-                                />
+                                <input value={ingresos} onChange={(e) => setIngresos(e.target.value)} className='form-input' type="number" placeholder="Ingresos Totales" />
                             </div>
 
                             <div className="field-group">
                                 <label>Salario Adicional</label>
-                                <input 
-                                    value={salario2}
-                                    onChange={(e) => setSalario2(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Salario Adicional" 
-                                />
+                                <input value={salario2} onChange={(e) => setSalario2(e.target.value)} className='form-input' type="number" placeholder="Salario Adicional" />
                             </div>
 
                             <div className="field-group">
                                 <label>Pensión</label>
-                                <input 
-                                    value={pension}
-                                    onChange={(e) => setPension(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Pensión" 
-                                />
+                                <input value={pension} onChange={(e) => setPension(e.target.value)} className='form-input' type="number" placeholder="Pensión" />
                             </div>
 
                             <div className="field-group">
                                 <label>Beca (Ingreso)</label>
-                                <input 
-                                    value={beca2}
-                                    onChange={(e) => setBeca2(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Beca (Ingreso)" 
-                                />
+                                <input value={beca2} onChange={(e) => setBeca2(e.target.value)} className='form-input' type="number" placeholder="Beca (Ingreso)" />
                             </div>
                         </div>
                     </div>
@@ -1072,101 +821,47 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         <div className="form-grid">
                             <div className="field-group">
                                 <label>Gastos Totales</label>
-                                <input 
-                                    value={gastos}
-                                    onChange={(e) => setGastos(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos Totales" 
-                                />
+                                <input value={gastos}onChange={(e) => setGastos(e.target.value)} className='form-input' type="number" placeholder="Gastos Totales" />
                             </div>
 
                             <div className="field-group">
                                 <label>Gastos en Comida</label>
-                                <input 
-                                    value={comida}
-                                    onChange={(e) => setComida(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos en Comida" 
-                                />
+                                <input value={comida} onChange={(e) => setComida(e.target.value)} className='form-input' type="number" placeholder="Gastos en Comida" />
                             </div>
 
                             <div className="field-group">
                                 <label>Gastos en Agua</label>
-                                <input 
-                                    value={agua}
-                                    onChange={(e) => setAgua(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos en Agua" 
-                                />
+                                <input value={agua} onChange={(e) => setAgua(e.target.value)} className='form-input' type="number" placeholder="Gastos en Agua" />
                             </div>
 
                             <div className="field-group">
                                 <label>Gastos en Electricidad</label>
-                                <input 
-                                    value={luz}
-                                    onChange={(e) => setLuz(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos en Electricidad" 
-                                />
+                                <input value={luz} onChange={(e) => setLuz(e.target.value)} className='form-input' type="number" placeholder="Gastos en Electricidad" />
                             </div>
 
                             <div className="field-group">
                                 <label>Internet y Cable</label>
-                                <input 
-                                    value={internetCable}
-                                    onChange={(e) => setInternetCable(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Internet y Cable" 
-                                />
+                                <input value={internetCable} onChange={(e) => setInternetCable(e.target.value)} className='form-input' type="number" placeholder="Internet y Cable" />
                             </div>
 
                             <div className="field-group">
                                 <label>Gastos en Celular</label>
-                                <input 
-                                    value={celular}
-                                    onChange={(e) => setCelular(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos en Celular" 
-                                />
+                                <input  value={celular} onChange={(e) => setCelular(e.target.value)} className='form-input' type="number" placeholder="Gastos en Celular" />
                             </div>
 
                             <div className="field-group">
                                 <label>Viáticos</label>
-                                <input 
-                                    value={viaticos}
-                                    onChange={(e) => setViaticos(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Viáticos" 
-                                />
+                                <input value={viaticos} onChange={(e) => setViaticos(e.target.value)}  className='form-input' type="number" placeholder="Viáticos" />
                             </div>
 
                             <div className="field-group">
                                 <label>Gastos en Salud</label>
-                                <input 
-                                    value={salud}
-                                    onChange={(e) => setSalud(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Gastos en Salud" 
-                                />
+                                <input value={salud} onChange={(e) => setSalud(e.target.value)} className='form-input' type="number" placeholder="Gastos en Salud" />
                             </div>
 
                             <div className="field-group">
                                 <label>Deudas</label>
-                                <input 
-                                    value={deudas}
-                                    onChange={(e) => setDeudas(e.target.value)} 
-                                    className='form-input' 
-                                    type="number" 
-                                    placeholder="Deudas" 
-                                />
+                                <input value={deudas}onChange={(e) => setDeudas(e.target.value)} className='form-input' type="number" placeholder="Deudas" />
                             </div>
                         </div>
                     </div>
@@ -1177,25 +872,13 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                         </button>
 
                         {editMode && (
-                            <button
-                                type="button"
-                                className="btn-secondary"
-                                onClick={limpiarFormulario}
-                            >
-                                Cancelar
-                            </button>
+                            <button type="button" className="btn-secondary" onClick={limpiarFormulario}>Cancelar</button>
                         )}
                     </div>
                     
                     {isLoading && (
                         <div className="loading-container">
-                            <div className="spinner">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <div className="spinner"> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
                             </div>
                         </div>
                     )}
@@ -1213,41 +896,17 @@ async function cargarDatosExpedientePreseleccionado(expedienteId) {
                     <table className="visitas-table">
                         <thead>
                             <tr>
-                                <th>Expediente</th>
-                                <th>Nombre</th>
-                                <th>Rol</th>
-                                <th>Institución</th>
-                                <th>Fecha Nacimiento</th>
-                                <th>Cédula</th>
-                                <th>Teléfono</th>
-                                <th>Fecha Visita</th>
-                                <th>Acciones</th>
+                                <th>Expediente</th> <th>Nombre</th> <th>Rol</th> <th>Institución</th> <th>Fecha Nacimiento</th> <th>Cédula</th> <th>Teléfono</th> <th>Fecha Visita</th> <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {visitas && visitas.length > 0 && visitas.map((visita) => (
                                 <tr key={`visita-${visita.id}`}>
-                                    <td>{obtenerNombreExpediente(visita.expediente)}</td>
-                                    <td>{visita.nombreCompleto}</td>
-                                    <td>{visita.rol}</td>
-                                    <td>{visita.institucion}</td>
-                                    <td>{visita.fechaNacimiento}</td>
-                                    <td>{visita.cedula}</td>
-                                    <td>{visita.telefono1}</td>
-                                    <td>{visita.fechaVisita ? new Date(visita.fechaVisita).toLocaleDateString() : 'N/A'}</td>
+                                    <td>{obtenerNombreExpediente(visita.expediente)}</td> <td>{visita.nombreCompleto}</td> <td>{visita.rol}</td> <td>{visita.institucion}</td> <td>{visita.fechaNacimiento}</td> <td>{visita.cedula}</td> <td>{visita.telefono1}</td> <td>{visita.fechaVisita ? new Date(visita.fechaVisita).toLocaleDateString() : 'N/A'}</td>
                                     <td>
                                         <div className="action-buttons">
-                                            <button 
-                                                className="btn-edit" 
-                                                onClick={() => editarVisita(visita)}
-                                            >
-                                                Editar
-                                            </button>
-                                            <button 
-                                                className="btn-delete" 
-                                                onClick={() => eliminarVisita(visita.id)}
-                                            >
-                                                Eliminar
+                                            <button className="btn-edit" onClick={() => editarVisita(visita)}> Editar </button>
+                                            <button className="btn-delete" onClick={() => eliminarVisita(visita.id)}> Eliminar
                                             </button>
                                         </div>
                                     </td>
