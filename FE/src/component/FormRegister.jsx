@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Llamados from '../services/Llamados';
 import Logo from '../assets/img/Logo.jpeg'; // Usar el mismo logo
 import '../style/Register.css';
+import Swal from 'sweetalert2';
 
 function FormRegister() {
   const [error, setError] = useState(null);
@@ -72,6 +73,11 @@ function FormRegister() {
 
       setTimeout(() => {
         setIsLoading(false);
+        Swal.fire({
+        title: "The Internet?",
+        text: "That thing is still around?",
+        icon: "question"
+        });
         navigate('/'); // Redirigir al login
       }, 1500);
     } catch (error) {

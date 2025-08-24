@@ -4,6 +4,7 @@ import '../style/login.css';
 import Llamados from '../services/Llamados';
 import Logo from '../assets/img/Logo.jpeg';
 import ResetPassword from './ResetPassword';
+import Swal from 'sweetalert2';
 
 const FormLogin = () => {
   const [username, setUsername] = useState('');
@@ -27,6 +28,11 @@ const FormLogin = () => {
 
       if (response.access) {
         localStorage.setItem('token', response.token);
+        Swal.fire({
+          title: "The Internet?",
+          text: "That thing is still around?",
+          icon: "question"
+        });
         navigate('/Expediente');
       } else {
         setError('Credenciales incorrectas, inténtalo de nuevo.');
