@@ -12,10 +12,6 @@
   --sombra-media: rgba(0, 0, 0, 0.15);
 }
 
-.acomodo {
-  background-color: red;
-}
-
 /* Estilos generales del componente Proyectos */
 .proyectos-fondo {
   background-color: var(--gris-claro);

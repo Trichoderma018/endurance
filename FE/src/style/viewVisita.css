@@ -414,9 +414,6 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-descargar-pdf:hover {
-    background-color: #c0392b;
-}
 
 .btn-descargar-pdf:active {
     transform: scale(0.98);

@@ -91,7 +91,6 @@
 }
 .inp-imagen:hover { 
   background: rgba(122,156,198,0.05);
-  border-color: #ff3636;
 }
 
 .campo-formulario img { 
@@ -136,14 +135,11 @@
 .boto-submit::before {
   left: 5px;
   top: 5px;
-  border-top: 2px solid #ff3636;
-  border-left: 2px solid #ff3636;
 }
 .boto-submit::after {
   right: 5px;
   bottom: 5px;
-  border-bottom: 2px solid #ff3636;
-  border-right: 2px solid #ff3636;
+
 }
 .boto-submit:hover:not(:disabled) { box-shadow: 4px 4px 10px rgb(184,184,184); }
 .boto-submit:hover:not(:disabled)::before, .boto-submit:hover:not(:disabled)::after {

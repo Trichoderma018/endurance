@@ -97,10 +97,3 @@ p {
   transform: scale(2) translate(-40%,-20%);
   transition: transform 1.2s ease;
 }
-
-
-
-.button:hover {
-  background-color: #E32629;
-  transform: scale(1.1);
-}
