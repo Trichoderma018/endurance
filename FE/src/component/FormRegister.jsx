@@ -74,9 +74,9 @@ function FormRegister() {
       setTimeout(() => {
         setIsLoading(false);
         Swal.fire({
-        title: "The Internet?",
-        text: "That thing is still around?",
-        icon: "question"
+        title: "Registro Exitoso",
+        text: "Se registro conrrectamente",
+        icon: "check"
         });
         navigate('/'); // Redirigir al login
       }, 1500);
