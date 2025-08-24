@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import Llamados from '../services/Llamados'
 import "../style/MantAdmin.css"
-import Sidebar from './Sidebar'
-import Navbar from './Navbar'
+
 
 function MantAdmin() {
   const [nombreCompleto, setNombreCompleto] = React.useState('')
@@ -112,11 +111,11 @@ function MantAdmin() {
     return usuario ? usuario.username : 'Usuario no encontrado'
   }
   return (
-    <div className='mant-admin'>
+    <div className='mant-admin23'>
 
-      <Sidebar/>
+      {/* <Sidebar/> */}
       <h2>{editMode ? 'Editar Administrador' : 'Crear Administrador'}</h2>
-      <div className="mant-admin-formulario">
+      <div className="formu">
           <div className="formulario-campo">
               <label htmlFor="campo-nombreCompleto"></label>
               <input
@@ -141,10 +140,10 @@ function MantAdmin() {
               />
           </div>
           <br />
-          <div className="formulario-campo">
-              <label htmlFor="campo-user"></label>
+          <div className="campo-user1">
+              <label htmlFor="user"></label>
               <select
-                className='input-user1'
+                className='input-user'
                 id="user"
                 value={user}
                 onChange={(e)=>setUser(e.target.value)}
@@ -157,11 +156,11 @@ function MantAdmin() {
                 ))}
               </select>
           </div>
-          <br />
-          <div className="formulario-botones">
+          <div className="botone-formulario">
               <button   
                 onClick={handleSubmit}
-                className="boton-submit"
+                className="bot-submit"
+
               >
                 {editMode ? 'Actualizar' : 'Crear'} 
               </button>
@@ -175,6 +174,7 @@ function MantAdmin() {
               )}
           </div>
       </div>
+      <br />
       <h2>Lista de Administradores</h2>
       <table className="tabla-administradores">
         <thead>

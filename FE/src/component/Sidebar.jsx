@@ -10,34 +10,9 @@ import '../style/Sidebar.css'; // Asegúrate de que esta ruta sea correcta
 
 function Sidebar() {
 
-  const CerrarSesion = () => {
-    
-    // SweetAlert de ejemplo (Revisar estilos)
-    Swal.fire({
-      title: '¿Cerrar sesión?',
-      text: 'Tu sesión actual se cerrará y volverás al inicio de sesión.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sí, cerrar sesión',
-      cancelButtonText: 'Cancelar',
-      background: '#1a1a1a',
-      color: '#ffffff',
-    });
-
-    localStorage.clear()
-
-
-  }
-
   return (
     <div className="sidebar-container">
-      <Link to="/Expediente" className="btn-sidebar">
-        <ArrowBackIcon style={{ marginRight: '10px' }} />
-        Volver
-      </Link>
-
+      
       <Link to="/mantAdmin" className="btn-sidebar">
         <PersonIcon style={{ marginRight: '10px' }} />
         Mantenimiento Admin
@@ -62,11 +37,6 @@ function Sidebar() {
         <MiscellaneousServicesOutlinedIcon style={{ marginRight: '10px' }} />
         Configuración
       </Link> */}
-
-      <button onClick={(e) => CerrarSesion()} className="btn-sidebar">
-        <ExitToAppIcon style={{ marginRight: '10px' }} />
-        Cerrar Sesión
-      </button>
 
     </div>
   );

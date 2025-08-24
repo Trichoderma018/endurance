@@ -224,8 +224,7 @@ function MantProyectos() {
     }
   }
   return (
-    <div className="mant-admin">
-      <Sidebar/>
+    <div className="mant-admin23">
       
       <h2>{editMode ? 'Editar Proyecto' : 'Crear Proyecto'}</h2>
       <form onSubmit={handleSubmit}>

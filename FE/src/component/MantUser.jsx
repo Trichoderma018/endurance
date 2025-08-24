@@ -146,8 +146,7 @@ function MantUser() {
         }
     }
     return (
-        <div className='mant-admin'>
-            <Sidebar/>
+        <div className='mant-admin23'>
             <h2>{editMode ? 'Editar Usuario' : 'Crear Usuario'}</h2>
             <div className="formulario-user">
                 <div className="campo-name">

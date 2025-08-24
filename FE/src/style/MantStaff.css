@@ -26,7 +26,7 @@
 .input-nombreCompleto1, .input-email1, .input-cargo1, .input-departamento1, .campo-user1 select { 
   width: 100%;
   line-height: 28px;
-  padding: 1rem;
+  padding: 10px;
   border: 0.5px solid;
   border-bottom-color: #777;
   border-radius: 1rem;

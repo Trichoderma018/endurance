@@ -23,8 +23,8 @@ h2 {
 .input-name, .input-correo, .input-sede, .inp-password, .inp-password-confirm { 
   width: 100%;
   line-height: 28px;
-  padding: 1rem;
-  border: 2px solid;
+  padding: 10px;
+  border: 0.5px solid;
   border-bottom-color: #777;
   border-radius: 1rem;
   background: transparent;

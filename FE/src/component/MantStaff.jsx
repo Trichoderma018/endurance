@@ -133,8 +133,7 @@ function MantStaff() {
         return usuario ? usuario.username : 'Usuario no encontrado'
     }
     return (
-        <div className='mant-admin'>
-            <Sidebar/>
+        <div className='mant-admin23'>
             <h2>{editMode ? 'Editar Staff' : 'Crear Staff'}</h2>
             <div className="formu">
                 <div className="campo-nombre">
@@ -187,7 +186,7 @@ function MantStaff() {
                         className="input-departamento1"
                     />
                 </div>
-                <div className="campo-user1  ">
+                <div className="campo-user1">
                     <label htmlFor="user"></label>
                     <select
                         id="user"
