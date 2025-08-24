@@ -310,13 +310,12 @@ function AgregarExpediente() {
                         required 
                     />
 
-                    <div style={{ marginTop: '10px' }}>
+                    <div style={{ textAlign: "center", marginTop: '10px' }}>
                         <button className='button' type="submit" disabled={isLoading}>
                             {isLoading ? 'Procesando...' : (editMode ? 'Actualizar' : 'Agregar')}
                         </button>
-                            <button className='button' onClick={() => navigate(-1)}>
-                             ⬅️ Regresar
-                            </button>
+                        <br />
+                      
                         {editMode && (
                             <button 
                                 type="button" 
@@ -337,8 +336,8 @@ function AgregarExpediente() {
             </div>
 
              {/* registro del expediente */}
-            <div className="proyectos-container">
-                <table>
+            <div>
+                <table className='proyectos-tabla-container'>
                     <thead>
                         <tr>
                             <th className='selectsEx'>Usuario</th>
@@ -359,9 +358,9 @@ function AgregarExpediente() {
                                 <td>{expediente.genero}</td>
                                 <td>{expediente.sede}</td>
                                 <td>{expediente.fechaExpediente}</td>
-                                <td>
+                                <td style={{display:"flex", justifyContent: "center"}}>
                                     <button onClick={() => editarExpediente(expediente)} className='FLR'>Editar</button>
-                                    <button onClick={() => eliminarExpediente(expediente.id)} className='FLR'>Eliminar</button>
+                                    <button onClick={() => eliminarExpediente(expediente.id)} className='FLRR'>Eliminar</button>
                                 </td>
                             </tr>
                         ))}

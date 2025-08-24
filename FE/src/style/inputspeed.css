@@ -1,136 +1,150 @@
-
-
-/* Animación suave */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Contenedor principal */
+.proyectos-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    background-color: red;
 }
 
-
-/* CONTENEDOR DEL FORMULARIO */
-.crf {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 25px 35px;
-  background: #ffffff;
-  border: 3px solid var(--primary-red);
-  border-radius: 14px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-  text-align: center;
-  animation: fadeIn 0.6s ease-in-out;
+/* Título principal */
+.proyectos-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1f2a44;
+    border-bottom: 2px solid #e63946;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-
-/* Título dentro del formulario */
-.crf h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #ff0000; /* Rojo original */
+/* Estilo general para inputs y selects */
+.selectsEx {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border 0.3s ease;
 }
 
-/* INPUTS Y SELECTS */
-.inyou {
-  width: 100%;
-  padding: 14px;
-  border: 2px solid #ff0000; /* Bordes consistentes en rojo */
-  border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 15px; /* Espaciado entre campos */
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background-color: #fff;
-  color: #000; /* Texto oscuro para contraste */
-  box-sizing: border-box;
+.selectsEx:focus {
+    border-color: #1f2a44;
+    outline: none;
 }
 
-.inyou:focus {
-  border-color: #b30000; /* Rojo más intenso en focus */
-  box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
-  outline: none;
+/* Campo de imagen */
+.campo label {
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 6px;
+    display: inline-block;
 }
 
-/* Placeholder en itálica */
-.inyou::placeholder {
-  font-style: italic;
-  color: #666;
-}
-
-/* BOTONES */
+/* Botones */
 .button {
-  background-color: #2980b9; /* Azul original */
-  color: #fff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button[type="submit"] {
+    background-color: #1f2a44;
+    color: white;
+}
+
+.button:not([type="submit"]) {
+    background-color: white;
+    color: #1f2a44;
+    border: 2px solid #1f2a44;
 }
 
 .button:hover {
-  background-color: #1f6390;
+    opacity: 0.9;
 }
 
-/* .visita-container {
-  margin-top: 4009px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--light-blue) 0%, var(--gray-50) 100%);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-}
-
-/* Barra de header */
-/* .header-bar {
-  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-  padding: 1rem 0;
-  box-shadow: var(--shadow-md);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}  */
-
-
-/* HEADER CON LOGO Y TÍTULO */
-.Endurance {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.Endurance .logo {
-  height: 110px;
-  margin-bottom: 8px;
-}
-
-.Endurance h1 {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--primary-red);
-  /* display: flex;
-  justify-content: center;
-  text-align: center; */
-}
-/* TABLA DE EXPEDIENTES */
+/* Tabla de expedientes */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
 }
 
-table th,
-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-table th {
-  background-color: #2980b9; /* Azul original */
-  color: white;
-  font-weight: bold;
+th.selectsEx {
+    background-color: #f1f1f1;
+    color: #1f2a44;
+    font-weight: bold;
 }
 
-table tr:hover {
-  background-color: #f9f9f9;
+tr.selectsEx:hover {
+    background-color: #f9f9f9;
+}
+
+/* Botones de acción en tabla */
+.FLR {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1f2a44;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.FLR:hover {
+    background-color: #2c3e5f;
+}
+
+.FLRR {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: #e63946;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.FLRR:hover {
+    background-color: #2c3e5f;
+}
+
+/* Spinner y error */
+.spinner span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #1f2a44;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+.error {
+    color: #e63946;
+    font-weight: bold;
+    margin-top: 10px;
 }

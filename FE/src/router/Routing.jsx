@@ -6,7 +6,7 @@ import MantenimientoAdmin from '../pages/MantenimientoAdmin';
 import MantenimientoStaff from '../pages/MantenimientoStaff';
 import MantenimientoUser from '../pages/MantenimientoUser';
 import MantenimientoProyectos from '../pages/MantenimientoProyectos';
-import Agregar from '../pages/Agregar';
+import AgregarPage from '../pages/AgregarPage';
 import Prueba from '../component/Prueba';
 import PageProyectos from '../pages/PageProyectos';
 import View from '../component/View';
@@ -36,7 +36,7 @@ function Routing() {
             <Route path="/register" element={<Register />} />
 
             {/* agregar nuevos usuarios */}
-            <Route path='/agregar' element={<Agregar/>}/>
+            <Route path='/agregar' element={<AgregarPage/>}/>
 
             {/* expediente personale */}
             <Route path='/Expediente' element={<Expediente/>}/>
