@@ -17,6 +17,16 @@ function FormRegister() {
     confirmPassword: ''
   });
 
+  const evaluatePasswordStrength = (password) => {
+    const conditions = [
+      password.length >= 8,
+      /[A-Z]/.test(password),
+      /[0-9]/.test(password),
+      /[^A-Za-z0-9]/.test(password),
+    ];
+    return conditions.filter(Boolean).length;
+  };
+
   const passwordStrength =
     formData.password &&
     formData.confirmPassword &&
@@ -38,16 +48,6 @@ function FormRegister() {
       setError(formData.password === formData.confirmPassword ? null : 'Passwords do not match.');
     }
   }, [formData.password, formData.confirmPassword]);
-
-  const evaluatePasswordStrength = (password) => {
-    const conditions = [
-      password.length >= 8,
-      /[A-Z]/.test(password),
-      /[0-9]/.test(password),
-      /[^A-Za-z0-9]/.test(password),
-    ];
-    return conditions.filter(Boolean).length;
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
