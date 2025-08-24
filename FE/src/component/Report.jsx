@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 import Llamados from '../services/Llamados';
 import "../style/report.css";
 
+
 export default function Report() {
   const [genero, setGenero] = useState([]);
   const [sede, setSede] = useState([]);
