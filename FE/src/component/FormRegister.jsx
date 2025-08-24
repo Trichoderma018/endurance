@@ -12,8 +12,9 @@ function FormRegister() {
   const strengthLabels = ["", "Weak", "Moderate", "Good", "Strong"];
   
   const [formData, setFormData] = useState({
-    username: '',
+    user: '',
     email: '',
+    sede : '',
     password: '',
     confirmPassword: ''
   });
@@ -52,8 +53,9 @@ function FormRegister() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+    console.log(formData.user, formData.sede, formData.email, formData.password, formData.confirmPassword);
+    
+    if (!formData.user || !formData.sede || !formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
@@ -62,21 +64,27 @@ function FormRegister() {
     setError(null);
 
     try {
+      console.log(formData.sede);
+      
       const response = await Llamados.postData({
+        username: formData.user,
         password: formData.password,
         password_confirm: formData.confirmPassword,
-        username: formData.username,
+        sede :formData.sede,
+        //user :"juanito24",
         email: formData.email
       }, 'api/users/');
 
+
       console.log('User registered successfully:', response);
+      console.log(response)
 
       setTimeout(() => {
         setIsLoading(false);
         Swal.fire({
-        title: "The Internet?",
-        text: "That thing is still around?",
-        icon: "question"
+        title: "Registro Exitoso",
+        text: "Se registro correctamente",
+        icon: "success",
         });
         navigate('/'); // Redirigir al login
       }, 1500);
@@ -96,8 +104,12 @@ function FormRegister() {
         <img src={Logo} alt="Logo" className="logo" />
         <div className="form-heading">Crear cuenta</div>
         <div className="input-group"> {/* Cambiado de 'input-field' a 'input-group' */}
-          <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
-          <label htmlFor="username">Nombre completo</label>
+          <input type="text" id="user" name="user" value={formData.user} onChange={handleChange} required />
+          <label htmlFor="user">Nombre completo</label>
+        </div>
+        <div className="input-group"> {/* Cambiado de 'input-field' a 'input-group' */}
+          <input type="text" id="sede" name="sede" value={formData.sede} onChange={handleChange} required />
+          <label htmlFor="username">Sede</label>
         </div>
         <div className="input-group">
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />

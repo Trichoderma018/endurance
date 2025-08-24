@@ -29,9 +29,9 @@ const FormLogin = () => {
       if (response.access) {
         localStorage.setItem('token', response.token);
         Swal.fire({
-          title: "The Internet?",
-          text: "That thing is still around?",
-          icon: "question"
+          title: "Inicio de sesion exitoso",
+          text: "Se logueo correctamente",
+          icon: "check"
         });
         navigate('/Expediente');
       } else {
