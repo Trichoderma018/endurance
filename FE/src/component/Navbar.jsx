@@ -47,6 +47,19 @@ function Navbar() {
                 />
                 </Link>
                 </label>
+
+                <label>
+                    <Link to="/graficas">
+                    <input
+                    defaultValue="graficas"
+                    name="value-radio"
+                    id="value-3"
+                    type="button"
+                    className='lar'
+                />
+                </Link>
+                </label>
+
             </div>
             <Link to="/null" className="BtnCerrar">
                 <i className="fas fa-sign-out-alt"></i>

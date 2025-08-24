@@ -189,7 +189,7 @@ export default function Report() {
   const Tabla = ({ data, label }) => {
     if (!data || !Array.isArray(data) || data.length === 0) {
       return (
-        <div className="table-container">
+        <div className="tablecontainerGraficas">
           <h3>{label}</h3>
           <p>No hay datos disponibles para {label.toLowerCase()}</p>
         </div>
@@ -197,7 +197,7 @@ export default function Report() {
     }
 
     return (
-      <div className="table-container">
+      <div className="tablecontainerGraficas">
         <h3>{label}</h3>
         <table
           border="1"
@@ -262,7 +262,7 @@ export default function Report() {
               legend: { position: 'bottom' }
             }}
             series={data.map((x) => x.total)}
-            height={350}
+            height={200}
           />
         );
       
@@ -277,12 +277,12 @@ export default function Report() {
                 options: {
                   chart: { width: 200 },
                   legend: { position: 'bottom' }
-                }
+                } 
               }],
               legend: { position: 'bottom' }
             }}
             series={data.map((x) => x.total)}
-            height={350}
+            height={200}
           />
         );
       
@@ -298,7 +298,7 @@ export default function Report() {
               dataLabels: { enabled: true }
             }}
             series={[{ name: "Total", data: data.map((x) => x.total) }]}
-            height={350}
+            height={200}
           />
         );
       
@@ -314,7 +314,7 @@ export default function Report() {
               markers: { size: 6 }
             }}
             series={[{ name: "Total", data: data.map((x) => x.total) }]}
-            height={350}
+            height={200}
           />
         );
       
@@ -328,15 +328,6 @@ export default function Report() {
       <div style={{ padding: 16, textAlign: 'center' }}>
         <h1>Reporte de Alumnos</h1>
         <div style={{ margin: '20px 0' }}>
-          <div style={{ 
-            border: '4px solid #f3f3f3',
-            borderRadius: '50%',
-            borderTop: '4px solid #3498db',
-            width: '40px',
-            height: '40px',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto'
-          }}></div>
           <p style={{ marginTop: '10px' }}>Cargando datos...</p>
         </div>
       </div>
@@ -344,68 +335,43 @@ export default function Report() {
   }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div className="BodyGraficas">
       <h1>Reporte de Alumnos</h1>
-      
-      {error && (
-        <div style={{ 
-          backgroundColor: '#fff3cd', 
-          color: '#856404', 
-          padding: '12px', 
-          borderRadius: '4px', 
-          marginBottom: '20px',
-          border: '1px solid #ffeaa7'
-        }}>
-          <strong>⚠️ Aviso:</strong> {error}
-        </div>
-      )}
 
-      <div ref={reportRef} style={{ background: "#fff", padding: 20 }}>
-        {/* 🔹 Género */}
-        <div style={{ marginBottom: '40px' }}>
-          <h2>Distribución por Género</h2>
+      <div ref={reportRef} className="graficasConteiner">
+        <div className="PorGenero">
+          <h2>Distibución por género</h2>
           <CrearGrafico data={genero} tipo="pie" titulo="Género" />
           <Tabla data={genero} label="Género" />
         </div>
 
-        {/* 🔹 Sede */}
-        <div style={{ marginBottom: '40px' }}>
-          <h2>Distribución por Sede</h2>
+        <div className="PorSede">
           <CrearGrafico data={sede} tipo="bar" titulo="Sede" />
           <Tabla data={sede} label="Sede" />
         </div>
 
-        {/* 🔹 Beca */}
-        <div style={{ marginBottom: '40px' }}>
-          <h2>Distribución por Tipo de Beca</h2>
+        <div className="PorBeca">
           <CrearGrafico data={beca} tipo="donut" titulo="Beca" />
           <Tabla data={beca} label="Beca" />
         </div>
 
-        {/* 🔹 Edad */}
-        <div style={{ marginBottom: '40px' }}>
-          <h2>Distribución por Rango de Edad</h2>
+        <div className="IMGG"></div>
+        
+        <div className="PorEdad">
           <CrearGrafico data={edad} tipo="line" titulo="Edad" />
           <Tabla data={edad} label="Edad" />
         </div>
       </div>
 
-      <div style={{ marginTop: 20, textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <button 
-          onClick={downloadPDF} 
-          style={{
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            padding: '12px 24px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '16px'
-          }}
+          onClick={downloadPDF}
+          className="Btn_Descargar"
         >
           📄 Exportar a PDF
         </button>
       </div>
+      <br />
     </div>
   );
 }

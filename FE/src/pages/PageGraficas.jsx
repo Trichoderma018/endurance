@@ -1,10 +1,11 @@
 import Report from "../component/Report"
+import Navbar from "../component/Navbar"
 
 function PageGraficas() {
   return (
-    <div style={{ marginTop: 1200, width: "500px" }}>
+    <div>
+        <Navbar/>
         <Report/>
-
     </div>
   )
 }
