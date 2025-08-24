@@ -77,7 +77,7 @@ const FormLogin = () => {
           <a href="#" onClick={openModal}>¿Olvidaste tu contraseña?</a>
         </div>
         <div className="signup-link" onClick={() => navigate('/register')}>
-          ¿No tienes cuenta? <a href="#">Iniciar sesión</a>
+          ¿No tienes cuenta? <a href="#">Registrate</a>
         </div>
       </form>
 
